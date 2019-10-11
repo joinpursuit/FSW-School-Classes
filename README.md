@@ -48,14 +48,16 @@ A successful response should look like:
 ```javascript
 { 
   added: { name: 'John', age: 30, city: 'NYC', grade: 75 }
-  class: 'physics'
+  class: 'physics',
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
 ```javascript
 { 
-  error: 'Please fill out all the information for the student'
+  error: 'Please fill out all the information for the student',
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
@@ -72,14 +74,16 @@ GET localhost:3000/class/list/?class=physics
   students: [
     { name: 'John', age: 30, city: 'NYC', grade: 75 },
     { name: 'Emily', age: 28, city: 'LA', grade: 80 }
-  ]
+  ],
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
 ```
 { 
-  error: 'Class physicslol doesn't exist.'
+  error: 'Class physicslol doesn't exist.',
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
@@ -95,14 +99,16 @@ GET localhost:3000/class/listfailing/?class=physics
 {
   students: [
     { name: 'Bob', age: 30, city: 'MIA', grade: 49 }
-  ]
+  ],
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
 ```
 { 
-  error: 'Class physicslol doesn't exist.'
+  error: 'Class physicslol doesn't exist.',
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
@@ -119,13 +125,15 @@ GET localhost:3000/class/listfromcity/?class=physics&city=MIA
 {
   students: [
     { name: 'Bob', age: 30, city: 'MIA', grade: 49 }
-  ]
+  ],
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
 ```
 { 
-  error: 'Class physicslol doesn't exist.'
+  error: 'Class physicslol doesn't exist.',
+  timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
