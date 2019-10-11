@@ -169,3 +169,7 @@ Have a checkbox input for:
 - Show Failing Students Only
 
 Have a button to submit the form to your server.  Route and retrieve the appropriate information given your inputs.  Display the response below the form.
+
+## Rubric
+
+![expressProjectRubric](./expressProjectRubric.png)
