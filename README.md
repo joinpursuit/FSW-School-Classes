@@ -2,7 +2,8 @@
 
 ## Introduction
 
-In this lab you will be developing a server that stores data for a school. The school has the following data models:
+In this lab you will be developing a server that stores data for a school, and a simple frontend. The school has the following data models:
+
 - Classes
 - Students
 
@@ -137,3 +138,34 @@ An error response should look like:
   timestamp: "YYYY, MM/DD HH:MM:SS"
 }
 ```
+
+## Frontend
+
+Build two separate forms, for using each of the different routes:
+
+
+### Form 1: Add Student
+
+Have text inputs for:
+
+- class
+- name
+- age
+- city
+- grade
+
+Have a button to submit the form to your server.  Display the response below the form.
+
+
+### Form 2: List Students
+
+Have inputs for:
+
+- class
+- city (optional)
+
+Have a checkbox input for:
+
+- Show Failing Students Only
+
+Have a button to submit the form to your server.  Route and retrieve the appropriate information given your inputs.  Display the response below the form.
