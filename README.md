@@ -66,6 +66,34 @@ In this lab you will be developing a server that stores data for a school, and a
 
 ## Routes & Functionality
 
+#### Creating a new class
+
+| Method | Endpoint | Request Body                        |
+| ------ | -------- | ----------------------------------- |
+| `POST` | `/class` | Class properties: `name`, `teacher` |
+
+- Create an Express route/endpoint to handle the request as seen above.
+- The method `addClass()` in the `School` has already been implemented for you. Make sure you understand how it works. Use the `addClass()` method in your route handler.
+- If the class already exists, respond with an error message.
+
+A successful response should look like:
+
+```json
+{ 
+  "class": { "name": "Physics", "teacher": "Henry Roman", "students": []},
+  "message": "Create a new class",
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
+}
+```
+
+An error response should look like:
+```json
+{ 
+  "error": "Please fill out all the information or Class already exists",
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
+}
+```
+
 #### Enrolling students in a class
 
 | Method | Endpoint                     | Body Data                                          |
