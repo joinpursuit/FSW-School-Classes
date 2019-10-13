@@ -66,14 +66,15 @@ In this lab you will be developing a server that stores data for a school, and a
 
 ## Routes & Functionality
 
-#### Adding Students to a Class
-```
-GET localhost:3000/class/add/?class=physics&name=John&age=30&city=NYC&grade=75
-```
-- Create the class file if it doesn't already exist
-- If file exists, add a new user object to the class file's array
-- The GET request must pass all four data points for the user to store into the file
-- If the student name already exists, UPDATE/REWRITE the students information with the new data passed
+#### Enrolling students in a class
+
+| Method | Endpoint                     | Body Data                                          |
+| ------ | ---------------------------- | -------------------------------------------------- |
+| `POST` | `/class/<class-name>/enroll` | Student properties: `name`, `age`, `city`, `grade` |
+
+- Create an Express route/endpoint to handle the request as seen above.
+- Add the new student to `<class-name>` class
+- If the student is already enrolled in the give class, update/rewrite the student's information with the new data passed
 
 A successful response should look like:
 
