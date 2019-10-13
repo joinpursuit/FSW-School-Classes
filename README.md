@@ -96,7 +96,7 @@ An error response should look like:
 
 #### Enrolling students in a class
 
-| Method | Endpoint                     | Body Data                                          |
+| Method | Endpoint                     | Request Body                                       |
 | ------ | ---------------------------- | -------------------------------------------------- |
 | `POST` | `/class/<class-name>/enroll` | Student properties: `name`, `age`, `city`, `grade` |
 
