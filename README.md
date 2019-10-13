@@ -43,17 +43,26 @@ In this lab you will be developing a server that stores data for a school, and a
   module.exports = Class;
   ```
 
-#### Students
+### Students
 - Each student within a class is an object that stores four data points or properties:
   - name
   - age
   - city
   - grade
-- A student looks like:
+- The `Student` class found in [`Student.js`](./Student.js) has:
   ```js
-  { name: 'Emily', age: 28, city: 'LA', grade: 67 }
+  class Student {
+    constructor(name, age, city, grade) {
+      this.name = name
+      this.city = city
+      this.age = age
+      this.grade = grade
+    }
+  }
+
+  module.exports = Student;
   ```
-- The same student can exist in multiple classes. A student's grade is depends on which class they are in.
+- A student can be enrolled in multiple classes. A student's grade is class dependant.
 
 ## Routes & Functionality
 
