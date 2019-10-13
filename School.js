@@ -24,12 +24,18 @@ class School {
   /**
    * Enroll student in class
    * 
-   * @param {string} className - Name of the class
+   * @param {array}String className - List of classes to enroll student in 
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    // Your code here
+  enrollStudent(classes, student) {
+    for(let i = 0; i < classes.length; i++){
+      if(!(this.classes[classes[i].class])){
+        throw new Error('This class does not exist');
+      }
+      student.addClassGrade(classes[i].grade, classes[i].class);
+      this.classes[classes[i].class].enrollStudent(student);
+    }
   }
 
 
@@ -42,7 +48,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students;
   }
 
 
@@ -63,9 +69,32 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    let allStudentsOfClass = this.classes[className].students;
+    let studentsToReturn;
+    if(failing && city){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.city === city && elem.classGrades[className] <= 60;
+      })
+      return studentsToReturn
+    }
+    else if(failing){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.classGrades[className] <= 60;
+      })
+      return studentsToReturn
+    }
+    else if(city){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.city === city;
+      })
+      return studentsToReturn
+    }
+    return allStudentsOfClass;
+
+
   }
 
 }
+
 
 module.exports = School;
