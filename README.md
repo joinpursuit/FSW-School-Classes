@@ -109,8 +109,9 @@ A successful response should look like:
 
 ```json
 { 
-  "added": { "name": "John", "age": 30, "city": "NYC", "grade": 75 },
-  "class": "physics",
+  "student": { "name": "John", "age": 30, "city": "NYC", "grade": 75 },
+  "className": "physics",
+  "message": "Enrolled Student",
   "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
@@ -147,6 +148,7 @@ An error response should look like:
     { "name": "John", "age": 30, "city": "NYC", "grade": 75 },
     { "name": "Emily", "age": 28, "city": "LA", "grade": 80 }
   ],
+  "message": "Retrieved Students",
   "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
