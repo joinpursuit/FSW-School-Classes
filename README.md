@@ -7,30 +7,40 @@ In this lab you will be developing a server that stores data for a school, and a
 - Classes
 - Students
 
-#### Classes
+## Setup
 
-- We will be storing each individual class as an object in a property with the name of the class in the module `classes.js` 
-- Each class has a `teacher` property with a string that represents the name of the instructor and a `students` property that holds an array of students currently enrolled in that class.
-- Take a look at the file [`classes.js`](./classes.js). It should look like this:
+1. Take a look at the JavaScript Classes in the files [`Class.js`](./Class.js), [`School.js`](./School.js) and [`Student.js`](./Student.js). They will be our models for creating objects.
+
+2. In your server instantiate a `School` as a global variable. Something like:
+    ```js
+    let mySchool = new School();
+    ```
+
+3. As you saw in [`School.js`](./School.js) a `School` object has a method called `addClass()`. You will use this method to add a class to the school. Example:
+    ```js 
+    mySchool.addClass('physics'); // Creates a Class Object with the name physics
+    ```
+
+4. It is your responsibility to implement and write the code for all the `School` methods outlined in [`School.js`](./School.js). The comments above the methods document what the methods should do and return. You will use these methods in your server routes.
+
+## Details
+
+### Classes
+
+- `Class`es objects will be stored in the `classes`(`this.classes`) property of the `School` instance.
+- The `classes` property of a `School` is itself an object where the property key is the name of the class and the property value will a `Class` object.
+- Each `Class` object has a `name` property, a `teacher` property with a string that represents the name of the instructor and a `students` property that holds an array of `Student`s currently enrolled in that class. [`Class.js`](./Class.js) is as follows: 
 
   ```js
-  let classes = {
-    physics: {
-      teacher: "Henry Roman",
-      students: [
-        { name: 'John', age: 30, city: 'NYC', grade: 75 },
-        { name: 'Emily', age: 28, city: 'LA', grade: 80 }
-      ]
-    },
-    physicalEducation: {
-      teacher: "Betty Franklin",
-      students: [
-        { name: 'Emily', age: 28, city: 'LA', grade: 67 }
-      ]
+  class Class {
+    constructor(name, teacher) {
+      this.name = name
+      this.teacher = teacher
+      this.students = []
     }
   }
 
-  module.exports = classes;
+  module.exports = Class;
   ```
 
 #### Students
