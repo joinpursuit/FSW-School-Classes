@@ -123,29 +123,36 @@ An error response should look like:
 }
 ```
 
-#### List All Students in a Class
+#### List all students enrolled in a Class
 
-```
-GET localhost:3000/class/list/?class=physics
-```
-- Check if the class file exists, if not give an error response
-- If class file exists show the list of students
+| Method | Endpoint                       | Query Parameters                 |
+| ------ | ------------------------------ | -------------------------------- |
+| `GET`  | `/class/<class-name>/students` | `failing=true|false`, `city=nyc` |
 
-```javascript
+
+- Create an Express route/endpoint to handle the request as seen above.
+- This endpoint should return all the students enrolled on `<class-name>`. 
+- If the query parameters are passed: If `failing=true`, return all students that are failing the class, that is all students whose grade is less than 70. 
+- If a city is passed return students whose city match the city passed. 
+- If both failing and city are passed return students that are failing and that live in the specified city.
+- Implement the methods `getStudentsByClass()` and `getStudentsByClassWithFilter()` in the `School` class for accomplishing this.
+
+
+```json
 {
-  students: [
-    { name: 'John', age: 30, city: 'NYC', grade: 75 },
-    { name: 'Emily', age: 28, city: 'LA', grade: 80 }
+  "students": [
+    { "name": "John", "age": 30, "city": "NYC", "grade": 75 },
+    { "name": "Emily", "age": 28, "city": "LA", "grade": 80 }
   ],
-  timestamp: "YYYY, MM/DD HH:MM:SS"
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
-```
+```json
 { 
-  error: 'Class physicslol doesn't exist.',
-  timestamp: "YYYY, MM/DD HH:MM:SS"
+  "error": "Class physicslol doesn't exist.",
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
