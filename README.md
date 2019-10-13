@@ -9,29 +9,41 @@ In this lab you will be developing a server that stores data for a school, and a
 
 #### Classes
 
-- We will be storing each individual class as a file on the server in the folder `/classes`. 
-- To store files as json, check out the stack overflow post [here](https://stackoverflow.com/questions/33113125/save-a-json-file-to-server-in-express-node)
-- The name of the class will match the name of the file. Example: Class physics will be stored as the file `/classes/physics.json`.
-- The class file will be stored as a `.json` file extension. The data in it will be a JSON object.
-- The JSON object will basically hold an array of students.
-- This is how the file should look:
+- We will be storing each individual class as an object in a property with the name of the class in the module `classes.js` 
+- Each class has a `teacher` property with a string that represents the name of the instructor and a `students` property that holds an array of students currently enrolled in that class.
+- Take a look at the file [`classes.js`](./classes.js). It should look like this:
 
-```javascript
-{
-  students: [
-    { name: 'John', age: 30, city: 'NYC', grade: 75 },
-    { name: 'Emily', age: 28, city: 'LA', grade: 80 }
-  ]
-}
-```
+  ```js
+  let classes = {
+    physics: {
+      teacher: "Henry Roman",
+      students: [
+        { name: 'John', age: 30, city: 'NYC', grade: 75 },
+        { name: 'Emily', age: 28, city: 'LA', grade: 80 }
+      ]
+    },
+    physicalEducation: {
+      teacher: "Betty Franklin",
+      students: [
+        { name: 'Emily', age: 28, city: 'LA', grade: 67 }
+      ]
+    }
+  }
+
+  module.exports = classes;
+  ```
 
 #### Students
-- Each student will be a JSON object that stores four data points:
+- Each student within a class is an object that stores four data points or properties:
   - name
   - age
   - city
   - grade
-- The same student can exist in multiple classes.
+- A student looks like:
+  ```js
+  { name: 'Emily', age: 28, city: 'LA', grade: 67 }
+  ```
+- The same student can exist in multiple classes. A student's grade is depends on which class they are in.
 
 ## Routes & Functionality
 
