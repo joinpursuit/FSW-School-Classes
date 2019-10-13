@@ -159,57 +159,6 @@ An error response should look like:
 }
 ```
 
-#### List Failing Students
-
-```
-GET localhost:3000/class/listfailing/?class=physics
-```
-- Check if the class file exists, if not give an error response
-- If class file exists show the list of students who are scoring less than 50
-
-```javascript
-{
-  students: [
-    { name: 'Bob', age: 30, city: 'MIA', grade: 49 }
-  ],
-  timestamp: "YYYY, MM/DD HH:MM:SS"
-}
-```
-
-An error response should look like:
-```
-{ 
-  error: 'Class physicslol doesn't exist.',
-  timestamp: "YYYY, MM/DD HH:MM:SS"
-}
-```
-
-#### List Students from a Specific City
-
-```
-GET localhost:3000/class/listfromcity/?class=physics&city=MIA
-```
-- Check if the class file exists, if not give an error response
-- If class file exists show the list of students who are from the entered city
-- If a city is passed that doesn't match any students, just pass an empty array of students
-
-```
-{
-  students: [
-    { name: 'Bob', age: 30, city: 'MIA', grade: 49 }
-  ],
-  timestamp: "YYYY, MM/DD HH:MM:SS"
-}
-```
-
-An error response should look like:
-```
-{ 
-  error: 'Class physicslol doesn't exist.',
-  timestamp: "YYYY, MM/DD HH:MM:SS"
-}
-```
-
 ## Frontend
 
 Build two separate forms, for using each of the different routes:
