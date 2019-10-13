@@ -4,9 +4,13 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+
     }
+    // className: Class Object
+    //   physics: {} 
+    // this.name = name
+    // this.teacher = teacher
+    // this.students = []
   }
 
   /**
@@ -17,8 +21,11 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
+    console.log("Add Class triggered")
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    console.log("classes", this.classes)
+    return newClass
   }
 
   /**
@@ -29,7 +36,8 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(name, age, city, grade)
+    this.name
   }
 
 
