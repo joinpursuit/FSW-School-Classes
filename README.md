@@ -18,7 +18,7 @@ In this lab you will be developing a server that stores data for a school, and a
 
 3. As you saw in [`School.js`](./School.js) a `School` object has a method called `addClass()`. You will use this method to add a class to the school. Example:
     ```js 
-    mySchool.addClass('physics'); // Creates a Class Object with the name physics
+    mySchool.addClass('physics', 'Henry Roman'); // Creates a Class Object with the name physics
     ```
 
 4. It is your responsibility to implement and write the code for all the `School` methods outlined in [`School.js`](./School.js). The comments above the methods document what the methods should do and return. You will use these methods in your server routes.
