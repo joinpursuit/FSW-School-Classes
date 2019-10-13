@@ -73,24 +73,25 @@ In this lab you will be developing a server that stores data for a school, and a
 | `POST` | `/class/<class-name>/enroll` | Student properties: `name`, `age`, `city`, `grade` |
 
 - Create an Express route/endpoint to handle the request as seen above.
-- Add the new student to `<class-name>` class
-- If the student is already enrolled in the give class, update/rewrite the student's information with the new data passed
+- Add the new student to `<class-name>` class. 
+- If the student is already enrolled in the give class, update/rewrite the student's information with the new data passed.
+- Implement the method `enrollStudent()` in the `School` object for accomplishing this.
 
 A successful response should look like:
 
-```javascript
+```json
 { 
-  added: { name: 'John', age: 30, city: 'NYC', grade: 75 }
-  class: 'physics',
-  timestamp: "YYYY, MM/DD HH:MM:SS"
+  "added": { "name": "John", "age": 30, "city": "NYC", "grade": 75 },
+  "class": "physics",
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
 An error response should look like:
-```javascript
+```json
 { 
-  error: 'Please fill out all the information for the student',
-  timestamp: "YYYY, MM/DD HH:MM:SS"
+  "error": "Please fill out all the information for the student",
+  "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
 
