@@ -28,7 +28,7 @@ In this lab you will be developing a server that stores data for a school, and a
 ### Classes
 
 - `Class`es objects will be stored in the `classes`(`this.classes`) property of the `School` instance.
-- The `classes` property of a `School` is itself an object where the property key is the name of the class and the property value will a `Class` object.
+- The `classes` property of a `School` is itself an object where the property key is the name of the class and the property value will be a `Class` object.
 - Each `Class` object has a `name` property, a `teacher` property with a string that represents the name of the instructor and a `students` property that holds an array of `Student`s currently enrolled in that class. [`Class.js`](./Class.js) is as follows: 
 
   ```js
