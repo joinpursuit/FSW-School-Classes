@@ -126,9 +126,9 @@ An error response should look like:
 
 #### List all students enrolled in a Class
 
-| Method | Endpoint                       | Query Parameters                 |
-| ------ | ------------------------------ | -------------------------------- |
-| `GET`  | `/class/<class-name>/students` | `failing=true|false`, `city=nyc` |
+| Method | Endpoint                       | Query Parameters                  |
+| ------ | ------------------------------ | --------------------------------- |
+| `GET`  | `/class/<class-name>/students` | `failing=true\|false`, `city=nyc` |
 
 
 - Create an Express route/endpoint to handle the request as seen above.
