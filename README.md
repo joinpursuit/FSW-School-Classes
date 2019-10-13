@@ -161,10 +161,18 @@ An error response should look like:
 
 ## Frontend
 
-Build two separate forms, for using each of the different routes:
+Build three separate forms, for using each of the different routes:
 
+### Form 1: Add Class
 
-### Form 1: Add Student
+Have text inputs for:
+
+- class name
+- teacher
+
+Have a button to submit the form to your server.  Display the response below the form.
+
+### Form 2: Add Student
 
 Have text inputs for:
 
@@ -175,7 +183,6 @@ Have text inputs for:
 - grade
 
 Have a button to submit the form to your server.  Display the response below the form.
-
 
 ### Form 2: List Students
 
