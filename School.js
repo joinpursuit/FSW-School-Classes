@@ -6,11 +6,7 @@ class School {
     this.classes = {
 
     }
-    // className: Class Object
-    //   physics: {} 
-    // this.name = name
-    // this.teacher = teacher
-    // this.students = []
+
   }
 
   /**
@@ -21,10 +17,12 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
-    console.log("Add Class triggered")
     let newClass = new Class(name, teacher);
+    this.name = name;
+    this.teacher = teacher;
     this.classes[name] = newClass;
-    console.log("classes", this.classes)
+    // console.log("classes", this.classes)
+
     return newClass
   }
 
@@ -36,8 +34,16 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student(name, age, city, grade)
-    this.name
+    let newStudent = new Student(className, student);
+
+    this.student = newStudent
+    this.classes[className] = className
+    // console.log(this.student);
+
+
+    // this.student =
+
+    return this.student;
   }
 
 
@@ -50,7 +56,9 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    this.classes[className].students
+    console.log(this.classes[className].students);
+
   }
 
 
@@ -71,7 +79,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    this.classes[className] = className;
+    this.failing = failing;
   }
 
 }
