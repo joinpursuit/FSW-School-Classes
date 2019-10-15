@@ -8,7 +8,7 @@ class School {
       //   physics: {} 
     }
   }
-
+  let mySchool = new School();
   /**
    * Add class to classes
    * 
