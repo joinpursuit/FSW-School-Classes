@@ -1,0 +1,16 @@
+.form-container {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+}
+
+input[type = 'button'] {
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px -5px red;
+    font-size: .95em;
+    padding: 3px 5px;
+}
+
+
+  

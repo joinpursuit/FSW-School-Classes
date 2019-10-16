@@ -12,10 +12,14 @@ app.use(body.urlencoded({
     extended: false
 }));
 
+app.use(body.json());
+
 let mySchool = new School();
 
 const validInput = (req, res, next) => [...Object.values(req.body)].every(ele => ele) ? next() : sendError(res, 'Please fill out all the information');
-
+// const validInput = (req, res, next) => {
+//     console.log("req.body", req.body)
+// }
 const timeStamp = () => moment().format('YYYY, MM/DD HH:mm:ss');
 
 const sendError = (res, msg) => res.json({
@@ -27,6 +31,9 @@ const duplicateClass = (req, res, next) => !!mySchool['classes'][req.body.name] 
 const classExists = (req, res, next) => !!mySchool['classes'][req.params.classname] ? next() : sendError(res, 'Class does not Exist');
 
 const addNewClass = (req, res, next) => {
+    console.log(req.body)
+    // console.log(req)
+
     mySchool.addClass(req.body.name, req.body.teacher);
     res.json({
         class: mySchool['classes'][req.body.name],
@@ -38,6 +45,8 @@ const addNewClass = (req, res, next) => {
 const sendSchoolInfo = (req, res, next) => res.send(mySchool);
 
 const addNewStudent = (req, res, next) => {
+    console.log('Body', req.body)
+    console.log(req.params)
     const enrolledJSON = mySchool.enrollStudent(req.params['classname'], req.body);
     res.json({
         ...enrolledJSON,
