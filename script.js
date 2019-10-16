@@ -35,6 +35,17 @@ const addClass = async (e) => {
 
     const data = await axios.post(`http://localhost:8000/class`, jsonData)
 
+    const displayClass = document.querySelector('#display-class');
+    displayClass.style.display = 'block';
+    displayClass.innerText = '';
+
+    if (data.data.error) {
+        displayClass.innerText = data.data.error;
+        displayClass.style.backgroundColor = 'red';
+    } else {
+        displayClass.innerText = data.data.message;
+
+    }
     console.log("data.data", data.data);
 }
 
@@ -54,22 +65,56 @@ const addStudent = async (e) => {
     }
 
     const data = await axios.post(`http://localhost:8000/class/${className}/enroll`, jsonData);
+
+    const displayAdd = document.querySelector('#display-add');
+    displayAdd.style.display = 'block';
+    displayAdd.innerText = '';
+
+    if (data.data.error) {
+        displayAdd.innerText = data.data.error;
+        displayAdd.style.backgroundColor = 'red';
+    } else {
+        displayAdd.innerText = data.data.message;
+    }
+
     console.log(data.data)
 }
 
-const listStudent = (e) => {
+const listStudent = async (e) => {
     e.preventDefault();
     const className = document.querySelector('#class-query').value;
     const cityQuery = document.querySelector('#city-query').value;
     const failing = document.querySelector('#failing').checked;
-    console.log(cityQuery)
+    console.log('City Query: ', cityQuery);
 
-    let data; 
+    let data = '';
     if (cityQuery) {
-        data = axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
+        data = await axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
     } else {
-        data = axios.get(`http://localhost:8000/class/${className}/students?failing=${failing}`);
+        data = await axios.get(`http://localhost:8000/class/${className}/students?failing=${failing}`);
     }
-    
-    console.log(data.data);
+
+    data = data.data;
+
+    const displayStudents = document.querySelector('#display-students');
+    displayStudents.style.display = 'block';
+    displayStudents.innerText = '';
+
+    const ul = document.querySelector('#student-list');
+    ul.innerHTML = '';
+
+
+    if (data.students.length === 0) {
+        displayStudents.innerText = 'There are 0 students that matches those criterias.';
+        displayStudents.style.backgroundColor = 'red';
+    } else {
+        displayStudents.style.display = 'none';
+        data.students.forEach(ele => {
+            const li = document.createElement('li');
+            li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
+            ul.appendChild(li)
+        })
+    }
+
+    console.log(data);
 }
