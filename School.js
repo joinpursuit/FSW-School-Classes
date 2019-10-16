@@ -45,6 +45,7 @@ class School {
 
     studentsArray.push(newStudent)
     console.log("classes", this.classes[className])
+
     return newStudent;
   }
 
@@ -60,9 +61,9 @@ class School {
   getStudentsByClass(className) {
 
 
-    console.log((this.classes.className.students));
+    console.log((this.classes[className].students));
     // console.log(this.classes);
-    return this.classes.className.students
+    return this.classes[className].students
   }
 
 

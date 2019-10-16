@@ -61,6 +61,20 @@ const enrollClass = (req, res, next) => {
 app.post('/class/:classname/enroll', enrollClass)
 
 
+const getStudentsByClass = (req, res, next) => {
+    let classname = req.params.classname;
+
+    res.send({
+        students: mySchool.getStudentsByClass(classname),
+        message: 'Retrieved Students',
+        timeStamp: timeStamp()
+    })
+}
+
+
+app.post('/class/:classname/students', getStudentsByClass)
+
+
 app.listen(3000, () => {
     console.log('Running at http://localhost:3000/');
 
