@@ -16,33 +16,19 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-/*
-const currentTime = (req, res, next) => {
-    let currDate = new Date();
-    res.json('TimeStamp', currDate.toLocaleString())
-}
 
-app.use(currentTime);*/
-
-// console.log("schools", School)
-mySchool.addClass("Chemistry", "JRJ", )
-// mySchool.addClass("Calculus", "Alejo")
-// mySchool.addClass("Biology", "Voniel")
-
-mySchool.enrollStudent("steve", 30, 'NY', 75)
-
-// console.log("hello ", mySchool.getStudentsByClass("Chemistry"));
-// console.log(mySchool.enrollStudent("Chemistry", 'Steve'));
+const timeStamp = () => new Date().toLocaleString()
 
 const addClassMethod = (req, res, next) => {
-    const classInfo = req.body
+    const className = req.body.name
+    const classTeacher = req.body.teacher
     let time = new Date();
 
     // const response = mySchool.addClass(classInfo.name, classInfo.teacher)
     res.send({
-        class: mySchool.addClass(classInfo.name, classInfo.teacher),
+        class: mySchool.addClass(className, classTeacher),
         message: "Created a new class",
-        timeStamp: time.toLocaleString()
+        timeStamp: timeStamp()
     })
 }
 
@@ -66,7 +52,9 @@ const enrollClass = (req, res, next) => {
     let studentObj = req.body
     res.send({
         classname: classname,
-        student: mySchool.enrollStudent(classname, studentObj)
+        student: mySchool.enrollStudent(classname, studentObj),
+        message: 'Enrolled Student',
+        timeStamp: timeStamp()
     })
 }
 

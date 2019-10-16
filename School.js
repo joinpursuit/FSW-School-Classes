@@ -21,7 +21,7 @@ class School {
     this.name = name;
     this.teacher = teacher;
     this.classes[name] = newClass;
-    console.log("classes", this.classes)
+    // console.log("classes", this.classes[name].name)
 
     return newClass
   }
@@ -34,8 +34,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    console.log("enroll student className", className)
-    console.log("enroll student student", student)
+    let studentsArray = this.classes[className].students
     let {
       name,
       age,
@@ -43,14 +42,9 @@ class School {
       grade
     } = student
     let newStudent = new Student(name, age, city, grade);
-    // this.classes[className].students
-    // this.className = this.classes[className]
-    this.student = newStudent
-    console.log("newStudent", this.student)
-    this.student.city = newStudent.city
 
-
-
+    studentsArray.push(newStudent)
+    console.log("classes", this.classes[className])
     return newStudent;
   }
 
