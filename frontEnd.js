@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let addForm = document.querySelector('#addClass')
     addForm.addEventListener('submit',(event) =>{
         event.preventDefault()
-        displayClass()
+        displayNewClass()
     })
 
     let enrollmentForm = document.querySelector('#enrollmentContainer')
     enrollmentForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        loadStudentEnrollment()
+        displayEnrollment()
     })
     let checker = document.querySelector('#showFailing')
     // checker.addEventListener('CheckedChanged', failingOrNot)
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 const loadAddClassData = async () => {
-    let className = document.querySelector('.classname').value
+    let className = document.querySelector('#createClass').value
     let teacher = document.querySelector('#teacher').value
     url = `http://localhost:8000/class?name=${className}&teacher=${teacher}`
     const {
@@ -30,11 +30,10 @@ const loadAddClassData = async () => {
     return data
 }
 
-const getResultsContainer = () => document.querySelector('#creationResults')
+const getClassResultsContainer = () => document.querySelector('#creationResults')
 
-const displayClass = async () => {
-    const container = getResultsContainer();
-    
+const displayNewClass = async () => {
+    const container = getClassResultsContainer();
     const data = await loadAddClassData();
 
     let lecture = document.createElement('div');
@@ -54,29 +53,13 @@ const displayClass = async () => {
         timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
         lecture.append(professor, message, timeStamp)
     }
-
-    // lecture.innerText = `Class Name: ${data.class.name}`;
-    // professor.innerText = `Assigned professor: ${data.class.teacher}`;
-    // message.innerText = `Status: ${data.message}`;
-    // timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
-    // err.innerText = data.error
-
-
-
-
-    // lecture.append(professor,message,timeStamp)
-    
-    // data.class === undefined ? lecture.append(err) : lecture.append(professor, message, timeStamp)
     container.append(lecture)
-    console.log(data);
-
-
     document.querySelector('.classname').value =''
     document.querySelector('#teacher').value =''
 }
 
 const loadStudentEnrollment = async () =>{
-    let className = document.querySelector('.classname').value
+    let className = document.querySelector('#enrollClass').value
     let studentName = document.querySelector('#studentName').value
     let age = document.querySelector('#age').value
     let city = document.querySelector('#city').value
@@ -91,6 +74,38 @@ const loadStudentEnrollment = async () =>{
     console.log(data);
     
     return data
+}
+
+const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer')
+
+const displayEnrollment =  async() =>{
+    const container = getEnrollSubContainer();
+    const data = await loadStudentEnrollment();
+
+    let student = document.createElement('div');
+    student.className ='student';
+
+    let clsName, name, age ,city ,grade
+    clsName = document.createElement('p');
+    name = document.createElement('p');
+    age = document.createElement('p');
+    city = document.createElement('p');
+    grade = document.createElement('p');
+
+    student.innerText = data.student.name
+    clsName.innerText = `This is student enrolled in: ${data.classname}`;
+    city.innerText = `This student is from: ${data.student.city}`
+    age.innerText = `Age : ${data.student.age}`
+    grade.innerText = `Current grade is: ${data.student.grade}`
+
+    student.append(age,city,age,grade, clsName)
+    container.append(student)
+
+    document.querySelector('#enrollClass').value = '';
+    document.querySelector('#studentName').value = '';
+    document.querySelector('#age').value = ''; 
+    document.querySelector('#city').value = '';
+    document.querySelector('#grade').value = '';
 }
 
 // const failingOrNot = () =>{

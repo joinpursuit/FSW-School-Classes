@@ -23,13 +23,13 @@ body {
     */
 }
 
-#classContainer {
+.display {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-/* #classContainer button {
-    width: 90px;
-    height: 50px;
-} */
+#searchForm {
+    display: flex;
+    gap: 30px;
+}
