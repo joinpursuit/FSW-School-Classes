@@ -15,13 +15,13 @@ app.use(handleCors)
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-
+// app.use(bodyParser.json())
 
 const timeStamp = () => new Date().toLocaleString()
 
 const addClassMethod = (req, res, next) => {
-    const className = req.body.name
-    const classTeacher = req.body.teacher
+    const className = req.query.name
+    const classTeacher = req.query.teacher
 
     res.send({
         class: mySchool.addClass(className, classTeacher),
@@ -50,13 +50,7 @@ validateStudent = (req, res, next) => {
         console.log('hello    ' + el['name'])
         el['name'] === studentObj.name
     })
-
-    // arr ? res.send({
-    //     console.log(el['name'])
-    //     error: 'Class already exist'
-    // }) : next()
 }
-
 const enrollClass = (req, res, next) => {
     let classname = req.params.classname;
     let studentObj = req.body
@@ -86,6 +80,6 @@ app.get('/class/:classname/students', getStudentsByClass)
 
 
 app.listen(port, () => {
-    console.log(`Running at http://localhost${port}/`);
+    console.log(`Running at http://localhost:${port}/`);
 
 })

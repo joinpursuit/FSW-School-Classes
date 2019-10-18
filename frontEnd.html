@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./frontEnd.js"></script>
     <script src="./frontEnd.css"></script>
     <link rel="stylesheet" href="./frontEnd.css">
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-    <Div id="container">
+    <Div id="formContainer">
         <div id="classContianer">
             <form id="addClass">
                 <input type="text" placeholder="Enter class Name" class="className">
@@ -37,11 +38,12 @@
                 <input type="text" placeholder="Enter class name" class="className">
                 <input type="text" placeholder="Enter city (optional)">
                 <label for="failing">Check to show who is failing</label>
-                <input type="checkbox" name="failing" id="ShowFailing">
+                <input type="checkbox" name="failing" id="showFailing">
                 <button id="getStudents">Search for students</button>
             </form>
         </div>
     </Div>
+    <div id="searchResults">Serch Results</div>
 </body>
 
 </html>
