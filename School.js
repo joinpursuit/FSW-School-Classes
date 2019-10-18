@@ -34,7 +34,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let studentsArray = this.classes[className].students
+    let studentsArray = this.classes[className].students;
+    console.log(studentsArray);
+
     let {
       name,
       age,
@@ -43,7 +45,7 @@ class School {
     } = student
     let newStudent = new Student(name, age, city, grade);
 
-    studentsArray.push(newStudent)
+    studentsArray.push(student)
     console.log("classes", this.classes[className])
 
     return newStudent;
