@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./frontEnd.js"></script>
+    <script src="./frontEnd.css"></script>
+    <link rel="stylesheet" href="./frontEnd.css">
+    <title>Vonarown University</title>
+</head>
+
+<body>
+    <Div id="container">
+        <div id="classContianer">
+            <form id="addClass">
+                <input type="text" placeholder="Enter class Name" class="className">
+                <input type="text" placeholder="Enter Teacher" id="teacher">
+                <button id="classAdded">Add class to directory</button>
+            </form>
+        </div>
+
+        <div id="studentContainer">
+            <form>
+                <input type="text" placeholder="Enter class Name" class="className">
+                <input type="text" placeholder="Enter student name">
+                <input type="text" placeholder="Enter student age">
+                <input type="text" placeholder="Enter city">
+                <input type="text" placeholder="Enter age">
+                <button id="enroll">Enroll student</button>
+            </form>
+        </div>
+
+        <div id="listStudents">
+            <form>
+                <input type="text" placeholder="Enter class name" class="className">
+                <input type="text" placeholder="Enter city (optional)">
+                <label for="failing">Check to show who is failing</label>
+                <input type="checkbox" name="failing" id="ShowFailing">
+                <button id="getStudents">Search for students</button>
+            </form>
+        </div>
+    </Div>
+</body>
+
+</html>

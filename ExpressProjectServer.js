@@ -86,6 +86,6 @@ app.get('/class/:classname/students', getStudentsByClass)
 
 
 app.listen(port, () => {
-    console.log(`Running at http://localhox${port}/`);
+    console.log(`Running at http://localhost${port}/`);
 
 })
