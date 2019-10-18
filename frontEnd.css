@@ -5,8 +5,31 @@ body {
     gap: 30px;
 }
 
+#creationResults {
+    display: flex;
+    gap: 10px;
+}
+
 #formContainer {
+    /* border: 2px solid wheat; */
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* display: grid;
+    grid-gap: -30px;
+    grid-template-columns: repeat(3, 30%);
+    justify-content: center;
+    width: 100vw;
+    */
 }
+
+#classContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* #classContainer button {
+    width: 90px;
+    height: 50px;
+} */

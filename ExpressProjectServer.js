@@ -31,9 +31,9 @@ const addClassMethod = (req, res, next) => {
 }
 
 const validateClass = (req, res, next) => {
-    let classInfo = req.body;
+    let classname = req.query.name;
 
-    !!mySchool['classes'][classInfo.name] ? res.send({
+    !!mySchool['classes'][classname] ? res.send({
         error: 'Class already exist'
     }) : next()
 }
@@ -53,7 +53,7 @@ validateStudent = (req, res, next) => {
 }
 const enrollClass = (req, res, next) => {
     let classname = req.params.classname;
-    let studentObj = req.body
+    let studentObj = req.query
     res.send({
         classname: classname,
         student: mySchool.enrollStudent(classname, studentObj),

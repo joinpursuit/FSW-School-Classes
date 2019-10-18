@@ -14,28 +14,29 @@
 
 <body>
     <Div id="formContainer">
-        <div id="classContianer">
+        <div id="classContainer">
             <form id="addClass">
-                <input type="text" placeholder="Enter class Name" class="className">
+                <input type="text" placeholder="Enter class Name" class="classname">
                 <input type="text" placeholder="Enter Teacher" id="teacher">
                 <button id="classAdded">Add class to directory</button>
             </form>
+            <div id="creationResults"></div>
         </div>
 
-        <div id="studentContainer">
+        <div id="enrollmentContainer">
             <form>
-                <input type="text" placeholder="Enter class Name" class="className">
-                <input type="text" placeholder="Enter student name">
-                <input type="text" placeholder="Enter student age">
-                <input type="text" placeholder="Enter city">
-                <input type="text" placeholder="Enter age">
+                <input type="text" placeholder="Enter class Name" class="classname">
+                <input type="text" placeholder="Enter student's name" id="studentName">
+                <input type="text" placeholder="Enter student's age" id="age">
+                <input type="text" placeholder="Enter student's city" id="city">
+                <input type="text" placeholder="Enter student's grade" id="grade">
                 <button id="enroll">Enroll student</button>
             </form>
         </div>
 
         <div id="listStudents">
             <form>
-                <input type="text" placeholder="Enter class name" class="className">
+                <input type="text" placeholder="Enter class name" class="classname">
                 <input type="text" placeholder="Enter city (optional)">
                 <label for="failing">Check to show who is failing</label>
                 <input type="checkbox" name="failing" id="showFailing">
@@ -43,7 +44,6 @@
             </form>
         </div>
     </Div>
-    <div id="searchResults">Serch Results</div>
 </body>
 
 </html>
