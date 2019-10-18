@@ -21,17 +21,6 @@ const addClass = async (e) => {
         teacher
     }
     console.log("jsonData", jsonData)
-    // console.log(name, teacher);
-
-    // const data = await axios({
-    //     method: 'post',
-    //     url: 'http://localhost:8000/class',
-    //     body: jsonData,
-    //     headers: {"Content-Type": "application/json"},
-    //     params: {
-    //         a: 1
-    //     }
-    // });
 
     const data = await axios.post(`http://localhost:8000/class`, jsonData)
 
@@ -51,11 +40,37 @@ const addClass = async (e) => {
 
 const addStudent = async (e) => {
     e.preventDefault();
+
     const className = document.querySelector('#class').value;
     const name = document.querySelector('#name').value;
     const age = document.querySelector('#age').value;
     const city = document.querySelector('#city').value;
     const grade = document.querySelector('#grade').value;
+
+    const displayAdd = document.querySelector('#display-add');
+    displayAdd.style.display = 'block';
+    displayAdd.innerText = '';
+
+    if (className == '' || name == '' || age == '' || city =='' || grade == '') {
+        displayAdd.innerText = 'Please fill out all fields in order to add the Student!';
+        displayAdd.style.backgroundColor = 'red';
+        return;
+    }
+
+    const parseGrade = parseFloat(grade);
+    const parseAge = parseInt(age);
+
+    if (isNaN(parseGrade) || parseGrade < 0 || parseGrade > 100)  {
+        displayAdd.innerText = 'Please enter a valid grade between 0 - 100';
+        displayAdd.style.backgroundColor = 'red';
+        return;
+    }
+
+    if (isNaN(parseAge) || parseAge < 0 || parseAge > 100)  {
+        displayAdd.innerText = 'Please enter a valid age between 0 - 100';
+        displayAdd.style.backgroundColor = 'red';
+        return;
+    }
 
     const jsonData = {
         name,
@@ -65,10 +80,6 @@ const addStudent = async (e) => {
     }
 
     const data = await axios.post(`http://localhost:8000/class/${className}/enroll`, jsonData);
-
-    const displayAdd = document.querySelector('#display-add');
-    displayAdd.style.display = 'block';
-    displayAdd.innerText = '';
 
     if (data.data.error) {
         displayAdd.innerText = data.data.error;
@@ -87,6 +98,16 @@ const listStudent = async (e) => {
     const failing = document.querySelector('#failing').checked;
     console.log('City Query: ', cityQuery);
 
+    const displayStudents = document.querySelector('#display-students');
+    displayStudents.style.display = 'block';
+    displayStudents.innerText = '';
+
+    if (className === '') {
+        displayStudents.innerText = 'Please write the name of the class you want to search in.'
+        displayStudents.style.backgroundColor = 'red';
+        return;
+    }
+
     let data = '';
     if (cityQuery) {
         data = await axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
@@ -95,16 +116,15 @@ const listStudent = async (e) => {
     }
 
     data = data.data;
+    console.log(data)
 
-    const displayStudents = document.querySelector('#display-students');
-    displayStudents.style.display = 'block';
-    displayStudents.innerText = '';
+    
 
     const ul = document.querySelector('#student-list');
     ul.innerHTML = '';
 
 
-    if (data.students.length === 0) {
+    if (!data.students) {
         displayStudents.innerText = 'There are 0 students that matches those criterias.';
         displayStudents.style.backgroundColor = 'red';
     } else {

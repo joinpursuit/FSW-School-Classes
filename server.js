@@ -87,6 +87,16 @@ const check = (req, res, next) => console.log(!!mySchool['classes'][req.body.nam
 
 const queryCheck = (req, res, next) => Object.keys(req.query).length ? validQueryCheck(req, res, next) : sendAllStudents(req, res, next);
 
+// const studentInputCheck = (req, res, next) => {
+//     console.log(req.body);
+//     for (let key in req.body) {
+//         if (req.body[key] === '') {
+//             return res.send({message: 'Please fill out all input fields to add a student!'});
+//         }
+//     }
+//     next();
+// }
+
 const validQueryCheck = (req, res, next) => {
     let {failing, city} = req.query;
 
@@ -132,10 +142,10 @@ app.get('/', sendSchoolInfo);
 app.post('/class', validInput, duplicateClass, addNewClass);
 
 // Enrolling students in class
-app.post('/class/:classname/enroll', validInput, classExists, studentAlreadyEnrolled, addNewStudent);
+app.post('/class/:classname/enroll', classExists, studentAlreadyEnrolled, addNewStudent);
 
 // List all students enrolled in a class
-app.get('/class/:classname/students', classExists, queryCheck);
+app.get('/class/:classname/students', validInput, classExists, queryCheck);
 
 const port = 8000;
 
