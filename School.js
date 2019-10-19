@@ -10,7 +10,7 @@ class School {
   }
 
   /**
-   * Add class to classes
+   * Add one class to all classes
    * 
    * @param {string} name - Name of the class
    * @param {string} teacher - Name of instructor 
@@ -22,7 +22,7 @@ class School {
   }
 
   /**
-   * Enroll student in class
+   * Enroll one student into one class
    * 
    * @param {string} className - Name of the class
    * @param {Student} student - Student object
@@ -36,7 +36,7 @@ class School {
 
 
   /**
-   * Get all students enrolled in a class
+   * Get all students enrolled in one class
    * 
    * @param {string} className - Name of the class
    * @return {Student[]} Array of Student objects
