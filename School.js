@@ -26,7 +26,7 @@ class School {
    * 
    * @param {string} className - Name of the class
    * @param {Student} student - Student object
-   * @return {Student} Enrolled student
+   * @return {Student} Enrolled student object
    */
   enrollStudent(className, student) {
     // Your code here
