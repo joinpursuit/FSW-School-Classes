@@ -15,13 +15,13 @@ app.use(handleCors)
 app.use(bodyParser.urlencoded({
     extended: false
 }))
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 
 const timeStamp = () => new Date().toLocaleString()
 
 const addClassMethod = (req, res, next) => {
-    const className = req.query.name
-    const classTeacher = req.query.teacher
+    const className = req.body.name
+    const classTeacher = req.body.teacher
 
     res.send({
         class: mySchool.addClass(className, classTeacher),
@@ -31,10 +31,11 @@ const addClassMethod = (req, res, next) => {
 }
 
 const validateClass = (req, res, next) => {
-    let classname = req.query.name;
+    let classname = req.body.name;
 
     !!mySchool['classes'][classname] ? res.send({
-        error: 'Class already exist'
+        error: 'Class already exist',
+        timeStamp: timeStamp()
     }) : next()
 }
 
@@ -53,7 +54,7 @@ validateStudent = (req, res, next) => {
 }
 const enrollClass = (req, res, next) => {
     let classname = req.params.classname;
-    let studentObj = req.query
+    let studentObj = req.body
     res.send({
         classname: classname,
         student: mySchool.enrollStudent(classname, studentObj),
