@@ -39,16 +39,27 @@ const validateClass = (req, res, next) => {
 app.post('/class', validateClass, addClassMethod)
 
 validateStudent = (req, res, next) => {
+    console.log("validating")
     let studentObj = req.body
     let classname = req.params.classname;
 
     let arr = mySchool['classes'][classname]['students'];
+    console.log(arr);
 
-    arr.filter(el => {
-        console.log('hello    ' + el['name'])
-        el['name'] === studentObj.name
+    arr.forEach(el => {
+        console.log(el.name);
+
+        if (el.name === studentObj.name) {
+            el.age = studentObj.age;
+            el.city = studentObj.city;
+            el.grade = studentObj.grade;
+
+            res.send(mySchool.enrollStudent(classname, el))
+        }
     })
+    next()
 }
+
 const enrollClass = (req, res, next) => {
     let classname = req.params.classname;
     let studentObj = req.body
@@ -60,11 +71,12 @@ const enrollClass = (req, res, next) => {
     })
 }
 
-app.post('/class/:classname/enroll', enrollClass)
+app.post('/class/:classname/enroll', validateStudent, enrollClass, validateStudent)
 
 
 const getStudentsByClass = (req, res, next) => {
     let classname = req.params.classname;
+    let city = req.body.city
 
     res.send({
         students: mySchool.getStudentsByClass(classname),

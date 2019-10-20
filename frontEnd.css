@@ -33,3 +33,8 @@ body {
     display: flex;
     gap: 30px;
 }
+
+#results {
+    display: flex;
+    gap: 30px;
+}
