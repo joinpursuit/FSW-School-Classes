@@ -1,16 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const School = require('./school.js')
+const cors = require('cors')
 const app = express();
+
+app.use(cors())
 let mySchool = new School();
 
-const handleCors = (req, res, next) => {
-    res.set('Access-Control-Allow-Origin', '*')
-    next()
-}
-
 const port = 8000;
-app.use(handleCors)
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -20,7 +17,7 @@ app.use(bodyParser.json())
 const timeStamp = () => new Date().toLocaleString()
 
 const addClassMethod = (req, res, next) => {
-    const className = req.body.name
+    const className = req.body.className
     const classTeacher = req.body.teacher
 
     res.send({
@@ -78,6 +75,8 @@ const getStudentsByClass = (req, res, next) => {
 
 
 app.get('/class/:classname/students', getStudentsByClass)
+
+
 
 
 app.listen(port, () => {

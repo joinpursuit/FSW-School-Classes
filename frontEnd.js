@@ -4,14 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let addForm = document.querySelector('#addClass')
     addForm.addEventListener('submit',(event) =>{
         event.preventDefault()
-        displayNewClass()
+      loadAddClassData()
     })
 
     let enrollmentForm = document.querySelector('#enrollmentContainer')
     enrollmentForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        displayEnrollment()
+        loadStudentEnrollment()
     })
+
+
+    let searchForm = document.querySelector('#listStudents')
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        loadStudentByClass()
+    })
+
     let checker = document.querySelector('#showFailing')
     // checker.addEventListener('CheckedChanged', failingOrNot)
     
@@ -23,23 +31,24 @@ const loadAddClassData = async () => {
     let className = document.querySelector('#createClass').value
     let teacher = document.querySelector('#teacher').value
     url = `http://localhost:8000/class?name=${className}&teacher=${teacher}`
-
-    let classObj ={
+   
+    let classObj = {
         className,
         teacher
     }
+
     const {
         data
-    } = await axios.post(url,obj);
+    } = await axios.post(url, classObj);
  
-    return data
+    displayNewClass(data)
 }
 
 const getClassResultsContainer = () => document.querySelector('#creationResults')
 
-const displayNewClass = async () => {
+const displayNewClass = async (data) => {
     const container = getClassResultsContainer();
-    const data = await loadAddClassData();
+   
 
     let lecture = document.createElement('div');
     lecture.className = 'classCard';
@@ -65,35 +74,33 @@ const displayNewClass = async () => {
 
 const loadStudentEnrollment = async () =>{
     let className = document.querySelector('#enrollClass').value
-    let studentName = document.querySelector('#studentName').value
+    let name = document.querySelector('#studentName').value
     let age = document.querySelector('#age').value
     let city = document.querySelector('#city').value
     let grade = document.querySelector('#grade').value
 
-    url = `http://localhost:8000/class/${className}/enroll?name=${studentName}&city=${city}&age=${age}&grade=${grade}`
+    url = `http://localhost:8000/class/${className}/enroll?name=${name}&city=${city}&age=${age}&grade=${grade}`
 
     let studentObj = {
-        className,
-        studentName,
+        name,
         age,
         city,
         grade
     }
-
     const {
         data
     } = await axios.post(url,studentObj)
 
     console.log(data);
     
-    return data
+    displayEnrollment(data)
 }
 
 const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer')
 
-const displayEnrollment =  async() =>{
+const displayEnrollment =  async(data) =>{
     const container = getEnrollSubContainer();
-    const data = await loadStudentEnrollment();
+    // const data = await loadStudentEnrollment();
 
     let student = document.createElement('div');
     student.className ='student';
@@ -127,6 +134,21 @@ const emptyInput = () =>{
     document.querySelector('#age').value = '';
     document.querySelector('#city').value = '';
     document.querySelector('#grade').value = '';
+}
+
+const loadStudentByClass = async () => {
+    let className = document.querySelector('#searchClass').value
+    url = `http://localhost:8000/class?name=${className}/students`
+
+    const {
+        data
+    } = axios.get(url)
+
+    displayEnrollment(data)
+}
+
+const displayStudentsByClass = () => {
+
 }
 
 // const failingOrNot = () =>{

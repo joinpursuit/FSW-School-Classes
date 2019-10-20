@@ -86,10 +86,21 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    this.classes[className] = className;
-    this.failing = failing;
-  }
+    this.name = this.classes[className];
 
+    let fail = [];
+
+    let studentArr = this.classes[className].students;
+
+    studentArr.filter(el => {
+      el.grade < 70 ? this.failing = true : this.failing = false
+      if (failing) {
+        fail.push(el)
+      }
+    })
+
+    return fail
+  }
 }
 
 module.exports = School;
