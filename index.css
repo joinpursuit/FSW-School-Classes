@@ -1,0 +1,19 @@
+form {
+    position: relative;
+}
+
+input {
+    position: absolute;
+    left: 70px;
+}
+input[type="checkbox"] {
+    left: 0px;
+}
+label[for="failing"] {
+    padding-left: 25px;
+}
+
+button {
+    position: relative;
+    /* right : 20px; */
+}
