@@ -30,6 +30,9 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let stud = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className].students.push(stud)
+    return stud
   }
 
 
@@ -43,6 +46,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    return this.classes[className].students
   }
 
 
@@ -64,6 +68,24 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let newArr = this.classes[className].students.filter(elem => {
+
+      if (failing === "true" && city !== "") {
+        if (city === elem.city)
+          if (elem.grade < 70)
+            return elem
+      }
+      else if (failing === "true") {
+        if (elem.grade < 70)
+          return elem
+
+      }
+      else if (city === elem.city) {
+        return elem
+      }
+    })
+
+    return newArr
   }
 
 }

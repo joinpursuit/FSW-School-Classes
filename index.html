@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="./index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      display: flex;
+
+    }
+
+    form {
+      margin: 20px;
+      height: 250px;
+      width: 200px;
+    }
+
+    div {
+      word-wrap: break-word;
+    }
+
+    input {
+      margin-bottom: 5px;
+    }
+
+    button {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form>
+    <input id="className" type="text" placeholder="class name" />
+    <input id="teacher" type="text" placeholder="teacher" />
+    <button id="addClass"> Add Class</button>
+
+    <div id="addClassResp"></div>
+  </form>
+
+
+
+  <form>
+    <input class="student" type="text" placeholder="class" />
+    <input class="student" type="text" placeholder="name" />
+    <input class="student" type="number" placeholder="age" />
+    <input class="student" type="text" placeholder="city" />
+    <input class="student" type="number" placeholder="grade" />
+    <button id="studBtn"> Add Student</button>
+
+    <div id="addStudentResp"></div>
+  </form>
+
+
+
+  <form>
+    <input id="class" placeholder="class" />
+    <input id="city" placeholder="city" />
+    <p><label>Show Failing Students Only<input type="checkbox" id="fail" /></label></p>
+    <button id="listBtn">List Students</button>
+    <div id="ListResp"></div>
+  </form>
+
+</body>
+
+</html>
