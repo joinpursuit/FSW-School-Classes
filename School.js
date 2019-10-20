@@ -59,8 +59,19 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // console.log(this.classes);
-    return this.classes[className].students
+    let arr = this.classes[className].students
+
+    const dupes = {};
+    const out = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      let key = arr[i].name
+      if (!dupes[key]) {
+        out.push(arr[i])
+      }
+      dupes[key] = true
+    }
+    return out
   }
 
 

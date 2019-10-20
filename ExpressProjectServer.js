@@ -54,7 +54,7 @@ validateStudent = (req, res, next) => {
             el.city = studentObj.city;
             el.grade = studentObj.grade;
 
-            res.send(mySchool.enrollStudent(classname, el))
+            res.send(el)
         }
     })
     next()

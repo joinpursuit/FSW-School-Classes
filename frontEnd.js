@@ -116,7 +116,6 @@ const displayEnrollment = async () => {
     console.log('This is data ', data);
 
     if (!data.student) {
-        student.innerText = data.name;
         city.innerText = data.city;
         age.innerText = data.age;
         grade.innerText = data.grade
