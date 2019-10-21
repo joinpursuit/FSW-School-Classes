@@ -52,7 +52,7 @@ validateStudent = (req, res, next) => {
         if (el.name === studentObj.name) {
             el.age = studentObj.age;
             el.city = studentObj.city;
-            el.grade = studentObj.grade;
+            el.grade = Number(studentObj.grade);
 
             res.send(el)
         }
@@ -99,20 +99,39 @@ app.post('/class/:classname/enroll', validateStudent, enrollClass, validateStude
 //     })
 // }
 
-const getStudentsByClass = (req, res, next) => {
-    let classname = req.params.classname;
-    let city = req.body.city
-    let failing = req.body.failing
+const getClassWithFilter = (req, res, next) => {
+    let classname = req.params.className;
+    let city = req.query.city;
+    let failing = req.query.failing;
 
     res.send({
-        students: mySchool.getStudentsByClass(classname, failing, city),
-        message: 'Retrieved Students',
+        students: mySchool.getStudentsByClassWithFilter(classname, failing, city),
         timeStamp: timeStamp()
     })
 }
 
+const getStudentsByClass = (req, res, next) => {
+    let classname = req.params.classname;
+    let city = req.query.city;
+    let failing = req.query.failing;
+    console.log("failing", typeof failing);
 
-app.get('/class/:classname/students', getStudentsByClass)
+    if (failing === "false") {
+        res.send({
+            students: mySchool.getStudentsByClass(classname),
+            message: 'Retrieved Students',
+            timeStamp: timeStamp()
+        })
+    } else {
+        res.send({
+            students: mySchool.getStudentsByClassWithFilter(classname, failing),
+            timeStamp: timeStamp()
+        })
+    }
+}
+
+app.get('/class/:classname/students', getStudentsByClass, getClassWithFilter)
+
 
 
 

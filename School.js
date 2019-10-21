@@ -72,6 +72,7 @@ class School {
       dupes[key] = true
     }
     return out
+    return arr
   }
 
 
@@ -95,18 +96,24 @@ class School {
     this.name = this.classes[className];
 
     let fail = [];
-
+    this.failing = failing;
     let studentArr = this.classes[className].students;
+    console.log("hi", this.failing)
 
-    studentArr.filter(el => {
-      el.grade < 70 ? this.failing = true : this.failing = false
-      if (failing) {
-        fail.push(el)
-      }
-    })
+    if (this.failing) {
+      let filtered = studentArr.filter(el => {
+        console.log("el grade", typeof el.grade)
+        if (el.grade < 70) {
+          fail.push(el)
+        }
+      })
+    }
+
 
     return fail
   }
+
+
 }
 
 module.exports = School;
