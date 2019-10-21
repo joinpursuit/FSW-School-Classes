@@ -74,12 +74,38 @@ const enrollClass = (req, res, next) => {
 app.post('/class/:classname/enroll', validateStudent, enrollClass, validateStudent)
 
 
+// const checkClass = (req, res, next) => {
+//     console.log('hit');
+
+//     let classname = req.params.classname;
+//     let arr = mySchool['classes'][classname]['students'];
+
+//     arr.forEach(el => {
+//         console.log('helllo there', el.name);
+
+//         if (el.name === classname) {
+//             next()
+//         } else {
+//             res.send({
+//                 error: `Class ${classname} doesn't exist`,
+//                 timeStamp: timeStamp()
+//             })
+//         }
+
+//         // el.name === classname ? res.send({
+//         //     error: `Class ${classname} doesn't exist`,
+//         //     timeStamp: timeStamp()
+//         // }) : next()
+//     })
+// }
+
 const getStudentsByClass = (req, res, next) => {
     let classname = req.params.classname;
     let city = req.body.city
+    let failing = req.body.failing
 
     res.send({
-        students: mySchool.getStudentsByClass(classname),
+        students: mySchool.getStudentsByClass(classname, failing, city),
         message: 'Retrieved Students',
         timeStamp: timeStamp()
     })

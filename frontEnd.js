@@ -1,6 +1,6 @@
 let url;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {    
     let addForm = document.querySelector('#addClass')
     addForm.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -20,9 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadStudentByClass()
     })
 
-    let checker = document.querySelector('#showFailing')
-    // checker.addEventListener('CheckedChanged', failingOrNot)
-
+    
+    checker()
 
 })
 
@@ -143,9 +142,21 @@ const emptyInput = () => {
     document.querySelector('#grade').value = '';
 }
 
+const checker = () => {
+    let check = document.querySelector('#showFailing')
+    check.addEventListener('change', () => {
+        check.checked === true ? console.log('hello') : console.log('bye');
+        console.log(check.checked);
+
+    })
+    return check.checked
+}
+
 const loadStudentByClass = async () => {
     let className = document.querySelector('#searchClass').value
-    url = `http://localhost:8000/class/${className}/students`
+
+    let checkBox = checker()
+    url = `http://localhost:8000/class/${className}/students?failing=${checkBox}`
 
     const {
         data
