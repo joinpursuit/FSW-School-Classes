@@ -7,6 +7,9 @@ class School {
       // className: Class Object
       //   physics: {} 
     }
+    this.students = {
+
+    }
   }
 
   /**
@@ -30,6 +33,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let newStudent = new Student(className, student);
+    this.students[name] = newStudent;
   }
 
 
