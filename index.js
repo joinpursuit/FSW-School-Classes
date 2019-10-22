@@ -22,13 +22,13 @@ app.get('/all', (req,res) => {
     res.send({ allRequest })
 })
 
-app.post("/addClass/:className/:teacherName", (req, res) => {
+app.post("/addClass/:className/:teacher", (req, res) => {
 
 let class_request = req.params.className;
-let teacherName = req.params.teacherName;
+let teacherName = req.params.teacher;
 console.log(class_request, teacherName)
 
-if(!class_request.name|| !class_request.teacher){
+if(!class_request || !teacherName){
     res.send({
         error: "Missing Information"
     })
