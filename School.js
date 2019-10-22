@@ -28,11 +28,12 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
+  enrollStudent(className, name) {
     // Your code here
+    let newStudent = new Student(name);
+    this.classes[className].students.push(newStudent);
+
   }
-
-
 
 
   /**
@@ -43,9 +44,9 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+  return this.classes[className].students
+
   }
-
-
 
 
   /**
