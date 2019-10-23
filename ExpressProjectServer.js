@@ -28,7 +28,7 @@ const addClassMethod = (req, res, next) => {
 }
 
 const validateClass = (req, res, next) => {
-    let classname = req.body.name;
+    let classname = req.body.className;
 
     !!mySchool['classes'][classname] ? res.send({
         error: 'Class already exist',
@@ -52,8 +52,7 @@ validateStudent = (req, res, next) => {
         if (el.name === studentObj.name) {
             el.age = studentObj.age;
             el.city = studentObj.city;
-            el.grade = Number(studentObj.grade);
-
+            el.grade = studentObj.grade;
             res.send(el)
         }
     })
@@ -74,41 +73,25 @@ const enrollClass = (req, res, next) => {
 app.post('/class/:classname/enroll', validateStudent, enrollClass, validateStudent)
 
 
-// const checkClass = (req, res, next) => {
-//     console.log('hit');
+const checkClass = (req, res, next) => {
+    let classname = req.params.classname;
+    !mySchool['classes'][classname] ? res.send({
+        error: `${classname} doesn't exist`,
+        timeStamp: timeStamp()
+    }) : next()
 
-//     let classname = req.params.classname;
-//     let arr = mySchool['classes'][classname]['students'];
+}
 
-//     arr.forEach(el => {
-//         console.log('helllo there', el.name);
+// const getClassWithFilter = (req, res, next) => {
+//     let classname = req.params.className;
+//     let city = req.query.city;
+//     let failing = req.query.failing;
 
-//         if (el.name === classname) {
-//             next()
-//         } else {
-//             res.send({
-//                 error: `Class ${classname} doesn't exist`,
-//                 timeStamp: timeStamp()
-//             })
-//         }
-
-//         // el.name === classname ? res.send({
-//         //     error: `Class ${classname} doesn't exist`,
-//         //     timeStamp: timeStamp()
-//         // }) : next()
+//     res.send({
+//         students: mySchool.getStudentsByClassWithFilter(classname, failing, city),
+//         timeStamp: timeStamp()
 //     })
 // }
-
-const getClassWithFilter = (req, res, next) => {
-    let classname = req.params.className;
-    let city = req.query.city;
-    let failing = req.query.failing;
-
-    res.send({
-        students: mySchool.getStudentsByClassWithFilter(classname, failing, city),
-        timeStamp: timeStamp()
-    })
-}
 
 const getStudentsByClass = (req, res, next) => {
     let classname = req.params.classname;
@@ -125,12 +108,13 @@ const getStudentsByClass = (req, res, next) => {
     } else {
         res.send({
             students: mySchool.getStudentsByClassWithFilter(classname, failing),
+            message: 'Retrieved Students',
             timeStamp: timeStamp()
         })
     }
 }
 
-app.get('/class/:classname/students', getStudentsByClass, getClassWithFilter)
+app.get('/class/:classname/students', checkClass, getStudentsByClass)
 
 
 

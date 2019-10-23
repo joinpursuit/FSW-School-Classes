@@ -1,6 +1,6 @@
 let url;
 
-document.addEventListener('DOMContentLoaded', () => {    
+document.addEventListener('DOMContentLoaded', () => {
     let addForm = document.querySelector('#addClass')
     addForm.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadStudentByClass()
     })
 
-    
+
     checker()
 
 })
@@ -39,6 +39,7 @@ const loadAddClassData = async () => {
     const {
         data
     } = await axios.post(url, classObj);
+    console.log(data);
 
     return data
 }
@@ -125,7 +126,7 @@ const displayEnrollment = async () => {
         age.innerText = `Age : ${data.student.age}`
         grade.innerText = `Current grade is: ${data.student.grade}`
         timeStamp.innerText = data.timeStamp
-        student.append(age, city, age, grade, clsName, timeStamp)
+        student.append(age, city, grade, clsName, timeStamp)
     }
     console.log("student", student)
     container.append(student)
@@ -145,9 +146,8 @@ const emptyInput = () => {
 const checker = () => {
     let check = document.querySelector('#showFailing')
     check.addEventListener('change', () => {
-        check.checked === true ? console.log('hello') : console.log('bye');
+        // check.checked === true ? console.log('hello') : console.log('bye');
         console.log(check.checked);
-
     })
     return check.checked
 }

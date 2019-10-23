@@ -71,8 +71,8 @@ class School {
       }
       dupes[key] = true
     }
+
     return out
-    return arr
   }
 
 
@@ -92,6 +92,7 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
+
   getStudentsByClassWithFilter(className, failing, city) {
     this.name = this.classes[className];
 
@@ -100,8 +101,19 @@ class School {
     let studentArr = this.classes[className].students;
     console.log("hi", this.failing)
 
+    const dupes = {};
+    const out = [];
+
+    for (let i = 0; i < studentArr.length; i++) {
+      let key = studentArr[i].name
+      if (!dupes[key]) {
+        out.push(studentArr[i])
+      }
+      dupes[key] = true
+    }
+
     if (this.failing) {
-      let filtered = studentArr.filter(el => {
+      let filtered = out.filter(el => {
         console.log("el grade", typeof el.grade)
         if (el.grade < 70) {
           fail.push(el)
