@@ -34,12 +34,14 @@ app.get('/all', (req,res) => {
 const newClass = (req, res, next) => {
     let newClass = req.body.name
     let newTeacher = req.body.teacher
+    let timeStamp = new Date();
     mySchool.addClass(newClass, newTeacher)
 
         console.log(mySchool.classes[newClass])
     res.json({
         "class": mySchool.classes[newClass],
-        "message" : "Created a new class"
+        "message" : "Created a new class", 
+        "time": timeStamp.toLocaleString()
     })
 }
 
@@ -49,11 +51,13 @@ const checkNewStudent = (req, res, next) => {
     let city = req.body.city
     let grade = req.body.grade
     let className = req.params.className
+    let timeStamp = new Date();
 
     let newStudent = mySchool.enrollStudent(className, name, age, city, grade)
     if(!name || !age || !city || !grade){
         res.json({
-            error: "Missing information"
+            error: "Missing information",
+            "message": timeStamp.toLocaleString()
         })
         
     }else{
@@ -66,30 +70,43 @@ const checkNewStudent = (req, res, next) => {
     let city = req.body.city
     let grade = req.body.grade
     let className = req.params.className
+    let timeStamp = new Date();
+
     let newStudent = mySchool.enrollStudent(className, name, age, city, grade)
 if(newStudent){
     updateStudent(newStudent)
-}else{
+}
+else{
     res.json(
         {"student": name,
         "className": className,
-         "message": "student added"})
+         "message": "student added",
+         "time": timeStamp.toLocaleString()})
 }
  }
 
-const updateStudent = () => {
+const updateStudent = (req,res,next) => {
     let name = req.body.name
     let age = req.body.age
     let city = req.body.city
     let grade = req.body.grade
     let className = req.params.className
-    let newStudent = mySchool.enrollStudent(className, name, age, city, grade)
 
+    let updateStudent = mySchool.enrollStudent(name, age, city, grade)
+
+res.json(
+        {
+         "student": name,
+         "className": className,
+         "age": age,
+         "city": city,
+         "grade": grade,
+         "message": "student updated"})
 }
 
 app.post("/class", newClass)
 app.post("/class/:className/enroll", checkNewStudent, newStudent)
-app.patch("/class/:className/enroll", updateStudent)
+app.put("/class/:className/enroll", updateStudent)
 
 
 // const Midwood = new School()
