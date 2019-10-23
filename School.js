@@ -7,9 +7,6 @@ class School {
       // className: Class Object
       //   physics: {} 
     }
-    this.students = {
-
-    }
   }
 
   /**
@@ -31,14 +28,12 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
+  enrollStudent(name, student, city, age, grade) {
     // Your code here
-    let newStudent = new Student(className, student);
-    this.students[name] = newStudent;
+    let newStudent = new Student(student, city, age, grade);
+    this.classes[name].students.push(newStudent);
+    // console.log(this.classes[name]);
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
