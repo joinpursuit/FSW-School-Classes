@@ -5,9 +5,15 @@ body {
     gap: 30px;
 }
 
-#creationResults {
+/* #creationResults {
     display: flex;
     gap: 10px;
+    flex-direction: column;
+} */
+
+.resultsContainer {
+    display: flex;
+    gap: 15px;
     flex-direction: column;
 }
 

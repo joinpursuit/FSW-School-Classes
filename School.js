@@ -92,7 +92,6 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-
   getStudentsByClassWithFilter(className, failing, city) {
     this.name = this.classes[className];
 
@@ -113,7 +112,7 @@ class School {
     }
 
     if (this.failing) {
-      let filtered = out.filter(el => {
+      out.filter(el => {
         console.log("el grade", typeof el.grade)
         if (el.grade < 70) {
           fail.push(el)

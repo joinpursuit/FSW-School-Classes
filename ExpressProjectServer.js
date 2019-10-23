@@ -82,17 +82,6 @@ const checkClass = (req, res, next) => {
 
 }
 
-// const getClassWithFilter = (req, res, next) => {
-//     let classname = req.params.className;
-//     let city = req.query.city;
-//     let failing = req.query.failing;
-
-//     res.send({
-//         students: mySchool.getStudentsByClassWithFilter(classname, failing, city),
-//         timeStamp: timeStamp()
-//     })
-// }
-
 const getStudentsByClass = (req, res, next) => {
     let classname = req.params.classname;
     let city = req.query.city;

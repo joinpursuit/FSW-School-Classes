@@ -1,16 +1,17 @@
 let url;
 
 document.addEventListener('DOMContentLoaded', () => {
+    emptyInput()
     let addForm = document.querySelector('#addClass')
     addForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        displayNewClass()
+        addingClassToDom()
     })
 
     let enrollmentForm = document.querySelector('#enrollmentContainer')
     enrollmentForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        displayEnrollment()
+        addingStudentToDom()
     })
 
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-
+// this function uses axios to create the information of a class
 const loadAddClassData = async () => {
     let className = document.querySelector('#createClass').value
     let teacher = document.querySelector('#teacher').value
@@ -44,11 +45,18 @@ const loadAddClassData = async () => {
     return data
 }
 
+// retrieving the container to display class creation results
 const getClassResultsContainer = () => document.querySelector('#creationResults')
 
-const displayNewClass = async () => {
+//this function adds the class information to the screem
+const addingClassToDom = async () => {
+    const classData = await loadAddClassData()
+    displayNewClass(classData)
+}
+
+// creating cards for the class information created
+const displayNewClass = async (data) => {
     const container = getClassResultsContainer();
-    const data = await loadAddClassData()
 
     let lecture = document.createElement('div');
     lecture.className = 'classCard';
@@ -72,6 +80,8 @@ const displayNewClass = async () => {
     emptyInput()
 }
 
+
+// function to post the information about the students from user input
 const loadStudentEnrollment = async () => {
     let className = document.querySelector('#enrollClass').value
     let name = document.querySelector('#studentName').value
@@ -79,7 +89,7 @@ const loadStudentEnrollment = async () => {
     let city = document.querySelector('#city').value
     let grade = document.querySelector('#grade').value
 
-    url = `http://localhost:8000/class/${className}/enroll?name=${name}&city=${city}&age=${age}&grade=${grade}`
+    url = `http://localhost:8000/class/${className}/enroll?name=${name}&city=${city}&age=${parseInt(age)}&grade=${parseFloat(grade)}`
 
     let studentObj = {
         name,
@@ -96,11 +106,18 @@ const loadStudentEnrollment = async () => {
     return data
 }
 
-const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer')
+//grabbing the students enrollment container
+const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer');
 
-const displayEnrollment = async () => {
+//displaying the new student information to the screen 
+const addingStudentToDom = async () => {
+    const studentData = await loadStudentEnrollment()
+    displayEnrollment(studentData)
+}
+
+//creating cards for student information to be added to the screen
+const displayEnrollment = async (data) => {
     const container = getEnrollSubContainer();
-    const data = await loadStudentEnrollment();
 
     let student = document.createElement('div');
     student.className = 'student';
@@ -111,8 +128,7 @@ const displayEnrollment = async () => {
     age = document.createElement('p');
     city = document.createElement('p');
     grade = document.createElement('p');
-    timeStamp = document.createElement('p')
-
+    timeStamp = document.createElement('p').innerText = data.timeStamp
     console.log('This is data ', data);
 
     if (!data.student) {
@@ -125,7 +141,6 @@ const displayEnrollment = async () => {
         city.innerText = `This student is from: ${data.student.city}`
         age.innerText = `Age : ${data.student.age}`
         grade.innerText = `Current grade is: ${data.student.grade}`
-        timeStamp.innerText = data.timeStamp
         student.append(age, city, grade, clsName, timeStamp)
     }
     console.log("student", student)
@@ -133,16 +148,7 @@ const displayEnrollment = async () => {
     emptyInput()
 }
 
-const emptyInput = () => {
-    document.querySelector('.classname').value = ''
-    document.querySelector('#teacher').value = ''
-    document.querySelector('#enrollClass').value = '';
-    document.querySelector('#studentName').value = '';
-    document.querySelector('#age').value = '';
-    document.querySelector('#city').value = '';
-    document.querySelector('#grade').value = '';
-}
-
+//this function sets the eventListener to the check-box
 const checker = () => {
     let check = document.querySelector('#showFailing')
     check.addEventListener('change', () => {
@@ -152,6 +158,7 @@ const checker = () => {
     return check.checked
 }
 
+//grabbing the student information by filter
 const loadStudentByClass = async () => {
     let className = document.querySelector('#searchClass').value
 
@@ -171,9 +178,15 @@ const displayStudentsByClass = () => {
 
 }
 
-// const failingOrNot = () =>{
-//     let checkBox = document.querySelector('#showFailing')
-//     checkBox.checked === true ? console.log('hello') :console.log('bye');
-//     ;
-
-// }
+//this function empties the the user input
+const emptyInput = () => {
+    document.querySelector('.classname').value = ''
+    document.querySelector('#teacher').value = ''
+    document.querySelector('#enrollClass').value = '';
+    document.querySelector('#studentName').value = '';
+    document.querySelector('#age').value = '';
+    document.querySelector('#city').value = '';
+    document.querySelector('#grade').value = '';
+    document.querySelector('#searchClass').value = '';
+    document.querySelector('#showFailing').value = '';
+}
