@@ -32,10 +32,15 @@ class School {
   enrollStudent(className, name, age, city, grade) {
     // Your code here
     let newStudent = new Student(name, age, city, grade);
-    // console.log(newStudent)
+    console.log(newStudent)
+    console.log(this.classes)
     this.classes[className].students.push(newStudent);
     // console.log('here')
-    // return this.classes
+    return this.classes
+  }
+
+  updateStudent(className, name, age, city, grade){
+
   }
 
   /**
