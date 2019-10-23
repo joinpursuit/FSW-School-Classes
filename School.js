@@ -19,7 +19,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
-    return this.classes
+    // return this.classes
   }
 
   /**
@@ -29,13 +29,14 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, name) {
+  enrollStudent(className, name, age, city, grade) {
     // Your code here
-    let newStudent = new Student(name);
+    let newStudent = new Student(name, age, city, grade);
+    console.log(newStudent)
     this.classes[className].students.push(newStudent);
-
+    console.log('here')
+    // return this.classes
   }
-
 
   /**
    * Get all students enrolled in a class
