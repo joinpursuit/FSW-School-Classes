@@ -1,4 +1,11 @@
 let url;
+let clsName, name, age, city, grade, timeStamp
+clsName = document.createElement('p');
+name = document.createElement('p');
+age = document.createElement('p');
+city = document.createElement('p');
+grade = document.createElement('p');
+timeStamp = document.createElement('p');
 
 document.addEventListener('DOMContentLoaded', () => {
     emptyInput()
@@ -18,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let searchForm = document.querySelector('#listStudents')
     searchForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        loadStudentByClass()
+        classFilterChoiceToDOM()
     })
 
 
@@ -48,7 +55,7 @@ const loadAddClassData = async () => {
 // retrieving the container to display class creation results
 const getClassResultsContainer = () => document.querySelector('#creationResults')
 
-//this function adds the class information to the screem
+//this function adds the class information to the screen
 const addingClassToDom = async () => {
     const classData = await loadAddClassData()
     displayNewClass(classData)
@@ -56,16 +63,15 @@ const addingClassToDom = async () => {
 
 // creating cards for the class information created
 const displayNewClass = async (data) => {
+
     const container = getClassResultsContainer();
 
     let lecture = document.createElement('div');
     lecture.className = 'classCard';
     let professor = document.createElement('p');
     let message = document.createElement('p');
-    let timeStamp = document.createElement('p');
     let err = document.createElement('p');
-
-    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
+    let timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
 
     if (data.class === undefined) {
         err.innerText = data.error
@@ -112,23 +118,25 @@ const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer'
 //displaying the new student information to the screen 
 const addingStudentToDom = async () => {
     const studentData = await loadStudentEnrollment()
+    clearResults()
     displayEnrollment(studentData)
 }
 
 //creating cards for student information to be added to the screen
-const displayEnrollment = async (data) => {
+const displayEnrollment = async (data, el) => {
     const container = getEnrollSubContainer();
 
     let student = document.createElement('div');
     student.className = 'student';
 
-    let clsName, name, age, city, grade, timeStamp
+    let clsName, name, age, city, grade
     clsName = document.createElement('p');
     name = document.createElement('p');
     age = document.createElement('p');
     city = document.createElement('p');
     grade = document.createElement('p');
-    timeStamp = document.createElement('p').innerText = data.timeStamp
+    let timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
+    clsName.innerText = `This is student enrolled in: ${data.classname}`;
     console.log('This is data ', data);
 
     if (!data.student) {
@@ -136,19 +144,30 @@ const displayEnrollment = async (data) => {
         age.innerText = data.age;
         grade.innerText = data.grade
     } else {
-        student.innerText = data.student.name
-        clsName.innerText = `This is student enrolled in: ${data.classname}`;
-        city.innerText = `This student is from: ${data.student.city}`
-        age.innerText = `Age : ${data.student.age}`
-        grade.innerText = `Current grade is: ${data.student.grade}`
-        student.append(age, city, grade, clsName, timeStamp)
+        if (el) {
+            student.innerText = el.name
+            city.innerText = `This student is from: ${el.city}`
+            console.log('helloo', el.city);
+
+            age.innerText = `Age : ${el.age}`
+            grade.innerText = `Current grade is: ${el.grade}`
+            student.append(age, city, grade, clsName, timeStamp)
+            container.append(student)
+        } else {
+            student.innerText = data.student.name
+            city.innerText = `This student is from: ${data.student.city}`
+            age.innerText = `Age : ${data.student.age}`
+            grade.innerText = `Current grade is: ${data.student.grade}`
+            student.append(age, city, grade, clsName, timeStamp);
+            container.append(student)
+        }
     }
     console.log("student", student)
-    container.append(student)
+    // container.append(student)
     emptyInput()
 }
 
-//this function sets the eventListener to the check-box
+//this function sets the eventListener to the check-box 
 const checker = () => {
     let check = document.querySelector('#showFailing')
     check.addEventListener('change', () => {
@@ -171,12 +190,26 @@ const loadStudentByClass = async () => {
 
     // displayEnrollment(data)
     console.log(data);
-
+    return data
 }
 
-const displayStudentsByClass = () => {
+const classFilterChoiceToDOM = async () => {
+    const classFilterData = await loadStudentByClass()
+    clearResults()
+    console.log("This is class filter", classFilterData);
 
+    // for (i in classFilterData.student) {
+    //     console.log(i);
+    //     displayEnrollment(classFilterData, i)
+    // }
+
+    classFilterData.student.forEach(el => {
+        console.log(el);
+
+        displayEnrollment(classFilterData, el)
+    });
 }
+
 
 //this function empties the the user input
 const emptyInput = () => {
@@ -188,5 +221,12 @@ const emptyInput = () => {
     document.querySelector('#city').value = '';
     document.querySelector('#grade').value = '';
     document.querySelector('#searchClass').value = '';
-    document.querySelector('#showFailing').value = '';
+    document.querySelector('#showFailing').checked = false;
+}
+
+const clearResults = () => {
+    let container = getEnrollSubContainer()
+    while (container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
 }

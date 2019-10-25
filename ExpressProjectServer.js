@@ -90,13 +90,14 @@ const getStudentsByClass = (req, res, next) => {
 
     if (failing === "false") {
         res.send({
-            students: mySchool.getStudentsByClass(classname),
+            student: mySchool.getStudentsByClass(classname),
+            classname: classname,
             message: 'Retrieved Students',
             timeStamp: timeStamp()
         })
     } else {
         res.send({
-            students: mySchool.getStudentsByClassWithFilter(classname, failing),
+            student: mySchool.getStudentsByClassWithFilter(classname, failing),
             message: 'Retrieved Students',
             timeStamp: timeStamp()
         })
