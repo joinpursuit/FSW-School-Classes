@@ -31,7 +31,7 @@ const emptyClass = (req, res, next) => {
     let classname = req.body.className;
 
     classname === '' ? res.send({
-        error: 'Enter class information',
+        error: 'Please fill out class information',
         timeStamp: timeStamp()
     }) : next()
 }
@@ -79,7 +79,17 @@ const enrollClass = (req, res, next) => {
     })
 }
 
-app.post('/class/:classname/enroll', validateStudent, enrollClass, validateStudent)
+const invalidStudent = (req, res, next) => {
+    let classname = req.params.classname;
+    let studentObj = req.body
+
+    studentObj.body === '' || studentObj.age === '' || studentObj.grade === '' || studentObj.city === '' ? res.send({
+        error: 'Please fill out all the information for the student',
+        timeStamp: timeStamp()
+    }) : next()
+}
+
+app.post('/class/:classname/enroll', invalidStudent, validateStudent, enrollClass)
 
 
 const checkClass = (req, res, next) => {

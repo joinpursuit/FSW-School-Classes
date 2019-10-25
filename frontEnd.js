@@ -59,7 +59,8 @@ const displayNewClass = async (data) => {
     let professor = document.createElement('p');
     let message = document.createElement('p');
     let err = document.createElement('p');
-    timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
+    timeStamp = document.createElement('p')
+    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
 
     if (data.class === undefined) {
         err.innerText = data.error
@@ -106,7 +107,7 @@ const loadStudentEnrollment = async () => {
 const addingStudentToDom = async () => {
     const studentData = await loadStudentEnrollment()
     clearResults()
-    displayEnrollment(studentData)
+    studentData.student === undefined ? displayError(studentData) : displayEnrollment(studentData);
 }
 
 //creating cards for student information to be added to the screen
@@ -121,7 +122,8 @@ const displayEnrollment = async (data, el) => {
     age = document.createElement('p');
     city = document.createElement('p');
     grade = document.createElement('p');
-    timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
+    timeStamp = document.createElement('p')
+    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
 
     if (!data.student) {
         city.innerText = data.city;
@@ -133,13 +135,14 @@ const displayEnrollment = async (data, el) => {
             city.innerText = `This student is from: ${el.city}`
             age.innerText = `Age : ${el.age}`
             grade.innerText = `Current grade is: ${el.grade}`
-            student.append(age, city, grade, clsName, timeStamp)
+            student.append(age, city, grade, timeStamp)
             container.append(student)
         } else {
             student.innerText = data.student.name
             city.innerText = `This student is from: ${data.student.city}`
             age.innerText = `Age : ${data.student.age}`
             grade.innerText = `Current grade is: ${data.student.grade}`
+            clsName.innerText = `Enrolled in ${data.classname}`
             student.append(age, city, grade, clsName, timeStamp);
             container.append(student)
         }
@@ -182,11 +185,15 @@ const classFilterChoiceToDOM = async () => {
 
 const displayError = (data) => {
     const container = getContainer();
+    let errorDiv = document.createElement('div')
+
     let err = document.createElement('p')
     err.innerText = `Error: ${data.error}`
     let timeStamp = document.createElement('p')
     timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
-    container.append(err, timeStamp)
+
+    errorDiv.append(err, timeStamp)
+    container.append(errorDiv)
 }
 
 //this function empties the the user input

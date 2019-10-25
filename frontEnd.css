@@ -1,4 +1,5 @@
 body {
+    background-color: grey;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,16 +7,9 @@ body {
 }
 
 #formContainer {
-    /* border: 2px solid wheat; */
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* display: grid;
-    grid-gap: -30px;
-    grid-template-columns: repeat(3, 30%);
-    justify-content: center;
-    width: 100vw;
-    */
 }
 
 .display {
@@ -36,8 +30,29 @@ body {
     align-items: center;
 }
 
-.classCard {
+.classCard, .student{
+    font-size: 20px;
+    color: blueviolet   ;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
     border: 1px solid blue;
+    border-radius: 10%;
     padding: 20px;
-    height: 120px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(.6, .7, .8, .8);
+}
+
+.student {
+    border: 1px solid brown;
+}
+.error{
+    border-color: 2px solid burlywood;
+    background-color: red;
+    border: 3px solid burlywood;
+    border-radius: 10%;
+    padding: 20px;
 }
