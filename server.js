@@ -74,8 +74,12 @@ const assignStudent = (req, res, next) => {
     // console.log(addedClass)
     // res.json(addedClass);
     mySchool.enrollStudent(currentClass, student, city, age, grade)
+
+    let studentArray = mySchool.classes[currentClass].students;
+    let end = studentArray.length - 1;
+
     res.json({
-        "student": mySchool.classes[currentClass].students,
+        "student": studentArray[end],
         "className": currentClass,
         "message": "Enrolled a new student in class",
         "timestamp": date
