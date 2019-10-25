@@ -27,6 +27,15 @@ const addClassMethod = (req, res, next) => {
     })
 }
 
+const emptyClass = (req, res, next) => {
+    let classname = req.body.className;
+
+    classname === '' ? res.send({
+        error: 'Enter class information',
+        timeStamp: timeStamp()
+    }) : next()
+}
+
 const validateClass = (req, res, next) => {
     let classname = req.body.className;
 
@@ -36,7 +45,7 @@ const validateClass = (req, res, next) => {
     }) : next()
 }
 
-app.post('/class', validateClass, addClassMethod)
+app.post('/class', emptyClass, validateClass, addClassMethod)
 
 validateStudent = (req, res, next) => {
     console.log("validating")

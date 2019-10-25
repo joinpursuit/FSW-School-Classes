@@ -119,8 +119,6 @@ class School {
         }
       })
     }
-
-
     return fail
   }
 

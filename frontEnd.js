@@ -1,12 +1,5 @@
 let url;
-let clsName, name, age, city, grade, timeStamp
-clsName = document.createElement('p');
-name = document.createElement('p');
-age = document.createElement('p');
-city = document.createElement('p');
-grade = document.createElement('p');
-timeStamp = document.createElement('p');
-
+let clsName, name, age, city, grade, timeStamp;
 document.addEventListener('DOMContentLoaded', () => {
     emptyInput()
     let addForm = document.querySelector('#addClass')
@@ -21,16 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         addingStudentToDom()
     })
 
-
     let searchForm = document.querySelector('#listStudents')
     searchForm.addEventListener('submit', (event) => {
         event.preventDefault()
         classFilterChoiceToDOM()
     })
-
-
     checker()
-
 })
 
 // this function uses axios to create the information of a class
@@ -48,12 +37,11 @@ const loadAddClassData = async () => {
         data
     } = await axios.post(url, classObj);
     console.log(data);
-
     return data
 }
 
 // retrieving the container to display class creation results
-const getClassResultsContainer = () => document.querySelector('#creationResults')
+const getContainer = () => document.querySelector('#results')
 
 //this function adds the class information to the screen
 const addingClassToDom = async () => {
@@ -64,14 +52,14 @@ const addingClassToDom = async () => {
 // creating cards for the class information created
 const displayNewClass = async (data) => {
 
-    const container = getClassResultsContainer();
-
+    const container = getContainer();
+    clearResults()
     let lecture = document.createElement('div');
     lecture.className = 'classCard';
     let professor = document.createElement('p');
     let message = document.createElement('p');
     let err = document.createElement('p');
-    let timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
+    timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
 
     if (data.class === undefined) {
         err.innerText = data.error
@@ -108,12 +96,11 @@ const loadStudentEnrollment = async () => {
     } = await axios.post(url, studentObj)
 
     console.log(data);
-
     return data
 }
 
 //grabbing the students enrollment container
-const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer');
+// const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer');
 
 //displaying the new student information to the screen 
 const addingStudentToDom = async () => {
@@ -124,20 +111,17 @@ const addingStudentToDom = async () => {
 
 //creating cards for student information to be added to the screen
 const displayEnrollment = async (data, el) => {
-    const container = getEnrollSubContainer();
+    const container = getContainer();
 
     let student = document.createElement('div');
     student.className = 'student';
 
-    let clsName, name, age, city, grade
     clsName = document.createElement('p');
     name = document.createElement('p');
     age = document.createElement('p');
     city = document.createElement('p');
     grade = document.createElement('p');
-    let timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
-    clsName.innerText = `This is student enrolled in: ${data.classname}`;
-    console.log('This is data ', data);
+    timeStamp = document.createElement('p').innerText = `Timestamp: ${data.timeStamp}`;
 
     if (!data.student) {
         city.innerText = data.city;
@@ -147,8 +131,6 @@ const displayEnrollment = async (data, el) => {
         if (el) {
             student.innerText = el.name
             city.innerText = `This student is from: ${el.city}`
-            console.log('helloo', el.city);
-
             age.innerText = `Age : ${el.age}`
             grade.innerText = `Current grade is: ${el.grade}`
             student.append(age, city, grade, clsName, timeStamp)
@@ -187,8 +169,6 @@ const loadStudentByClass = async () => {
     const {
         data
     } = await axios.get(url)
-
-    // displayEnrollment(data)
     console.log(data);
     return data
 }
@@ -197,19 +177,17 @@ const classFilterChoiceToDOM = async () => {
     const classFilterData = await loadStudentByClass()
     clearResults()
     console.log("This is class filter", classFilterData);
-
-    // for (i in classFilterData.student) {
-    //     console.log(i);
-    //     displayEnrollment(classFilterData, i)
-    // }
-
-    classFilterData.student.forEach(el => {
-        console.log(el);
-
-        displayEnrollment(classFilterData, el)
-    });
+    classFilterData.student === undefined ? displayError(classFilterData) : classFilterData.student.forEach(el => displayEnrollment(classFilterData, el));
 }
 
+const displayError = (data) => {
+    const container = getContainer();
+    let err = document.createElement('p')
+    err.innerText = `Error: ${data.error}`
+    let timeStamp = document.createElement('p')
+    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
+    container.append(err, timeStamp)
+}
 
 //this function empties the the user input
 const emptyInput = () => {
@@ -225,7 +203,7 @@ const emptyInput = () => {
 }
 
 const clearResults = () => {
-    let container = getEnrollSubContainer()
+    let container = getContainer()
     while (container.firstChild) {
         container.removeChild(container.firstChild)
     }

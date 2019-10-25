@@ -5,18 +5,6 @@ body {
     gap: 30px;
 }
 
-/* #creationResults {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-} */
-
-.resultsContainer {
-    display: flex;
-    gap: 15px;
-    flex-direction: column;
-}
-
 #formContainer {
     /* border: 2px solid wheat; */
     display: flex;
@@ -43,5 +31,13 @@ body {
 
 #results {
     display: flex;
-    gap: 30px;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.classCard {
+    border: 1px solid blue;
+    padding: 20px;
+    height: 120px;
 }
