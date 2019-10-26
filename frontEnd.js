@@ -46,7 +46,7 @@ const getContainer = () => document.querySelector('#results')
 //this function adds the class information to the screen
 const addingClassToDom = async () => {
     const classData = await loadAddClassData()
-    displayNewClass(classData)
+    classData.class === undefined ? displayError(classData) : displayNewClass(classData);
 }
 
 // creating cards for the class information created
@@ -62,19 +62,13 @@ const displayNewClass = async (data) => {
     timeStamp = document.createElement('p')
     timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
 
-    if (data.class === undefined) {
-        err.innerText = data.error
-        lecture.append(err, timeStamp)
-    } else {
-        lecture.innerText = `Class Name: ${data.class.name}`;
-        professor.innerText = `Assigned professor: ${data.class.teacher}`;
-        message.innerText = `Status: ${data.message}`;
-        lecture.append(professor, message, timeStamp)
-    }
+    lecture.innerText = `Class Name: ${data.class.name}`;
+    professor.innerText = `Assigned professor: ${data.class.teacher}`;
+    message.innerText = `Status: ${data.message}`;
+    lecture.append(professor, message, timeStamp)
     container.append(lecture)
     emptyInput()
 }
-
 
 // function to post the information about the students from user input
 const loadStudentEnrollment = async () => {
@@ -99,10 +93,6 @@ const loadStudentEnrollment = async () => {
     console.log(data);
     return data
 }
-
-//grabbing the students enrollment container
-// const getEnrollSubContainer = () => document.querySelector('#enrollSubContainer');
-
 //displaying the new student information to the screen 
 const addingStudentToDom = async () => {
     const studentData = await loadStudentEnrollment()
@@ -148,24 +138,19 @@ const displayEnrollment = async (data, el) => {
         }
     }
     console.log("student", student)
-    // container.append(student)
     emptyInput()
 }
 
 //this function sets the eventListener to the check-box 
 const checker = () => {
     let check = document.querySelector('#showFailing')
-    check.addEventListener('change', () => {
-        // check.checked === true ? console.log('hello') : console.log('bye');
-        console.log(check.checked);
-    })
+    check.addEventListener('change', () => {})
     return check.checked
 }
 
 //grabbing the student information by filter
 const loadStudentByClass = async () => {
     let className = document.querySelector('#searchClass').value
-
     let checkBox = checker()
     url = `http://localhost:8000/class/${className}/students?failing=${checkBox}`
 
@@ -183,10 +168,12 @@ const classFilterChoiceToDOM = async () => {
     classFilterData.student === undefined ? displayError(classFilterData) : classFilterData.student.forEach(el => displayEnrollment(classFilterData, el));
 }
 
+//this function handles displaying the error message
 const displayError = (data) => {
     const container = getContainer();
+    clearResults()
     let errorDiv = document.createElement('div')
-
+    errorDiv.className = 'error'
     let err = document.createElement('p')
     err.innerText = `Error: ${data.error}`
     let timeStamp = document.createElement('p')

@@ -29,7 +29,6 @@ const addClassMethod = (req, res, next) => {
 
 const emptyClass = (req, res, next) => {
     let classname = req.body.className;
-
     classname === '' ? res.send({
         error: 'Please fill out class information',
         timeStamp: timeStamp()
@@ -38,7 +37,6 @@ const emptyClass = (req, res, next) => {
 
 const validateClass = (req, res, next) => {
     let classname = req.body.className;
-
     !!mySchool['classes'][classname] ? res.send({
         error: 'Class already exist',
         timeStamp: timeStamp()
@@ -57,7 +55,6 @@ validateStudent = (req, res, next) => {
 
     arr.forEach(el => {
         console.log(el.name);
-
         if (el.name === studentObj.name) {
             el.age = studentObj.age;
             el.city = studentObj.city;

@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    font-size: 20px
 }
 
 #formContainer {
@@ -36,7 +37,7 @@ body {
     font-weight: bolder;
     display: flex;
     flex-direction: column;
-    border: 1px solid blue;
+    border: 3px solid blue;
     border-radius: 10%;
     padding: 20px;
     height: 300px;
@@ -47,7 +48,7 @@ body {
 }
 
 .student {
-    border: 1px solid brown;
+    border: 3px solid brown;
 }
 .error{
     border-color: 2px solid burlywood;
@@ -55,4 +56,11 @@ body {
     border: 3px solid burlywood;
     border-radius: 10%;
     padding: 20px;
+    font-size: 20px;
+    color:yellow;
+}
+input{
+    border: 1px solid black;
+    border-radius: 10%;
+    background-color: wheat;
 }
