@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    <title>School</title>
+</head>
+<body>
+    <div id="makeClass">
+        <h4>Make a class</h4>
+        <input type="text" id="name" placeholder="Class Name">
+        <input type="text" id="teacher" placeholder="Teacher Name">
+        <button id="classButton">Make a class</button>
+    </div>
+    <div id="enroll">
+        <h4>Enroll a student in a class</h4>
+        <input type="text" id="className" placeholder="Class Name">
+        <input type="text" id="studentName" placeholder="Student's Name">
+        <input type="text" id="studentAge" placeholder="Student's Age">
+        <input type="text" id="studentCity" placeholder="City Student Lives In">
+        <input type="text" id="studentGrade" placeholder="Student's Grade">
+        <button id="enrollButton">Enroll a student</button>
+    </div>
+    <div id="update">
+        <h4>Update Student's Grade</h4>
+        <input type="text" id="classUpdate" placeholder="Class Name">
+        <input type="text" id="studentNameUp" placeholder="Student's Name">  
+        <input type="text" id="studentGradeUp" placeholder="Student's New Grade">
+        <button id="updateButton">Update Grade</button>
+    </div>
+    <div id="getStudents">
+        <h4>Get Students by Class</h4>
+        <input type="text" id="classNameGet" placeholder="Class Name">
+        <input type="checkbox" id="failing"> Get the only failing students<br>
+        <button id="getButton">Get Students</button>
+    </div>
+    
+</body>
+</html>
