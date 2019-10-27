@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     getButton.addEventListener("click", getStudents);
 })
 
-function makeClass() {
+function makeClass(event) {
+    event.preventDefault();
     console.log("clicked")
     let className = document.getElementById("name");
     let inputClass = className.value;
@@ -30,7 +31,8 @@ function makeClass() {
     })
 }
 
-function enrollStudent() {
+function enrollStudent(event) {
+    event.preventDefault();
     let className = document.getElementById("className");
     let inputClass = className.value;
 
@@ -58,7 +60,8 @@ function enrollStudent() {
     })
 }
 
-function updateStudent() {
+function updateStudent(event) {
+    event.preventDefault();
     let className = document.getElementById("classUpdate");
     let inputClass = className.value;
     console.log(inputClass)
@@ -80,7 +83,8 @@ function updateStudent() {
     })
 }
 
-function getStudents() {
+function getStudents(event) {
+    event.preventDefault();
     let className = document.getElementById("classNameGet");
     let inputClass = className.value;
     console.log(inputClass)
