@@ -31,7 +31,20 @@ class School {
   enrollStudent(name, student, city, age, grade) {
     // Your code here
     let newStudent = new Student(student, city, age, grade);
+
     this.classes[name].students.push(newStudent);
+
+    for(let i = 0; i < this.classes[name].students.length - 1; i++){
+      if(this.classes[name].students[i].name === newStudent.name){
+        // console.log("Before", this.classes[name].students)
+
+        // console.log("Remove Dupe ", this.classes[name].students[i].name)
+        this.classes[name].students[i] = newStudent;
+        this.classes[name].students.pop()
+        // console.log("After", this.classes[name].students)
+
+      }
+    }
     // console.log(this.classes[name]);
   }
 

@@ -87,6 +87,7 @@ const assignStudent = (req, res, next) => {
     let studentArray = mySchool.classes[currentClass].students;
     let end = studentArray.length - 1;
 
+    // console.log("Checking Names ", studentArray)
     res.json({
         "student": studentArray[end],
         "className": currentClass,
