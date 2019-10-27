@@ -170,6 +170,7 @@ const classFilterChoiceToDOM = async () => {
 
 //this function handles displaying the error message
 const displayError = (data) => {
+    emptyInput()
     const container = getContainer();
     clearResults()
     let errorDiv = document.createElement('div')

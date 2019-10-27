@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const School = require('./school.js')
 const cors = require('cors')
 const app = express();
+const pool = require('./databaseInfo')
 
 app.use(cors())
 let mySchool = new School();
