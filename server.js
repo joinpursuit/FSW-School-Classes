@@ -2,11 +2,14 @@ const express = require('express');
 let bodyParser = require('body-parser');
 const port = 1337;
 const app = express();
+const cors = require('cors');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+
+app.use(cors());
 
 const School = require('./School.js')
 let mySchool = new School();
@@ -45,15 +48,20 @@ const newClass = (req, res, next) => {
             return;
         }
     }
-    console.log('works')
+    console.log('Created Class')
     mySchool.addClass(className, teacherName)
 
     res.json({
                 "class": mySchool.classes[className],
+                // "teacher": mySchool.classes[teacherName],
                 "message": "Created a new class",
                 "timestamp": date
             })
     return;
+}
+const checkClass = (req, res, next) => {
+    let currentClass = req.params.checkClass
+    next();
 }
 
 const assignStudent = (req, res, next) => {
@@ -183,7 +191,7 @@ app.get('/Classes', printClasses);
 
 app.post('/Class', newClass);
 
-app.post('/class/:className/enroll', assignStudent);
+app.post('/class/:className/enroll', checkClass, assignStudent);
 
 app.get('/class/:className/students', findStudents);
 
