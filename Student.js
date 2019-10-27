@@ -1,5 +1,5 @@
 class Student {
-  constructor(name, age, city, grade) {
+  constructor(name, city, age, grade) {
     this.name = name
     this.city = city
     this.age = age

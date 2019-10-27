@@ -106,13 +106,74 @@ const findStudents = (req, res, next) => {
 
     let currentClass = req.params.className;
     let studentsList = mySchool.getStudentsByClass(currentClass);
+    let queryStatus = req.query;
 
-    // console.log('My Answers', studentsList[0].name);
-    res.json({
-        studentsList,
-        "message": "Retrieved Students",
-        "timestamp": date
-    })
+    for(let key in mySchool.classes){
+        if(currentClass !== mySchool.classes[key].name){
+            // console.log("Error", mySchool.classes[key].name);
+            res.json({ 
+                "error": `Class ${currentClass} doesnt exists`,
+                "timestamp": date
+              })
+            return;
+        }
+    }
+
+    if(queryStatus.failing === 'true') {
+        let failingStudents = [];
+        console.log('First option', queryStatus.failing)
+
+        for(let i = 0; i < studentsList.length; i++) {
+            if(studentsList[i].grade < 70){
+                failingStudents.push(studentsList[i])
+            }
+        }
+
+        res.json({
+            failingStudents,
+            "message": "List of failing Students",
+            "timestamp": date
+        })
+        return
+    } else if (queryStatus.failing === 'false') {
+        let passingStudents = [];
+        console.log('2nd Option', queryStatus.failing)
+
+         for(let i = 0; i < studentsList.length; i++) {
+            if(studentsList[i].grade >= 70){
+                passingStudents.push(studentsList[i])
+            }
+        }
+
+        res.json({
+            passingStudents,
+            "message": "List of passing Students",
+            "timestamp": date
+        })
+        return
+    } else if (queryStatus.city){
+        sharedLocations = [];
+
+        for(let i = 0; i < studentsList.length; i++) {
+
+            if(studentsList[i].city === queryStatus.city){
+                sharedLocations.push(studentsList[i])
+            }
+        }
+
+        res.json({
+            "Students": sharedLocations,
+            "message": `List of students in ${queryStatus.city}`,
+            "timestamp": date
+        })
+    } else {
+        // console.log('My Answers', studentsList[0].name);
+        res.json({
+            "Students": studentsList,
+            "message": "Retrieved Students",
+            "timestamp": date
+        })
+    }
 }
 
 app.get('/Classes', printClasses);

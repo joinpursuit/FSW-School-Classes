@@ -68,7 +68,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    // I added this and the last function together
   }
 
 }
