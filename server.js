@@ -17,11 +17,11 @@ const printClasses = (req, res, next) => {
     res.json(mySchool.classes)
 }
 
-const printStudents = (req, res, next) => {
-    console.log(mySchool.students)
-    res.json(mySchool.students)
+// const printStudents = (req, res, next) => {
+//     console.log(mySchool.students)
+//     res.json(mySchool.students)
 
-}
+// }
 
 const newClass = (req, res, next) => {
     let today = new Date();
@@ -71,6 +71,15 @@ const assignStudent = (req, res, next) => {
     let age = req.body.studentage
     let grade = req.body.studentgrade
 
+    if(!student || !city || !age || !grade){
+        console.log("Error");
+        res.json({ 
+            "error": "Please fill out all the information for the Student",
+            "timestamp": date
+          })
+        return;
+    }
+
     // console.log(addedClass)
     // res.json(addedClass);
     mySchool.enrollStudent(currentClass, student, city, age, grade)
@@ -86,13 +95,35 @@ const assignStudent = (req, res, next) => {
     })
 }
 
+const findStudents = (req, res, next) => {
+    let today = new Date();
+    let date = today.getFullYear() + ', ' +
+        (today.getMonth()+1) + '/' + 
+         today.getDate() + ' ' + 
+         today.getHours() + ":" + 
+         today.getMinutes() + ":" + 
+         today.getSeconds();
+
+    let currentClass = req.params.className;
+    let studentsList = mySchool.getStudentsByClass(currentClass);
+
+    // console.log('My Answers', studentsList[0].name);
+    res.json({
+        studentsList,
+        "message": "Retrieved Students",
+        "timestamp": date
+    })
+}
+
 app.get('/Classes', printClasses);
 
-app.get('/Students', printStudents);
+// app.get('/Students', printStudents);
 
 app.post('/Class', newClass);
 
-app.post('/class/:className/enroll', assignStudent)
+app.post('/class/:className/enroll', assignStudent);
+
+app.get('/class/:className/students', findStudents);
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)

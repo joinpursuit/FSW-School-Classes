@@ -42,7 +42,12 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    for(let key in this.classes){
+      // console.log('Checking Key', this.classes[key])
+      if(this.classes[key].name === className){
+        return this.classes[key].students
+      }
+    }
   }
 
 
