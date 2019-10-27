@@ -12,7 +12,7 @@ const port = 8080;
 
 function timestamp() {
   let date = new Date()
-  return ` ${date.getFullYear()} , ${date.getMonth()}/${date.getDate()} , ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} `
+  return ` ${date.getFullYear()} , ${date.getMonth() + 1}/${date.getDate()} , ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} `
 }
 
 function CheckifClassExists(req, res, next) {
@@ -21,12 +21,14 @@ function CheckifClassExists(req, res, next) {
       error: "Please fill out all the information",
       timestamp: timestamp()
     })
+    return
   }
   else if (mySchool.classes[req.body.name]) {
     res.json({
       error: "Class already exists",
       timestamp: timestamp()
     })
+    return
   }
   next()
 }
@@ -37,12 +39,14 @@ function ValidateStudent(req, res, next) {
       error: "Please fill out all the information for the student",
       timestamp: timestamp()
     })
+    return
   }
   if (!mySchool.classes[req.params.className]) {
     res.json({
       error: "Class doesn't exist",
       timestamp: timestamp()
     })
+    return
   }
   next()
 }
@@ -53,16 +57,18 @@ function SameStudent(req, res, next) {
   for (let i = 0; i < studentsArr.length; i++) {
 
     if (req.body.name === studentsArr[i].name) {
-      studentsArr[i].age = req.body.age
-      studentsArr[i].city = req.body.city
-      studentsArr[i].grade = req.body.grade
+      for (let key in req.body) {
+        studentsArr[i][key] = req.body[key]
+      }
       res.json({
         student: studentsArr[i],
         className: req.params.className,
         message: "Updated Student",
         timestamp: timestamp()
       })
+      return
     }
+
   }
   next()
 
@@ -75,6 +81,7 @@ function ListMiddleWare(req, res, next) {
       error: `Class ${req.params.className} doesn't exist.`,
       timestamp: timestamp()
     })
+    return
   }
   else if (req.query.failing == "false" && req.query.city == "") {
 
@@ -83,6 +90,7 @@ function ListMiddleWare(req, res, next) {
       message: "Retrieved Students",
       timestamp: timestamp()
     })
+    return
   }
 
   next()
@@ -100,15 +108,9 @@ app.post('/class', CheckifClassExists, (req, res) => {
 
 
 app.post('/class/:className/enroll', ValidateStudent, SameStudent, (req, res) => {
-  let stud = {
-    name: req.body.name,
-    age: req.body.age,
-    city: req.body.city,
-    grade: req.body.grade
-  }
-  mySchool.enrollStudent(req.params.className, stud)
+
   res.json({
-    student: stud,
+    student: mySchool.enrollStudent(req.params.className, req.body),
     className: req.params.className,
     message: "Enrolled Student",
     timestamp: timestamp()
@@ -124,4 +126,4 @@ app.get('/class/:className/students', ListMiddleWare, (req, res) => {
   })
 })
 
-app.listen(port, () => { })
+app.listen(port)
