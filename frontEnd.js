@@ -46,7 +46,7 @@ const getContainer = () => document.querySelector('#results')
 //this function adds the class information to the screen
 const addingClassToDom = async () => {
     const classData = await loadAddClassData()
-    classData.class === undefined ? displayError(classData) : displayNewClass(classData);
+    classData.error ? displayError(classData) : displayNewClass(classData);
 }
 
 // creating cards for the class information created
@@ -97,7 +97,7 @@ const loadStudentEnrollment = async () => {
 const addingStudentToDom = async () => {
     const studentData = await loadStudentEnrollment()
     clearResults()
-    studentData.student === undefined ? displayError(studentData) : displayEnrollment(studentData);
+    studentData.error ? displayError(studentData) : displayEnrollment(studentData);
 }
 
 //creating cards for student information to be added to the screen
@@ -165,7 +165,7 @@ const classFilterChoiceToDOM = async () => {
     const classFilterData = await loadStudentByClass()
     clearResults()
     console.log("This is class filter", classFilterData);
-    classFilterData.student === undefined ? displayError(classFilterData) : classFilterData.student.forEach(el => displayEnrollment(classFilterData, el));
+    classFilterData.error ? displayError(classFilterData) : classFilterData.student.forEach(el => displayEnrollment(classFilterData, el));
 }
 
 //this function handles displaying the error message
