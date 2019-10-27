@@ -3,7 +3,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
     font-size: 20px
 }
 
@@ -11,12 +10,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border: 1px solid whitesmoke;
+    padding: 85px;
 }
 
 .display {
     display: flex;
     flex-direction: column;
-    gap: 30px;
 }
 
 #searchForm {
