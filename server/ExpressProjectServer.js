@@ -1,9 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const School = require('./school.js')
+const School = require('../School.js')
 const cors = require('cors')
 const app = express();
-const pool = require('./databaseInfo')
+const pool = require('../databaseInfo')
 
 app.use(cors())
 let mySchool = new School();
