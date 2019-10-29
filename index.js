@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       let response = await axios.post(url, newStudent)
       console.log(response.data)
+      let newStudentInfo = response.data
+      displayStudentInfo([newStudentInfo])
     } catch (err) {
       console.log(err)
     }
@@ -91,9 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
   displayClassInfo = (classes) => {
     const ul = document.getElementById('class-info')
   
-    classes.forEach(className => {
+    classes.forEach(classElective => {
       let li = document.createElement('li')
-      li.innerText = `${className.class.name} - ${className.class.teacher} - ${className.message} - ${className.timestamp}`
+      li.innerText = `${classElective.class.name} - ${classElective.class.teacher} - ${classElective.message} - ${classElective.timestamp}`
+      ul.appendChild(li);
+    })
+  }
+
+  displayStudentInfo = (students) => {
+    const ul = document.getElementById('student-info')
+  
+    students.forEach(scholar => {
+      let li = document.createElement('li')
+      li.innerText = `${scholar.className} - ${scholar.student.studentname} - ${scholar.student.city} - ${scholar.student.age} - ${scholar.student.grade} - ${scholar.message} - ${scholar.timestamp}`
       ul.appendChild(li);
     })
   }
