@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const grabStudentData = () => {
 
-    let classname = document.querySelector('input[name="name"]').value
+    let classname = document.querySelector('input[name="class-name"]').value
     let studentname = document.querySelector('input[name="studentname"]').value
     let city = document.querySelector('input[name="city"]').value
     let age = document.querySelector('input[name="age"]').value
@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       let response = await axios.post(url, newClass)
       console.log(response.data)
+      let newClassInfo = response.data
+      displayClassInfo([newClassInfo])
     } catch (err) {
       console.log(err)
     }
@@ -84,5 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  displayClassInfo = (classes) => {
+    const ul = document.getElementById('class-info')
+  
+    classes.forEach(className => {
+      let li = document.createElement('li')
+      li.innerText = `${className.class.name} - ${className.class.teacher} - ${className.message} - ${className.timestamp}`
+      ul.appendChild(li);
+    })
   }
   

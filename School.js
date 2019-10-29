@@ -32,7 +32,6 @@ class School {
     // Your code here
     let newStudent = new Student(student, city, age, grade);
 
-    
     // console.log('Whats this array', this.classes[name].students)
 
     this.classes[name].students.push(newStudent);
