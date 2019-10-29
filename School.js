@@ -32,10 +32,13 @@ class School {
     // Your code here
     let newStudent = new Student(student, city, age, grade);
 
+    
+    // console.log('Whats this array', this.classes[name].students)
+
     this.classes[name].students.push(newStudent);
 
     for(let i = 0; i < this.classes[name].students.length - 1; i++){
-      if(this.classes[name].students[i].name === newStudent.name){
+      if(this.classes[name].students[i].name === newStudent.studentname){
         // console.log("Before", this.classes[name].students)
 
         // console.log("Remove Dupe ", this.classes[name].students[i].name)

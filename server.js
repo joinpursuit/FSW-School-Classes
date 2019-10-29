@@ -48,8 +48,9 @@ const newClass = (req, res, next) => {
             return;
         }
     }
-    console.log('Created Class')
+    
     mySchool.addClass(className, teacherName)
+    console.log('Created Class', mySchool)
 
     res.json({
                 "class": mySchool.classes[className],
@@ -58,10 +59,6 @@ const newClass = (req, res, next) => {
                 "timestamp": date
             })
     return;
-}
-const checkClass = (req, res, next) => {
-    let currentClass = req.params.checkClass
-    next();
 }
 
 const assignStudent = (req, res, next) => {
@@ -73,11 +70,18 @@ const assignStudent = (req, res, next) => {
          today.getMinutes() + ":" + 
          today.getSeconds();
 
-    let currentClass = req.params.className;
+    // let currentClass = req.params.className;
+    let className = req.body.name;
     let student = req.body.studentname
-    let city = req.body.studentcity
-    let age = req.body.studentage
-    let grade = req.body.studentgrade
+    let city = req.body.city
+    let age = req.body.age
+    let grade = req.body.grade
+    
+    // console.log("What is this", className);
+    // console.log('Student23235234', student)
+    // console.log('city', city)
+    // console.log('age', age)
+    // console.log('grade', grade)
 
     if(!student || !city || !age || !grade){
         console.log("Error");
@@ -90,15 +94,15 @@ const assignStudent = (req, res, next) => {
 
     // console.log(addedClass)
     // res.json(addedClass);
-    mySchool.enrollStudent(currentClass, student, city, age, grade)
+    mySchool.enrollStudent(className, student, city, age, grade)
 
-    let studentArray = mySchool.classes[currentClass].students;
+    let studentArray = mySchool.classes[className].students;
     let end = studentArray.length - 1;
 
     // console.log("Checking Names ", studentArray)
     res.json({
         "student": studentArray[end],
-        "className": currentClass,
+        "className": className,
         "message": "Enrolled a new student in class",
         "timestamp": date
     })
@@ -113,15 +117,17 @@ const findStudents = (req, res, next) => {
          today.getMinutes() + ":" + 
          today.getSeconds();
 
-    let currentClass = req.params.className;
-    let studentsList = mySchool.getStudentsByClass(currentClass);
+    // let currentClass = req.params.className;
+    let className = req.body.name;
+    // console.log("What is this", className);
+    let studentsList = mySchool.getStudentsByClass(className);
     let queryStatus = req.query;
 
     for(let key in mySchool.classes){
-        if(currentClass !== mySchool.classes[key].name){
+        if(className !== mySchool.classes[key].name){
             // console.log("Error", mySchool.classes[key].name);
             res.json({ 
-                "error": `Class ${currentClass} doesnt exists`,
+                "error": `Class ${className} doesnt exists`,
                 "timestamp": date
               })
             return;
@@ -191,7 +197,7 @@ app.get('/Classes', printClasses);
 
 app.post('/Class', newClass);
 
-app.post('/class/:className/enroll', checkClass, assignStudent);
+app.post('/class/:className/enroll', assignStudent);
 
 app.get('/class/:className/students', findStudents);
 

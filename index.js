@@ -35,15 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const grabStudentData = () => {
 
-    let name = document.querySelector('input[name="name"]').value
+    let classname = document.querySelector('input[name="name"]').value
+    let studentname = document.querySelector('input[name="studentname"]').value
     let city = document.querySelector('input[name="city"]').value
     let age = document.querySelector('input[name="age"]').value
     let grade = document.querySelector('input[name="grade"]').value
+    // let newClass = grabClassData()
 
         // Grab the data from the input fields and fill this object with it
 
   let studentData = {
-      name: name,
+      name: classname,
+      studentname: studentname,
       city: city,
       age: age,
       grade: grade
@@ -73,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // name, teacher
   
     let newStudent = grabStudentData()
-    console.log(newStudent)
+    // console.log(newStudent)
 
     try {
       let response = await axios.post(url, newStudent)
