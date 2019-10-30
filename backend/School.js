@@ -29,7 +29,13 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student (student.name, student.city, student.age, student.grade)
+
+      if(!student.name){
+        this.classes[className].students.push(newStudent)
+        return newStudent
+      }
+
   }
 
 
@@ -42,7 +48,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    this.classes[className].students
   }
 
 
@@ -68,4 +74,11 @@ class School {
 
 }
 
-module.exports = School;
+
+let mySchool = new School();
+
+
+
+mySchool.addClass('physics', 'Mr.Sims')
+// console.log(mySchool)
+module.exports = mySchool;
