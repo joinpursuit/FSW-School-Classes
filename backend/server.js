@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000; 
+const port = 3030; 
 const cors = require('cors');
 const mySchool = require('./school.js')
 
@@ -14,27 +14,34 @@ app.use(express.json())
 
 //routes
 app.get('/class', (req, res)=>{
-    res.send('what')
+    let classes = mySchool.classes
+    res.send(classes)
 })
 
-// creating a new class
-app.post('/class', (req,res)=>{
+//creating a new class
+ app.post('/class', (req,res)=>{
     let className = req.body.name
     let teacher = req.body.teacher
+    let time = new Date();
+
     console.log( className, teacher)
     
     
         if(!mySchool.classes[className]){
             let newClass = mySchool.addClass(className,teacher)
-            res.json(newClass)
+            res.json({
+                'classes': mySchool.classes[className],
+                'message': className,
+                'timestamp': time.toISOString()
+
+            })
         } else{
-            // res.status(404)
-            let time = new Date();
+            res.status(404)
             res.json({
                'error': 'Please fill out all the information or Class already exists',
-               'timestamp':  time.toISOString()
-            })
-        }
+                'timestamp':  time.toISOString()
+             })
+       }
     } )
 
 app.listen(port, ()=>{
