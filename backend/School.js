@@ -30,7 +30,6 @@ class School {
    */
   enrollStudent(className, student) {
     let newStudent = new Student (student.name, student.city, student.age, student.grade)
-
       if(!student.name){
         this.classes[className].students.push(newStudent)
         return newStudent
