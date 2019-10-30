@@ -1,0 +1,23 @@
+{
+  "name": "pursuit-core-web-express-project",
+  "version": "1.0.0",
+  "description": "## Introduction",
+  "main": "Class.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenama/Pursuit-Core-Web-Express-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenama/Pursuit-Core-Web-Express-Project/issues"
+  },
+  "homepage": "https://github.com/jenama/Pursuit-Core-Web-Express-Project#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

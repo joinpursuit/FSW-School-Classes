@@ -9,11 +9,15 @@ class School {
     }
   }
 
+
+  
   /**
    * Add class to classes
    * 
+
+   * 
    * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
+   * @param {stringg} teacher - Name of instructor 
    * @return {Class} Class object
    */
   addClass(name, teacher) {
@@ -67,5 +71,7 @@ class School {
   }
 
 }
+
+let mySchool = new School();
 
 module.exports = School;

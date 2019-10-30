@@ -1,3 +1,5 @@
+const s
+
 class Class {
   constructor(name, teacher) {
     this.name = name
