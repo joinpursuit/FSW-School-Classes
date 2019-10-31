@@ -42,11 +42,11 @@ app.get('/class', (req, res)=>{
 
 // enrolling students in class
 app.post('/class/:className/enroll', (req, res)=>{
+    let className = req.params.className
     let name = req.body.name
     let city = req.body.city
     let age = req.body.age
     let grade = req.body.grade
-    let className = req.params.name
     let time = new Date();
     let student = {
         name, 
@@ -54,15 +54,17 @@ app.post('/class/:className/enroll', (req, res)=>{
         city, 
         grade
     }
+
     if(!mySchool.classes[className].student){
         let newStudent = mySchool.enrollStudent(className, student)
         res.json({
             'student': student,
-            'className': mySchool.classes[className].name, 
+            'className': mySchool.classes[className], 
             'message' :'Enrolled Student',
             'timestamp': time.toISOString()
         })
-    }else{
+    }
+   else{
         res.json({
             'error' : 'Please fill out all the information for the student',
             'timestamp': time.toISOString()
