@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // addClassForm INPUTS:
     let classNameInput = document.querySelector("#className");
     let classTeacherInput = document.querySelector("#classTeacher");
-    let addClassBtn = document.querySelector("#addClassBtn");
 
     // addStudentForm INPUTS:
     let studentClassInput = document.querySelector("#studentClass");
@@ -18,20 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let studentCityInput = document.querySelector("#studentCity");
     let studentGradeInput = document.querySelector("#studentGrade");
     let failingCheckBoxInput = document.querySelector("#failing");
-    let addStudentBtn = document.querySelector("#addStudentBtn");
     
 
     // listStudentForm INPUTS:
     let searchStudentByClassInput = document.querySelector("#searchStudentByClass");
     let searchStudentByCityInput = document.querySelector("#searchStudentByCity");
-    let listStudentBtn = document.querySelector("#listStudentBtn");
 
 
     // FEEDBACK
+    let feedbackDiv = document.querySelector("#feedbackDiv");
     let feedbackText = document.querySelector("#feedbackText");
     let feedbackDetails = document.querySelector("#details");
+    let closeDiv = document.querySelector("#close");
 
+    feedbackDiv.style.visibility = "hidden";
 
+    closeDiv.addEventListener('click', (event) => {
+        if (event.target.parentNode.parentNode === feedbackDiv) {
+            feedbackDiv.style.visibility = "hidden";
+        }
+    })
+    document.addEventListener('keydown', event => {
+        if (event.code === 'Escape') {
+            feedbackDiv.style.visibility = "hidden";
+        }
+    })
+
+    // SUBMITTING FORMS
     addClassForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -39,11 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
         let teacherName = classTeacherInput.value;
 
         try {
-            let response = await axios.post(baseURL, {data: {name: className, teacher: teacherName}})
-            handleServerResponse(feedbackText, feedbackDetails, response.data)
+            let response = await axios.post(baseURL, {name: className, teacher: teacherName})
+            handleServerResponse(feedbackDiv, feedbackText, feedbackDetails, response.data)
         } catch (err) {
             console.log(err)
         }
+
+        classNameInput.value = '';
+        classTeacherInput.value = '';
     })
 
 
@@ -64,11 +79,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            let response = await axios.post(`${baseURL}/${studentClass}`, {data: studentObject})
-            handleServerResponse(feedbackText, feedbackDetails, response.data)
+            let response = await axios.post(`${baseURL}/${studentClass}`, studentObject)
+            handleServerResponse(feedbackDiv, feedbackText, feedbackDetails, response.data)
         } catch (err) {
             console.log(err)
         }
+
+        studentClassInput.value = '';
+        studentNameInput.value = '';
+        studentAgeInput.value = '';
+        studentCityInput.value = '';
+        studentGradeInput.value = '';
     })
 
     
@@ -77,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let className = searchStudentByClassInput.value;
         if (!className) {
-            className = 'noClass';
+            className = '---';
         }
         let city = searchStudentByCityInput.value;
 
@@ -90,16 +111,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         try {
             let response = await axios.get(`${baseURL}/${className}/students?failing=${failingChecked}&city=${city}`);
-            handleServerResponse(feedbackText, feedbackDetails, response.data)
+            handleServerResponse(feedbackDiv, feedbackText, feedbackDetails, response.data)
         } catch (err) {
             console.log(err)
         }
+
+        searchStudentByClassInput.value = '';
+        searchStudentByCityInput.value = '';
     })
 
 })
 
 
-const handleServerResponse = (container, details, data) => {
+const handleServerResponse = (div, container, details, data) => {
+    div.style.visibility = 'visible'
     if (data.error) {
         container.innerText = data.error;
         details.innerText = "";
@@ -120,7 +145,6 @@ const handleServerResponse = (container, details, data) => {
             Grade: ${data.student.grade}`
         }
         if (data.students) {
-            console.log(data.students)
             let list = '';
             (data.students).forEach(std => {
                 list += "Name: " + std.name + " Age: " + std.age + " city: " + std.city + " Grade: " + std.grade + "\n"

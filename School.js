@@ -20,11 +20,11 @@ class School {
   addClass(className, teacherName) {
     // in a school it's possible to have multiples classes of the same name with different teachers
     // if (this.classes[className] && this.classes[className][teacher] === teacherName) {
-    if (this.classes[className]) {
+    if (this.classes[className.toLowerCase()]) {
       return -1 // Class already exists
     }
-    let newClass = new Class(className, teacherName);
-    this.classes[className] = newClass;
+    let newClass = new Class(className.toLowerCase(), teacherName.toLowerCase());
+    this.classes[className.toLowerCase()] = newClass;
     console.log("CLASSES", this.classes)
     return newClass;
   }
@@ -132,4 +132,7 @@ class School {
 
 }
 
-module.exports = School;
+let newSchool = new School;
+
+
+module.exports = newSchool;

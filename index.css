@@ -1,3 +1,44 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    margin: 5%;
+    background-color: rgba(238, 233, 159, 0.445);
+}
+#feedbackDiv {
+    width: 60%;
+    background-color: rgba(243, 134, 94, 0.822);
+    border: cornflowerblue double 5px;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 10% auto;
+}
+
+#feedbackDiv div {
+    text-align: right;
+}
+#close {
+    z-index: 4;
+    display: inline-block;
+    border: rgb(73, 73, 238) solid 5px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    color: white;
+    background-color: rgb(224, 98, 98);
+    font-weight: bolder;
+}
+#close:hover {
+    cursor: pointer;
+}
+
 form {
     position: relative;
 }

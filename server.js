@@ -1,4 +1,4 @@
-const School = require('./School');
+const school = require('./School');
 const Student = require('./Student')
 
 const express = require('express');
@@ -20,19 +20,19 @@ app.listen(port, () => {
 })
 
 
-let newSchool = new School();
+let mySchool = school;
 
 const log = (request, response, next) => {
     console.log('\nURL', request.url)
     console.log("Queries", request.query)
-    console.log("body", request.body.data, "\n")
-    console.log("body.name", request.body.data, "\n")
+    console.log("body", request.body, "\n")
+    console.log("body.name", request.body, "\n")
 
     next();
 }
 
 const checkAddClassBody = (request, response, next) => {
-    if (!request.body.data.name || !request.body.data.teacher) {
+    if (!request.body.name || !request.body.teacher) {
         response.json({
             error: 'Please fill out all the information',
             timestamp: new Date()
@@ -43,9 +43,9 @@ const checkAddClassBody = (request, response, next) => {
 }
 
 const checkExistingClass = (request, response, next) => {
-    let className = (request.body.data.name).toLowerCase();
+    let className = (request.body.name).toLowerCase();
 
-    if (newSchool.classes[className]) {
+    if (mySchool.classes[className]) {
         response.json({
             error: 'Class already exists',
             timestamp: new Date()
@@ -56,7 +56,7 @@ const checkExistingClass = (request, response, next) => {
 }
 
 const addTheClass = (request, response) => {
-    let addedClass = newSchool.addClass(request.body.data.name, request.body.data.teacher);
+    let addedClass = mySchool.addClass(request.body.name, request.body.teacher);
     if (addedClass === -1) {
         response.json({
             error: 'Class already exists',
@@ -73,12 +73,12 @@ const addTheClass = (request, response) => {
 
 
 const checkEnrollStudentBody = (request, response, next) => {
-    if (!request.body.data.name 
-        || !request.body.data.age 
-        || isNaN(parseInt(request.body.data.age))
-        || !request.body.data.city 
-        || !request.body.data.grade
-        || isNaN(parseInt(request.body.data.grade))) {
+    if (!request.body.name 
+        || !request.body.age 
+        || isNaN(parseInt(request.body.age))
+        || !request.body.city 
+        || !request.body.grade
+        || isNaN(parseInt(request.body.grade))) {
             response.json({
                 error: 'Please fill out all the information, Grade and Age have to be a numbers',
                 timestamp: new Date()
@@ -89,9 +89,9 @@ const checkEnrollStudentBody = (request, response, next) => {
 }
 
 const checkIfClassExist = (request, response, next) => {
-    let className = request.params.class_name;
+    let className = (request.params.class_name).toLowerCase();
 
-    if (!newSchool.classes[className]) {
+    if (!mySchool.classes[className]) {
         response.json({
             error: `Class ${className} doesn't exists`,
             timestamp: new Date()
@@ -103,15 +103,15 @@ const checkIfClassExist = (request, response, next) => {
 
 
 const enrollTheStudent = (request, response) => {
-    let name = request.body.data.name;
-    let age = request.body.data.age;
-    let city = request.body.data.city;
-    let grade = request.body.data.grade;
+    let name = (request.body.name).toLowerCase();
+    let age = parseInt(request.body.age);
+    let city = (request.body.city).toLowerCase();
+    let grade = parseInt(request.body.grade);
 
-    let className = request.params.class_name;
+    let className = (request.params.class_name).toLowerCase();
 
     let newStudent = new Student(name, age, city, grade, className)
-    let enrolledStudent = newSchool.enrollStudent(className, newStudent);
+    let enrolledStudent = mySchool.enrollStudent(className, newStudent);
 
     if (enrolledStudent === -1) {
         response.json({
@@ -142,9 +142,9 @@ const enrollTheStudent = (request, response) => {
 
 
 const getStudent = (request, response) => {
-    let className = request.params.class_name;
-    let failing = request.query.failing;
-    let city = request.query.city;
+    let className = (request.params.class_name).toLowerCase();
+    let failing = (request.query.failing).toLowerCase();
+    let city = (request.query.city).toLowerCase();
 
     if (failing === 'true') {
         failing = true;
@@ -152,12 +152,12 @@ const getStudent = (request, response) => {
         failing = false;
     }
 
-    let filteredStudents;
+    let filteredStudents = [];
 
     if (!failing && !city) {
-        filteredStudents = newSchool.getStudentsByClass(className);
+        filteredStudents = mySchool.getStudentsByClass(className);
     } else {
-        filteredStudents = newSchool.getStudentsByClassWithFilter(className, failing, city);
+        filteredStudents = mySchool.getStudentsByClassWithFilter(className, failing, city);
     }
 
 
