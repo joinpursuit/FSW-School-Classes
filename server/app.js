@@ -16,7 +16,6 @@ const cors = require('cors');
   app.use(cors());
 // database
 const g = require("../database/database.js");
-  // g.dataStudents
 
 
 /* SERVER INIT */
@@ -25,7 +24,16 @@ app.listen(port, () => {
 });
 
 
+/* MAIN ROUTING */
+// Imports
+const schoolRT = require('./routes/schoolRT.js');
+const classRT = require('./routes/classRT.js');
+// Connects
+app.use('/school', schoolRT);
+app.use('/class', classRT);
+
+
 /* NO-ROUTE CATCH */
 app.use("*", (req, res) => {
-    res.status(404).send('error: no such route found on this server');
+    res.status(404).send('error: no such route found on this JoeyServer');
 });

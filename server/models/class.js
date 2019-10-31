@@ -5,9 +5,9 @@ Class model | Express Server Project
 
 
 class Class {
-  constructor(name, teacher) {
-    this.name = name;
-    this.teacher = teacher;
+  constructor(className, teacherName) {
+    this.name = className;
+    this.teacher = teacherName;
     this.students = [];
   }
 }

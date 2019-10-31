@@ -4,8 +4,8 @@ School model | Express Server Project
 */
 
 
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('./class');
+const Student = require('./student')
 
 class School {
   constructor() {
@@ -15,31 +15,14 @@ class School {
     }
   }
 
-  /**
-   * Add one class to all classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
-  addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+  addClass(className, teacherName) {
+    let newClass = new Class(className, teacherName);
+    this.classes[className] = newClass;
   }
 
-  /**
-   * Enroll one student into one class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student object
-   */
-  enrollStudent(className, student) {
+  enrollStudent(className, studentName) {
     // Your code here
   }
-
-
-
 
   /**
    * Get all students enrolled in one class
@@ -50,9 +33,6 @@ class School {
   getStudentsByClass(className) {
     // Your code here
   }
-
-
-
 
   /**
    * Get all students and apply filters. If failing = true

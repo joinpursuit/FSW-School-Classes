@@ -1,13 +1,17 @@
 /*
 Joseph P. Pasaoa
-Faux Database | Express Server Project
+Database | Express Server Project
 */
 
 
-const data = {
-  test: "hit"
+/* DATA MAIN */
+const School = require('../server/models/school.js');
+const joeySchool = {
+  classIndex: {},
+  register: new School
 };
 
-module.exports = {
-  dataStudents: data
-}
+/* data injection */
+
+
+module.exports = joeySchool;
