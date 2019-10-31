@@ -44,8 +44,8 @@ const addClassDisplay = (data) => {
 }
 
 const addStudent = async (e) => {
-    e.preventDefault();
-
+    // e.preventDefault();
+    // getstudentvalues()
     const className = document.querySelector('#class').value;
     const name = document.querySelector('#name').value;
     const age = document.querySelector('#age').value;
@@ -55,7 +55,7 @@ const addStudent = async (e) => {
     const displayAdd = document.querySelector('#display-add');
     displayAdd.style.display = 'block';
     displayAdd.innerText = '';
-
+    // obj destruct
     if (className == '' || name == '' || age == '' || city =='' || grade == '') {
         displayAdd.innerText = 'Please fill out all fields in order to add the Student!';
         displayAdd.style.backgroundColor = 'red';
@@ -95,6 +95,7 @@ const checkValidNumbers = (grade, age) => {
     const displayAdd = document.querySelector('#display-add');
     let gradeBool = false;
     let ageBool = false;
+    // validNumCheck()
     if (isNaN(grade) || grade < 0 || grade > 100)  {
         displayAdd.innerText = 'Please enter a valid grade between 0 - 100';
         displayAdd.style.backgroundColor = 'red';
@@ -130,7 +131,7 @@ const displayStudentResponse = (data) => {
 }
 
 const listStudent = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const className = document.querySelector('#class-query').value;
     const cityQuery = document.querySelector('#city-query').value;
     const failing = document.querySelector('#failing').checked;
@@ -156,26 +157,6 @@ const listStudent = async (e) => {
         console.log(data.data);
         return displayStudentResponse(data.data);
     }
-
-    // data = data.data;
-    // console.log(data)
-
-    // displayStudentResponse(data);
-
-    // const ul = document.querySelector('#student-list');
-    // ul.innerHTML = '';
-
-    // if (!data.students) {
-    //     displayStudents.innerText = 'There are 0 students that matches those criterias.';
-    //     displayStudents.style.backgroundColor = 'red';
-    // } else {
-    //     displayStudents.style.display = 'none';
-    //     data.students.forEach(ele => {
-    //         const li = document.createElement('li');
-    //         li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
-    //         ul.appendChild(li)
-    //     })
-    // }
 }
 
 // API LINK to get randomuser information
