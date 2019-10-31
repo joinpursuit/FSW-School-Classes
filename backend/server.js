@@ -40,8 +40,8 @@ app.get('/class', (req, res)=>{
     } )
 
 
-// enrolling students in class
-app.post('/class/:className/enroll', (req, res)=>{
+
+const enrollNewStudent = (req, res, next) =>{
     let className = req.params.className
     let name = req.body.name
     let city = req.body.city
@@ -63,17 +63,39 @@ app.post('/class/:className/enroll', (req, res)=>{
             'message' :'Enrolled Student',
             'timestamp': time.toISOString()
         })
+    } else if(mySchool.classes[className].student[student]){
+        next();
     }
-   else{
+}
+
+const updateStudent =(req, res, next)=>{
+    if(mySchool.classes[className].student[student].name){
+        res.json({
+            'student': student, 
+            'className' : mySchool.classes.student[student],
+            'message' : 'Student info has been updated',
+            'timestamp': time.toISOString()
+
+        })
+    } else {
+        next();
+    }
+}
+
+const studentError = (req, res, next) =>{
         res.json({
             'error' : 'Please fill out all the information for the student',
             'timestamp': time.toISOString()
         })
-    }
-    
+}
+
+// enrolling students in class and updates info
+app.post('/class/:className/enroll', enrollNewStudent, updateStudent, studentError)
+
+
+app.get('/class/:className/students', (req,res,next)=>{
+
 })
-
-
 
 app.listen(port, ()=>{
     console.log(`Listening on http://localhost:${port}`)

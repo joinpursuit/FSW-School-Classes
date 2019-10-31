@@ -38,8 +38,6 @@ class School {
   }
 
 
-
-
   /**
    * Get all students enrolled in a class
    * 
@@ -47,7 +45,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    this.classes[className].students
+   return this.classes[className].students
   }
 
 
