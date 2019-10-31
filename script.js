@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Script working!')
-    document.querySelector('#add-class-btn').addEventListener('click', addClass)
+    document.querySelector('#add-class-btn').addEventListener('click', addClass);
     document.querySelector('#add-student-btn').addEventListener('click', addStudent);
     document.querySelector('#list-student-btn').addEventListener('click', listStudent);
 })
@@ -24,6 +24,10 @@ const addClass = async (e) => {
 
     const data = await axios.post(`http://localhost:8000/class`, jsonData)
 
+    addClassDisplay(data); // Notify the user of the status of adding a class
+}
+
+const addClassDisplay = (data) => {
     const displayClass = document.querySelector('#display-class');
     displayClass.style.display = 'block';
     displayClass.innerText = '';
@@ -33,6 +37,7 @@ const addClass = async (e) => {
         displayClass.style.backgroundColor = 'red';
     } else {
         displayClass.innerText = data.data.message;
+        displayClass.style.backgroundColor = 'green';
 
     }
     console.log("data.data", data.data);
@@ -60,15 +65,9 @@ const addStudent = async (e) => {
     const parseGrade = parseFloat(grade);
     const parseAge = parseInt(age);
 
-    if (isNaN(parseGrade) || parseGrade < 0 || parseGrade > 100)  {
-        displayAdd.innerText = 'Please enter a valid grade between 0 - 100';
-        displayAdd.style.backgroundColor = 'red';
-        return;
-    }
+    const valid = checkValidNumbers(parseGrade, parseAge);
 
-    if (isNaN(parseAge) || parseAge < 0 || parseAge > 100)  {
-        displayAdd.innerText = 'Please enter a valid age between 0 - 100';
-        displayAdd.style.backgroundColor = 'red';
+    if (valid) {
         return;
     }
 
@@ -86,9 +85,48 @@ const addStudent = async (e) => {
         displayAdd.style.backgroundColor = 'red';
     } else {
         displayAdd.innerText = data.data.message;
+        displayAdd.style.backgroundColor = 'green';
     }
 
     console.log(data.data)
+}
+
+const checkValidNumbers = (grade, age) => {
+    const displayAdd = document.querySelector('#display-add');
+    let gradeBool = false;
+    let ageBool = false;
+    if (isNaN(grade) || grade < 0 || grade > 100)  {
+        displayAdd.innerText = 'Please enter a valid grade between 0 - 100';
+        displayAdd.style.backgroundColor = 'red';
+        gradeBool = true;
+    }
+    if (isNaN(age) || age < 0 || age > 100)  {
+        displayAdd.innerText = 'Please enter a valid age between 0 - 100';
+        displayAdd.style.backgroundColor = 'red';
+        ageBool = true;
+    }
+    return gradeBool && ageBool;
+}
+
+const displayStudentResponse = (data) => {
+    const displayStudents = document.querySelector('#display-students');
+    displayStudents.style.display = 'block';
+    displayStudents.innerText = '';
+
+    const ul = document.querySelector('#student-list');
+    ul.innerHTML = '';
+
+    if (!data.students) {
+        displayStudents.innerText = 'There are 0 students that matches those criterias.';
+        displayStudents.style.backgroundColor = 'red';
+    } else {
+        displayStudents.style.display = 'none';
+        data.students.forEach(ele => {
+            const li = document.createElement('li');
+            li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
+            ul.appendChild(li)
+        })
+    }
 }
 
 const listStudent = async (e) => {
@@ -108,33 +146,36 @@ const listStudent = async (e) => {
         return;
     }
 
-    let data = '';
+    // let data = '';
     if (cityQuery) {
-        data = await axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
+        const data = await axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
+        console.log(data.data);
+        return displayStudentResponse(data.data);
     } else {
-        data = await axios.get(`http://localhost:8000/class/${className}/students?failing=${failing}`);
+        const data = await axios.get(`http://localhost:8000/class/${className}/students?failing=${failing}`);
+        console.log(data.data);
+        return displayStudentResponse(data.data);
     }
 
-    data = data.data;
-    console.log(data)
+    // data = data.data;
+    // console.log(data)
 
-    
+    // displayStudentResponse(data);
 
-    const ul = document.querySelector('#student-list');
-    ul.innerHTML = '';
+    // const ul = document.querySelector('#student-list');
+    // ul.innerHTML = '';
 
-
-    if (!data.students) {
-        displayStudents.innerText = 'There are 0 students that matches those criterias.';
-        displayStudents.style.backgroundColor = 'red';
-    } else {
-        displayStudents.style.display = 'none';
-        data.students.forEach(ele => {
-            const li = document.createElement('li');
-            li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
-            ul.appendChild(li)
-        })
-    }
-
-    console.log(data);
+    // if (!data.students) {
+    //     displayStudents.innerText = 'There are 0 students that matches those criterias.';
+    //     displayStudents.style.backgroundColor = 'red';
+    // } else {
+    //     displayStudents.style.display = 'none';
+    //     data.students.forEach(ele => {
+    //         const li = document.createElement('li');
+    //         li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
+    //         ul.appendChild(li)
+    //     })
+    // }
 }
+
+// API LINK to get randomuser information
