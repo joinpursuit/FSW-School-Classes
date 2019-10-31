@@ -13,8 +13,10 @@ const express = require('express');
   const app = express();
   const port = 11000;
 const cors = require('cors');
+  app.use(cors());
 // database
-const database = require("../database/database.js");
+const g = require("../database/database.js");
+  // g.dataStudents
 
 
 /* SERVER INIT */
