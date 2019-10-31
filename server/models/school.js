@@ -1,3 +1,9 @@
+/*
+Joseph P. Pasaoa
+School model | Express Server Project
+*/
+
+
 const Class = require('./Class');
 const Student = require('./Student')
 
