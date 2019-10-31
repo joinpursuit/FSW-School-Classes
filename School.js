@@ -3,10 +3,11 @@ const Student = require('./Student')
 
 class School {
   constructor() {
+   // this.classes = [] 
     this.classes = {
       // className: Class Object
       //   physics: {} 
-    }
+     }
   }
 
   /**
@@ -19,6 +20,8 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+   // return (`${newClass} ${this.classes}`)
+   return newClass
   }
 
   /**
@@ -30,6 +33,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    this.classes[className].students.push(student)
+    return student 
   }
 
 
@@ -43,6 +48,8 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    let studentsArr = this.classes[className].students
+    return studentsArr 
   }
 
 
@@ -64,8 +71,50 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let currClass = this.classes[className].students 
+    
+    if (failing === true) {
+      let failingArr = currClass.filter(el => {
+        return (el.grade < 70)
+      }) 
+      if (city) {
+        failingArr = failingArr.filter(el => {
+          return (el.city === city)
+        })
+      }
+      return failingArr 
+    } else if (failing === false) {
+      let passingArr = currClass.filter(el => {
+        return (el.grade > 65)
+      })
+      if (city) {
+        passingArr = failingArr.filter(el => {
+          return (el.city === city)
+        })
+      }
+      return passingArr 
+    }
   }
-
 }
 
 module.exports = School;
+
+// let mySchool = new School()
+// let newStudent = new Student("Briany", 22, "New York City", "95")
+// let passingNy = new Student("Joshua", 18, "New York City", "63")
+// let failingStudent = new Student("Jon", 21, "Boston", "55")
+// let passingBoston = new Student("Ben", 24, "Boston", "85")
+
+
+//mySchool.addClass("Astronomy", "Mr.Bob")
+
+
+// mySchool.enrollStudent("Astronomy", newStudent)
+// mySchool.enrollStudent("Astronomy", passingNy)
+// mySchool.enrollStudent("Astronomy", failingStudent)
+// mySchool.enrollStudent("Astronomy", passingBoston)
+
+//console.log(mySchool.getStudentsByClass("Astronomy"))
+
+// console.log('getstudents by class with filter function')
+// console.log(mySchool.getStudentsByClassWithFilter("Astronomy", true, "Boston"))
