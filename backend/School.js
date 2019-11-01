@@ -29,10 +29,13 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student (student.name, student.city, student.age, student.grade)
+      if(!student.name){
+        this.classes[className].students.push(newStudent)
+        return newStudent
+      }
+
   }
-
-
 
 
   /**
@@ -42,7 +45,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+   return this.classes[className].students
   }
 
 
@@ -63,9 +66,27 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    let class = this.classes[className]
+    let students = class.students
+    let failing = 70
+    let failingStudents = students.filter((student)=>{student.grade < failing})
+    console.log(failingStudents)
+    for(let student of failingStudents){
+      if(city === student.city ){
+        return students[student]
+      }
+      return student
+     
+    }
   }
 
 }
 
-module.exports = School;
+
+let mySchool = new School();
+
+
+
+// mySchool.addClass('physics', 'Mr.Sims')
+// console.log(mySchool)
+module.exports = mySchool;
