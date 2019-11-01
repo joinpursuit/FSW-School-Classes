@@ -17,7 +17,8 @@ class School {
 
   addClass(className, teacherName) {
     let newClass = new Class(className, teacherName);
-    this.classes[className] = newClass;
+    this.classes[className.toLowerCase()] = newClass;
+    return newClass;
   }
 
   enrollStudent(className, studentName) {

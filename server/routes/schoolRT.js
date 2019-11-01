@@ -26,6 +26,7 @@ const express = require('express');
 
 
 /* ROUTES */
+// unpublished route for debugging purposes
 router.get("/", (req, res) => {
     res.json({
         status: "success",
