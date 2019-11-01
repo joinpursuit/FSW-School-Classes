@@ -5,20 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#list-student-btn').addEventListener('click', listStudent);
 })
 
-const test = () => {
-    console.log('Test')
-}
-
 const serverURL = `http://localhost:8000`;
 
-const addClass = async (e) => {
-    // e.preventDefault();
-    console.log('Add Class');
-    const name = document.querySelector('#class-name').value;
-    const teacher = document.querySelector('#teacher').value;
+// Helper function to get value of any node by it's ID
+const getValueFrom = (id) => document.querySelector(`#${id}`).value; 
+
+const addClass = async () => {
+    console.log('Adding Class...');
     const jsonData = {
-        name,
-        teacher
+        name: getValueFrom('class-name'),
+        teacher: getValueFrom('teacher')
     }
     console.log("jsonData", jsonData)
 
@@ -27,123 +23,109 @@ const addClass = async (e) => {
     addClassDisplay(data); // Notify the user of the status of adding a class
 }
 
-const addClassDisplay = (data) => {
-    const displayClass = document.querySelector('#display-class');
-    displayClass.style.display = 'block';
+// Helper functions to Hide/Show notifcation and the Message based on if it was a success or an error
+const showNotification = (id) => document.querySelector(`#${id}`).style.display = 'block';
+
+const hideNotification = (id) => {
+    const displayClass = document.querySelector(`#${id}`);
+    displayClass.style.display = 'none';
     displayClass.innerText = '';
+}
 
-    if (data.data.error) {
-        displayClass.innerText = data.data.error;
-        displayClass.style.backgroundColor = 'red';
-    } else {
-        displayClass.innerText = data.data.message;
-        displayClass.style.backgroundColor = 'green';
+const displayMsg = (id, text, bgColor) => {
+    const displayClass = document.querySelector(`#${id}`);
+    displayClass.innerText = text;
+    displayClass.style.backgroundColor = bgColor;
+}
+// Combined helper functions into one function called notification
+const notify = (id, msg, color, time = 1250) => {
+    showNotification(id);
+    displayMsg(id, msg, color);
+    setTimeout(hideNotification, time, id);
+}
 
-    }
+// Display notifcation when client attempts to add a class (Success or Error)
+const addClassDisplay = (data) => {
+    data.data.error ? notify('display-class', data.data.error, 'red') : notify('display-class', data.data.message, 'green');
     console.log("data.data", data.data);
 }
 
-const addStudent = async (e) => {
-    // e.preventDefault();
-    // getstudentvalues()
-    const className = document.querySelector('#class').value;
-    const name = document.querySelector('#name').value;
-    const age = document.querySelector('#age').value;
-    const city = document.querySelector('#city').value;
-    const grade = document.querySelector('#grade').value;
+// Returns an object with all the values from Student form
+const getStudentFormData = () => {
+    return {
+        className: getValueFrom('class'),
+        name: getValueFrom('name'),
+        age: getValueFrom('age'),
+        city: getValueFrom('city'),
+        grade: getValueFrom('grade')
+    }
+};
 
-    const displayAdd = document.querySelector('#display-add');
-    displayAdd.style.display = 'block';
-    displayAdd.innerText = '';
-    // obj destruct
+const getListStudentFormData = () => {
+    return {
+        className: getValueFrom('class-query'),
+        cityQuery: getValueFrom('city-query'),
+        failing: getValueFrom('failing')
+    }
+}
+
+const addStudent = async () => {
+    const {className, name, age, city, grade} = getStudentFormData();
+
     if (className == '' || name == '' || age == '' || city =='' || grade == '') {
-        displayAdd.innerText = 'Please fill out all fields in order to add the Student!';
-        displayAdd.style.backgroundColor = 'red';
+        return notify('display-add', 'Please fill out all fields in order to add the Student!', 'red');
+    }
+    if (checkValidNumbers(parseFloat(grade), parseInt(age))) {
+        console.log('Not Valid');
         return;
     }
 
-    const parseGrade = parseFloat(grade);
-    const parseAge = parseInt(age);
-
-    const valid = checkValidNumbers(parseGrade, parseAge);
-
-    if (valid) {
-        return;
-    }
-
-    const jsonData = {
-        name,
-        age,
-        city,
-        grade
-    }
-
-    const data = await axios.post(`http://localhost:8000/class/${className}/enroll`, jsonData);
-
-    if (data.data.error) {
-        displayAdd.innerText = data.data.error;
-        displayAdd.style.backgroundColor = 'red';
-    } else {
-        displayAdd.innerText = data.data.message;
-        displayAdd.style.backgroundColor = 'green';
-    }
-
-    console.log(data.data)
+    const data = await axios.post(`http://localhost:8000/class/${className}/enroll`, {name, age, city, grade});
+    data.data.error ? notify('display-add', data.data.error, 'red') : notify('display-add', data.data.message, 'green');
+    console.log(data.data);
 }
 
 const checkValidNumbers = (grade, age) => {
-    const displayAdd = document.querySelector('#display-add');
-    let gradeBool = false;
-    let ageBool = false;
-    // validNumCheck()
+    let invalidGrade = false;
+    let invalidAge = false;
+    
     if (isNaN(grade) || grade < 0 || grade > 100)  {
-        displayAdd.innerText = 'Please enter a valid grade between 0 - 100';
-        displayAdd.style.backgroundColor = 'red';
-        gradeBool = true;
+        notify('display-add', 'Please enter a valid grade between 0 - 100', 'red');
+        invalidGrade = true;
     }
     if (isNaN(age) || age < 0 || age > 100)  {
-        displayAdd.innerText = 'Please enter a valid age between 0 - 100';
-        displayAdd.style.backgroundColor = 'red';
-        ageBool = true;
+        notify('display-add', 'Please enter a valid age between 0 - 100', 'red')
+        invalidAge = true;
     }
-    return gradeBool && ageBool;
+    return invalidGrade || invalidAge;
 }
 
 const displayStudentResponse = (data) => {
-    const displayStudents = document.querySelector('#display-students');
-    displayStudents.style.display = 'block';
-    displayStudents.innerText = '';
-
     const ul = document.querySelector('#student-list');
     ul.innerHTML = '';
 
-    if (!data.students) {
-        displayStudents.innerText = 'There are 0 students that matches those criterias.';
-        displayStudents.style.backgroundColor = 'red';
+    if (data.error) {
+        notify('display-students', data.error, 'red');
+    } else if (!data.students.length) {
+        notify('display-students', 'There are 0 students that matches those criterias.', 'red');
     } else {
-        displayStudents.style.display = 'none';
         data.students.forEach(ele => {
             const li = document.createElement('li');
-            li.innerText = `${ele.name} ${ele.age} ${ele.city} ${ele.grade}`;
-            ul.appendChild(li)
+            li.innerText = `Name: ${ele.name} Age: ${ele.age} City:  ${ele.city} Grade:  ${ele.grade}`;
+            document.querySelector('#student-list').appendChild(li);
         })
     }
 }
 
-const listStudent = async (e) => {
-    // e.preventDefault();
-    const className = document.querySelector('#class-query').value;
-    const cityQuery = document.querySelector('#city-query').value;
+const listStudent = async () => {
+    const {className, cityQuery} = getListStudentFormData();
     const failing = document.querySelector('#failing').checked;
     console.log('City Query: ', cityQuery);
 
-    const displayStudents = document.querySelector('#display-students');
-    displayStudents.style.display = 'block';
-    displayStudents.innerText = '';
-
     if (className === '') {
-        displayStudents.innerText = 'Please write the name of the class you want to search in.'
-        displayStudents.style.backgroundColor = 'red';
+        showNotification('display-students');
+        displayMsg('display-students',  'Please write the name of the class you want to search in.', 'red');
+        setTimeout(hideNotification, 1500, 'display-students');
         return;
     }
 
