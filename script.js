@@ -61,11 +61,11 @@ const getStudentFormData = () => {
     }
 };
 
+// Returns an object with all the values from list Student form
 const getListStudentFormData = () => {
     return {
         className: getValueFrom('class-query'),
-        cityQuery: getValueFrom('city-query'),
-        failing: getValueFrom('failing')
+        cityQuery: getValueFrom('city-query')
     }
 }
 
@@ -112,7 +112,7 @@ const displayStudentResponse = (data) => {
         data.students.forEach(ele => {
             const li = document.createElement('li');
             li.innerText = `Name: ${ele.name} Age: ${ele.age} City:  ${ele.city} Grade:  ${ele.grade}`;
-            document.querySelector('#student-list').appendChild(li);
+            ul.appendChild(li);
         })
     }
 }
@@ -129,7 +129,6 @@ const listStudent = async () => {
         return;
     }
 
-    // let data = '';
     if (cityQuery) {
         const data = await axios.get(`http://localhost:8000/class/${className}/students?city=${cityQuery}&failing=${failing}`);
         console.log(data.data);
@@ -141,4 +140,4 @@ const listStudent = async () => {
     }
 }
 
-// API LINK to get randomuser information
+// Randomuser api to get random information for enrolled students coming soon...
