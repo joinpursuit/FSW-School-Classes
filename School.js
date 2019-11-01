@@ -29,7 +29,30 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    const {
+      name,
+      age,
+      city,
+      grade
+    } = student;
+
+    this.classes[className]['students'].push({
+      name,
+      age,
+      city,
+      grade
+    });
+
+    return {
+      student: {
+        name,
+        age,
+        city,
+        grade
+      },
+      className: className,
+      message: 'Enrolled Student',
+    }
   }
 
 
@@ -42,7 +65,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students;
   }
 
 

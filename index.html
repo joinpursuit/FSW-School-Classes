@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>School Database</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="add-class" class="form-container">
+            <form action="" method="post" id="class-form">
+                <input type="text" name="classname" id="class-name" placeholder="Class Name">
+                <input type="text" name="teacher" id="teacher" placeholder="Teacher">
+                <input type="button" value="Add class" id="add-class-btn">
+            </form>
+            <p id="display-class"></p>
+        </div>
+        <div id="add-student" class="form-container">
+            <form action="" method="post" id="student-form">
+                <input type="text" name="class" id="class" placeholder="Class">
+                <input type="text" name="name" id="name" placeholder="Name">
+                <input type="text" name="age" id="age" placeholder="Age">
+                <input type="text" name="city" id="city" placeholder="City">
+                <input type="text" name="grade" id="grade" placeholder="Grade">
+                <input type="button" value="Add Student" id="add-student-btn">
+            </form>
+            <p id="display-add"></p>
+        </div>
+        <div id="list-student" class="form-container">
+            <form action="" method="get" id="get-student-form">
+                <input type="text" name="class" id="class-query" placeholder="Class">
+                <input type="text" name="city" id="city-query" placeholder="City (Optional)">
+                <label for="failing"> <input type="checkbox" name="failing" id="failing"> Failing Students Only</label>
+                <input type="button" value="List Students"2 id="list-student-btn">
+            </form>
+            <p id="display-students"></p>
+            <ul id="student-list"></ul>
+        </div>
+    </div>
+</body>
+</html>

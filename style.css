@@ -1,0 +1,53 @@
+.form-container {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 400px;
+    margin: 20px auto;
+}
+
+input[type = 'button'] {
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px 1px gray;
+    font-size: .95em;
+    padding: 3px 5px;
+}
+
+input {
+    color: black;
+    padding: 5px;
+    text-align: center;
+    margin: 5px;
+    width: 100%;
+    outline: none;
+}
+
+input:focus {
+    background: rgba(133, 177, 225, 0.29);
+}
+
+#class-form, #student-form, #get-student-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#display-class, #display-add, #display-students, #student-list {
+    text-align: center;
+    /* width: 150px; */
+    /* position: relative; */
+    /* left: calc(50% - 100px); */
+}
+
+li {
+    list-style: upper-roman; 
+}
+
+p {
+    display: none;
+    background: lightgreen;
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+}
