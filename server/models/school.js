@@ -4,27 +4,61 @@ School model | Express Server Project
 */
 
 
+/* HELPERS */
+const addZero = (component, targetLength) => {
+  while (component.toString().length < targetLength) {
+    component = "0" + component;
+  }
+  return component;
+}
+const customizeDate = (d) => {
+  let output = `${addZero(d.getFullYear(), 4)}, ${addZero(d.getMonth() + 1, 2)}/${addZero(d.getDate(), 2)}`;
+  output += ` ${addZero(d.getHours(), 2)}:${addZero(d.getMinutes(), 2)}:${addZero(d.getSeconds(), 2)}`;
+  return output;
+}
+
+
+/* MODEL */
 const Class = require('./class');
 const Student = require('./student')
 
 class School {
   constructor() {
-    this.classes = {
-      // className: Class Object
-      //   physics: {} 
-    }
+    this.classes = {};
   }
-
+  //
   addClass(className, teacherName) {
-    let newClass = new Class(className, teacherName);
+    const newClass = new Class(className, teacherName);
     this.classes[className.toLowerCase()] = newClass;
     return newClass;
   }
-
-  enrollStudent(className, studentName) {
-    // Your code here
+  addStudentToClass(className, ssn, name, age, city, grade) {
+    const newStudent = new Student(name, age, city, grade, ssn);
+    const classStr = className.toLowerCase();
+    this.classes[classStr].index[ssn] = this.classes[classStr].nextIdxAssign;
+    this.classes[classStr].nextIdxAssign += 1;
+    this.classes[classStr].capacity -= 1;
+    this.classes[classStr].students.push(newStudent);
+    return newStudent;
   }
-
+  updateStudentInClass(className, ssn, name, age, city, grade) {
+    const classStr = className.toLowerCase();
+    const idx = this.classes[classStr].index[ssn];
+    const student = this.classes[classStr].students[idx];
+    student.name = name;
+    student.age = age;
+    student.city = city;
+    student.grade = grade;
+    student.entryUpdated.unshift(customizeDate(new Date()));
+    return student;
+  }
+  /* TODO SSN EDIT ROUTE NEEDED
+      if (ssn !== student.ssn) { // updates ssn index if necessary
+      this.classes[classStr].index[ssn] = idx;
+      delete this.classes[classStr].index[student.ssn];
+      student.ssn = ssn;
+    }
+  */
   /**
    * Get all students enrolled in one class
    * 
