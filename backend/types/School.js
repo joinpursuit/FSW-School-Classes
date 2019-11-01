@@ -1,5 +1,5 @@
 const Class = require('./Class');
-const Student = require('./Student')
+const Student = require('./Student');
 
 class School {
   constructor() {
@@ -17,12 +17,14 @@ class School {
 
    * 
    * @param {string} name - Name of the class
-   * @param {stringg} teacher - Name of instructor 
+   * @param {string} teacher - Name of instructor 
    * @return {Class} Class object
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+
+
   }
 
   /**
@@ -33,8 +35,36 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+       // Your code here
+   
+    if (!this.classes[className]) {
+      console.log("class doesn't exists!!!")
+    } else {
+      console.log("class exist!!!")
+    }
+    
+    for (let i = 0; i < this.classes[name].students.length; i++) {
+    
+      if (this.clases[name].student !== student.name) {
+        console.log("class name")
+      let name = student.name
+      let city = student.city
+      let age = student.age
+      let grade = student.grade
+      let newStudent = new Student(name, city, age, grade)
+        console.log(newStudent)
+       this.student.push(newStudent)
+       return newStudent
+      
+      }
+    } 
+  
   }
+
+  
+    
+ 
+  
 
 
 
@@ -46,7 +76,11 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
+
     // Your code here
+    // if(this.clases[className] === this.student.name) {
+
+    // }
   }
 
 
