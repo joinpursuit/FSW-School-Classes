@@ -4,10 +4,6 @@ class Class {
     this.teacher = teacher
     this.students = []
   }
-
-  enrollStudent(student){
-  	this.students.push(student);
-  }
 }
 
 

@@ -1,13 +1,9 @@
 class Student {
-  constructor(name, age, city) {
+  constructor(name, age, city, grade) {
     this.name = name
     this.city = city
     this.age = age
-    this.classGrades = {};
-  }
-
-  addClassGrade(classGrade, className){
-  	this.classGrades[className] = classGrade;
+    this.grade = grade
   }
 }
 

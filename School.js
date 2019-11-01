@@ -24,18 +24,35 @@ class School {
   /**
    * Enroll student in class
    * 
-   * @param {array}String className - List of classes to enroll student in 
+   * @param 
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(classes, student) {
-    for(let i = 0; i < classes.length; i++){
-      if(!(this.classes[classes[i].class])){
-        throw new Error('This class does not exist');
-      }
-      student.addClassGrade(classes[i].grade, classes[i].class);
-      this.classes[classes[i].class].enrollStudent(student);
+
+   //compare name in student to name in all students in class
+  enrollStudent(className, student) {
+    // for(let i = 0; i < classes.length; i++){
+    //   if(!(this.classes[classes[i].class])){
+    //     throw new Error('This class does not exist');
+    //   }
+    //   if(this.classes[classes[i].class].students.indexOf(student) === -1){
+    //     throw new Error('Duplicate student');
+    //   }
+    //   student.addClassGrade(classes[i].grade, classes[i].class);
+    //   this.classes[classes[i].class].enrollStudent(student);
+    // }
+
+    if(!(this.classes[className])){
+      throw new Error('Class does not exist');
     }
+    for(let i = 0; i < this.classes[className].students.length; i++){
+      if(this.classes[className].students[i].name === student.name){
+        this.classes[className].students[i] = student;
+        return student;
+      }
+    }
+    this.classes[className].students.push(student);
+    return student;
   }
 
 
@@ -49,6 +66,7 @@ class School {
    */
   getStudentsByClass(className) {
     return this.classes[className].students;
+
   }
 
 
@@ -73,13 +91,13 @@ class School {
     let studentsToReturn;
     if(failing && city){
       studentsToReturn = allStudentsOfClass.filter((elem) => {
-        return elem.city === city && elem.classGrades[className] <= 60;
+        return elem.city === city && elem.grade <= 60;
       })
       return studentsToReturn
     }
     else if(failing){
       studentsToReturn = allStudentsOfClass.filter((elem) => {
-        return elem.classGrades[className] <= 60;
+        return elem.grade <= 60;
       })
       return studentsToReturn
     }
