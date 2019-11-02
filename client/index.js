@@ -17,7 +17,7 @@ const clearStage = () => {
 const serverComm = async (method, urlAdds, body) => {
   const url = `http://localhost:11000/${urlAdds}`;
   try {
-    const response = await axios[method](url);
+    const response = await axios[method](url, body);
     log(response.data);
     return response.data;
   } catch(err) {
@@ -28,8 +28,8 @@ const serverComm = async (method, urlAdds, body) => {
 const showResponse = (result) => {
   clearStage();
 
-  log("result: ", result);
-  log("jsoned: ", JSON.stringify(result, null, 2));
+  // log("result: ", result);
+  // log("jsoned: ", JSON.stringify(result, null, 2));
   const stage = document.querySelector(`#response`);
   setTimeout(() => { // gives more natural delay to displaying response
       stage.innerHTML = JSON.stringify(result, null, 3);
@@ -40,8 +40,14 @@ const showResponse = (result) => {
 /* POST DOM LOAD EXECS */
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('#buttonForm1').addEventListener("click", async (e) => {
-      const received = await serverComm("get", "school");
-      const responseStage = document.querySelector('#response');
+      // console.dir(e.target);
+      const classEntry = e.target.parentNode[0].value;
+      const teacherEntry = e.target.parentNode[1].value;
+      const body = {
+        className: classEntry,
+        teacherName: teacherEntry
+      }
+      const received = await serverComm("post", "class", body);
       showResponse(received);
   });
 });
