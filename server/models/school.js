@@ -59,14 +59,10 @@ class School {
       student.ssn = ssn;
     }
   */
-  /**
-   * Get all students enrolled in one class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClass(className) {
-    // Your code here
+    const classStr = className.toLowerCase();
+    let roll = this.classes[classStr].students;
+    return roll.filter(el => !!el);
   }
 
   /**
@@ -88,5 +84,6 @@ class School {
   }
 
 }
+
 
 module.exports = School;
