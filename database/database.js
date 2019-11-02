@@ -19,9 +19,9 @@ const tempClassesData = [
   ["101 Engineering", "Mr. Alysius Retcognac", "2019, 10/21 08:32:41"]
 ];
 const tempStudentsData = [
-  ["Daenerys Targaryen", 27, "New York City", 34, "999-99-9990"],
+  ["Daenerys Targaryen", 27, "New York City", 74, "999-99-9990"],
   ["Jon Snow", 25, "Montreal", 83, "898-89-8887"],
-  ["Arya Stark", 18, "montreal", 79, "123-45-6789"],
+  ["Arya Stark", 18, "montreal", 69, "123-45-6789"],
   ["Sansa Stark", 22, "montreal", 85, "987-65-4321"],
   ["Theon Greyjoy", 26, "new york City", 66, "000-00-0555"]
 ];
