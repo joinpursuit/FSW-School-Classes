@@ -14,12 +14,43 @@
 <body>
 
    <div id="grid-base">
+
       <div id="leftPrimeCol">
          <h1>SCHOOL SERVER Express Project</h1>
          <div>
             <div class="nav-button" id="buttonAddClass">Add Class</div>
             <div class="nav-button" id="buttonAddStudent">Add Student</div>
             <div class="nav-button" id="buttonListStudents">List Students</div>
+         </div>
+      </div>
+
+      <div id="midActionCol">
+         <h2>Add Class Form</h2>
+         <p>Enter the name of the new class and the name of the teacher who will lead it, then click Submit.</p>
+         <p>------</p>
+
+         <form id="form1">
+            <div>
+               <label for="classText">Class name:</label>
+               <input form="form1" id="classText" name="classText" type="text" />
+            </div>
+            <div>
+               <label for="teacherText">Teacher name:</label>
+               <input form="form1" id="teacherText" name="teacherText" type="text" />      
+            </div>
+            <button type="button" id="buttonForm1">Submit</button>
+         </form>
+         <p>------</p>
+
+      </div>
+
+      <div id="rightResultsCol">
+         <div id="responseGroup">
+            <h3>• Server Response</h3>
+            <p>------</p>
+            <div id="response">
+               Test. Ipsum loren, beauxregard anos dios se capsum sanguine subito.
+            </div>
          </div>
       </div>
 
