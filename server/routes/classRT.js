@@ -38,7 +38,7 @@ const validateSSN = (input) => {
 
 
 /* MIDDLEWARE */
-const isInputComplete = (req, res, next) => {
+const areInputsComplete = (req, res, next) => {
   const classPostError = (!req.params.op && (!req.body.className || !req.body.teacherName));
   const studentPostError = (!!req.params.op && (!req.body.name || !req.body.age || !req.body.ssn || !req.body.city || !req.body.grade));
   if (classPostError || studentPostError) {
@@ -52,7 +52,7 @@ const isInputComplete = (req, res, next) => {
   }
 };
 
-const screenInputs = (req, res, next) => {
+const scrutinizeInputs = (req, res, next) => {
   let problems = [];
   for (let key in req.body) {
     const str = req.body[key].trim();
@@ -67,7 +67,7 @@ const screenInputs = (req, res, next) => {
           problems.push("teacher name is missing or too long (32 chars max)");
         }
         break;
-      case "studentName":
+      case "name":
         if (!str || str.length > 32) {
           problems.push("student name is missing or too long (32 chars max)");
         }
@@ -99,7 +99,7 @@ const screenInputs = (req, res, next) => {
   if (problems[0]) {
     problems = problems.map(el => el.toUpperCase());
     if (problems.length > 1) {
-      problems[length - 1] = "and " + problems[length - 1];
+      problems[problems.length - 1] = "and " + problems[problems.length - 1];
     }
     problems.length > 2
       ? problems = problems.join(', ')
@@ -114,8 +114,9 @@ const screenInputs = (req, res, next) => {
   }
 };
 
-const antiDupe = (req, res, next) => {
-  if (g.classes[req.body.className.toLowerCase()]) {
+const rejectDupes = (req, res, next) => {
+  const proposedClass = req.body.className.trim().toLowerCase();
+  if (g.classes[proposedClass]) {
     res.json({
         status: "FAIL",
         message: "Error: Submitted class already exists. Please change entry and try again.",
@@ -128,7 +129,8 @@ const antiDupe = (req, res, next) => {
 };
 
 const doesClassExist = (req, res, next) => {
-  if (!g.classes[req.params.className]) {
+  const targetClass = req.params.className.trim().toLowerCase();
+  if (!g.classes[targetClass]) {
     res.json({
         status: "FAIL",
         message: `Error: Target class \'${req.params.className}\' not found. Please check the input and re-submit.`,
@@ -139,8 +141,20 @@ const doesClassExist = (req, res, next) => {
   }
 };
 
+const giveRoll = (req, res, next) => {
+  const targetClass = req.params.className.trim().toLowerCase();
+  const classRoll = g.getStudentsByClass(targetClass);
+  res.json({
+      status: "SUCCESS",
+      payload: classRoll,
+      accessed: customizeDate(new Date())
+  });
+};
+
 const makeNewClass = (req, res, next) => {
-  const newClass = g.addClass(req.body.className, req.body.teacherName);
+  const proposedClass = req.body.className.trim().toLowerCase();
+  const proposedTeacher = req.body.teacherName.trim().toLowerCase();
+  const newClass = g.addClass(proposedClass, proposedTeacher);
   res.json({
       status: "SUCCESS",
       message: `The submitted class \'${req.body.className}\' has been added.`,
@@ -149,26 +163,26 @@ const makeNewClass = (req, res, next) => {
 };
 
 const addOrUpdateStudent = (req, res, next) => {
-  const classStr = req.params.className.toLowerCase();
-  const studentStr = (req.body.ssn).toString();
-  if (g.classes[classStr].index[studentStr]) { // student ALREADY ENROLLED, server will UPDATE record
-    const updatedRecord = g.updateStudentInClass(classStr, studentStr, req.body.name, req.body.age, req.body.city, req.body.grade);
+  const targetClass = req.params.className.trim().toLowerCase();
+  const targetSsn = (req.body.ssn).toString();
+  if (g.classes[targetClass].index[targetSsn]) { // student ALREADY ENROLLED, server will UPDATE record
+    const updatedRecord = g.updateStudentInClass(targetClass, targetSsn, req.body.name, req.body.age, req.body.city, req.body.grade);
     res.json({
         status: "SUCCESS",
         message: `The record of student \'${req.body.name.trim()}\' has been updated.`,
         submission: updatedRecord
     });
-  } else if (g.classes[classStr].capacity <= 0) { // NEW ENROLLMENT but CLASS is FULL
+  } else if (g.classes[targetClass].capacity <= 0) { // NEW ENROLLMENT ATTEMPTED but CLASS is FULL
     res.json({
         status: "FAIL",
-        message: `Error: the class \'${classStr}\' is full.`,
+        message: `Error: the class \'${req.params.className.trim()}\' is full.`,
         timestamp: customizeDate(new Date())
     });
   } else { // NEW ENROLLMENT is a GO
-    const newEnroll = g.addStudentToClass(classStr, studentStr, req.body.name, req.body.age, req.body.city, req.body.grade);
+    const newEnroll = g.addStudentToClass(targetClass, targetSsn, req.body.name, req.body.age, req.body.city, req.body.grade);
     res.json({
         status: "SUCCESS",
-        message: `The submitted student \'${req.body.name.trim()}\' has been enrolled into \'${req.params.className}\' successfully.`,
+        message: `The submitted student \'${req.body.name.trim()}\' has been enrolled into \'${req.params.className.trim()}\' successfully.`,
         submission: newEnroll
     });
   }
@@ -176,8 +190,9 @@ const addOrUpdateStudent = (req, res, next) => {
 
 
 /* ROUTES */
-router.post("/", isInputComplete, screenInputs, antiDupe, makeNewClass); // for adding a class
-router.post("/:className/:op", doesClassExist, isInputComplete, screenInputs, addOrUpdateStudent); // for adding a student to a class
+router.get("/:className/students", doesClassExist, giveRoll);
+router.post("/", areInputsComplete, scrutinizeInputs, rejectDupes, makeNewClass); // for adding a class
+router.post("/:className/:op", doesClassExist, areInputsComplete, scrutinizeInputs, addOrUpdateStudent); // for adding a student to a class
 
 
 module.exports = router;

@@ -14,8 +14,6 @@ const express = require('express');
   const port = 11000;
 const cors = require('cors');
   app.use(cors());
-// database
-const g = require("../database/database.js");
 
 
 /* SERVER INIT */

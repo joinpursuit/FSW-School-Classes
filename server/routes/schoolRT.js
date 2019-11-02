@@ -29,7 +29,7 @@ const express = require('express');
 // unpublished route for debugging purposes
 router.get("/", (req, res) => {
     res.json({
-        status: "success",
+        status: "SUCCESS",
         joeySchool: g
     });
 });
