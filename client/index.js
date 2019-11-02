@@ -28,8 +28,6 @@ const serverComm = async (method, urlAdds, body) => {
 const showResponse = (result) => {
   clearStage();
 
-  // log("result: ", result);
-  // log("jsoned: ", JSON.stringify(result, null, 2));
   const stage = document.querySelector(`#response`);
   setTimeout(() => { // gives more natural delay to displaying response
       stage.innerHTML = JSON.stringify(result, null, 3);
@@ -46,8 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const body = {
         className: classEntry,
         teacherName: teacherEntry
-      }
+      };
       const received = await serverComm("post", "class", body);
       showResponse(received);
+  });
+  document.querySelector('#buttonForm2').addEventListener("click", async (e) => {
+    const classEntry = e.target.parentNode[0].value;
+    const nameEntry = e.target.parentNode[1].value;
+    const ssnEntry = e.target.parentNode[2].value;
+    const ageEntry = e.target.parentNode[3].value;
+    const cityEntry = e.target.parentNode[4].value;
+    const gradeEntry = e.target.parentNode[5].value;
+    const body = {
+      className: classEntry,
+      name: nameEntry,
+      age: ageEntry,
+      city: cityEntry,
+      grade: gradeEntry,
+      ssn: ssnEntry
+    };
+    const received = await serverComm("post", `class/${classEntry.trim()}/enroll`, body);
+    showResponse(received);
   });
 });
