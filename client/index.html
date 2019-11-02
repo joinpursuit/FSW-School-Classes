@@ -30,7 +30,6 @@
             <h2>Create a New Class Form</h2>
             <p>Enter the name of the new class and the name of the teacher who will lead it, then click Submit.</p>
             <p>------</p>
-
             <form id="form1">
                <div>
                   <label for="classText">Class name:</label>
@@ -43,13 +42,12 @@
                <button type="button" id="buttonForm1">Submit</button>
             </form>
             <p>------</p>
-         </div>
+         </div><!-- id="form1pack" end -->
 
          <div class="form-package" id="form2pack">
             <h2>Create/Edit Student Form</h2>
             <p>Enter the name, age, city, and grade information for a specific student, then click Submit.</p>
             <p>------</p>
-
             <form id="form2">
                <div>
                   <label for="className">Class:</label>
@@ -78,27 +76,32 @@
                <button type="button" id="buttonForm2">Submit</button>
             </form>
             <p>------</p>
-         </div>
+         </div><!-- id="form2pack" end -->
 
-         <!-- <div class="form-package" id="form3pack">
-            <h2>Add Class Form</h2>
-            <p>Enter the name of the new class and the name of the teacher who will lead it, then click Submit.</p>
+         <div class="form-package" id="form3pack">
+            <h2>Request Roll Form</h2>
+            <p>Enter the class you request roll info for, optionally filter results by student's city and whether 
+               student is currently passing or failing, then click Submit.</p>
             <p>------</p>
-
-            <form id="form1">
+            <form id="form3">
                <div>
-                  <label for="classText">Class name:</label>
-                  <input form="form1" id="classText" name="classText" type="text" />
+                  <label for="className">Class:</label>
+                  <input form="form3" id="className" name="className" type="text" />
                </div>
                <div>
-                  <label for="teacherText">Teacher name:</label>
-                  <input form="form1" id="teacherText" name="teacherText" type="text" />      
+                  <label for="city">Student city (opt):</label>
+                  <input form="form3" id="city" name="city" type="text" />
                </div>
-               <button type="button" id="buttonForm1">Submit</button>
+               <div>
+                  <label for="failing">Grade status (opt):</label>
+                  All <input value=undefined form="form3" id="failing" name="failing" type="radio" checked />
+                  Failing <input value="true" form="form3" id="failing" name="failing" type="radio" />
+                  Passing <input value="false" form="form3" id="failing" name="failing" type="radio" />
+               </div>
+               <button type="button" id="buttonForm3">Submit</button>
             </form>
             <p>------</p>
-         </div> -->
-
+         </div><!-- id="form3pack" end -->
 
       </div>
 
@@ -106,8 +109,7 @@
          <div id="responseGroup">
             <h3>• Server Response</h3>
             <p>------</p>
-            <div id="response">Test. Ipsum loren, beauxregard anos dios se capsum sanguine subito.
-            </div>
+            <div id="response"></div>
             <p>------</p>
          </div>
       </div>

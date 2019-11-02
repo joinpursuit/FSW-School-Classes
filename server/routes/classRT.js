@@ -4,6 +4,12 @@ class Route | Express Server Project
 */
 
 
+/* TODO
+    add debug route
+    implement find student route using hash indices already built in
+*/
+
+
 /* HELPERS */
 const log = console.log;
 
@@ -34,6 +40,13 @@ const customizeDate = (d) => {
 const validateSSN = (input) => {
   const ssnPattern = /^[0-9]{3}\-?[0-9]{2}\-?[0-9]{4}$/;
   return ssnPattern.test(input);
+}
+const emptyClassErr = (req, res) => {
+  res.json({
+      status: "FAIL",
+      message: `Error: Target class is empty. Please input a class and re-submit.`,
+      timestamp: customizeDate(new Date())
+  });
 }
 
 
@@ -145,18 +158,20 @@ const giveRoll = (req, res, next) => {
   const targetClass = req.params.className.trim().toLowerCase();
   let classRoll = null;
   if (req.query.failing || req.query.city) {
-    let onlyFailing = false;
-    let targetCity = req.query.city || null;
-    if (req.query.failing && req.query.failing.trim().toLowerCase() === "true") {
-      onlyFailing = true;
+    let onlyFailing = null;
+    if (req.query.failing) {
+      req.query.failing === "true"
+        ? onlyFailing = true
+        : onlyFailing = false;
     }
+    let targetCity = req.query.city || null;
     classRoll = g.getStudentsByClassWithFilter(targetClass, onlyFailing, targetCity);
   } else {
     classRoll = g.getStudentsByClass(targetClass);
   }
   res.json({
       status: "SUCCESS",
-      payload: classRoll,
+      payload: classRoll[0] ? classRoll : "No results found",
       accessed: customizeDate(new Date())
   });
 };
@@ -201,8 +216,14 @@ const addOrUpdateStudent = (req, res, next) => {
 
 /* ROUTES */
 router.get("/:className/students", doesClassExist, giveRoll); // for un/filtered list of students in a class
+router.get("/:foo?/:bar?", (req, res) => { // error catch for empty get :className parameter in above route
+    emptyClassErr(req, res);
+});
 router.post("/", areInputsComplete, scrutinizeInputs, rejectDupes, makeNewClass); // for adding a class
 router.post("/:className/:op", doesClassExist, areInputsComplete, scrutinizeInputs, addOrUpdateStudent); // for adding a student to a class
+router.post("/:foo?/:bar?", (req, res) => { // error catch for empty get :className parameter in above route
+    emptyClassErr(req, res);
+});
 
 
 module.exports = router;

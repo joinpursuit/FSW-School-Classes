@@ -5,8 +5,8 @@ School model | Express Server Project
 
 
 /* TODO
-   edit ssn route
-   delete student
+    method + route to edit ssn
+    method + route to delete student
 */
 
 

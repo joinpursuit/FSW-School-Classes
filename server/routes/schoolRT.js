@@ -30,6 +30,7 @@ const express = require('express');
 router.get("/", (req, res) => {
     res.json({
         status: "SUCCESS",
+        message: "Welcome to the debugger's route",
         joeySchool: g
     });
 });

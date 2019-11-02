@@ -4,6 +4,10 @@ Database | Express Server Project
 */
 
 
+/* TODO
+    port temp injection system into persistent json sys, for the shites and gigs ofc
+*/
+
 /* DATA MAIN */
 const School = require('../server/models/school.js');
 const Class = require('../server/models/class.js');
