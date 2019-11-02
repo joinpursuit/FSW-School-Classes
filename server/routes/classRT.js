@@ -143,7 +143,17 @@ const doesClassExist = (req, res, next) => {
 
 const giveRoll = (req, res, next) => {
   const targetClass = req.params.className.trim().toLowerCase();
-  const classRoll = g.getStudentsByClass(targetClass);
+  let classRoll = null;
+  if (req.query.failing || req.query.city) {
+    let onlyFailing = false;
+    let targetCity = req.query.city || null;
+    if (req.query.failing && req.query.failing.trim().toLowerCase() === "true") {
+      onlyFailing = true;
+    }
+    classRoll = g.getStudentsByClassWithFilter(targetClass, onlyFailing, targetCity);
+  } else {
+    classRoll = g.getStudentsByClass(targetClass);
+  }
   res.json({
       status: "SUCCESS",
       payload: classRoll,
@@ -152,12 +162,12 @@ const giveRoll = (req, res, next) => {
 };
 
 const makeNewClass = (req, res, next) => {
-  const proposedClass = req.body.className.trim().toLowerCase();
-  const proposedTeacher = req.body.teacherName.trim().toLowerCase();
+  const proposedClass = req.body.className.trim();
+  const proposedTeacher = req.body.teacherName.trim();
   const newClass = g.addClass(proposedClass, proposedTeacher);
   res.json({
       status: "SUCCESS",
-      message: `The submitted class \'${req.body.className}\' has been added.`,
+      message: `The submitted class \'${proposedClass}\' has been added.`,
       submission: newClass
   });
 };
@@ -190,7 +200,7 @@ const addOrUpdateStudent = (req, res, next) => {
 
 
 /* ROUTES */
-router.get("/:className/students", doesClassExist, giveRoll);
+router.get("/:className/students", doesClassExist, giveRoll); // for un/filtered list of students in a class
 router.post("/", areInputsComplete, scrutinizeInputs, rejectDupes, makeNewClass); // for adding a class
 router.post("/:className/:op", doesClassExist, areInputsComplete, scrutinizeInputs, addOrUpdateStudent); // for adding a student to a class
 

@@ -4,6 +4,12 @@ School model | Express Server Project
 */
 
 
+/* TODO
+   edit ssn route
+   delete student
+*/
+
+
 /* HELPERS */
 const addZero = (component, targetLength) => {
   while (component.toString().length < targetLength) {
@@ -28,61 +34,63 @@ class School {
   }
   //
   addClass(className, teacherName) {
-    const newClass = new Class(className, teacherName);
-    this.classes[className.toLowerCase()] = newClass;
+    const newClass = new Class(className.trim(), teacherName.trim());
+    this.classes[className.trim().toLowerCase()] = newClass;
     return newClass;
   }
   addStudentToClass(className, ssn, name, age, city, grade) {
     const newStudent = new Student(name, age, city, grade, ssn);
-    const classStr = className.toLowerCase();
-    this.classes[classStr].index[ssn] = this.classes[classStr].nextIdxAssign;
-    this.classes[classStr].nextIdxAssign += 1;
-    this.classes[classStr].capacity -= 1;
-    this.classes[classStr].students.push(newStudent);
+    const targetClass = className.trim().toLowerCase();
+    this.classes[targetClass].index[ssn] = this.classes[targetClass].nextIdxAssign; // creates index entry (ssn: index #)
+    this.classes[targetClass].nextIdxAssign += 1;
+    this.classes[targetClass].capacity -= 1;
+    this.classes[targetClass].students.push(newStudent);
     return newStudent;
   }
   updateStudentInClass(className, ssn, name, age, city, grade) {
-    const classStr = className.toLowerCase();
-    const idx = this.classes[classStr].index[ssn];
-    const student = this.classes[classStr].students[idx];
-    student.name = name;
-    student.age = age;
-    student.city = city;
-    student.grade = grade;
+    const targetClass = className.trim().toLowerCase();
+    const idx = this.classes[targetClass].index[ssn];
+    const student = this.classes[targetClass].students[idx];
+    student.name = name.trim();
+    student.age = age.trim();
+    student.city = city.trim();
+    student.grade = grade.trim();
     student.entryUpdated.unshift(customizeDate(new Date()));
     return student;
   }
   /* TODO SSN EDIT ROUTE NEEDED
       if (ssn !== student.ssn) { // updates ssn index if necessary
-      this.classes[classStr].index[ssn] = idx;
-      delete this.classes[classStr].index[student.ssn];
+      this.classes[targetClass].index[ssn] = idx;
+      delete this.classes[targetClass].index[student.ssn];
       student.ssn = ssn;
     }
   */
   getStudentsByClass(className) {
-    const classStr = className.toLowerCase();
-    let roll = this.classes[classStr].students;
-    return roll.filter(el => !!el);
+    const targetClass = className.trim().toLowerCase();
+    let roll = this.classes[targetClass].students;
+    return roll.filter(student => !!student);
   }
-
-  /**
-   * Get all students and apply filters. If failing = true
-   * return all students that are failing the class, 
-   * that is all students whose grade is less than 70.
-   * If a city is passed return students whose city match
-   * the city passed. If both failing and city are passed
-   * return students that are failing and that live in the
-   * specified city
-   * 
-   * @param {string} className - Name of the class
-   * @param {boolean} failing - Whether to return students that are failing the class or not
-   * @param {string} city - Name of the city to match against students
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    const targetClass = className.trim().toLowerCase();
+    let roll = this.classes[targetClass].students;
+    roll = roll.filter(student => {
+        if (student) {
+          let checkFail = true;
+          let checkCity = true;
+          if (failing === true) {
+            checkFail = student.grade < 70;
+          } else if (failing === false) {
+            checkFail = student.grade >= 70;
+          }
+          if (city) {
+            checkCity = city.trim().toLowerCase() === student.city.trim().toLowerCase();
+          }
+          return checkFail && checkCity;
+        }
+        return false;
+    })
+    return roll;
   }
-
 }
 
 
