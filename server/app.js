@@ -33,5 +33,5 @@ app.use('/class', classRT);
 
 /* NO-ROUTE CATCH */
 app.use("*", (req, res) => {
-    res.status(404).send('error: no such route found on this JoeyServer');
+    res.status(404).send('error: no such route found on this JoeyServer. try again.');
 });
