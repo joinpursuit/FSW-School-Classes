@@ -4,6 +4,9 @@ Front-End Style | Express Web Server Project
 */
 
 
+// TODO response overflow
+
+
 /* CSS RESET
 http://meyerweb.com/eric/tools/css/reset/ 
 v2.0 | 20110126
@@ -67,6 +70,12 @@ table {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Anonymous Pro';
+  src: url('./fonts/Anonymous_Pro/AnonymousPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 /* MAIN STYLE */
@@ -85,6 +94,7 @@ body {
 div#grid-base {
   display: grid;
   grid-template-columns: 220px 488px auto;
+  grid-template-rows: 1fr;
 }
 
 div#leftPrimeCol {
@@ -142,7 +152,7 @@ h2 {
 
 h3 {
   margin-top: 33px;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
   
   font-size: 1.1em;
   text-transform: uppercase;
@@ -182,15 +192,18 @@ button {
 }
 
 div#responseGroup p {
-  margin-bottom: 17px;
+  margin-bottom: 3px;
 }
 
 div#response {
   padding: 9px 16px;
-  margin: 16px 0px;
+  margin: 3px 0px;
 
-  /* white-space: pre-wrap; */
-  line-height: 1.3em;
+  font-family: "Anonymous Pro", monospace;
+  font-weight: normal;
+  font-size: 0.8em;
+  line-height: 1.1em;
+  white-space: pre-wrap;
 
   background-color: #0d150b;
 }
