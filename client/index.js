@@ -13,20 +13,28 @@ Front-end JS | Express Web Server Project
 /* HELPERS */
 const log = console.log;
 
-const navSwitch = (num) => {
+const navSwitch = async (num) => { // Nav Buttons & Form Switcher
   const form1 = document.querySelector('#form1pack');
   const form2 = document.querySelector('#form2pack');
   const form3 = document.querySelector('#form3pack');
-  const indices = [form1, form1, form2, form3];
+  const form4 = document.querySelector('#form4pack');
+  const indices = [form1, form1, form2, form3, form4];
   const navBox = document.querySelector('#nav');
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 4; i++) {
     if (i === num) {
-      navBox.children[i - 1].style.color = "white";
-      navBox.children[i - 1].style.backgroundColor = "darkorange";
-      indices[i].style.zIndex = 200;
-      setTimeout(() => {
-        indices[i].style.opacity = 1;
-      }, 0);
+      if (num === 4) {
+        const received = await serverComm("get", "school");
+        showResponse(received);
+        navBox.children[i - 1].style.color = "white";
+        navBox.children[i - 1].style.backgroundColor = "#b12f12";
+      } else {
+        navBox.children[i - 1].style.color = "white";
+        navBox.children[i - 1].style.backgroundColor = "darkorange";
+      }
+        indices[i].style.zIndex = 200;
+        setTimeout(() => {
+          indices[i].style.opacity = 1;
+        }, 0);
     } else {
       navBox.children[i - 1].style.color = null;
       navBox.children[i - 1].style.backgroundColor = null;
@@ -75,6 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (e.target.id === "btnListStudents") {
           navSwitch(3);
+        }
+        if (e.target.id === "btnSchool") {
+          navSwitch(4);
         }
     });
     document.querySelector('#buttonForm1').addEventListener("click", async (e) => {
