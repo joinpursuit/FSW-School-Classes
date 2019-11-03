@@ -4,9 +4,6 @@ Front-End Style | Express Web Server Project
 */
 
 
-// TODO response overflow
-
-
 /* CSS RESET
 http://meyerweb.com/eric/tools/css/reset/ 
 v2.0 | 20110126
@@ -106,6 +103,10 @@ div#leftPrimeCol {
   background-color: #146d14;
 }
 
+div#nav {
+  cursor: pointer;
+}
+
 div.nav-button {
   background-color: olivedrab;
   border: solid 2px #111;
@@ -118,6 +119,8 @@ div.nav-button {
 }
 
 div#midActionCol {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
@@ -126,6 +129,9 @@ div#midActionCol {
 
 div#rightResultsCol {
   padding-top: 107px;
+  overflow: auto;
+  width: auto;
+  height: auto;
 
   color: #10c2de;
 
@@ -142,6 +148,15 @@ h1 {
   line-height: 1.2em;
 }
 
+div.form-package {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
 h2 {
   margin: 57px 16px 26px 16px;
 
@@ -152,7 +167,7 @@ h2 {
 
 h3 {
   margin-top: 33px;
-  margin-bottom: 25px;
+  margin-bottom: 16px;
   
   font-size: 1.1em;
   text-transform: uppercase;

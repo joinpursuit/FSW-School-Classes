@@ -7,6 +7,29 @@ Front-end JS | Express Web Server Project
 /* HELPERS */
 const log = console.log;
 
+const navSwitch = (num) => {
+  const form1 = document.querySelector('#form1pack');
+  const form2 = document.querySelector('#form2pack');
+  const form3 = document.querySelector('#form3pack');
+  const indices = [form1, form1, form2, form3];
+  const navBox = document.querySelector('#nav');
+  for (let i = 1; i <= 3; i++) {
+    if (i === num) {
+      navBox.children[i - 1].style.color = "white";
+      navBox.children[i - 1].style.backgroundColor = "darkorange";
+      indices[i].style.zIndex = 200;
+      setTimeout(() => {
+        indices[i].style.opacity = 1;
+      }, 0);
+    } else {
+      navBox.children[i - 1].style.color = null;
+      navBox.children[i - 1].style.backgroundColor = null;
+      indices[i].style.zIndex = null;
+      indices[i].style.opacity = null;
+    }
+  }
+}
+
 const clearStage = () => {
   const stage = document.querySelector(`#response`);
   while (stage.firstChild) {
@@ -18,9 +41,8 @@ const serverComm = async (method, urlAdds, body) => {
   const url = `http://localhost:11000/${urlAdds}`;
   try {
     const response = await axios[method](url, body);
-    log(response.data);
     return response.data;
-  } catch(err) {
+  } catch (err) {
     log("client-side error: ", err);
   }
 }
@@ -37,6 +59,18 @@ const showResponse = (result) => {
 
 /* POST DOM LOAD EXECS */
 document.addEventListener("DOMContentLoaded", () => {
+    navSwitch(1);
+    document.querySelector('#nav').addEventListener("click", (e) => {
+        if (e.target.id === "btnAddClass") {
+          navSwitch(1);
+        }
+        if (e.target.id === "btnAddStudent") {
+          navSwitch(2);
+        }
+        if (e.target.id === "btnListStudents") {
+          navSwitch(3);
+        }
+    });
     document.querySelector('#buttonForm1').addEventListener("click", async (e) => {
         const classEntry = e.target.parentNode[0].value.trim();
         const teacherEntry = e.target.parentNode[1].value.trim();
