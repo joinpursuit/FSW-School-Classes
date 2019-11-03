@@ -4,6 +4,12 @@ Front-end JS | Express Web Server Project
 */
 
 
+/* TODO
+    raw data button
+    press Enter to submit on inputs
+*/
+
+
 /* HELPERS */
 const log = console.log;
 
