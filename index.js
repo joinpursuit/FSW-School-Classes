@@ -41,10 +41,8 @@ const checkNewStudent = (req, res, next) => {
     let age = req.body.age
     let city = req.body.city
     let grade = req.body.grade
-    let className = req.params.className
+    // let className = req.params.className
     let timeStamp = new Date();
-
-
     if(!name || !age || !city || !grade){
         res.json({
             error: "Missing information",
@@ -56,57 +54,99 @@ const checkNewStudent = (req, res, next) => {
     }
 }
 
- const newStudent =(req, res, next) => {
+ const newStudent = (req, res, next) => {
+    //  console.log("hitting new student function")
     let name = req.body.name
     let age = req.body.age
     let city = req.body.city
     let grade = req.body.grade
     let className = req.params.className
     let timeStamp = new Date();
-    let newStudent = mySchool.enrollStudent(className, name, age, city, grade)
+     mySchool.enrollStudent(className, name, age, city, grade)
 
-if(newStudent.name === name){
-    updateStudent(newStudent)
-}
-else{
     res.json(
         {"student": name,
         "className": className,
+        "age": age,
+        "city": city,
+        "grade": grade,
          "message": "student added",
-         "time": timeStamp.toLocaleString()})
-}
- }
+         "time": timeStamp.toLocaleString()
+        })
 
-app.post("/class/:className/enroll", checkNewStudent, newStudent)
+    }
+ 
 
 
 const updateStudent = (req,res,next) => {
-    let name = req.body.name
-    let age = req.body.age
-    let city = req.body.city
-    let grade = req.body.grade
-    let className = req.params.className
+        // console.log("classStudents", classStudents)
+        let name = req.body.name
+        let age = req.body.age
+        let city = req.body.city
+        let grade = req.body.grade
+        let className = req.params.className
+        let timeStamp = new Date();
+     
+    let classStudents = mySchool.classes[className].students 
+    
+        let studentCheck = null;
 
-   mySchool.enrollStudent(name, age, city, grade)
+    for(let i = 0; i < classStudents.length; i++){   
+        if(classStudents[i].name === name){
+            studentCheck = classStudents[i] 
+    }
+      }
+      if(studentCheck !== null){
+        studentCheck.name = name
+        studentCheck.age= age
+        studentCheck.city = city
+        studentCheck.grade = grade
+        studentCheck.timeStamp = timeStamp.toLocaleString()
 
-res.json(
-        {
-         "student": name,
-         "className": className,
-         "age": age,
-         "city": city,
-         "grade": grade,
-         "message": "student updated"})
+        res.json({
+            name: studentCheck.name,
+            age: studentCheck.age,
+            city: studentCheck.city,
+            grade: studentCheck.grade,
+            timeStamp: studentCheck.timeStamp
+
+        })
+      } else{
+        next()
+      }
 }
 
+app.post("/class/:className/enroll", checkNewStudent, updateStudent, newStudent)
 
-app.put("/class/:className/enroll", updateStudent)
 
 
-// const Midwood = new School()
-// Midwood.addClass('Algebra', 'Mr. Paul')
-// Midwood.enrollStudent('Algebra', 'Kadijah')
-//console.log(Midwood.classes.Algebra.students);
+
+
+const getStudentsByClass = (req,res) => {
+    let className = req.params.className
+    let failing = req.query.fail
+  let studentsInClass = mySchool.getStudentsByClass(className);
+
+  if(failing){
+    let failingStudents = mySchool.getStudentsByClassWithFilter(className, failing)
+      res.json({
+        className: className,
+        failingStudents: failingStudents,
+        failing: failing
+    })
+  }
+  else{
+  res.json({
+      className: className,
+      studentsInClass: studentsInClass,
+      failing: failing
+  })
+}
+}
+
+app.get("/class/:className/students", getStudentsByClass)
+
+
 
 app.listen(port, () => {
     console.log("running")

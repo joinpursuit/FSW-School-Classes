@@ -19,6 +19,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    console.log("this classes added", this.classes[name].students)
     // return this.classes
   }
 
@@ -32,15 +33,13 @@ class School {
   enrollStudent(className, name, age, city, grade) {
     // Your code here
     let newStudent = new Student(name, age, city, grade);
-    console.log(newStudent)
-    console.log(this.classes)
+    // console.log("classes", className)
+    // console.log("this classes", this.classes)
     this.classes[className].students.push(newStudent);
+
+    // console.log("this classes", this.classes)
     // console.log('here')
     return this.classes
-  }
-
-  updateStudent(className, name, age, city, grade){
-
   }
 
   /**
@@ -51,8 +50,8 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-  return this.classes[className].students
-
+  let arr = this.classes[className].students
+return arr
   }
 
 
@@ -72,7 +71,18 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let stuInClass = this.getStudentsByClass(className)
+
+    const studentArr = stuInClass.filter(student => {
+      if(student.grade <= 70 && failing === "true"){
+        return student
+      }
+    
+    })
+    return studentArr
+
   }
+
 
 }
 
