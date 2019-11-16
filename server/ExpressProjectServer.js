@@ -1,8 +1,11 @@
+const path = require('path');
 const express = require('express')
 const bodyParser = require('body-parser')
 const School = require('../School.js')
 const cors = require('cors')
 const app = express();
+app.use(express.static(path.join(__dirname, "../client")));
+
 const {
     db
 } = require('../database/databaseInfo.js'); //connected db instance
@@ -24,27 +27,33 @@ app.use(bodyParser.json())
 
 const timeStamp = () => new Date().toLocaleString()
 
-const addClassMethod = (req, res, next) => {
+
+
+const addClassMethod = async (req, res, next) => {
     const className = req.body.className
     const classTeacher = req.body.teacher
 
-    // res.send({
-    //     class: mySchool.addClass(className, classTeacher),
-    //     message: "Created a new class",
-    //     timeStamp: timeStamp()
-    // })
-    try {
-        let insertQuery = `INSERT INTO class(student_name,classname,teacher) VALUES($/student_name/,$/classname/,$/teacher/) RETURNING *`;
-        let newClass = await db.one(insertQuery, user)
-        return newClass;
-    } catch (err) {
-        // Username already taken 
-        if (err.code === "23505" && err.detail.includes("already exists")) {
-            let customErr = "Username not available. Please try a different one.";
-            err = customErr;
-        }
-        throw err;
-    }
+    res.send({
+        class: mySchool.addClass(className, classTeacher),
+        message: "Created a new class",
+        timeStamp: timeStamp()
+    })
+    // try {
+    //     let insertQuery = `INSERT INTO class(classname,teacher) VALUES($/classname/,$/teacher/) RETURNING *`;
+    //     let newClass = await db.none(insertQuery, {
+    //         className,
+    //         classTeacher
+    //     })
+    //     // return newClass;
+    //     next()
+    // } catch (err) {
+    //     // Class already created 
+    //     if (err.code === "23505" && err.detail.includes("already exists")) {
+    //         let customErr = "Class not available. Please fill out class information";
+    //         err = customErr;
+    //     }
+    //     throw err;
+    // }
 }
 
 const emptyClass = (req, res, next) => {
@@ -60,8 +69,8 @@ const validateClass = (req, res, next) => {
     !!mySchool['classes'][classname] ? res.send({
         error: 'Class already exist',
         timeStamp: timeStamp()
-    }) : next()
-}
+        }): next()
+    }
 
 app.post('/class', emptyClass, validateClass, addClassMethod)
 
@@ -143,6 +152,9 @@ const getStudentsByClass = (req, res, next) => {
 app.get('/class/:classname/students', checkClass, getStudentsByClass)
 
 
+app.use('/', (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, '../client/frontEnd.html'))
+})
 
 
 
