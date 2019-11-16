@@ -28,11 +28,23 @@ const addClassMethod = (req, res, next) => {
     const className = req.body.className
     const classTeacher = req.body.teacher
 
-    res.send({
-        class: mySchool.addClass(className, classTeacher),
-        message: "Created a new class",
-        timeStamp: timeStamp()
-    })
+    // res.send({
+    //     class: mySchool.addClass(className, classTeacher),
+    //     message: "Created a new class",
+    //     timeStamp: timeStamp()
+    // })
+    try {
+        let insertQuery = `INSERT INTO class(student_name,classname,teacher) VALUES($/student_name/,$/classname/,$/teacher/) RETURNING *`;
+        let newClass = await db.one(insertQuery, user)
+        return newClass;
+    } catch (err) {
+        // Username already taken 
+        if (err.code === "23505" && err.detail.includes("already exists")) {
+            let customErr = "Username not available. Please try a different one.";
+            err = customErr;
+        }
+        throw err;
+    }
 }
 
 const emptyClass = (req, res, next) => {
