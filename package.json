@@ -22,7 +22,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^1.19.4",
-    "pg": "^7.12.1"
+    "pg": "^7.12.1",
+    "pg-promise": "^10.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "keywords": [
+    "heroku"
+  ]
 }

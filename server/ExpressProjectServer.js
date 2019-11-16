@@ -3,12 +3,19 @@ const bodyParser = require('body-parser')
 const School = require('../School.js')
 const cors = require('cors')
 const app = express();
-const pool = require('../databaseInfo')
+const {
+    db
+} = require('../database/databaseInfo.js'); //connected db instance
+
 
 app.use(cors())
 let mySchool = new School();
 
-const port = 8000;
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 8000;
+}
+
 
 app.use(bodyParser.urlencoded({
     extended: false
