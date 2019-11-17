@@ -16,7 +16,8 @@ let mySchool = new School();
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-    port = 8000;
+    //change port back
+    port = 3000;
 }
 
 
@@ -30,126 +31,157 @@ const timeStamp = () => new Date().toLocaleString()
 
 
 const addClassMethod = async (req, res, next) => {
-    const className = req.body.className
-    const classTeacher = req.body.teacher
-
-    res.send({
-        class: mySchool.addClass(className, classTeacher),
-        message: "Created a new class",
-        timeStamp: timeStamp()
-    })
-    // try {
-    //     let insertQuery = `INSERT INTO class(classname,teacher) VALUES($/classname/,$/teacher/) RETURNING *`;
-    //     let newClass = await db.none(insertQuery, {
-    //         className,
-    //         classTeacher
-    //     })
-    //     // return newClass;
-    //     next()
-    // } catch (err) {
-    //     // Class already created 
-    //     if (err.code === "23505" && err.detail.includes("already exists")) {
-    //         let customErr = "Class not available. Please fill out class information";
-    //         err = customErr;
-    //     }
-    //     throw err;
-    // }
+    const classname = req.body.className
+    const teacher = req.body.teacher
+    try {
+        let insertQuery = `INSERT INTO class(classname,teacher,timeStamp) VALUES($/classname/,$/teacher/,$/timeStamp/) RETURNING *`;
+       req.returnQuery = await db.one(insertQuery, {
+            classname,
+           teacher,
+            timeStamp
+        })
+        next()
+    } catch (err) {
+        // Class already created 
+        if (err.code === "23505" && err.detail.includes("already exists")) {
+            let customErr = "Class already exist. Please enter a different one.";
+            err = customErr;
+            res.send({
+                payload: err,
+                error: true,
+                timeStamp: timeStamp()
+            })
+        }
+        throw err;
+    }
 }
 
 const emptyClass = (req, res, next) => {
     let classname = req.body.className;
-    classname === '' ? res.send({
-        error: 'Please fill out class information',
-        timeStamp: timeStamp()
+    let teacher = req.body.teacher;
+    classname === '' || teacher === ''? res.status(400).send({
+        message: 'Please fill out all of the class information',
+        error:true
     }) : next()
 }
 
-const validateClass = (req, res, next) => {
-    let classname = req.body.className;
-    !!mySchool['classes'][classname] ? res.send({
-        error: 'Class already exist',
-        timeStamp: timeStamp()
-        }): next()
+const sendResults = (req, res) => {
+    let data =req.returnQuery
+   res.status(200).json({
+       payload: data,
+       status: 'success',
+       error:false
+        })
     }
 
-app.post('/class', emptyClass, validateClass, addClassMethod)
+app.post('/class', addClassMethod, emptyClass, sendResults)
 
 validateStudent = (req, res, next) => {
     console.log("validating")
-    let studentObj = req.body
-    let classname = req.params.classname;
-
-    let arr = mySchool['classes'][classname]['students'];
-    console.log(arr);
-
-    arr.forEach(el => {
-        console.log(el.name);
-        if (el.name === studentObj.name) {
-            el.age = studentObj.age;
-            el.city = studentObj.city;
-            el.grade = studentObj.grade;
-            res.send(el)
-        }
-    })
+     let data = req.returnQuery
+     if (data.length === 0) {
+         res.status(404);
+         res.json({
+             status: 'failed',
+             message: 'Post doesn\'t have any likes'
+         })
+     } else {
+         next();
+     }
     next()
 }
 
-const enrollClass = (req, res, next) => {
+const enrollClass = async (req, res, next) => {
     let classname = req.params.classname;
-    let studentObj = req.body
-    res.send({
-        classname: classname,
-        student: mySchool.enrollStudent(classname, studentObj),
-        message: 'Enrolled Student',
-        timeStamp: timeStamp()
-    })
+    let studentName = req.body.studentName;
+    let age = req.body.age;
+    let city = req.body.city;
+    let grade = req.body.grade
+    
+    try {
+        let insertQuery = `INSERT INTO students(classname,studentName,age,city,grade,timeStamp) 
+        VALUES($/classname/,$/studentName/,$/age/,$/city/,$/grade/,$/timeStamp/) RETURNING * `;
+        req.returnQuery = await db.one(insertQuery, {
+            classname,
+            studentName,
+            age,
+            city,
+            grade,
+            timeStamp
+        })
+        next()
+    } catch (err) {
+        // Class already created 
+        if (err.code === "23505" && err.detail.includes("already exists")) {
+            let customErr = "Student is already enrolled. Please try a different one.";
+            err = customErr;
+            res.send({
+                payload: err,
+                error: true
+            })
+        }
+        throw err;
+    }
 }
 
 const invalidStudent = (req, res, next) => {
     let classname = req.params.classname;
-    let studentObj = req.body
+     let studentName = req.body.studentName;
+     let age = req.body.age;
+     let city = req.body.city;
+     let grade = req.body.grade
 
-    studentObj.body === '' || studentObj.age === '' || studentObj.grade === '' || studentObj.city === '' ? res.send({
-        error: 'Please fill out all the information for the student',
+    studentName === '' || age === '' || grade === '' || city === '' ? res.status(400).send({
+        errMessage:'Please fill out all the information for the student',
+        error:true,
         timeStamp: timeStamp()
     }) : next()
 }
 
-app.post('/class/:classname/enroll', invalidStudent, validateStudent, enrollClass)
+app.post('/class/:classname/enroll', invalidStudent, enrollClass, sendResults)
 
-
-const checkClass = (req, res, next) => {
+const getStudentsByClass = async (req, res, next) => {
     let classname = req.params.classname;
-    !mySchool['classes'][classname] ? res.send({
-        error: `${classname} doesn't exist`,
-        timeStamp: timeStamp()
-    }) : next()
-
-}
-
-const getStudentsByClass = (req, res, next) => {
-    let classname = req.params.classname;
-    let city = req.query.city;
-    let failing = req.query.failing;
+    // let city = req.query.city;
+    let failing = req.body.failing;
     console.log("failing", typeof failing);
+    let getQuery;
+    failing === "false" ? getQuery = 'SELECT * FROM students WHERE className = $/classname/'
+        : getQuery = 'SELECT * FROM students WHERE className = $/classname/ AND grade < 65'
+  
+try {
+    req.returnQuery = await db.any(getQuery, {
+        classname
+    });
+    next()
+} catch (err) {
+    if (err instanceof errors.QueryResultError) {
+        if (err.code === errors.queryResultErrorCode.noData) {
+            return false;
+        }
+    }
+    throw err;
+}
+}
 
-    if (failing === "false") {
-        res.send({
-            student: mySchool.getStudentsByClass(classname),
-            classname: classname,
-            message: 'Retrieved Students',
-            timeStamp: timeStamp()
+const validateClassQuery = (req, res, next) => {
+    let classname = req.params.classname;
+    let data = req.returnQuery
+    console.log(data);
+    
+    if (data.length === 0) {
+        res.status(404);
+        res.json({
+            status: 'failed',
+            message: `${classname} is empty please enroll students`,
+            timeStamp:timeStamp()
         })
     } else {
-        res.send({
-            student: mySchool.getStudentsByClassWithFilter(classname, failing),
-            message: 'Retrieved Students',
-            timeStamp: timeStamp()
-        })
+        next();
     }
 }
 
-app.get('/class/:classname/students', checkClass, getStudentsByClass)
+app.get('/class/:classname/students', getStudentsByClass, validateClassQuery, sendResults)
 
 
 app.use('/', (req, res, next) => {

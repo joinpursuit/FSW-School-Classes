@@ -9,7 +9,7 @@ CREATE TABLE class
     id SERIAL PRIMARY KEY,
     classname VARCHAR NOT NULL UNIQUE,
     teacher VARCHAR NOT NULL,
-    class_date DATE NOT NULL DEFAULT CURRENT_DATE
+    timeStamp VARCHAR NOT NULL
 );
 
 CREATE TABLE students
@@ -19,5 +19,6 @@ CREATE TABLE students
     studentName VARCHAR NOT NULL,
     age INT NOT NULL,
     city VARCHAR NOT NULL,
-    grade INT NOT NULL
+    grade INT NOT NULL,
+    timeStamp VARCHAR NOT NULL
 );
