@@ -17,7 +17,7 @@ let mySchool = new School();
 let port = process.env.PORT;
 if (port == null || port == "") {
     //change port back
-    port = 3000;
+    port = 3100;
 }
 
 
@@ -35,9 +35,9 @@ const addClassMethod = async (req, res, next) => {
     const teacher = req.body.teacher
     try {
         let insertQuery = `INSERT INTO class(classname,teacher,timeStamp) VALUES($/classname/,$/teacher/,$/timeStamp/) RETURNING *`;
-       req.returnQuery = await db.one(insertQuery, {
+        req.returnQuery = await db.one(insertQuery, {
             classname,
-           teacher,
+            teacher,
             timeStamp
         })
         next()
@@ -47,7 +47,7 @@ const addClassMethod = async (req, res, next) => {
             let customErr = "Class already exist. Please enter a different one.";
             err = customErr;
             res.send({
-                payload: err,
+                message: err,
                 error: true,
                 timeStamp: timeStamp()
             })
@@ -59,35 +59,36 @@ const addClassMethod = async (req, res, next) => {
 const emptyClass = (req, res, next) => {
     let classname = req.body.className;
     let teacher = req.body.teacher;
-    classname === '' || teacher === ''? res.status(400).send({
+    classname === '' || teacher === '' ? res.status(400).send({
         message: 'Please fill out all of the class information',
-        error:true
+        error: true
     }) : next()
 }
 
 const sendResults = (req, res) => {
-    let data =req.returnQuery
-   res.status(200).json({
-       payload: data,
-       status: 'success',
-       error:false
-        })
-    }
+    let data = req.returnQuery
+    res.status(200).json({
+        class: data,
+        message: "Created a new class",
+        status: 'success',
+        error: false
+    })
+}
 
 app.post('/class', addClassMethod, emptyClass, sendResults)
 
 validateStudent = (req, res, next) => {
     console.log("validating")
-     let data = req.returnQuery
-     if (data.length === 0) {
-         res.status(404);
-         res.json({
-             status: 'failed',
-             message: 'Post doesn\'t have any likes'
-         })
-     } else {
-         next();
-     }
+    let data = req.returnQuery
+    if (data.length === 0) {
+        res.status(404);
+        res.json({
+            status: 'failed',
+            message: 'Student doesn\'t exist'
+        })
+    } else {
+        next();
+    }
     next()
 }
 
@@ -97,7 +98,7 @@ const enrollClass = async (req, res, next) => {
     let age = req.body.age;
     let city = req.body.city;
     let grade = req.body.grade
-    
+
     try {
         let insertQuery = `INSERT INTO students(classname,studentName,age,city,grade,timeStamp) 
         VALUES($/classname/,$/studentName/,$/age/,$/city/,$/grade/,$/timeStamp/) RETURNING * `;
@@ -126,14 +127,14 @@ const enrollClass = async (req, res, next) => {
 
 const invalidStudent = (req, res, next) => {
     let classname = req.params.classname;
-     let studentName = req.body.studentName;
-     let age = req.body.age;
-     let city = req.body.city;
-     let grade = req.body.grade
+    let studentName = req.body.studentName;
+    let age = req.body.age;
+    let city = req.body.city;
+    let grade = req.body.grade
 
     studentName === '' || age === '' || grade === '' || city === '' ? res.status(400).send({
-        errMessage:'Please fill out all the information for the student',
-        error:true,
+        errMessage: 'Please fill out all the information for the student',
+        error: true,
         timeStamp: timeStamp()
     }) : next()
 }
@@ -146,35 +147,35 @@ const getStudentsByClass = async (req, res, next) => {
     let failing = req.body.failing;
     console.log("failing", typeof failing);
     let getQuery;
-    failing === "false" ? getQuery = 'SELECT * FROM students WHERE className = $/classname/'
-        : getQuery = 'SELECT * FROM students WHERE className = $/classname/ AND grade < 65'
-  
-try {
-    req.returnQuery = await db.any(getQuery, {
-        classname
-    });
-    next()
-} catch (err) {
-    if (err instanceof errors.QueryResultError) {
-        if (err.code === errors.queryResultErrorCode.noData) {
-            return false;
+    failing === "false" ? getQuery = 'SELECT * FROM students WHERE className = $/classname/' :
+        getQuery = 'SELECT * FROM students WHERE className = $/classname/ AND grade < 65'
+
+    try {
+        req.returnQuery = await db.any(getQuery, {
+            classname
+        });
+        next()
+    } catch (err) {
+        if (err instanceof errors.QueryResultError) {
+            if (err.code === errors.queryResultErrorCode.noData) {
+                return false;
+            }
         }
+        throw err;
     }
-    throw err;
-}
 }
 
 const validateClassQuery = (req, res, next) => {
     let classname = req.params.classname;
     let data = req.returnQuery
     console.log(data);
-    
+
     if (data.length === 0) {
         res.status(404);
         res.json({
             status: 'failed',
             message: `${classname} is empty please enroll students`,
-            timeStamp:timeStamp()
+            timeStamp: timeStamp()
         })
     } else {
         next();

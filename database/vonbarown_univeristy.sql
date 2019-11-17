@@ -3,6 +3,15 @@
 -- CREATE DATABASE vonbarown_univeristy;
 
 -- \c vonbarown_univeristy;
+CREATE TABLE users
+(
+    username VARCHAR PRIMARY KEY,
+    firstname VARCHAR NOT NULL,
+    lastname VARCHAR NOT NULL,
+    dob DATE NOT NULL,
+    user_password VARCHAR NOT NULL,
+    signing_date DATE NOT NULL DEFAULT CURRENT_DATE
+);
 
 CREATE TABLE class
 (
