@@ -3,6 +3,8 @@ let clsName, name, age, city, grade, timeStamp;
 document.addEventListener('DOMContentLoaded', () => {
     emptyInput()
 
+    addingStudentToDom()
+
     let enrollmentForm = document.querySelector('#enrollForm')
     enrollmentForm.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -45,9 +47,9 @@ const loadStudentEnrollment = async () => {
 
 //displaying the new student information to the screen 
 const addingStudentToDom = async () => {
-    const studentData = await loadStudentEnrollment()
+    let studentData = await loadStudentEnrollment()
     clearResults()
-    studentData.error ? displayError(studentData) : displayEnrollment(studentData);
+    studentData.error ? displayError(studentData) : displayEnrollment(studentData.payload);
 }
 
 //creating cards for student information to be added to the screen
@@ -63,45 +65,47 @@ const displayEnrollment = async (data, el) => {
     city = document.createElement('p');
     grade = document.createElement('p');
     timeStamp = document.createElement('p')
-    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
+    timeStamp.innerText = `Timestamp: ${data.timestamp}`;
 
-    if (!data.student) {
-        city.innerText = data.city;
-        age.innerText = data.age;
-        grade.innerText = data.grade
-    } else {
-        if (el) {
-            student.innerText = el.name
-            city.innerText = `This student is from: ${el.city}`
-            age.innerText = `Age : ${el.age}`
-            grade.innerText = `Current grade is: ${el.grade}`
-            student.append(age, city, grade, timeStamp)
-            container.append(student)
-        } else {
-            student.innerText = data.student.name
-            city.innerText = `This student is from: ${data.student.city}`
-            age.innerText = `Age : ${data.student.age}`
-            grade.innerText = `Current grade is: ${data.student.grade}`
-            clsName.innerText = `Enrolled in ${data.classname}`
-            student.append(age, city, grade, clsName, timeStamp);
-            container.append(student)
-        }
-    }
+    // if (!data.student) {
+    //     city.innerText = data.city;
+    //     age.innerText = data.age;
+    //     grade.innerText = data.grade
+    // } else {
+    //     if (el) {
+    //         student.innerText = el.name
+    //         city.innerText = `This student is from: ${el.city}`
+    //         age.innerText = `Age : ${el.age}`
+    //         grade.innerText = `Current grade is: ${el.grade}`
+    //         student.append(age, city, grade, timeStamp)
+    //         container.append(student)
+    //     } else {
+    student.innerText = data.studentname
+    city.innerText = `This student is from: ${data.city}`
+    age.innerText = `Age : ${data.age}`
+    grade.innerText = `Current grade is: ${data.grade}`
+    clsName.innerText = `Enrolled in ${data.classname}`
+    student.append(age, city, grade, clsName, timeStamp);
+    container.append(student)
+    // }
+    // }
     console.log("student", student)
     emptyInput()
 }
 
-//this function handles displaying the error message
+// //this function handles displaying the error message
 const displayError = (data) => {
+    console.log('this', data.timestamp);
+
     emptyInput()
     const container = getContainer();
     clearResults()
     let errorDiv = document.createElement('div')
     errorDiv.className = 'error'
     let err = document.createElement('p')
-    err.innerText = `Error: ${data.error}`
+    err.innerText = `Error: ${data.message}`
     let timeStamp = document.createElement('p')
-    timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
+    timeStamp.innerText = `Timestamp: ${data.timestamp}`;
 
     errorDiv.append(err, timeStamp)
     container.append(errorDiv)

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const School = require('../School.js')
 const cors = require('cors')
 const app = express();
+
 app.use(express.static(path.join(__dirname, "../client")));
 
 const {
@@ -67,9 +68,9 @@ const emptyClassData = (req, res, next) => {
 }
 //sends class creation information
 const sendClassResults = (req, res) => {
-    let data = req.getQuery
+    let data = req.returnQuery
     res.status(200).json({
-        class: data,
+       payload: data,
         message: "Created a new class",
         status: 'success',
         error: false
@@ -78,23 +79,7 @@ const sendClassResults = (req, res) => {
 
 app.post('/class', addClassMethod, emptyClassData, sendClassResults)
 
-//checks if the student already exists
-validateStudent = (req, res, next) => {
-    console.log("validating");
-    let studentName = req.body.studentName;
-    let data = req.getQuery
-    for (let i = 0; i < data.length; i++){
-        if (data[i].studentname === studentName) {
-            res.json({
-                status: 'failed',
-                message: 'Student already exist',
-                 error:true
-            })
-        } else {
-            next()
-        }
-    }
-}
+
 
 //query to add a new student in the database
 const enrollClass = async (req, res, next) => {
@@ -117,13 +102,15 @@ const enrollClass = async (req, res, next) => {
         })
         next()
     } catch (err) {
-        // Class already created 
+        // Student already created 
         if (err.code === "23505" && err.detail.includes("already exists")) {
             let customErr = "Student is already enrolled. Please try a different one.";
             err = customErr;
             res.send({
-                payload: err,
-                error: true
+                message: err,
+                error: true,
+                payload: null,
+                timestamp:timeStamp()
             })
         }
         throw err;
@@ -146,11 +133,10 @@ const invalidStudent = (req, res, next) => {
 //sends the student enrollment data
 const sendStudentResults = (req, res) => {
     let data = req.studentInsertQuery
-    let classname = req.params.classname;
     res.status(200).json({
-        classname:classname,
+    //    studentID:classname,
         message: "Enrolled Student",
-        student: data,
+        payload: data,
         status: 'success',
         error: false
     })
@@ -166,10 +152,11 @@ const getStudentsByClass = async (req, res, next) => {
     getQuery = 'SELECT * FROM students WHERE className = $/classname/ AND grade < 65'
     
     try {
-        req.getQuery = await db.any(getQuery, {
+        req.query = await db.any(getQuery, {
             classname
         });
         next()
+        // return geuery
     } catch (err) {
         if (err instanceof errors.QueryResultError) {
             if (err.code === errors.queryResultErrorCode.noData) {
@@ -182,8 +169,8 @@ const getStudentsByClass = async (req, res, next) => {
 //validates if class contains any students
 const validateClassQuery = (req, res, next) => {
     let classname = req.params.classname;
-    let data = req.getQuery
-    console.log(data);
+    let data = req.query
+    // console.log(data);
     
     if (data.length === 0) {
         res.status(404);
@@ -199,9 +186,9 @@ const validateClassQuery = (req, res, next) => {
 //middleware to send filter results
 const sendFilterResults = (req, res) => {
     let classname = req.params.classname;
-    let data = req.getQuery
+    let data = req.query
     res.status(200).json({
-        student: data,
+        payload: data,
         classname: classname,
         message: "Retrieved Students",
         status: 'success',
@@ -211,7 +198,7 @@ const sendFilterResults = (req, res) => {
 
 
 //app endpoints
-app.post('/class/:classname/enroll', invalidStudent, getStudentsByClass, validateStudent, enrollClass, sendStudentResults)
+app.post('/class/:classname/enroll', invalidStudent, enrollClass, sendStudentResults)
 app.get('/class/:classname/students', getStudentsByClass, validateClassQuery, sendFilterResults)
 
 

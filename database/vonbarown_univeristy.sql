@@ -23,9 +23,9 @@ CREATE TABLE class
 
 CREATE TABLE students
 (
-    id SERIAL PRIMARY KEY,
+    id SERIAL ,
     className VARCHAR NOT NULL REFERENCES class (classname) ON DELETE CASCADE ON UPDATE CASCADE,
-    studentName VARCHAR NOT NULL,
+    studentName VARCHAR PRIMARY KEY,
     age INT NOT NULL,
     city VARCHAR NOT NULL,
     grade INT NOT NULL,
