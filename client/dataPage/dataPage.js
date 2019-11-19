@@ -76,9 +76,14 @@ const loadStudentByClass = async () => {
     let checkBox = checker()
     url = `http://localhost:3100/class/${className}/students?failing=${checkBox}`
 
-    const {
-        data
-    } = await axios.get(url)
+    try {
+        const {
+            data
+        } = await axios.get(url)
+    } catch (error) {
+        console.log(error);
+
+    }
     console.log(data);
     return data
 }
