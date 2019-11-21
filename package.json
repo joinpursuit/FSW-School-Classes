@@ -23,7 +23,8 @@
     "express": "^4.17.1",
     "nodemon": "^1.19.4",
     "pg": "^7.12.1",
-    "pg-promise": "^10.2.1"
+    "pg-promise": "^10.2.1",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {},
   "keywords": [

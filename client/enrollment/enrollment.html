@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./enrollment.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset=" UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./enrollment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Enroll Student</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="../createClass/creatingClass.html"><i class="material-icons left">class</i>Create Class</a>
+                </li>
+                <li><a href="#"><i class="material-icons left">add_circle_outline</i>Enroll Student</a></li>
+                <li><a href="../dataPage/dataPage.html"><i class="material-icons left">search</i>Search Class</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Enroll New Student</h1>
+    <div id="enrollmentContainer" class="display">
+        <form id="enrollForm">
+            <h3>Student Information:</h3>
+            <div class="input-field col s6">
+                <input id="enrollClass" type="text" class="validate classname">
+                <label for="last_name">Enter class Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="studentName" type="text" class="validate ">
+                <label for="last_name">Enter student's name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="age" type="text" class="validate ">
+                <label for="last_name">Enter student's age</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="city" type="text" class="validate ">
+                <label for="last_name">Enter student's city</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="grade" type="text" class="validate ">
+                <label for="last_name">Enter student's grade</label>
+            </div>
+            <button id="enroll">Enroll student</button>
+        </form>
+        <!-- <div id="enrollSubContainer" class="resultsContainer"></div> -->
+    </div>
+    <div id="results"></div>
+    </Div>
+</body>
+
+</html>
