@@ -6,9 +6,9 @@ const cors = require('cors')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }))
-
+app.use(bodyParser.json())
 
 const School = require('./School.js')
 
@@ -27,7 +27,7 @@ const newClass = (req, res, next) => {
     let timeStamp = new Date();
     mySchool.addClass(newClass, newTeacher)
 
-        // console.log(mySchool.classes[newClass])
+        // console.log("req", req)
 
     res.json({
         "class": mySchool.classes[newClass],
