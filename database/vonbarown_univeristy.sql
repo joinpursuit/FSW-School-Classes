@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS vonbarown_univeristy;
+-- DROP DATABASE IF EXISTS vonbarown_univeristy;
 
-CREATE DATABASE vonbarown_univeristy;
+-- CREATE DATABASE vonbarown_univeristy;
 
-\c vonbarown_univeristy;
+-- \c vonbarown_univeristy;
 CREATE TABLE users
 (
     username VARCHAR PRIMARY KEY,
