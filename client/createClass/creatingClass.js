@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadAddClassData = async () => {
   let className = document.querySelector("#createClass").value;
   let teacher = document.querySelector("#teacher").value;
-  url = `http://localhost:3100/class?name=${className}&teacher=${teacher}`;
+  url = `http://localhost:3100/class/post`;
 
   let classObj = {
     className,

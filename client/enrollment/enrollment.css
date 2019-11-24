@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#enrollmentContainer{
+  gap: 30px
+}
+
+#results {
+  display: flex;
+  flex-direction: column;
+  margin-top: 115px;
+  margin-left: 50px;
+  height: 40vh;
+  width: 40vw;
+  text-align: center;
+  border: 2px solid black;
+  border-radius:20px;
+  justify-content: center;
+}
+#enrollForm{
+  margin-right: 60px;
+}
