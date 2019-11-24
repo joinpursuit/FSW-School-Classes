@@ -37,9 +37,9 @@ const emptyClassData = (req, res, next) => {
   let teacher = req.body.teacher;
   classname === "" || teacher === ""
     ? res.status(400).send({
-        message: "Please fill out all of the class information",
-        error: true
-      })
+      message: "Please fill out all of the class information",
+      error: true
+    })
     : next();
 };
 //sends class creation information
@@ -101,12 +101,21 @@ const invalidStudent = (req, res, next) => {
 
   studentName === "" || age === "" || grade === "" || city === ""
     ? res.status(400).send({
-        errMessage: "Please fill out all the information for the student",
-        error: true,
-        timeStamp: timeStamp()
-      })
+      errMessage: "Please fill out all the information for the student",
+      error: true,
+      timeStamp: timeStamp()
+    })
     : next();
 };
+
+// const failingStudent = (req, res) => {
+//   let grade = req.body.grade;
+
+//   if (grade <= 65) {
+//     db.none('UPDATE student SET failing = tru')
+//   }
+// }
+
 //sends the student enrollment data
 const sendStudentResults = (req, res) => {
   let data = req.studentInsertQuery;
@@ -128,7 +137,7 @@ const getStudentsByClass = async (req, res, next) => {
   failing === "false"
     ? (getQuery = "SELECT * FROM students WHERE className = $/classname/")
     : (getQuery =
-        "SELECT * FROM students WHERE className = $/classname/ AND grade <= 65");
+      "SELECT * FROM students WHERE className = $/classname/ AND grade <= 65");
 
   try {
     req.query = await db.any(getQuery, {

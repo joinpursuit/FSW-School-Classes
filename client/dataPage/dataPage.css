@@ -9,8 +9,13 @@ body{
 }
 
 #results{
+    margin-left: 100px;
+    margin-top: 100px;
+    margin-right: -100px;
     overflow: scroll;
-    height: 40vh;
+    height: 78vh;
     width: 40vw;
     text-align: center;
+border-radius: 20px;
+    padding-top: 40px
 }

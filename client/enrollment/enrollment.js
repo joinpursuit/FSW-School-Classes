@@ -3,13 +3,13 @@ let clsName, name, age, city, grade, timeStamp;
 document.addEventListener("DOMContentLoaded", () => {
   emptyInput();
 
-  let enrollmentContainer = document.querySelector("#enrollmentContainer");
 
   let enrollmentForm = document.querySelector("#enrollForm");
   enrollmentForm.addEventListener("submit", event => {
     event.preventDefault();
     addingStudentToDom();
-    enrollmentContainer.style.display = "flex";
+    document.querySelector("#enrollmentContainer").style.display = "flex";
+    document.querySelector('#results').style.border = '1px solid black'
   });
 });
 

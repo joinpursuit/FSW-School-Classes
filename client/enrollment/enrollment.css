@@ -17,10 +17,9 @@ body {
   height: 40vh;
   width: 40vw;
   text-align: center;
-  border: 2px solid black;
   border-radius:20px;
   justify-content: center;
 }
-#enrollForm{
+/* #enrollForm{
   margin-right: 60px;
-}
+} */

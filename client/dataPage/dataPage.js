@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   searchForm.addEventListener("submit", event => {
     event.preventDefault();
     classFilterChoiceToDOM();
+    document.querySelector('#bodyContainer').style.display = 'flex';
+    document.querySelector('#results').style.border = '1px solid black'
   });
   checker();
 });
@@ -61,7 +63,7 @@ const displayEnrollment = async (data, el) => {
 //this function sets the eventListener to the check-box
 const checker = () => {
   let check = document.querySelector("#showFailing");
-  check.addEventListener("change", () => {});
+  check.addEventListener("change", () => { });
   return check.checked;
 };
 
@@ -72,8 +74,8 @@ const classFilterChoiceToDOM = async () => {
   classFilterData.status === "failed"
     ? displayError(classFilterData)
     : classFilterData.payload.forEach(el =>
-        displayEnrollment(classFilterData, el)
-      );
+      displayEnrollment(classFilterData, el)
+    );
 };
 
 //this function handles displaying the error message
