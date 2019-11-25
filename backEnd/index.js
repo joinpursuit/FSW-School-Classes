@@ -17,7 +17,8 @@ let mySchool = new School();
 
 app.get('/all', (req,res) => {
     let allRequest = mySchool.classes;
-    res.send( allRequest )
+    res.send( allRequest
+        )
 })
 
 
@@ -121,31 +122,27 @@ const updateStudent = (req,res,next) => {
 app.post("/class/:className/enroll", checkNewStudent, updateStudent, newStudent)
 
 
-
-
-
 const getStudentsByClass = (req,res) => {
     let className = req.params.className
     let failing = req.query.fail
-  let studentsInClass = mySchool.getStudentsByClass(className);
+    let studentsInClass = mySchool.getStudentsByClass(className);
 
   if(failing){
     let failingStudents = mySchool.getStudentsByClassWithFilter(className, failing)
       res.json({
         className: className,
         failingStudents: failingStudents,
-        failing: failing
+        failing: failing,
     })
   }
   else{
   res.json({
       className: className,
       studentsInClass: studentsInClass,
-      failing: failing
+      failing: failing,
   })
 }
 }
-
 app.get("/class/:className/students", getStudentsByClass)
 
 
