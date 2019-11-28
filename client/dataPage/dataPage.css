@@ -1,3 +1,21 @@
 #showFailing {
     width: 30px;
 }
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+#results{
+    margin-left: 100px;
+    margin-top: 100px;
+    margin-right: -100px;
+    overflow: scroll;
+    height: 78vh;
+    width: 40vw;
+    text-align: center;
+border-radius: 20px;
+    padding-top: 40px
+}
