@@ -36,8 +36,8 @@ class School {
 
     this.classes[name].students.push(newStudent);
 
-    for(let i = 0; i < this.classes[name].students.length - 1; i++){
-      if(this.classes[name].students[i].name === newStudent.studentname){
+    for (let i = 0; i < this.classes[name].students.length - 1; i++) {
+      if (this.classes[name].students[i].name === newStudent.studentname) {
         // console.log("Before", this.classes[name].students)
 
         // console.log("Remove Dupe ", this.classes[name].students[i].name)
@@ -57,9 +57,9 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    for(let key in this.classes){
+    for (let key in this.classes) {
       // console.log('Checking Key', this.classes[key])
-      if(this.classes[key].name === className){
+      if (this.classes[key].name === className) {
         return this.classes[key].students
       }
     }
