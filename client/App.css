@@ -1,0 +1,67 @@
+body {
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+#formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid whitesmoke;
+  padding: 85px;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #searchForm {
+    display: flex;
+    gap: 30px;
+} */
+
+#results {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.classCard,
+.student {
+  font-size: 20px;
+  color: blueviolet;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid blue;
+  border-radius: 10%;
+  height: 500px;
+  width: 30vw;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0.6, 0.7, 0.8, 0.8);
+}
+
+.student {
+  border: 3px solid brown;
+}
+.error {
+  border-color: 2px solid burlywood;
+  background-color: red;
+  border: 3px solid burlywood;
+  border-radius: 10%;
+  padding: 20px;
+  font-size: 20px;
+  color: yellow;
+}
+input {
+  border: 1px solid black;
+  border-radius: 10%;
+  background-color: wheat;
+} */

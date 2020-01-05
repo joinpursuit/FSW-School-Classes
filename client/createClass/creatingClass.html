@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset=" UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./creatingClass.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./creatingClass.css">
+    <title>Create New Class</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#"><i class="material-icons left">class</i>Create Class</a>
+                </li>
+                <li><a href="../enrollment/enrollment.html"><i class="material-icons left">add_circle_outline</i>Enroll
+                        Student</a></li>
+                <li><a href="../dataPage/dataPage.html"><i class="material-icons left">search</i>Search Class</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1 large">
+                <div class="card-content white-text ">
+                    <span class="card-title">Card Title</span>
+                    <Div id="formContainer">
+                        <div id="classContainer" class="display">
+                            <h3>Enter New Class Information:</h3>
+                            <form id="addClass">
+                                <input type="text" placeholder="Enter class Name" id="createClass" class="classname">
+                                <input type="text" placeholder="Enter Teacher" id="teacher">
+                                <button id="classAdded">Add class to directory</button>
+                            </form>
+                        </div>
+                        <div id="results"></div>
+                    </Div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

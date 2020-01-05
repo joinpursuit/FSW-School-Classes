@@ -4,9 +4,9 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+
     }
+
   }
 
   /**
@@ -18,7 +18,12 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
+    this.name = name;
+    this.teacher = teacher;
     this.classes[name] = newClass;
+    // console.log("classes", this.classes[name].name)
+
+    return newClass
   }
 
   /**
@@ -29,7 +34,19 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let studentsArray = this.classes[className].students;
+    let {
+      name,
+      age,
+      city,
+      grade
+    } = student
+    let newStudent = new Student(name, age, city, grade);
+
+    studentsArray.push(student)
+    // console.log("classes", this.classes[className])
+
+    return newStudent;
   }
 
 
@@ -42,7 +59,20 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    let arr = this.classes[className].students
+
+    const dupes = {};
+    const out = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      let key = arr[i].name
+      if (!dupes[key]) {
+        out.push(arr[i])
+      }
+      dupes[key] = true
+    }
+
+    return out
   }
 
 
@@ -63,8 +93,35 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    this.name = this.classes[className];
+
+    let fail = [];
+    this.failing = failing;
+    let studentArr = this.classes[className].students;
+    console.log("hi", this.failing)
+
+    const dupes = {};
+    const out = [];
+
+    for (let i = 0; i < studentArr.length; i++) {
+      let key = studentArr[i].name
+      if (!dupes[key]) {
+        out.push(studentArr[i])
+      }
+      dupes[key] = true
+    }
+
+    if (this.failing) {
+      out.filter(el => {
+        console.log("el grade", typeof el.grade)
+        if (el.grade < 70) {
+          fail.push(el)
+        }
+      })
+    }
+    return fail
   }
+
 
 }
 
