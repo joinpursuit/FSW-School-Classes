@@ -5,6 +5,10 @@ class Student {
     this.age = age
     this.grade = grade
   }
+
+  isFailing = () => this.grade < 70;
+
+  matchCity = (city) => this.city === city;
 }
 
 module.exports = Student;

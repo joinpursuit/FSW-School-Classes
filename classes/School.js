@@ -23,24 +23,22 @@ class School {
   getStudentsByClass(className) {
     return this.classes[className].students;
   }
-  /**
-   * Get all students and apply filters. If failing = true
-   * return all students that are failing the class, 
-   * that is all students whose grade is less than 70.
-   * If a city is passed return students whose city match
-   * the city passed. If both failing and city are passed
-   * return students that are failing and that live in the
-   * specified city
-   * 
-   * @param {string} className - Name of the class
-   * @param {boolean} failing - Whether to return students that are failing the class or not
-   * @param {string} city - Name of the city to match against students
-   * @return {Student[]} Array of Student objects
-   */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
 
+  getStudentsByClassWithFilter(className, failing = false, city = undefined) {
+    let students = this.getStudentsByClass(className);
+
+    if(failing && city) {
+      return students.filter(student => student.isFailing() && student.matchCity(city));
+    }
+
+    if(!failing && city) {
+      return students.filter(student => student.matchCity(city));
+    }
+
+    if(failing && !city) {
+      return students.filter(student => student.isFailing());
+    }
+  }
 }
 
 module.exports = School;
