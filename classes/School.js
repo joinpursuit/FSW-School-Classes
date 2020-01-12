@@ -9,45 +9,20 @@ class School {
     }
   }
 
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
   enrollStudent(className, student) {
-    // Your code here
+    this.classes[className].enrollStudent(student);
+    return student;
   }
 
-
-
-
-  /**
-   * Get all students enrolled in a class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students;
   }
-
-
-
-
   /**
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 
