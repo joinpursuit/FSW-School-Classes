@@ -1,6 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParse = require("body-parser");
+
+const Class = require("./classes/Class.js");
+const Student = require("./classes/Student.js");
+const School = require("./classes/School.js");
+
 const port = 3000;
 const app = express();
 
