@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 let mySchool = new School();
 
 app.post("/class", (req, res) => {
-    if(!mySchool.addClass(req.body.name, req.body.teacher)) {
+    if(!mySchool.addClass(req.body.name.toLowerCase(), req.body.teacher.toLowerCase())) {
         res.json({
             error: "Please fill out all the information or Class already exists",
             "timestamp": new Date()
@@ -23,13 +23,31 @@ app.post("/class", (req, res) => {
         res.json({
             class: req.body,
             message: "created a new class",
-            timestamp: new Date()
+            timestamp: new Date().toString()
         })
     }
 })
 
 app.post("/class/:className/enroll", (req, res) => {
-    mySchool.enrollStudent(userClass, req.body)
+    let userClass = req.params.className.toLowerCase();
+
+    if(!mySchool.enrollStudent(userClass, req.body)) {
+        res.json({
+            error: "Please fill out all the information for the student",
+            timestamp: new Date().toString()
+        })
+    } else {
+        res.json({ 
+            student: req.body,
+            className: userClass,
+            message: "Enrolled Student",
+            timestamp: new Date().toString()
+        })
+    }
+})
+
+app.get("/class", (req, res) => {
+    res.json(mySchool.classes);
 })
 
 app.listen(port, () => console.log("Listening on port", port));
