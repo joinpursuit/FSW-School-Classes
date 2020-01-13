@@ -16,6 +16,12 @@ class Class {
     }
     return false;
   }
+
+  updateStudent = (newStudent) => {
+    this.students.forEach(student => {
+      if(student.name === newStudent.name) student = newStudent;
+    })
+  }
 }
 
 module.exports = Class;
