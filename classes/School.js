@@ -11,6 +11,9 @@ class School {
 
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
+    if(this.classes[name]) {
+      return false
+    }
     this.classes[name] = newClass;
     return newClass;
   }

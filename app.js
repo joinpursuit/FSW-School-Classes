@@ -14,7 +14,18 @@ app.use(bodyParser.json());
 let mySchool = new School();
 
 app.post("/class", (req, res) => {
-    mySchool.addClass(req.body.name, req.body.teacher);
+    if(!mySchool.addClass(req.body.name, req.body.teacher)) {
+        res.json({
+            error: "Please fill out all the information or Class already exists",
+            "timestamp": new Date()
+        })
+    } else {
+        res.json({
+            class: req.body,
+            message: "created a new class",
+            timestamp: new Date()
+        })
+    }
 })
 
 app.listen(port, () => console.log("Listening on port", port));
