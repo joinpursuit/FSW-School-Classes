@@ -19,6 +19,11 @@ class School {
   }
 
   enrollStudent(className, student) {
+    let currClass = this.classes[className];
+    let newStudent = new Student(student.name, student.age, student.city, student.grade);
+    if(currClass.isEnrolled(newStudent.name)) {
+      
+    }
     this.classes[className].enrollStudent(student);
     return student;
   }

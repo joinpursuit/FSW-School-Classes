@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParse = require("body-parser");
+const bodyParser = require("body-parser");
 
 const School = require("./classes/School.js");
 
@@ -26,6 +26,10 @@ app.post("/class", (req, res) => {
             timestamp: new Date()
         })
     }
+})
+
+app.post("/class/:className/enroll", (req, res) => {
+    mySchool.enrollStudent(userClass, req.body)
 })
 
 app.listen(port, () => console.log("Listening on port", port));
