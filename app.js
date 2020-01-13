@@ -63,6 +63,7 @@ app.get("/class/:className/students", (req, res) => {
     }
 })
 
+// For testing purposes
 app.get("/class", (req,res) => {
     res.json(mySchool.classes);
 })
