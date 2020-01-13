@@ -22,10 +22,11 @@ class School {
     let currClass = this.classes[className];
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
     if(currClass.isEnrolled(newStudent.name)) {
-      
+      currClass.updateStudent(newStudent);
+    } else {
+      this.classes[className].enrollStudent(student);
     }
-    this.classes[className].enrollStudent(student);
-    return student;
+    return newStudent;
   }
 
   getStudentsByClass(className) {
