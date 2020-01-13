@@ -19,13 +19,23 @@ class School {
   }
 
   enrollStudent(className, student) {
+    // Check if student is missing information
+    if(!student.name || !student.age || !student.city || !student.grade) {
+      return false;
+    }
+
+    // Creating helper variable, and new student based on inputted info
     let currClass = this.classes[className];
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
+
+    // Checking if student is enrolled, and updating if so
+    // Else it will enroll the student
     if(currClass.isEnrolled(newStudent.name)) {
       currClass.updateStudent(newStudent);
     } else {
       this.classes[className].enrollStudent(student);
     }
+
     return newStudent;
   }
 
