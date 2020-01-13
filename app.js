@@ -46,7 +46,24 @@ app.post("/class/:className/enroll", (req, res) => {
     }
 })
 
-app.get("/class", (req, res) => {
+app.get("/class/:className/students", (req, res) => {
+    let currClass = req.params.className.toLowerCase();
+    
+    if(mySchool.classes[currClass]) {
+        res.json({
+            students: mySchool.classes[currClass].students,
+            message: "Retrieved students",
+            timestamp: new Date().toString()
+        }) 
+    } else {
+        res.json({
+            error: `Class ${currClass} doesn't exist.`,
+            timestamp: new Date().toString()
+        })
+    }
+})
+
+app.get("/class", (req,res) => {
     res.json(mySchool.classes);
 })
 
