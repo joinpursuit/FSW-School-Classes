@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formEnroll.style.display = "none";
         } else if(e.target.value === "enroll"){
             formEnroll.style.display = "block";
-            formClass.style.display = "none";
+            formClass.style.display = "none"
         } else if(e.target.value === "list"){
             formEnroll.style.display === "block"
         }
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(className.value === "" || teacher.value === ""){
             alert("Please enter a valid class and teacher");
         } else {
-            await axios.post(`http://localhost:3000/school/add`, {name: className.value, teacher: teacher.value})
+            await axios.post(`http://localhost:3000/class`, {name: className.value, teacher: teacher.value})
         }
     })
 

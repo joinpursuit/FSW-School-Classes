@@ -29,7 +29,10 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // this.classes[className]
+    if(this.classes.hasOwnProperty(className)){
+      student = new Student();
+      this.classes[className].students.push(student);
+    }
   }
 
 
