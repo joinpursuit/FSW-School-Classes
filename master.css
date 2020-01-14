@@ -1,9 +1,33 @@
 body {
-background-image: url("https://media.giphy.com/media/26uf3lbVKN6ton7Ms/giphy.gif");
+  background-image: url("https://media.giphy.com/media/26uf3lbVKN6ton7Ms/giphy.gif");
   background-size: cover;
   image-orientation: initial;
   height: 100vh;
   background-repeat: no-repeat;
   white-space: inherit;
+  /* opacity: 0.4; */
+  
+}
+h2 {
+  color: aliceblue;
+  background-color:#556696;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 25%;
+  text-align: center;
+  border: 5pt darkblue;
+  
+  
+}
 
+form {
+  margin-bottom: 5%;
+  max-width: 25%;
+  /* margin: auto; */
+  /* justify-content: space-evenly; */
+}
+
+div {
+  background-color: aliceblue, 0.3;
+  display: grid;
+  grid-template-columns: 1fr, 1fr, 1fr;
 }

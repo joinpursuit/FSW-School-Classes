@@ -1,6 +1,5 @@
 {
     "prettier.semi": false,
-    "editor.defaultFormatter": "vscode.configuration-editing",
     "editor.mouseWheelZoom": true,
     "editor.formatOnType": true
 }

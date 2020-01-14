@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>School Directory</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script async src="./index.js"></script>
-    <link rel="stylesheet" href="./master.css"/>
-</head>
-<body>
+    <link rel="stylesheet" href="./master.css" />
+  </head>
+
+  <body>
+
+
+    <div id="formDiv">
+        <h2><b>Add a Class</b></h2>
+      <form id="formAddClass">
+        <input id="teacherInput" type="text" placeholder="Enter Teacher Name" />
+        <input id="classInput" type="text" placeholder="Enter Class Name" />
+        <button id="addClassInfo" type="submit">Submit</button>
+      </form>
+
+
+        <h2><b>Add a Student</b></h2>
+      <form id="formAddStudent">
+        <input
+          id="studentClassInput"
+          type="text"
+          placeholder="Enter Class Name"
+        />
+        <input
+          id="studentNameInput"
+          type="text"
+          placeholder="Enter Student Name"
+        />
+        <input
+          id="studentAgeInput"
+          type="text"
+          placeholder="Enter Student Age"
+        />
+        <input
+          id="studentCityInput"
+          type="text"
+          placeholder="Enter Student City"
+        />
+        <input
+          id="studentGradeInput"
+          type="text"
+          placeholder="Enter Student Grade"
+        />
+        <button id="addStudentInfo" type="submit">Submit</button>
+      </form>
     
-</body>
+
+        <h2><b>List Students</b></h2>
+      <form id="listStudents">
+        <input id="studentByClassInput" type="text" placeholder="Enter Student Name" />
+        <input id="studentByCityInput" type="text" placeholder="Enter Student City" />
+        <button id="getStudentInfo" type="submit">Submit</button>
+      </form>
+    </div>
+
+
+  </body>
 </html>
