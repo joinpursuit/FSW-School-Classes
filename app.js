@@ -10,12 +10,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const School = require("./School.js");
+const Student = require("./Student.js");
 
 
 let mySchool = new School();
 
 
-app.get("/school", (req, res) => {
+app.get("/", (req, res) => {
     res.json(mySchool);
 })
 
@@ -37,9 +38,28 @@ app.post("/class", (req,res) => {
 })
 
 app.post("/class/:className/enroll", (req, res) => {
-    mySchool.enrollStudent(req.params.className, req.body.name)
-    console.log(mySchool);
-    res.json(mySchool)
+    let students = mySchool.classes[req.params.className]["students"];
+    for(let i = 0; i < students.length; i++){
+        if(students[i].name === req.body.name){
+            students[i].age = req.body.age;
+            students[i].city = req.body.city;
+            students[i].grade = req.body.grade;
+            res.json({
+                "student": {"name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade},
+                "className": req.params.className,
+                "message": "Updated Student",
+                "timestamp": req.timestamp
+            })
+        }
+    }
+    mySchool.enrollStudent(req.params.className, new Student(req.body.name, req.body.age, req.body.city, req.body.grade))
+    res.json({
+        "student": {"name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade},
+        "className": req.params.className,
+        "message": "Enrolled Student",
+        "timestamp": req.timestamp
+    })
+    console.log(mySchool)
 })
 
 app.listen(port, () => console.log("Listening on port: ", port));

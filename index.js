@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let formClass = document.querySelector("#formClass");
     formClass.style.display = "none";
+    let formClassRes = document.querySelector("#formClassRes")
 
     let formEnroll = document.querySelector("#formEnroll");
     formEnroll.style.display = "none";
+    let formEnrollRes = document.querySelector("#formEnrollRes")
 
     select.addEventListener("change", (e) => {
         if(e.target.value === "addClass"){
@@ -30,12 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    formClass.addEventListener("submit", async (e) => {
+    formClass.addEventListener("submit", (e) => {
         e.preventDefault();
+        formClassRes.innerHTML = "";
         if(className.value === "" || teacher.value === ""){
-            alert("Please enter a valid class and teacher");
+            formClassRes.innerText = "Please enter a valid class and teacher!";
         } else {
-            await axios.post(`http://localhost:3000/class`, {name: className.value, teacher: teacher.value})
+            axios.post(`http://localhost:3000/class`, {name: className.value, teacher: teacher.value}).then(res => {
+                debugger
+                formClassRes.innerHTML = JSON.stringify(res.data, null, 4);
+            })
         }
     })
 

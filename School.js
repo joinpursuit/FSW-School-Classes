@@ -30,7 +30,6 @@ class School {
    */
   enrollStudent(className, student) {
     if(this.classes.hasOwnProperty(className)){
-      student = new Student();
       this.classes[className].students.push(student);
     }
   }
