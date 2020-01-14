@@ -12,14 +12,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 let mySchool = new School();
-mySchool.addClass("physics", "John Brown");
-mySchool.enrollStudent("physics", {name: "John Brown", age: 18, city: "NYC", grade: 75})
-mySchool.enrollStudent("physics", {name: "John Brow", age: 18, city: "NYC", grade: 69})
 
 app.post("/class", (req, res) => {
     // addClass returns false if the information is incorrect/class exists
     // Checking if addClass returns false, if it does an error is sent
-    if(!mySchool.addClass(req.body.name.toLowerCase(), req.body.teacher.toLowerCase())) {
+    if(!mySchool.addClass(req.body.name, req.body.teacher)) {
         res.json({
             error: "Please fill out all the information or Class already exists",
             "timestamp": new Date()
@@ -34,11 +31,11 @@ app.post("/class", (req, res) => {
 })
 
 app.post("/class/:className/enroll", (req, res) => {
-    let userClass = req.params.className.toLowerCase();
+    let className = req.params.className;
 
     // enrollStudent returns false if student information is incorrect
     // Checking if false is returned, if it is then an error is sent
-    if(!mySchool.enrollStudent(userClass, req.body)) {
+    if(!mySchool.enrollStudent(className, req.body)) {
         res.json({
             error: "Please fill out all the information for the student",
             timestamp: new Date().toString()
@@ -46,7 +43,7 @@ app.post("/class/:className/enroll", (req, res) => {
     } else {
         res.json({ 
             student: req.body,
-            className: userClass,
+            className: className,
             message: "Enrolled Student",
             timestamp: new Date().toString()
         })
@@ -54,27 +51,24 @@ app.post("/class/:className/enroll", (req, res) => {
 })
 
 app.get("/class/:className/students", (req, res) => {
-    let currClass = req.params.className.toLowerCase();
+    let className = req.params.className;
     let city = req.query.city;
     let failing = req.query.failing;
     
-    if(mySchool.classes[currClass]) {
+    if(mySchool.classes[className]) {
         res.json({
-            students: (city || failing) ? mySchool.getStudentsByClassWithFilter(currClass, failing, city) : mySchool.getStudentsByClass(currClass),
+            // If city or failing queries are passed, then WithFilter version of getStudentsByClass runs
+            // Otherwise the normal version runs
+            students: (city || failing) ? mySchool.getStudentsByClassWithFilter(className, failing, city) : mySchool.getStudentsByClass(className),
             message: "Retrieved students",
             timestamp: new Date().toString()
         }) 
     } else {
         res.json({
-            error: `Class ${currClass} doesn't exist.`,
+            error: `Class ${className} doesn't exist.`,
             timestamp: new Date().toString()
         })
     }
-})
-
-// For testing purposes
-app.get("/class", (req,res) => {
-    res.json(mySchool.classes);
 })
 
 app.listen(port, () => console.log("Listening on port", port));
