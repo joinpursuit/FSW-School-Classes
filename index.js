@@ -48,14 +48,19 @@ const appendClassResponse = (data) => {
     classSection.innerHTML = "";
 
     let newClass = data.class;
-    let message = data.message;
-    let timestamp = data.timestamp;
 
-    alert(`${message.toUpperCase()} on ${timestamp}`);
-    let p = document.createElement("p");
-    p.innerHTML = `<b>Class Name</b>: ${newClass.name} <b>Teacher</b>: ${newClass.teacher}`;
-    classSection.appendChild(p);
-
+    if(data.error) {
+        let err = document.createElement("p");
+        err.innerText = data.error;
+        classSection.appendChild(err);
+    } else {
+        let status = document.createElement("p");
+        status.innerText = "Class Added";
+        let p = document.createElement("p");
+        p.innerHTML = `<b>Class Name</b>: ${newClass.name} <b>Teacher</b>: ${newClass.teacher}`;
+        classSection.appendChild(status);
+        classSection.appendChild(p);
+    }
 }
 
 const addStudent = () => {
