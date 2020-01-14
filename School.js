@@ -39,7 +39,7 @@ class School {
   enrollStudent(className, student) {
     // Your code here
     let newStudent = new Student(className, student)
-    this.student = newStudent
+    this.student[className] = newStudent
     //console.log(newStudent)
   }
 
@@ -52,7 +52,10 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-  
+    // this.students.forEach(class => {
+    //   className
+
+    // })
   }
 
 
