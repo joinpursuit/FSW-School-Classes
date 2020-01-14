@@ -8,6 +8,7 @@ class School {
       //   physics: {} 
     }
   }
+  
 
   /**
    * Add class to classes
