@@ -15,7 +15,7 @@ let mySchool = new School();
 // If the given class <class-name> doesn't exist and error should be returned.
 // Implement the methods getStudentsByClass() and getStudentsByClassWithFilter() in the School class for accomplishing this.
 
-classes.post("/", (request, response)=>{
+classes.post("/classes/:enroll", (request, response)=>{
    
 let enrolledStudent = {
     name:request.body.name,
@@ -34,10 +34,10 @@ if(enrolledStudent.name === undefined|| enrolledStudent.age === undefined||enrol
 }
 
 })
-classes.patch("/", (request, response)=>{
+classes.patch("/:nameOfClass/students", (request, response)=>{
 let nameOfClass = request.body.nameOfClass;
 })
-classes.get("/",(request, response)=>{
+classes.get("/nameOfClass/:students/:failing",(request, response)=>{
 
 })
 
