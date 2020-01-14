@@ -6,32 +6,68 @@ body {
   background-repeat: no-repeat;
   white-space: inherit;
   /* margin: auto; */
+  /* display: grid;
+ grid-template-columns: auto; */
   /* opacity: 0.4; */
 }
 h2 {
-  display: grid;
-  grid-auto-rows: 3fr;
+  display: flex;
+  flex-direction: 3fr column;
   /* grid-auto-rows: max-content; */
   color: aliceblue;
+  text-shadow: 3px darkblue;
   background-color: #556696;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   max-width: 25%;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   /* border: 5px; */
   border-style: ridge;
   border-bottom-color: darkblue;
-  border-bottom-width: 7px;
-  height: 45%;
+  border-bottom-width: 5px;
+  height: 35%;
   padding: 5px;
   font-weight: bolder;
 }
 
-form {
-  /* margin: auto; */
+form > input {
+  height: 25px;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: khaki;
+  color: darkblue;
+  font-weight: 700;
+  font-size: 8.5pt;
+}
+
+form > button {
+  height: 30px;
+  width: 150px;
   display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  margin: right;
+  text-align: center;
+  justify-content: center;
+  color: darkblue;
+  background-color: rgb(151, 105, 169);
+  font-size: 9.5pt;
+  font-weight: 700;
+  border-width: 1px;
+  border-style: solid;
+  border-color: whitesmoke;
+  
+}
+
+form {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* margin: auto; */
+  display: grid;
+  grid-template-columns: auto;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
   margin-top: auto;
   margin-bottom: 5%;
   max-width: 25%;
@@ -43,7 +79,7 @@ form {
   /* justify-content: space-evenly; */
 }
 
-div{
+div {
   background-color: aliceblue 0.3;
   display: grid;
   grid-template-columns: 1fr, 1fr, 1fr;
