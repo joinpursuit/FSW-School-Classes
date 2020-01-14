@@ -4,8 +4,7 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+      
     }
   }
   addClassToClasses(name,teacher){

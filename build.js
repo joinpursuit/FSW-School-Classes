@@ -47,32 +47,65 @@ class School {
 
 }
 
-let andrewJackson = new School();
-andrewJackson.addClass("english","jon");
-andrewJackson.addClass("math","Danny");
-andrewJackson.enrollStudent("math","boe");
-andrewJackson.enrollStudent("math","joe");
-// console.log(andrewJackson.getStudentsByClass("math"));
-console.log(andrewJackson.getStudentsByClassWithFilter("math",false,"ny"))
-// console.log(andrewJackson);
+// let andrewJackson = new School();
+// andrewJackson.addClass("english","jon");
+// andrewJackson.addClass("math","Danny");
+// andrewJackson.enrollStudent("math","boe");
+// andrewJackson.enrollStudent("math","joe");
+// // console.log(andrewJackson.getStudentsByClass("math"));
+// console.log(andrewJackson.getStudentsByClassWithFilter("math",false,"ny"))
+// // console.log(andrewJackson);
 
 
+// let today = new Date()
 
-// let arr = [
-//     {class: "math",name:"danny",grade:70,city:"Ny"},
-//     {class: "math",name:"jon",grade:70,city:"Ny"}
-// ];
-
-// let arr2 = ["danny","danny","mike"];
-
-// const filter = (arr) => {
-//     return arr.filter(el => {
-//      if (el === "danny"){
-//          return el
-//      }
-//     })
+// let year = today.getFullYear();
+// let month = today.getMonth() + 1;
+// let date = today.getDate();
+ 
+// const addZero = (num) => {
+//   return num < 10 ? `0${num}`:num;
 // }
 
-// console.log(filter(arr2));
+// let hours = addZero(today.getHours());
+// let minutes = addZero(today.getMinutes());
+// let seconds = addZero(today.getSeconds());
+
+
+// let currentDate = `${month}/${date}/${year}`;
+// let currentTime = `${hours}:${minutes}:${seconds}`;
+
+// console.log(`current Date Is:${currentDate} & Current Time is ${currentTime}` );
+
+const displayTime = () =>{
+  let today = new Date()
+
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  let date = today.getDate();
+
+  const addZero = (num) => {
+    return num < 10 ? `0${num}`:num;
+  }
+  
+  const checkHours = (num) => {
+    return num > 12? num - 12: num;
+  }
+  
+  let hours = checkHours(addZero(today.getHours()));
+  let minutes = addZero(today.getMinutes());
+  let seconds = addZero(today.getSeconds());
+  
+  
+  let currentDate = `${month}/${date}/${year}`;
+  let currentTime = `${hours}:${minutes}:${seconds}`;
+
+  
+   return `current Date Is:${currentDate} & Current Time is ${currentTime}`
+}
+
+console.log(displayTime());
+
+
 
 

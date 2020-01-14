@@ -14,9 +14,7 @@ class Class {
 
 
 
-// let classA = new Class("Code","Danny");
-// classA.addStudents("bruhman");
-// console.log(classA);
+
 
 
 module.exports = Class;
