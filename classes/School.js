@@ -9,7 +9,7 @@ class School {
     }
   }
 
-  addClass(name, teacher) {
+  addClass = (name, teacher) => {
     let newClass = new Class(name, teacher);
     if(this.classes[name]) {
       return false
@@ -18,7 +18,7 @@ class School {
     return newClass;
   }
 
-  enrollStudent(className, student) {
+  enrollStudent = (className, student) => {
     // Check if student is missing information
     if(!student.name || !student.age || !student.city || !student.grade) {
       return false;
@@ -39,20 +39,23 @@ class School {
     return newStudent;
   }
 
-  getStudentsByClass(className) {
+  getStudentsByClass = (className) => {
     return this.classes[className].students;
   }
 
-  getStudentsByClassWithFilter(className, failing = false, city = undefined) {
-    if(failing && city ) {
+  getStudentsByClassWithFilter = (className, failing = false, city = undefined) => {
+    if(failing && city) {
+      // Gives back a filtered array of students who are failing, and from given city
       return this.getStudentsByClass(className).filter(student => (student.isFailing() && student.matchCity(city)));
     }
 
-    if(!failing && city ) {
+    if(!failing && city) {
+      // Gives back a filtered array of students from given city
       return this.getStudentsByClass(className).filter(student => student.matchCity(city));
     }
 
     if(failing && !city) {
+      // Gives back a filtered array of students who are failing
       return this.getStudentsByClass(className).filter(student => student.isFailing());
     }
   }
