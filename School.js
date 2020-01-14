@@ -8,14 +8,10 @@ class School {
       //   physics: {} 
     }
   }
-
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
+  addClassToClasses(name,teacher){
+    this.addClass(name,teacher);
+    return this.classes[name]
+}
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
@@ -67,5 +63,14 @@ class School {
   }
 
 }
+
+let mySchool = new School();
+mySchool.addClassToClasses()
+
+
+
+
+
+
 
 module.exports = School;
