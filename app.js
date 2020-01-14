@@ -7,8 +7,8 @@ const port = 3000;
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(cors())
-app.use("/studentRoutes",userRouter)
-app.use('/classRoutes',recipeRouter)
+app.use("/studentRoutes",studentsRoutesRouter)
+app.use('/classRoutes',classRoutesRouter)
 
 
 
