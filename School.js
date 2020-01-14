@@ -64,6 +64,12 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    return this.classes[className]["students"].filter((el) => {
+      if(this.grade < 70) {
+        return el;
+      }
+    })
+
   }
 
 }
