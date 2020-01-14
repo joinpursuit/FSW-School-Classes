@@ -14,6 +14,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return this.classes[name]
   }
 
   enrollStudent(className,student) {
@@ -45,8 +46,7 @@ class School {
 
 }
 
-let mySchool = new School();
-mySchool.addClassToClasses()
+
 
 
 

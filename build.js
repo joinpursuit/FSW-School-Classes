@@ -91,21 +91,21 @@ const displayTime = () =>{
   const checkHours = (num) => {
     return num > 12? num - 12: num;
   }
-  
+
   let hours = checkHours(addZero(today.getHours()));
   let minutes = addZero(today.getMinutes());
   let seconds = addZero(today.getSeconds());
   
   
-  let currentDate = `${month}/${date}/${year}`;
+  let currentDate = `${year},${month}/${date}/`;
   let currentTime = `${hours}:${minutes}:${seconds}`;
 
   
-   return `current Date Is:${currentDate} & Current Time is ${currentTime}`
+   return `${currentDate} ${currentTime}`
 }
 
 console.log(displayTime());
 
-
+module.exports = displayTime;
 
 
