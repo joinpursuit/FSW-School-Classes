@@ -63,15 +63,26 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-    return this.classes[className]["students"].filter((el) => {
-      if(this.grade < 70) {
-        return el;
-      }
-    })
-
+    if(failing && city) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.grade < 70 && el.city === city) {
+          return el;
+        }
+      })
+    } else if(failing) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.grade < 70) {
+          return el;
+        }
+      })
+    } else if(city) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.city === city) {
+          return el;
+        }
+      })
+    }
   }
-
 }
 
 module.exports = School;
