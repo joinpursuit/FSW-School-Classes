@@ -77,9 +77,9 @@ class School {
   }
 
 }
-let the_school = new School()
-console.log(the_school)
-console.log(the_school.enrollStudent())
+let pursuit = new School()
+console.log(pursuit)
+console.log(pursuit.enrollStudent())
 
 enrollStudent('physics', "ohidu")
 module.exports = School;
