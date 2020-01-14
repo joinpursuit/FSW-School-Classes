@@ -1,3 +1,6 @@
+const express = require("express");
+const classRoute = express.Router({mergeParams: true});
+
 class Class {
   constructor(name, teacher) {
     this.name = name
@@ -5,5 +8,11 @@ class Class {
     this.students = []
   }
 }
+
+classRoute.get("/", (req, res) => {
+  res.json({
+    this.name = 
+  });
+})
 
 module.exports = Class;

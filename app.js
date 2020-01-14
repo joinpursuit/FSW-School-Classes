@@ -13,7 +13,7 @@ const classRouter = require("./Class.js");
 const schoolRouter = require("./School.js");
 const studentRouter = require("./Student.js");
 
-app.use("/Class", classRouter);
+app.use("/class", classRouter);
 app.use("/School", schoolRouter);
 app.use("/Student", studentRouter);
 
