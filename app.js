@@ -7,6 +7,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+
+
 app.listen(port, () => {
   console.log(`The server is running on port ${port}`)
 })

@@ -62,8 +62,21 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+  getStudentsByClassWithFilter(className, failing, city = "") {
+    let students = this.classes[className]["students"]
+    if (failing === true && city){
+      return students.filter((stu) => {
+        return (stu.grade < 70) && (stu.city === city)
+      })
+    } else if (city){
+      return students.filter((stu) => {
+        return stu.city === city
+      }) 
+    } else if (failing){
+      return students.filter((stu) => {
+        return stu.grade < 70
+      })
+    }
   }
 
 }

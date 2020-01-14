@@ -1,4 +1,4 @@
-class Student {
+ class Student {
   constructor(name, age, city, grade) {
     this.name = name
     this.city = city
