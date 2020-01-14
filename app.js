@@ -1,4 +1,7 @@
 //let mySchool = new School();
+const Class = require('./Class');
+const Student = require('./Student')
+const School = require('./School.js')
 const express = require('express')
 const cors = require('express')
 const app = express()

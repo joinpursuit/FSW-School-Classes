@@ -27,6 +27,9 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    console.log(newClass);
+    
+    
   }
 
   /**
@@ -38,8 +41,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    let newStudent = new Student(className, student)
-    this.student[className] = newStudent
+    // let newStudent = new Student(className, student)
+    // this.student[className] = newStudent
     //console.log(newStudent)
   }
 
@@ -81,8 +84,7 @@ class School {
 
 }
 let pursuit = new School()
-console.log(pursuit)
-console.log(pursuit.enrollStudent())
+pursuit.addClass()
+// console.log(pursuit.enrollStudent())
 
-enrollStudent('physics', "ohidu")
 module.exports = School;
