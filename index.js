@@ -77,12 +77,28 @@ const addStudent = () => {
             city: studentCity.value,
             grade: studentGrade.value
         }
-        postData(`http://localhost:3000/class/${studentClass.value}/enroll`, student, appendStdResposne);
+        postData(`http://localhost:3000/class/${studentClass.value}/enroll`, student, appendStdResponse);
     }
 }
 
-const appendStdResposne = (data) => {
-    
+const appendStdResponse = (data) => {
+    let studentSection = document.querySelector("#studentResponse");
+    studentSection.innerHTML = "";
+
+    let student = data.student;
+
+    if(data.error) {
+        let err = document.createElement("p");
+        err.innerText = data.error;
+        studentSection.appendChild(err);
+    } else {
+        let status = document.createElement("p");
+        status.innerText = "Student Enrolled";
+        let p = document.createElement("p");
+        p.innerHTML = `<b>Name</b>: ${student.name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+        studentSection.appendChild(status);
+        studentSection.appendChild(p);
+    }
 }
 
 const listStudents = () => {
