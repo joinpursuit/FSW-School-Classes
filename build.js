@@ -24,15 +24,26 @@ class School {
      return student;
   }
 
-  /**
-   * Get all students enrolled in a class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClass(className) {
     return this.classes[className].students
   }
+
+  getStudentsByClassWithFilter(className, failing, city) {
+    let studentsarr = this.classes[className].students
+    
+    return studentsarr.filter(student => {
+       if(failing && student.grade < 70 && city === student.city){
+         return student
+       }
+       else if(failing && student.grade < 70) { 
+           return student
+       }
+       else if(city){
+           return student
+       }
+    })
+  }
+
 
 }
 
@@ -41,8 +52,27 @@ andrewJackson.addClass("english","jon");
 andrewJackson.addClass("math","Danny");
 andrewJackson.enrollStudent("math","boe");
 andrewJackson.enrollStudent("math","joe");
-console.log(andrewJackson.getStudentsByClass("math"));
+// console.log(andrewJackson.getStudentsByClass("math"));
+console.log(andrewJackson.getStudentsByClassWithFilter("math",false,"ny"))
 // console.log(andrewJackson);
 
+
+
+// let arr = [
+//     {class: "math",name:"danny",grade:70,city:"Ny"},
+//     {class: "math",name:"jon",grade:70,city:"Ny"}
+// ];
+
+// let arr2 = ["danny","danny","mike"];
+
+// const filter = (arr) => {
+//     return arr.filter(el => {
+//      if (el === "danny"){
+//          return el
+//      }
+//     })
+// }
+
+// console.log(filter(arr2));
 
 
