@@ -33,7 +33,7 @@ class School {
     if(currClass.isEnrolled(newStudent.name)) {
       currClass.updateStudent(newStudent);
     } else {
-      this.classes[className].enrollStudent(student);
+      this.classes[className].enrollStudent(newStudent);
     }
 
     return newStudent;
@@ -44,18 +44,16 @@ class School {
   }
 
   getStudentsByClassWithFilter(className, failing = false, city = undefined) {
-    let students = this.getStudentsByClass(className);
-
-    if(failing && city) {
-      return students.filter(student => student.isFailing() && student.matchCity(city));
+    if(failing && city ) {
+      return this.getStudentsByClass(className).filter(student => (student.isFailing() && student.matchCity(city)));
     }
 
-    if(!failing && city) {
-      return students.filter(student => student.matchCity(city));
+    if(!failing && city ) {
+      return this.getStudentsByClass(className).filter(student => student.matchCity(city));
     }
 
     if(failing && !city) {
-      return students.filter(student => student.isFailing());
+      return this.getStudentsByClass(className).filter(student => student.isFailing());
     }
   }
 }

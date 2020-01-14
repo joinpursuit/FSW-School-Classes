@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 let mySchool = new School();
+mySchool.addClass("physics", "John Brown");
+mySchool.enrollStudent("physics", {name: "John Brown", age: 18, city: "NYC", grade: 75})
+mySchool.enrollStudent("physics", {name: "John Brow", age: 18, city: "NYC", grade: 69})
 
 app.post("/class", (req, res) => {
     // addClass returns false if the information is incorrect/class exists
@@ -52,11 +55,12 @@ app.post("/class/:className/enroll", (req, res) => {
 
 app.get("/class/:className/students", (req, res) => {
     let currClass = req.params.className.toLowerCase();
+    let city = req.query.city;
+    let failing = req.query.failing;
     
-    // TODO: use getStudentByClassWithFilter method on mySchool. Args will be queries from the Front end
     if(mySchool.classes[currClass]) {
         res.json({
-            students: mySchool.classes[currClass].students,
+            students: (city || failing) ? mySchool.getStudentsByClassWithFilter(currClass, failing, city) : mySchool.getStudentsByClass(currClass),
             message: "Retrieved students",
             timestamp: new Date().toString()
         }) 

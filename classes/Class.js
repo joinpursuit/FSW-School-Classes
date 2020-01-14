@@ -1,15 +1,15 @@
 class Class {
   constructor(name, teacher) {
-    this.name = name
-    this.teacher = teacher
-    this.students = []
+    this.name = name;
+    this.teacher = teacher;
+    this.students = [];
   }
 
-  enrollStudent = (student) => {
+  enrollStudent(student) {
     this.students.push(student);
   }
 
-  isEnrolled = (studentName) => {
+  isEnrolled(studentName) {
     for(let i = 0; i < this.students.length; i++) {
       let student = this.students[i];
       if(student.name === studentName) return true;
@@ -17,7 +17,7 @@ class Class {
     return false;
   }
 
-  updateStudent = (newStudent) => {
+  updateStudent(newStudent) {
     this.students.forEach(student => {
       if(student.name === newStudent.name) student = newStudent;
     })
