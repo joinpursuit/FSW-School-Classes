@@ -29,7 +29,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    this.classes[className]["students"].push(student);     
   }
 
 
@@ -42,7 +42,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className]["students"];
   }
 
 
