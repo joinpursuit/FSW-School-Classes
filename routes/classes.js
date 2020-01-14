@@ -1,8 +1,8 @@
 const express = require("express")
-let cors = require("cors")
+const classes = require("express").Router()
+const cors = require("cors")
 const Student = require("../Student")
 const School = require("../School")
-const classes = require("express").Router()
 let mySchool = new School();
 // Create an Express route/endpoint to handle the request as seen above.
 
@@ -16,19 +16,21 @@ let mySchool = new School();
 // Implement the methods getStudentsByClass() and getStudentsByClassWithFilter() in the School class for accomplishing this.
 
 classes.post("/", (request, response)=>{
-    let arr = []
-let studentsEnrolled = {
+   
+let enrolledStudent = {
     name:request.body.name,
     age: request.body.age,
     city:request.body.city,
     grade:request.body.grade
 }
-if(studentsEnrolled.name|| studentsEnrolled.age||studentsEnrolled.city||studentsEnrolled.grade){
-    response.send("add name, age, city and grade")
+
+let nameOfClass = request.params.nameOfClass
+let newStudent = new Student(enrolledStudent)
+if(enrolledStudent.name === undefined|| enrolledStudent.age === undefined||enrolledStudent.city === undefined||enrolledStudent.grade=== undefined){
+    response.json("add name, age, city and grade")
 }else{
-    studentsEnrolled.name = studentsEnrolled.name.split(",")
-    arr.push(studentsEnrolled)
-    response.json(arr)
+    mySchool.enrolledStudent(newStudent, nameOfClass) 
+    response.json({ enrolled: newStudent.name, student:newStudent.city, date: new Date(), message: `${enrolledStudent}has been enrolled in ${nameOfClass}`})
 }
 
 })
