@@ -11,6 +11,7 @@ class School {
 
   /**
    * Add class to classes
+
    * 
    * @param {string} name - Name of the class
    * @param {string} teacher - Name of instructor 
@@ -19,6 +20,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    this.classes[teacher] = newClass
   }
 
   /**
@@ -29,7 +31,12 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(name, age, city, grade)
+    this.student[name] = newStudent
+    this.student[age] = newStudent
+    this.student[city] = newStudent
+    this.student[grade] = newStudent
+
   }
 
 
@@ -42,7 +49,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    
   }
 
 
