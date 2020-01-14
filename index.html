@@ -14,15 +14,31 @@
     <select name="" id="selectOptions">
         <option value="" selected disabled>Pick an option</option>
         <option value="addClass">Add Class</option>
-        <option value="">Add Student</option>
+        <option value="enroll">Enroll student</option>
+        <option value="list">List students</option>
     </select>
 
     <form id="formClass">  
-        </br><label>Please enter a class and teacher:</label></br>
-        <input id="className" type="text" placeholder="Input name">
-        <input id="teacher" type="text" placeholder="Input teacher">
+        </br><label>Class name:</label>
+        <input class="className" type="text" placeholder="Input name"></br>
+        <label>Teacher name:</label>
+        <input id="teacher" type="text" placeholder="Input teacher"></br>
         <button id="addClassBtn" type="submit">Add Class</button></br>
     </form>
+
+    <form id="formEnroll">  
+    </br><label>Class name:</label>
+    <input class="className" type="text" placeholder="Input class"></br>
+    <label>Name:</label>
+    <input id="student" type="text" placeholder="Input name"></br>
+    <label>Age:</label>
+    <input id="age" type="text" placeholder="Input age"></br>
+    <label>City:</label>
+    <input id="city" type="text" placeholder="Input city"></br>
+    <label>Grade</label>
+    <input id="grade" type="text" placeholder="Input grade"></br>
+    <button id="enrollBtn" type="submit">Enroll</button></br>
+</form>
     
 </body>
 </html>
