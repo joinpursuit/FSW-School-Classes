@@ -29,7 +29,11 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(student.name, student.city, student.age, student.grade)
+    if(!student.name){
+      this.classes.className.push(newStudent)
+      return (newStudent)
+    }
   }
 
 
@@ -42,7 +46,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    this.class.className.student
   }
 
 

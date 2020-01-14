@@ -1,0 +1,1 @@
+let mySchool = new School()
