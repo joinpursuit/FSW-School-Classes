@@ -43,7 +43,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    this.class.className.student
+    return this.class[className]["student"]
   }
 
 
