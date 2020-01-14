@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>The Pursuit School</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./index.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to the Pursuit School</h1>
+        <form action="submit" id="addClass">
+            <h4>Add Class</h4>
+            Class Name:<br>
+            <input type="text" name="addClassName" ><br>
+            Teacher:<br>
+            <input type="text" name="addClassTeach" ><br>
+            <input type="submit" value="Submit">
+        </form>
+        <form action="submit" id="addStudent">
+            <h4>Add Student</h4>
+                Class:<br>
+            <input type="text" name="addStudentClass"><br>
+                Name:<br>
+            <input type="text" name="addStudentName"><br>
+                Age:<br>
+            <input type="text" name="addStudentAge"><br>
+                City:<br>
+            <input type="text" name="addStudentCity"><br>
+                Grade:<br>
+            <input type="text" name="addStudentGrade"><br>
+            <input type="submit" value="Submit">
+        </form>
+        <form action="submit" id="studentList">
+            <h4>Student List</h4>
+            Class:<br>
+            <input type="search" name="listClass"><br>
+            City:<br>
+            <input type="text" name="listCity" placeholder="optional"><br>
+            <input type="checkbox" name="failingStudents">Show Failing Students Only<br>
+            <input type="submit" value="submit">
+        </form>
+        <div id="studentListResults"></div>
+        
+    
+    </body>
+</html>
