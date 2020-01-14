@@ -5,7 +5,8 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {name: "Physics", teacher: "Jon A", students: [{name: "Jhenya E", city: "Brooklyn", age:"15", grade: "80" }]} 
+
     }
   }
 
@@ -56,16 +57,25 @@ class School {
    * If a city is passed return students whose city match
    * the city passed. If both failing and city are passed
    * return students that are failing and that live in the
-   * specified citye
+   * specified city
    * @param {string} className - Name of the class
-   * @param {boolean} failing - Whether to return students that are failing the class or not
+   * @param {boolean} failing - Whether to return stfudents that are failing the class or not
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
-
+  getStudentsByClassWithFilter(className, failing, city = "") {
+    
+    let presentClass = this.class[className]["student"]
+    if(failing === true && city){
+      presentClass.filter(stud=>{
+        return stud.city === city
+      })
+    } else if(failing === ){
+      presentClass.filter(stud =>{
+        return stud.grade
+      })
+   }
+ }
 }
 
 module.exports = School;
