@@ -1,5 +1,5 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('./Class.js');
+const Student = require('./Student.js')
 
 class School {
   constructor() {
@@ -29,7 +29,8 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    this.classes[className]["students"].push(student)
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className]["students"].push(newStudent)
   }
 
 
