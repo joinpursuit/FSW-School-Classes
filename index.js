@@ -32,15 +32,13 @@ const addClass = async () => {
     let className = document.querySelector("#className");
     let classTeacher = document.querySelector("#classTeacher");
 
-    if(!className.value && !classTeacher.value) {
-        alert("Missing Class Name, and Teacher");
-    } else if(!className.value) {
-        alert("Missing Class Name");
-    } else if(!classTeacher.value) alert("Missing Teacher");
-
-    let newClass = {name: className.value, teacher: classTeacher.value};
-
-    postData("http://localhost:3000/class", newClass, appendClassResponse);
+    if(!className.value || !classTeacher.value) { 
+        alert("Missing class information.");
+    } else {
+        let newClass = {name: className.value, teacher: classTeacher.value};
+        postData("http://localhost:3000/class", newClass, appendClassResponse);
+    }
+    
 }
 
 const appendClassResponse = (data) => {
@@ -64,7 +62,27 @@ const appendClassResponse = (data) => {
 }
 
 const addStudent = () => {
+    let studentClass = document.querySelector("#studentClass");
+    let studentName = document.querySelector("#studentName");
+    let studentAge = document.querySelector("#studentAge");
+    let studentCity = document.querySelector("#studentCity");
+    let studentGrade = document.querySelector("#studentGrade");
 
+    if(!studentClass.value || !studentName.value || !studentAge.value || !studentCity.value || !studentGrade.value){
+        alert("Missing student information.");
+    } else {
+        let student = {
+            name: studentName.value,
+            age: studentAge.value,
+            city: studentCity.value,
+            grade: studentGrade.value
+        }
+        postData(`http://localhost:3000/class/${studentClass.value}/enroll`, student, appendStdResposne);
+    }
+}
+
+const appendStdResposne = (data) => {
+    
 }
 
 const listStudents = () => {
