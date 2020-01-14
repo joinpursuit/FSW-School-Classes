@@ -29,12 +29,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student(student.name, student.city, student.age, student.grade)
-    if(!student.name){
-      this.classes.className.push(newStudent)
-      return (newStudent)
-    }
+    this.classes[className]["student"].push(student)
   }
+
 
 
 
@@ -59,8 +56,7 @@ class School {
    * If a city is passed return students whose city match
    * the city passed. If both failing and city are passed
    * return students that are failing and that live in the
-   * specified city
-   * 
+   * specified citye
    * @param {string} className - Name of the class
    * @param {boolean} failing - Whether to return students that are failing the class or not
    * @param {string} city - Name of the city to match against students

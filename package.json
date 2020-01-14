@@ -1,0 +1,19 @@
+{
+  "name": "pursuit-core-web-express-project",
+  "version": "1.0.0",
+  "description": "## Introduction",
+  "main": "Class.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafidhossain1995/Pursuit-Core-Web-Express-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafidhossain1995/Pursuit-Core-Web-Express-Project/issues"
+  },
+  "homepage": "https://github.com/rafidhossain1995/Pursuit-Core-Web-Express-Project#readme"
+}
