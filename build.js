@@ -17,27 +17,32 @@ class School {
     this.classes[name] = newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
   enrollStudent(className,student) {
      let studentsarr = this.classes[className].students;
      let newStudent = new Student(student,0,"",0);
      studentsarr.push(newStudent);
-     console.log(student);
-     
+     return student;
   }
+
+  /**
+   * Get all students enrolled in a class
+   * 
+   * @param {string} className - Name of the class
+   * @return {Student[]} Array of Student objects
+   */
+  getStudentsByClass(className) {
+    return this.classes[className].students
+  }
+
 }
 
 let andrewJackson = new School();
 andrewJackson.addClass("english","jon");
 andrewJackson.addClass("math","Danny");
 andrewJackson.enrollStudent("math","boe");
-console.log(andrewJackson);
+andrewJackson.enrollStudent("math","joe");
+console.log(andrewJackson.getStudentsByClass("math"));
+// console.log(andrewJackson);
 
 
 

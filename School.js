@@ -17,16 +17,12 @@ class School {
     this.classes[name] = newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
-  enrollStudent(className, student) {
-    // Your code here
-  }
+  enrollStudent(className,student) {
+    let studentsarr = this.classes[className].students;
+    let newStudent = new Student(student,0,"",0);
+    studentsarr.push(newStudent);
+    return student;
+ }
 
 
 
