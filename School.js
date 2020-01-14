@@ -10,6 +10,11 @@ class School {
 
         ]
     }
+    this.students = {
+      student1: [
+        {name: "dis me ", city: "NYC", age: 100, grade: "88"},
+      ]
+    }
   }
 
   /**
@@ -33,9 +38,10 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let newStudent = new Student(className, student)
+    this.student = newStudent
+    //console.log(newStudent)
   }
-
-
 
 
   /**
@@ -46,6 +52,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+  
   }
 
 
@@ -70,5 +77,9 @@ class School {
   }
 
 }
+let the_school = new School()
+console.log(the_school)
+console.log(the_school.enrollStudent())
 
+enrollStudent('physics', "ohidu")
 module.exports = School;
