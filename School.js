@@ -52,6 +52,8 @@ class School {
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 
    * that is all students whose grade is less than 70.
+   * 
+   * 
    * If a city is passed return students whose city match
    * the city passed. If both failing and city are passed
    * return students that are failing and that live in the
@@ -67,5 +69,7 @@ class School {
   }
 
 }
+
+let mySchool = new School();
 
 module.exports = School;

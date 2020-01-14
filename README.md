@@ -27,7 +27,7 @@ In this lab you will be developing a server that stores data for a school, and a
 
 ### Classes
 
-- `Class`es objects will be stored in the `classes`(`this.classes`) property of the `School` instance.
+- `Classes` objects will be stored in the `classes`(`this.classes`) property of the `School` instance.
 - The `classes` property of a `School` is itself an object where the property key is the name of the class and the property value will be a `Class` object.
 - Each `Class` object has a `name` property, a `teacher` property with a string that represents the name of the instructor and a `students` property that holds an array of `Student`s currently enrolled in that class. [`Class.js`](./Class.js) is as follows: 
 
@@ -39,6 +39,12 @@ In this lab you will be developing a server that stores data for a school, and a
       this.students = []
     }
   }
+
+
+
+
+
+
 
   module.exports = Class;
   ```
@@ -70,7 +76,7 @@ In this lab you will be developing a server that stores data for a school, and a
 
 | Method | Endpoint | Request Body                        |
 | ------ | -------- | ----------------------------------- |
-| `POST` | `/class` | Class properties: `name`, `teacher` |
+|    | `/class` | Class properties: `name`, `teacher` |
 
 - Create an Express route/endpoint to handle the request as seen above.
 - The method `addClass()` in the `School` has already been implemented for you. Make sure you understand how it works. Use the `addClass()` method in your route handler.
