@@ -1,43 +1,54 @@
 const express = require("express")
-const classes = require("express").Router()
 const cors = require("cors")
+const classes = express.Router()
+classes.use(cors())
 const Student = require("../Student")
 const School = require("../School")
 let mySchool = new School();
+
+  // * Add class to classes
+
+//    * 
+//    * @param {string} name - Name of the class
+//    * @param {string} teacher - Name of instructor 
+//    * @return {Class} Class object
+//    */
+let newClass = new Class();
 // Create an Express route/endpoint to handle the request as seen above.
+// Add the new student to <class-name> class.
+// If the student is already enrolled in the given class, update/rewrite the student's information with the new data passed.
+// Implement the method enrollStudent() in the School object for accomplishing this. This method should add the student to the students array within the Class object.
+classes.post("/add",()=>{
+    let newClass = {
+        name: request.params.name,
+        teacher: request.params.teacher
+    }
+    if(!newClass.name|| !newClass.teacher){
+        response.send("add name of course and teacher")
+    }else {
+        newClass.name = newClass.name.split(", ")
+        classes.push(newClass)
+        response.json(classes)
 
-// This endpoint should return all the students enrolled on <class-name>.
-// If query parameters are passed:
-// If failing=true, return all students that are failing the class, that is all students whose grade is less than 70.
-// If a city is passed return students whose city match the city passed.
-// If both failing and city are passed return students that are failing and that live in the specified city.
-// If not matches for students failing or in a given city are found, the students property of the response should have an empty array.
-// If the given class <class-name> doesn't exist and error should be returned.
-// Implement the methods getStudentsByClass() and getStudentsByClassWithFilter() in the School class for accomplishing this.
-
-classes.post("/classes/:enroll", (request, response)=>{
-   
-let enrolledStudent = {
-    name:request.body.name,
-    age: request.body.age,
-    city:request.body.city,
-    grade:request.body.grade
-}
-
-let nameOfClass = request.params.nameOfClass
-let newStudent = new Student(enrolledStudent)
-if(enrolledStudent.name === undefined|| enrolledStudent.age === undefined||enrolledStudent.city === undefined||enrolledStudent.grade=== undefined){
-    response.json("add name, age, city and grade")
-}else{
-    mySchool.enrolledStudent(newStudent, nameOfClass) 
-    response.json({ enrolled: newStudent.name, student:newStudent.city, date: new Date(), message: `${enrolledStudent}has been enrolled in ${nameOfClass}`})
-}
-
+    }
+    console.log(newClass)
 })
+
+
 classes.patch("/:nameOfClass/students", (request, response)=>{
 let nameOfClass = request.body.nameOfClass;
 })
 classes.get("/nameOfClass/:students/:failing",(request, response)=>{
+
+})
+classes.delete("/:name",(request,response)=>{
+    let {name} = request.params
+    classes = classes.filter(aClass=>aClass.name !==name)
+    response.status(200).json({
+        message:"class deleted",
+        remainingClasses:classes
+
+    })
 
 })
 

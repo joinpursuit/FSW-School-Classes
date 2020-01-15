@@ -20,7 +20,7 @@ const addClass = async(event)=>{
 
     }
     try{
-        let response = axios.get(`http://localhost/routes/classes ${classInfo.value}`)
+        let response = axios.get(`http://localhost:4000/routes/classes ${classInfo.value}`)
         debugger
         let p = document.createElement("p")
         p.innerText = response.data
@@ -45,6 +45,11 @@ const enrollStudent = async(event)=>{
     let ageInput = age.value
     let cityInput = city.value
     let gradeInput = grade.value
+    // classInput.value = ""
+    // nameInput.value = ""
+    // ageInput.value = ""
+    // cityInput.value = ""
+    // gradeInput.value = ""
     let studentInfo = {
         name: nameInput,
         age: ageInput,
@@ -52,7 +57,7 @@ const enrollStudent = async(event)=>{
         grade:gradeInput
     }
     try{
-     let response= axios.post(`http://localhost:4000/classes/${studentInfo.value}/enroll`)
+     let response= axios.post(`http://localhost:4000/${nameOfClass}/${studentInfo.value}/enroll`)
      debugger
         console.log(response.data)
         let p = document.createElement("p")
@@ -62,11 +67,7 @@ const enrollStudent = async(event)=>{
     }catch(err){
 console.log(err)
     }
-    classInput.value = ""
-    nameInput.value = ""
-    ageInput.value = ""
-    cityInput.value = ""
-    gradeInput.value = ""
+
 
 
 
@@ -77,3 +78,4 @@ event.preventDefault()
 const listStudents = (event)=>{
 event.preventDefault()
 }
+
