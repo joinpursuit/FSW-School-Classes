@@ -1,5 +1,6 @@
 const Class = require('./Class');
-const Student = require('./Student')
+const Student = require('./Student');
+
 
 class School {
   constructor() {
@@ -67,5 +68,7 @@ class School {
   }
 
 }
+
+let mySchool = new School()
 
 module.exports = School;
