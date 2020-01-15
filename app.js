@@ -19,8 +19,12 @@ app.use('/students',studentRouter)
 app.use('/schoolR', schoolRouter)
 
 app.get('/',(req,res) => {
-    res.json(this.classes)
+    res.json({
+        status: 200,
+        message: "This is running, try other routes"
+    })
 })
+
 
 
 

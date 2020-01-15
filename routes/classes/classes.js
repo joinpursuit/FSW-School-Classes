@@ -1,6 +1,6 @@
 
 const classes = require('express').Router()
-// const purusit = require('./School');
+ const school = require('./School.js');
 // const Class = require('./Class');
 // const Student = require('./Student')
 
@@ -19,5 +19,5 @@ classes.post('/',(req,res) => {
     
 })
 
-
+let pursuit = new School;
 module.exports = classes
