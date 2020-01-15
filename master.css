@@ -4,43 +4,43 @@ body {
   image-orientation: initial;
   height: 100vh;
   background-repeat: no-repeat;
-  white-space: inherit;
-  /* margin: auto; */
-  /* display: grid;
- grid-template-columns: auto; */
-  /* opacity: 0.4; */
+  /* white-space: inherit; */
 }
+
 h2 {
   display: flex;
+  /* float: center; */
+  /* width: 150px; */
   flex-direction: 3fr column;
-  /* grid-auto-rows: max-content; */
-  color: aliceblue;
+  color:rgb(53, 59, 73);
   text-shadow: 3px darkblue;
   background-color: #556696;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  max-width: 25%;
+  font-family:'Times New Roman';
+  width: 200px;
   align-items: center;
   justify-content: center;
-  /* border: 5px; */
   border-style: ridge;
   border-bottom-color: darkblue;
   border-bottom-width: 5px;
-  height: 35%;
+  height: 30px;
+  font-size: 18pt;
   padding: 5px;
-  font-weight: bolder;
+  text-justify: newspaper;
+  text-decoration: 5px midnightblue;
+
 }
 
 form > input {
   height: 25px;
   width: 150px;
-  margin: auto;
+  /* margin: auto; */
+  margin-top: 2px;
   margin-bottom: 10px;
   text-align: center;
-  background-color: khaki;
+  background-color: rgb(208, 209, 210, .85);
   color: darkblue;
-  font-weight: 700;
-  font-size: 8.5pt;
+  font-weight: 500;
+  font-size: 10pt;
 }
 
 form > button {
@@ -52,37 +52,39 @@ form > button {
   justify-content: center;
   color: darkblue;
   background-color: rgb(151, 105, 169);
-  font-size: 9.5pt;
+  font-size: 10pt;
   font-weight: 700;
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
   border-color: whitesmoke;
-  
 }
+
 
 form {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  /* margin: auto; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: grid;
-  grid-template-columns: auto;
-  /* flex-wrap: wrap; */
   justify-content: space-evenly;
-  margin-top: auto;
-  margin-bottom: 5%;
   max-width: 25%;
+  grid-gap: 2.5%;
   text-align: center;
   align-items: center;
-  /* grid-template-columns: 1fr, 1fr, 1fr; */
-  /* grid-auto-flow: column; */
-  /* margin: auto; */
-  /* justify-content: space-evenly; */
+  grid-row: none;
+  margin-left: 18%;
+  padding: 5px;
 }
 
-div {
+#formListStudents {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+#formDiv {
+  grid-auto-flow: column;
   background-color: aliceblue 0.3;
   display: grid;
-  grid-template-columns: 1fr, 1fr, 1fr;
-  /* grid-auto-flow: column;  */
-  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-auto-flow: row; */
+  max-width: 150%;
+  justify-content: center;
+  margin: 5% 5% 5% 20%;
 }
