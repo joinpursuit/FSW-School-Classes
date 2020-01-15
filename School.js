@@ -4,7 +4,17 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      
+          physics: {
+          name: "Physics",
+          teacher: "Jon A",
+          students: [
+            {name: "Jhenya",
+            age: 14,
+            city: "Brooklyn",
+            grade: 98
+            }
+          ]
+        } 
     }
   }
   addClassToClasses(name,teacher){
@@ -17,11 +27,11 @@ class School {
     return this.classes[name]
   }
 
-  enrollStudent(className,student) {
+  enrollStudent(className,student,age,city) {
     let studentsarr = this.classes[className].students;
-    let newStudent = new Student(student,0,"Ny",0);
+    let newStudent = new Student(student,age,city,"N/A");
     studentsarr.push(newStudent);
-    return student;
+    return newStudent;
   }
 
   getStudentsByClass(className) {
@@ -48,12 +58,7 @@ class School {
 
 
 
+let mySchool = new School();
 
 
-
-
-
-
-
-
-module.exports = School;
+module.exports = mySchool;

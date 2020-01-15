@@ -104,7 +104,7 @@ const displayTime = () =>{
    return `${currentDate} ${currentTime}`
 }
 
-console.log(displayTime());
+// console.log(displayTime());
 
 module.exports = displayTime;
 
