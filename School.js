@@ -2,6 +2,8 @@ const Class = require('./Class');
 const Student = require('./Student')
 const classes = require('./routes/classes/classes.js')
 const students = require('./routes/students/students.js')
+const school = require('express').Router()
+
 
 
 
@@ -91,4 +93,4 @@ let pursuit = new School()
 pursuit.addClass()
 // console.log(pursuit.enrollStudent())
 
-module.exports = pursuit;
+module.exports = school;
