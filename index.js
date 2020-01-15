@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // TODO: DONOT USE ALERTS. THEY LOOK CHEAP. Replace Alerts with showing an error
     let classForm = document.querySelector("#classForm");
     let studentForm = document.querySelector("#studentForm");
     let listForm = document.querySelector("#listForm");

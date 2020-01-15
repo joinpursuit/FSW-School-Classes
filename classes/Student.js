@@ -8,7 +8,7 @@ class Student {
 
   isFailing = () => this.grade < 70;
 
-  matchCity = (city) => this.city === city;
+  matchCity = (city) => this.city.toLowerCase() === city.toLowerCase();
 }
 
 module.exports = Student;

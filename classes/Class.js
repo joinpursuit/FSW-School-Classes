@@ -12,14 +12,14 @@ class Class {
       let student = this.students[i];
 
       // If student exists, return true
-      if(student.name === studentName) return true;
+      if(student.name.toLowerCase() === studentName.toLowerCase()) return true;
     }
     return false;
   }
 
   updateStudent = (newStudent) => {
     this.students.forEach(student => {
-      if(student.name === newStudent.name) student = newStudent;
+      if(student.name.toLowerCase() === newStudent.name.toLowerCase()) student = newStudent;
     })
   }
 }
