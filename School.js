@@ -1,15 +1,26 @@
-const Class = require('./Class');
-const Student = require('./Student')
 
+// const express = require("express");
+// const newSchool=express.Router();
+const Class = require('./Class.js');
+const Student = require('./Student.js')
+
+
+// classes: {
+//   Math: { teacher: 'John Doe', students: [Array] },
+//   English: { teacher: 'Jane Doe', students: [Array] },
+//   Gym: Class { name: 'Gym', teacher: 'Brad', students: [] }
+// }
 class School {
   constructor() {
     this.classes = {
+      // Math:{"teacher": "John Doe", "students":[{name:"Kim",age:12,city:"CHI",grade:"fail"},{name:"Rachel",age:17,city:"NYC",grade:"pass"}]},
+      English:{"teacher": "Jane Doe", "students":[{name:"Leo",age:17,city:"NYC",grade:"n/a"}]}
       // className: Class Object
       //   physics: {} 
     }
   }
   
-
+  
   /**
    * Add class to classes
    * 
@@ -21,7 +32,7 @@ class School {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
-
+  
   /**
    * Enroll student in class
    * 
@@ -33,9 +44,7 @@ class School {
     // Your code here
   }
 
-
-
-
+  
   /**
    * Get all students enrolled in a class
    * 
@@ -45,10 +54,10 @@ class School {
   getStudentsByClass(className) {
     // Your code here
   }
-
-
-
-
+  
+  
+  
+  
   /**
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 
@@ -66,7 +75,60 @@ class School {
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
   }
-
+  
 }
 
+
+// let newSchool = new School ()
+// newSchool.addClass("Gym","Brad")
+// console.log(newSchool)
+
+
+
+
+
 module.exports = School;
+
+// newSchool.get("/",(req,res)=>{
+//   // new Class({"name": "Physics", "teacher": "Henry Roman", "students":[]});
+//   // new Student({ "name": "John", "age": 30, "city": "NYC", "grade": 75 });
+//   res.json(schoolOne.classes)
+// })
+
+// newSchool.post("/add/class",(req,res)=>{
+//   let classOne = new Class(req.query.name, req.query.teacher, req.query.student)
+//   schoolOne.classes[req.query.name]=req.query
+//   res.json(classOne)
+// })
+
+// newSchool.get(`/class`,(req,res)=>{
+//   res.json(studentOne)
+// })
+// newSchool.post("/add/className/student",(req,res)=>{
+//   let studentOne = new Student(req.query.name,req.query.age,req.query.city,req.query.grade);
+//   console.log(studentOne)
+//   schoolOne.classes[req.query.className].student+=(studentOne)
+//   res.json(studentOne)
+// })
+// enrollStudent(className, student) {
+//   // Your code here
+// }
+
+
+// class School{
+//   constructor(){
+//     this.classes={
+//       "hell":1,
+//       "hello":2,
+//     }
+//   }
+  
+//   addClass(name, teacher) {
+//     let newClass = new Class(name, teacher);
+//     this.classes[name] = newClass;
+//   }
+  
+  
+  
+// }
+// let schoolOne = new School()
