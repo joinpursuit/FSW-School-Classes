@@ -29,15 +29,24 @@ app.post("/school/add/class",(req,res)=>{
         }
         )
     }
-    // newSchool.addClass(name, teacher) {
-    // let newClass = new Class(name, teacher);
-    // this.classes[name] = newClass;
-    // }
-
-    // let classAdd = new Class(req.query.name, req.query.teacher, req.query.student);
 })
-// const schoolRouter=require("./School.js")
-// app.use("/school",schoolRouter)
+app.post("/school/add/student/:class",(req,res)=>{
+    try{
+        newSchool.enrollStudent(req.params.class,req.body)
+        res.json(
+            {"student": { "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade },
+        "className": req.params.class,
+        "message": "Enrolled Student",
+        "timestamp": "YYYY, MM/DD HH:MM:SS"}
+        )
+    }catch(err){
+        res.json(
+            { "error":"Please fill out all the information for the student",
+            "timestamp": "YYYY, MM/DD HH:MM:SS"
+        }
+        )
+    }
+})
 
 app.get("/",(req,res)=>{
     res.json("making requesting on / url")

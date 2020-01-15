@@ -14,7 +14,7 @@ class School {
   constructor() {
     this.classes = {
       // Math:{"teacher": "John Doe", "students":[{name:"Kim",age:12,city:"CHI",grade:"fail"},{name:"Rachel",age:17,city:"NYC",grade:"pass"}]},
-      English:{"teacher": "Jane Doe", "students":[{name:"Leo",age:17,city:"NYC",grade:"n/a"}]}
+      English:{name:"English", "teacher": "Jane Doe", "students":[{name:"Leo",age:17,city:"NYC",grade:"n/a"}]}
       // className: Class Object
       //   physics: {} 
     }
@@ -80,8 +80,12 @@ class School {
 
 
 // let newSchool = new School ()
+// console.log(newSchool)
 // newSchool.addClass("Gym","Brad")
 // console.log(newSchool)
+// newSchool.enrollStudent("Gym",{name:"Ben",age:"10",city:"nyc",grade:"F"})
+// newSchool.enrollStudent("Gym",{name:"Leo",age:"2",city:"nyc",grade:"N/A"})
+// console.log(newSchool.classes.Gym.students)
 
 
 
