@@ -11,52 +11,60 @@
 </head>
 <body>
     <main>
-        <h2>Add Class</h2>
-        <form id="classForm">
-            <label for="className">Class Name: </label>
-            <input type="text" name="className" id="className">
-
-            <label for="classTeacher">Teacher: </label>
-            <input type="text" name="classTeacher" id="classTeacher">
-
-            <input type="submit">
-        </form>
-        <section id="classResponse"></section>
-
-        <h2>Enroll Student</h2>
-        <form id="studentForm">
-            <label for="studentClass">Class Name: </label>
-            <input type="text" name="studentClass" id="studentClass">
-
-            <label for="studentName">Name: </label>
-            <input type="text" name="studentName" id="studentName">
-
-            <label for="studentAge">Age: </label>
-            <input type="text" name="studentAge" id="studentAge">
-
-            <label for="studentCity">City: </label>
-            <input type="text" name="studentCity" id="studentCity">
-
-            <label for="studentGrade">Grade: </label>
-            <input type="text" name="studentGrade" id="studentGrade">
-
-            <input type="submit">
-        </form>
-        <section id="studentResponse"></section>
-
-        <h2>List Students</h2>
-        <form id="listForm">
-            <label for="listClass">Class Name: </label>
-            <input type="text" name="listClass" id="listClass">
-
-            <label for="listCity">City: (optional)</label>
-            <input type="text" name="listCity" id="listCity">
-
-            <input type="checkbox" name="listFailing" id="listFailing">Show Failing Students Only
-
-            <input type="submit">
-        </form>
-        <section id="listResponse"></section>
+        <section id="classSection">
+            <h2>Add Class</h2>
+            <form id="classForm">
+                <label for="className">Class Name: </label>
+                <input type="text" name="className" id="className">
+    
+                <label for="classTeacher">Teacher: </label>
+                <input type="text" name="classTeacher" id="classTeacher">
+    
+                <input type="submit">
+            </form>
+            <section id="classResponse"></section>
+        </section>
+        
+        <section id="studentSection">
+            <h2>Enroll Student</h2>
+            <form id="studentForm">
+                <label for="studentClass">Class Name: </label>
+                <input type="text" name="studentClass" id="studentClass">
+    
+                <label for="studentName">Name: </label>
+                <input type="text" name="studentName" id="studentName">
+    
+                <label for="studentAge">Age: </label>
+                <input type="text" name="studentAge" id="studentAge">
+    
+                <label for="studentCity">City: </label>
+                <input type="text" name="studentCity" id="studentCity">
+    
+                <label for="studentGrade">Grade: </label>
+                <input type="text" name="studentGrade" id="studentGrade">
+    
+                <input type="submit">
+            </form>
+            <section id="studentResponse"></section>
+        </section>
+        
+        <section id="listSection">
+            <h2>List Students</h2>
+            <form id="listForm">
+                <label for="listClass">Class Name: </label>
+                <input type="text" name="listClass" id="listClass">
+    
+                <label for="listCity">City: (optional)</label>
+                <input type="text" name="listCity" id="listCity">
+    
+                <label for="listFailing">Show Failing Students Only</label>
+                <input type="checkbox" name="listFailing" id="listFailing">
+    
+                <input type="submit">
+            </form>
+            <section id="listResponse"></section>
+        </section>
+        
     </main>
 </body>
 </html>

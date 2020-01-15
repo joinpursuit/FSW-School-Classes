@@ -1,0 +1,48 @@
+body {
+    background-color: #B8DBD9;
+}
+
+section {
+    padding: 25px;
+    margin-top: 25px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 4% 28% 4% 28% 4% 28% 4%;
+}
+
+#classSection {
+    grid-column: 2 / 3;
+}
+
+#classForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#studentSection {
+    grid-column: 4 / 5;
+}
+
+#studentForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#listSection {
+    grid-column: 6 / 7;
+}
+
+#listForm {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=submit] {
+    width: fit-content;
+}
+
+input {
+    margin-bottom: 10px;
+}
