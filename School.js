@@ -29,6 +29,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
+    this.classes
     // Your code here
   }
 
