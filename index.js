@@ -5,25 +5,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let className1 = document.querySelector("#className1");
     let teacher = document.querySelector("#teacher");
-    let select = document.querySelector("#selectOptions")
+    let select = document.querySelector("#selectOptions");
 
     let formClass = document.querySelector("#formClass");
     formClass.style.display = "none";
-    let formClassRes = document.querySelector("#formClassRes")
+    let formClassRes = document.querySelector("#formClassRes");
 
     let formEnroll = document.querySelector("#formEnroll");
     formEnroll.style.display = "none";
-    let formEnrollRes = document.querySelector("#formEnrollRes")
+    let formEnrollRes = document.querySelector("#formEnrollRes");
+
+    let formList = document.querySelector("#formList");
+    formList.style.display = "none";
+    let formListRes = document.querySelector("#formListRes");
 
     select.addEventListener("change", (e) => {
         if(e.target.value === "addClass"){
             formClass.style.display = "block";
             formEnroll.style.display = "none";
+            formList.style.display = "none";
         } else if(e.target.value === "enroll"){
             formEnroll.style.display = "block";
             formClass.style.display = "none"
+            formList.style.display = "none";
         } else if(e.target.value === "list"){
-            formEnroll.style.display === "block"
+            formList.style.display = "block";
+            formClass.style.display = "none";
+            formEnroll.style.display = "none";
         }
         else {
             formClass.style.display = "none";
