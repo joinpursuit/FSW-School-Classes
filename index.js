@@ -101,6 +101,45 @@ const appendStdResponse = (data) => {
     }
 }
 
-const listStudents = () => {
+const listStudents = async () => {
+    let listClass = document.querySelector("#listClass");
+    let listCity = document.querySelector("#listCity");
+    let listFailing = document.querySelector("#listFailing");
 
+    if(!listClass.value) {
+        alert("No Class was entered!");
+    } else {
+        let res;
+    
+        if(listFailing.checked && listCity.value) {
+            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?failing=true&city=${listCity.value}`);
+        } else if(listFailing.checked) {
+            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?failing=true`);
+        } else if(listCity.value) {
+            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?city=${listCity.value}`);
+        } else {
+            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students`);
+        }
+
+        appendListResponse(res.data);
+    }
+}
+
+const appendListResponse = (data) => {
+    let students = data.students;
+    let listResponse = document.querySelector("#listResponse");
+    listResponse.innerHTML = "";
+    if(students.length === 0) {
+        let noStudents = document.createElement("p");
+        noStudents.innerText = "No students found.";
+        listResponse.appendChild(noStudents);
+    } else {
+        let studentList = document.createElement("ul");
+        students.forEach(student => {
+            let li = document.createElement("li");
+            li.innerHTML = `<b>Name</b>: ${student.name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+            studentList.appendChild(li);
+        })
+        listResponse.appendChild(studentList);
+    }
 }
