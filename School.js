@@ -19,6 +19,8 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+
+    return newClass;
   }
 
   /**
@@ -30,6 +32,11 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    student = new Student(name, age, city, grade)
+    this.classes[className].student.push(student)
+
+    return this.classes[className].student
+
   }
 
 
@@ -43,6 +50,8 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+
+    return this.classes[className].students
   }
 
 
@@ -64,8 +73,21 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let fStudents = []
+    this.classes[className].students.forEach(el => {
+      if(city){
+        if(el.grade <= failing){
+          fStudents.push(el.name)
+        }
+      } else if(el.grade <= failing){
+        fStudents.push(el.name)
+      }
+    });
+    return fStudents
   }
 
 }
+
+mySchool.addClass('physics', 'Henry Roman');
 
 module.exports = School;

@@ -11,6 +11,21 @@ app.use(bodyParser.json());
 
 let myschool = new School();
 
+app.get("/", (req, res) => {
+    res.json("Hello Wellcome to Jay World")
+})
+
+app.post("/class", (req, res) => {
+    res.json("Updating classes")
+})
+
+app.post("/class/:class-name/enroll", (req, res) => {
+    res.json("Updating class enrollment")
+})
+
+app.get("/class/:class-name/students", (req, res) => {
+    res.json("List of students")
+})
 
 app.listen(port, () => {
     console.log("listening on port: ", port)
