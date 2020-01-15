@@ -19,6 +19,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -30,6 +31,9 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+      let student = new Student(name, age, city, grade)
+      this.classes[className].student.push(student)
+      return student
   }
 
 
@@ -43,6 +47,8 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    return this.classes[className]["students"]
+
   }
 
 
@@ -64,6 +70,19 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let filterArr = []
+    // let grade = this.classes[className]["students"]["grade"]
+    // let cityName = this.classes[className]["students"]["city"]
+
+    filterArr = this.classes.filter(el => {
+      return el["students"]
+    } )
+    if(failing === true && city === ){
+      filterArr.filter(el => {
+
+      })
+    }
+
   }
 
 }
