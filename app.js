@@ -18,7 +18,7 @@ let mySchool = new School();
 
 app.get("/", (req, res) => {
     res.json(mySchool);
-})
+}) //end get
 
 app.post("/class", (req,res) => {
     if(!mySchool.classes.hasOwnProperty(req.body.name) && req.body.name !== "" && req.body.teacher !== ""){
@@ -28,24 +28,28 @@ app.post("/class", (req,res) => {
             "message": "Created a new class",
             "timestamp": req.timestamp
         })
-        console.log(mySchool)
     } else {
         res.json({
             "error": "Please fill out all the information or Class already exists",
             "timestamp": req.timestamp
         })
     }
-})
+}) //end post
 
 app.post("/class/:className/enroll", (req, res) => {
+    if(!mySchool.classes[req.params.className]){
+        res.json({ 
+            "error": "Class doesn't exist!",
+            "timestamp": req.timestamp
+        })
+    }
     let students = mySchool.classes[req.params.className]["students"];
-    if(!req.body.name || !req.body.age || !req.body.city || !req.body.grade){
+    if(!req.params.className || !req.body.name || !req.body.age || !req.body.city || !req.body.grade){
         res.json({ 
             "error": "Please fill out all the information for the student",
             "timestamp": req.timestamp
         })
-    }
-    if(!students.some(obj => obj.name === req.body.name)){
+    } else if(!students.some(obj => obj.name === req.body.name)){
         mySchool.enrollStudent(req.params.className, new Student(req.body.name, req.body.age, req.body.city, req.body.grade))
         res.json({
             "student": {"name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade},
@@ -68,7 +72,8 @@ app.post("/class/:className/enroll", (req, res) => {
             }
         }
     }
-    console.log(mySchool)
-})
+}) //end post
+
+
 
 app.listen(port, () => console.log("Listening on port: ", port));

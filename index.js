@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("index.js is working");
 
-    let className = document.querySelector(".className");
+    let className1 = document.querySelector("#className1");
     let teacher = document.querySelector("#teacher");
     let select = document.querySelector("#selectOptions")
 
@@ -35,17 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
     formClass.addEventListener("submit", (e) => {
         e.preventDefault();
         formClassRes.innerHTML = "";
-        if(className.value === "" || teacher.value === ""){
-            formClassRes.innerText = "Please enter a valid class and teacher!";
-        } else {
-            axios.post(`http://localhost:3000/class`, {name: className.value, teacher: teacher.value}).then(res => {
-                debugger
-                formClassRes.innerHTML = JSON.stringify(res.data, null, 4);
-            })
-        }
+        formEnrollRes.innerHTML = "";
+        axios.post(`http://localhost:3000/class`, {name: className1.value, teacher: teacher.value}).then(res => {
+            formClassRes.innerHTML = JSON.stringify(res.data, null, 4);
+        })
     })
 
-    formEnroll.addEventListener("submit", async (e) => {
+    let className2 = document.querySelector("#className2");
+    let name = document.querySelector("#name");
+    let age = document.querySelector("#age");
+    let city = document.querySelector("#city");
+    let grade = document.querySelector("#grade");
+    formEnroll.addEventListener("submit", (e) => {
+        e.preventDefault();
+        formClassRes.innerHTML = ""
+        formEnrollRes.innerHTML = "";
+        axios.post(`http://localhost:3000/class/${className2.value}/enroll`, {name: name.value, age: age.value, city: city.value, grade: grade.value}).then(res => {
+            formEnrollRes.innerHTML = JSON.stringify(res.data, null, 4);
+        })
     })
 
 
