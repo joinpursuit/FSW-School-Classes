@@ -16,11 +16,6 @@ addClass.addEventListener("submit",async(el)=>{
     let teacherName=el.target.elements[1].value;
     // http://localhost:3000/school/add/class/?name=Math&teacher=Kim S&student=[]
     let add = await axios.post(url+"/add/class/?"+name+`=`+nameClass+`&`+`${teacher}=`+teacherName)
-    console.log(add.data)
-    // .then(res=>{
-    //     debugger;
-    // })
-    // debugger;
 })
 
 

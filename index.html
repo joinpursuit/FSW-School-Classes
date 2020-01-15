@@ -14,9 +14,32 @@
 <button id="showAllClasses">Show School all Class</button>
 
 <form action="" id="addClass">
+        <h3>Open Class</h3>
     <input type="text" placeholder="Class Subject Name" title="name" required>
     <input type="text" placeholder="Class Teacher Name" title="teacher" required>
-    <input type="submit" value="Click to add">
+    <input type="submit" value="Click to Open Class">
+</form>
+<br>
+
+<form id="addStudent">
+        <h3>Enroll Student</h3>
+    <select name="classList" id="classList" required>
+        <option disabled>select class</option>
+        <option value="1">1</option>
+    </select>
+    <input type="text" name="name" id="nameStudent" placeholder="Student Name" required>
+    <input type="number" name="age" id="ageStudent" placeholder="Student Age" required>
+    <input type="text" name="city" id="cityStudent" placeholder="Student City" required>
+    <select name="grade" id="gradeList" required>
+            <option disabled>select grade</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+            <option value="N/A" selected>N/A</option>
+        </select>
+    <input type="submit" value="Click to Enroll"></input>
 </form>
 
 <div id="showing"></div>

@@ -41,7 +41,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    this.classes[className].students.push(student)
   }
 
   
