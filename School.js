@@ -1,12 +1,12 @@
-const Class = require('./Class');
+const Course = require('./Course');
 const Student = require('./Student')
 
 class School {
   constructor() {
-    this.classes = {
-      // className: Class Object
-      //   physics: {} 
+    this.courses = {
+      
     }
+    
   }
 
   /**
@@ -16,33 +16,31 @@ class School {
    * @param {string} teacher - Name of instructor 
    * @return {Class} Class object
    */
-  addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+  addCourse(name, teacher) {
+    let newCourse = new Course(name, teacher);
+    this.courses[name] = newCourse;
   }
 
   /**
    * Enroll student in class
    * 
-   * @param {string} className - Name of the class
+   * @param {string} courseName - Name of the class
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    // Your code here
+  enrollStudent(courseName, student) {
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.courses[courseName].students.push(newStudent)
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
    * 
-   * @param {string} className - Name of the class
+   * @param {string} courseName - Name of the class
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClass(className) {
-    // Your code here
+  getStudentsByCourse(courseName) {
+    return this.courses[courseName].students
   }
 
 
@@ -57,15 +55,26 @@ class School {
    * return students that are failing and that live in the
    * specified city
    * 
-   * @param {string} className - Name of the class
+   * @param {string} courseName - Name of the class
    * @param {boolean} failing - Whether to return students that are failing the class or not
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+  getStudentsByCourseWithFilter(courseName, failing, city) {
+    if(failing && city){
+      return this.getStudentsByCourse(courseName).filter((student)=>{
+        return student.grade < 70 && student.city === city
+      })
+    } else if(failing){
+      return this.getStudentsByCourse(courseName).filter((student)=>{
+        return student.grade < 70
+      })
+    } else if(city){
+      return this.getStudentsByCourse(courseName).filter((student)=>{
+        return student.city === city
+      })
+    }
   }
-
 }
 
 module.exports = School;
