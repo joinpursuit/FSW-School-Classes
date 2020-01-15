@@ -1,12 +1,16 @@
 
 const classes = require('express').Router()
+// const purusit = require('./School');
+// const Class = require('./Class');
+// const Student = require('./Student')
+
 
 // let classArr = []
 classes.get('/',(req,res ) => {
-    res.json(this.classes)
+    res.json(req.body)
 })
 classes.post('/',(req,res) => {
-    this.classes["name"].push(req.body)
+    addClass["name"].push(req.body)
         res.json({
             status: 200,
             message: "class added!",
