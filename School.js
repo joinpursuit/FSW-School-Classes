@@ -69,6 +69,5 @@ class School {
 
 }
 
-let mySchool = new School()
 
 module.exports = School;
