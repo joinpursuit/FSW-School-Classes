@@ -2,10 +2,30 @@ const Class = require('./Class');
 const Student = require('./Student')
 
 class School {
-  constructor() {
-    this.classes = {
-      // className: Class Object
-      //   physics: {} 
+  constructor(classes) {
+    this.classes = classes
+    { 
+      className1 = {
+        name: "shop",
+        teacher: "mr.adler",
+        studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
+      },
+      {
+        className2 = {
+          name: "language",
+          teacher: "mr.stkrdknmibalz",
+          studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"] 
+        },
+
+  
+        className3 = {
+          name: "homeEc",
+          teacher: "ms.pearl",
+          studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
+        }
+        
+        }
+     
     }
   }
 
