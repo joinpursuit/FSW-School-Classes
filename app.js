@@ -75,5 +75,10 @@ app.post("/class/:className/enroll", (req, res) => {
 }) //end post
 
 
+app.get("/class/:className/students", (req,res) => {
+    let students = mySchool.getStudentsByClass(req.params.className);
+    res.json(students);
+})
+
 
 app.listen(port, () => console.log("Listening on port: ", port));
