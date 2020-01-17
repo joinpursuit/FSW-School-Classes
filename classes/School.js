@@ -33,7 +33,7 @@ class School {
     if(currClass.isEnrolled(newStudent.name)) {
       currClass.updateStudent(newStudent);
     } else {
-      this.classes[className].enrollStudent(newStudent);
+      currClass.enrollStudent(newStudent);
     }
 
     return newStudent;

@@ -68,29 +68,35 @@ const appendClassResponse = (data) => {
         p.innerHTML = `<b>Class Name</b>: ${newClass.name} <b>Teacher</b>: ${newClass.teacher}`;
         classSection.appendChild(status);
         classSection.appendChild(p);
+
+        document.querySelector("#className").value = "";
+        document.querySelector("#classTeacher").value = "";
     }
 }
 
 const addStudent = () => {
     let studentClass = document.querySelector("#studentClass");
-    let studentName = document.querySelector("#studentName");
+    let studentFirst = document.querySelector("#studentFirst");
+    let studentLast = document.querySelector("#studentLast");
     let studentAge = document.querySelector("#studentAge");
     let studentCity = document.querySelector("#studentCity");
     let studentGrade = document.querySelector("#studentGrade");
     let studentSection = document.querySelector("#studentResponse");
 
-    if(!studentClass.value || !studentName.value || !studentAge.value || !studentCity.value || !studentGrade.value){
+    if(!studentClass.value || !studentFirst.value || !studentLast.value || !studentAge.value || !studentCity.value || !studentGrade.value){
         studentSection.innerHTML = "";
         let p = document.createElement("p");
         p.innerText = "Please fill out all information.";
         studentSection.appendChild(p);
     } else {
         let student = {
-            name: studentName.value,
+            firstName: studentFirst.value,
+            lastName: studentLast.value,
             age: studentAge.value,
             city: studentCity.value,
             grade: studentGrade.value
         }
+        
         postData(`http://localhost:3000/class/${studentClass.value}/enroll`, student, appendStdResponse);
     }
 }
@@ -112,6 +118,13 @@ const appendStdResponse = (data) => {
         p.innerHTML = `<b>Name</b>: ${student.name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
         studentSection.appendChild(status);
         studentSection.appendChild(p);
+
+        document.querySelector("#studentClass").value = "";
+        document.querySelector("#studentFirst").value = "";
+        document.querySelector("#studentLast").value = "";
+        document.querySelector("#studentCity").value = "";
+        document.querySelector("#studentAge").value = "";
+        document.querySelector("#studentGrade").value = "";
     }
 }
 
@@ -139,6 +152,10 @@ const listStudents = async () => {
             res = await axios.get(`http://localhost:3000/class/${listClass.value}/students`);
         }
 
+        listClass.value = "";
+        listCity.value = "";
+        listFailing.checked = false;
+
         appendListResponse(res.data);
     }
 }
@@ -147,7 +164,7 @@ const appendListResponse = (data) => {
     let students = data.students;
     let listResponse = document.querySelector("#listResponse");
     listResponse.innerHTML = "";
-    if(students.length === 0) {
+    if(!students) {
         let noStudents = document.createElement("p");
         noStudents.innerText = "No students found.";
         listResponse.appendChild(noStudents);

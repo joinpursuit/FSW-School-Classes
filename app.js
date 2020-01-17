@@ -53,10 +53,11 @@ app.post("/class", (req, res) => {
 
 app.post("/class/:className/enroll", (req, res) => {
     let className = req.params.className;
+    req.body.name = req.body.firstName + " " + req.body.lastName;
 
     // enrollStudent returns false if student information is incorrect
     // Checking if false is returned, if it is then an error is sent
-    if(mySchool.classes[className]) {
+    if(mySchool.classes[className.toLowerCase()]) {
         mySchool.enrollStudent(className, req.body);
         res.json({ 
             student: req.body,
