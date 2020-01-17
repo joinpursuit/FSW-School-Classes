@@ -71,12 +71,20 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
-    students.filter(el=>{
-      return el.grade < 70;
-    });
-    students.filter(el=>{
-      return el.city === city
-    })
+
+    if(failing && city){
+      this.classes[className].students.filter(el =>{
+        return el.grade < 70 && el.city === city;
+      });
+    }else if(failing){
+      this.classes[className].students.filter(el=>{
+        return el.grade < 70;
+      });
+    }else if(city){
+      this.classes[className].students.filter(el=>{
+        return el.city === city
+      });
+    }
 
   }
 
