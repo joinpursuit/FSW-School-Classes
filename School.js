@@ -35,8 +35,6 @@ class School {
   }
 
 
-
-
   /**
    * Get all students enrolled in a class
    * 
@@ -46,8 +44,6 @@ class School {
   getStudentsByClass(className) {
     return this.classes[className].students;
   }
-
-
 
 
   /**
@@ -65,7 +61,14 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    let studentsArr = this.classes[className].students;
+    if(failing && city){
+      return studentsArr.filter(student => student["grade"] < 70 && student["city"] === city);
+    }else if(failing){
+      return studentsArr.filter(student => student["grade"] < 70);
+    } else if(city){
+      return studentsArr.filter(student => student["city"] === city);
+    }
   }
 
 }
