@@ -35,16 +35,18 @@ app.post("/class/:className/enroll", (req, res) => {
 
     // enrollStudent returns false if student information is incorrect
     // Checking if false is returned, if it is then an error is sent
-    if(!mySchool.classes[className]) {
-        res.json({
-            error: `Class ${className} doesn't exist.`,
-            timestamp: new Date().toString()
-        })
-    } else {
+    if(mySchool.classes[className]) {
+        mySchool.enrollStudent(className, req.body);
         res.json({ 
             student: req.body,
             className: className,
             message: "Enrolled Student",
+            timestamp: new Date().toString()
+        })
+        
+    } else {
+        res.json({
+            error: `Class ${className} doesn't exist.`,
             timestamp: new Date().toString()
         })
     }

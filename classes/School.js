@@ -6,6 +6,7 @@ class School {
     this.classes = {
       // className: Class Object
       //   physics: {} 
+      Physics: new Class("Physics", "John Drake")
     }
   }
 

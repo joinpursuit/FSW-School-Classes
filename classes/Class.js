@@ -19,7 +19,9 @@ class Class {
 
   updateStudent = (newStudent) => {
     this.students.forEach(student => {
-      if(student.name.toLowerCase() === newStudent.name.toLowerCase()) student = newStudent;
+      if(student.name.toLowerCase() === newStudent.name.toLowerCase()) {
+        student.updateInfo(newStudent);
+      }
     })
   }
 }

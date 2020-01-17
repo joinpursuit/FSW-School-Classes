@@ -9,6 +9,13 @@ class Student {
   isFailing = () => this.grade < 70;
 
   matchCity = (city) => this.city.toLowerCase() === city.toLowerCase();
+
+  updateInfo = (newStudent) => {
+    this.city = newStudent.city;
+    this.age = newStudent.age;
+    this.grade = newStudent.grade;
+
+  }
 }
 
 module.exports = Student;
