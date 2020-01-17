@@ -14,13 +14,19 @@
     src: url(./assets/fonts/abstergo_sans_light.ttf);
 }
 
+header {
+    margin-top: 25px;
+    text-align: center;
+    font-family: trajanPro;
+    color: #C1232C;
+}
+
 body {
     background-color: #C7C8CA;
 }
 
 section {
     padding: 25px;
-    margin-top: 25px;
 }
 
 main {
@@ -31,7 +37,7 @@ main {
 h2 {
     font-family: trajanPro;
     font-weight: bold;
-    color: #C1232C
+    color: #C1232C;
 }
 
 p, label, input {
@@ -104,4 +110,11 @@ input[type=text]:focus {
 
 input[type=checkbox]:checked {
     background-color: #2d2c2e;
+}
+
+@media only screen and (max-width: 768px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
 }
