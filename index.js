@@ -4,10 +4,11 @@ let school=""
 document.addEventListener("DOMContentLoaded", async() => {
     school = await axios.get(url+"/")
     classOpt(school.data)
-    
+
 
     let schoolBtn = document.querySelector("#showAllClasses")
     schoolBtn.addEventListener("click",()=>{
+
         show(school.data)
     })
 
@@ -20,14 +21,13 @@ document.addEventListener("DOMContentLoaded", async() => {
         let teacher=el.target.elements[1].title;
         let teacherName=el.target.elements[1].value;
         // http://localhost:3000/school/add/class/?name=Math&teacher=Kim S&student=[]
-        let add = await axios.post(url+"/add/class/?"+name+`=`+nameClass+`&`+`${teacher}=`+teacherName)
+        await axios.post(url+"/add/class/?"+name+`=`+nameClass+`&`+`${teacher}=`+teacherName)
     });
     
     let enroll=document.querySelector("#addStudent")
     enroll.addEventListener("submit",async(el)=>{
-        el.preventDefault()
-        console.log(enroll)
-
+        el.preventDefault();
+        await axios.post(`http://localhost:3000/school/add/student/${el.target.elements[0].value}`, {name: el.target.elements[1].value, age: el.target.elements[2].value, city:el.target.elements[3].value, grade:el.target.elements[4].value})
     })
     
 })

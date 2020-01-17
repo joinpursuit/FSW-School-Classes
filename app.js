@@ -41,7 +41,7 @@ app.post("/school/add/student/:class",(req,res)=>{
         )
     }catch(err){
         res.json(
-            { "error":"Please fill out all the information for the student",
+            { "error":err+"Please fill out all the information for the student",
             "timestamp": "YYYY, MM/DD HH:MM:SS"
         }
         )
