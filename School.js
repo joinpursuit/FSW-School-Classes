@@ -1,15 +1,8 @@
 
-// const express = require("express");
-// const newSchool=express.Router();
+
 const Class = require('./Class.js');
 const Student = require('./Student.js')
 
-
-// classes: {
-//   Math: { teacher: 'John Doe', students: [Array] },
-//   English: { teacher: 'Jane Doe', students: [Array] },
-//   Gym: Class { name: 'Gym', teacher: 'Brad', students: [] }
-// }
 class School {
   constructor() {
     this.classes = {
