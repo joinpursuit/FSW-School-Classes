@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const pgp = require("pg-promise")();
+const connectionString = "postgres://localhost:5432/my_school_database";
+const db = pgp(connectionString);
 
 const School = require("./classes/School.js");
 
@@ -12,6 +15,24 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 let mySchool = new School();
+
+// EXAMPLES IF DATABASE CAN BE USED
+// app.get("/", (req, res) => {
+//     db.any('SELECT * FROM students').then(data => {
+//         res.json({
+//             students: data
+//         })
+//     });
+// })
+
+// app.post("/", (req, res) => {
+//     let student = req.body
+//     db.none('INSERT INTO students(first_name, last_name, city, age) VALUES(${firstName}, ${lastName}, ${city}, ${age})', student).then(() => {
+//         res.json({
+//             addedUser: req.body
+//         })
+//     })
+// })
 
 app.post("/class", (req, res) => {
     // addClass returns false if the information is incorrect/class exists
