@@ -44,20 +44,16 @@ class School {
   }
 
   getStudentsByClassWithFilter = (className, failing = false, city = undefined) => {
-    if(failing && city) {
+    return this.getStudentsByClass(className).filter(student => {
       // Gives back a filtered array of students who are failing, and from given city
-      return this.getStudentsByClass(className).filter(student => (student.isFailing() && student.matchCity(city)));
-    }
-
-    if(!failing && city) {
-      // Gives back a filtered array of students from given city
-      return this.getStudentsByClass(className).filter(student => student.matchCity(city));
-    }
-
-    if(failing && !city) {
-      // Gives back a filtered array of students who are failing
-      return this.getStudentsByClass(className).filter(student => student.isFailing());
-    }
+        if(failing && city) {
+          return (student.isFailing() && student.matchCity(city));
+        } else if(city) {
+          return student.matchCity(city);
+        } else if(failing) {
+          return student.isFailing();
+        }
+      })
   }
 }
 
