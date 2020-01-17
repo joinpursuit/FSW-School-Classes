@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("index.js is working");
-
   let className1 = document.querySelector("#className1");
   let teacher = document.querySelector("#teacher");
   let select = document.querySelector("#selectOptions");
@@ -100,13 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         city: cityList.value
       })
       .then(res => {
-        debugger;
         formListRes.innerHTML = JSON.stringify(res.data, null, 4);
       });
   });
-
-  // let failing = document.querySelector("#failing");
-  // axios.post(`..../class/${className.value}/students`, {params:{failing: failing.value}).then(res => {
-
-  // })
 });
