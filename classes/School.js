@@ -11,7 +11,7 @@ class School {
 
   addClass = (name, teacher) => {
     let newClass = new Class(name, teacher);
-    if(this.classes[name.toLowerCase()] ** this.classes[name.toLowerCase()].teacher.toLowerCase() === newClass.teacher.toLowerCase()) {
+    if(this.classes[name.toLowerCase()]) {
       return false
     }
     this.classes[name.toLowerCase()] = newClass;
