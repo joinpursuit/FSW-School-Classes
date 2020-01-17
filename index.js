@@ -1,5 +1,10 @@
+document.addEventListener("click", () => {
+    let audio = document.querySelector("audio");
+    audio.play();
+})
+
 document.addEventListener("DOMContentLoaded", () => {
-    // TODO: DONOT USE ALERTS. THEY LOOK CHEAP. Replace Alerts with showing an error
+
     let classForm = document.querySelector("#classForm");
     let studentForm = document.querySelector("#studentForm");
     let listForm = document.querySelector("#listForm");
@@ -32,9 +37,13 @@ const postData = async (url, data, callback) => {
 const addClass = async () => {
     let className = document.querySelector("#className");
     let classTeacher = document.querySelector("#classTeacher");
+    let classSection = document.querySelector("#classResponse");
 
     if(!className.value || !classTeacher.value) { 
-        alert("Missing class information.");
+        classSection.innerHTML = "";
+        let p = document.createElement("p");
+        p.innerText = "Please fill out all information.";
+        classSection.appendChild(p);
     } else {
         let newClass = {name: className.value, teacher: classTeacher.value};
         postData("http://localhost:3000/class", newClass, appendClassResponse);
@@ -50,7 +59,7 @@ const appendClassResponse = (data) => {
 
     if(data.error) {
         let err = document.createElement("p");
-        err.innerText = data.error;
+        err.innerText = "Class already exists.";
         classSection.appendChild(err);
     } else {
         let status = document.createElement("p");
@@ -68,9 +77,13 @@ const addStudent = () => {
     let studentAge = document.querySelector("#studentAge");
     let studentCity = document.querySelector("#studentCity");
     let studentGrade = document.querySelector("#studentGrade");
+    let studentSection = document.querySelector("#studentResponse");
 
     if(!studentClass.value || !studentName.value || !studentAge.value || !studentCity.value || !studentGrade.value){
-        alert("Missing student information.");
+        studentSection.innerHTML = "";
+        let p = document.createElement("p");
+        p.innerText = "Please fill out all information.";
+        studentSection.appendChild(p);
     } else {
         let student = {
             name: studentName.value,
@@ -106,9 +119,13 @@ const listStudents = async () => {
     let listClass = document.querySelector("#listClass");
     let listCity = document.querySelector("#listCity");
     let listFailing = document.querySelector("#listFailing");
+    let listResponse = document.querySelector("#listResponse");
 
     if(!listClass.value) {
-        alert("No Class was entered!");
+        listResponse.innerHTML = "";
+        let p = document.createElement("p");
+        p.innerText = "Please enter a class.";
+        listResponse.appendChild(p);
     } else {
         let res;
     

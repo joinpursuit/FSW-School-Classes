@@ -10,13 +10,14 @@
     <title>School Records</title>
 </head>
 <body>
+    
     <header>
         <!-- TODO: Add Header -->
     </header>
     <main>
         <section id="classSection">
             <h2>Add Class</h2>
-            <form id="classForm">
+            <form id="classForm" autocomplete="off">
                 <label for="className">Class Name: </label>
                 <input type="text" name="className" id="className">
     
@@ -30,7 +31,7 @@
         
         <section id="studentSection">
             <h2>Enroll Student</h2>
-            <form id="studentForm">
+            <form id="studentForm" autocomplete="off">
                 <label for="studentClass">Class Name: </label>
                 <input type="text" name="studentClass" id="studentClass">
     
@@ -53,7 +54,7 @@
         
         <section id="listSection">
             <h2>List Students</h2>
-            <form id="listForm">
+            <form id="listForm" autocomplete="off">
                 <label for="listClass">Class Name: </label>
                 <input type="text" name="listClass" id="listClass">
     
@@ -69,5 +70,9 @@
         </section>
         
     </main>
+        
+    <audio loop>
+        <source src="./assets/music/assassinsCreed.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>
