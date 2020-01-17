@@ -48,7 +48,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    // Your code here;
+    return this.classes[className].students;
   }
 
 
@@ -70,6 +71,13 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    students.filter(el=>{
+      return el.grade < 70;
+    });
+    students.filter(el=>{
+      return el.city === city
+    })
+
   }
 
 }

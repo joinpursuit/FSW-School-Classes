@@ -23,6 +23,10 @@ app.post("/class/:className/enroll", (req, res)=>{
     let newStudent = mySchool.
     enrollStudent(req.params.className, {name: req.body.name, age: Number(req.body.age), city: req.body.city, grade: Number(req.body.grade)});
     res.json(newStudent)
+});
+app.post("/class/:className/enroll", (req, res)=>{
+
+
 })
 
 
