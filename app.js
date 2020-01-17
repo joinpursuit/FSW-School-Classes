@@ -57,7 +57,7 @@ app.get("/class/:className/students", (req, res) => {
     let city = req.query.city;
     let failing = req.query.failing;
     
-    if(mySchool.classes[className]) {
+    if(mySchool.classes[className.toLowerCase()]) {
         res.json({
             // If city or failing queries are passed, then WithFilter version of getStudentsByClass runs
             // Otherwise the normal version runs

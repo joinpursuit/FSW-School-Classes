@@ -6,16 +6,15 @@ class School {
     this.classes = {
       // className: Class Object
       //   physics: {} 
-      Physics: new Class("Physics", "John Drake")
     }
   }
 
   addClass = (name, teacher) => {
     let newClass = new Class(name, teacher);
-    if(this.classes[name]) {
+    if(this.classes[name.toLowerCase()] ** this.classes[name.toLowerCase()].teacher.toLowerCase() === newClass.teacher.toLowerCase()) {
       return false
     }
-    this.classes[name] = newClass;
+    this.classes[name.toLowerCase()] = newClass;
     return newClass;
   }
 
@@ -26,7 +25,7 @@ class School {
     }
 
     // Creating helper variable, and new student based on inputted info
-    let currClass = this.classes[className];
+    let currClass = this.classes[className.toLowerCase()];
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
 
     // Checking if student is enrolled, and updating if so
@@ -41,7 +40,7 @@ class School {
   }
 
   getStudentsByClass = (className) => {
-    return this.classes[className].students;
+    return this.classes[className.toLowerCase()].students;
   }
 
   getStudentsByClassWithFilter = (className, failing = false, city = undefined) => {
