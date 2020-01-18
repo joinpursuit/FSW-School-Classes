@@ -4,7 +4,6 @@ document.addEventListener("click", () => {
 })
 
 document.addEventListener("DOMContentLoaded", () => {
-
     let classForm = document.querySelector("#classForm");
     let studentForm = document.querySelector("#studentForm");
     let listForm = document.querySelector("#listForm");
@@ -161,6 +160,7 @@ const listStudents = async () => {
 }
 
 const appendListResponse = (data) => {
+    debugger;
     let students = data.students;
     let listResponse = document.querySelector("#listResponse");
     listResponse.innerHTML = "";

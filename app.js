@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const pgp = require("pg-promise")();
+const pgp = require("pg-promise")({});
 const connectionString = "postgres://localhost:5432/my_school_database";
 const db = pgp(connectionString);
 
@@ -16,37 +16,34 @@ app.use(bodyParser.json());
 
 let mySchool = new School();
 
-// EXAMPLES IF DATABASE CAN BE USED
-// app.get("/", (req, res) => {
-//     db.any('SELECT * FROM students').then(data => {
-//         res.json({
-//             students: data
-//         })
-//     });
-// })
+const isClassAdded = async (newClass) => {
+    let classes = await db.any('SELECT * FROM classes WHERE class_name=${name} ' +
+                               'AND teacher=${teacher}', newClass);
+    
+    if(classes.length) {
+        return true;
+    } else {
+        return false
+    }
+}
 
-// app.post("/", (req, res) => {
-//     let student = req.body
-//     db.none('INSERT INTO students(first_name, last_name, city, age) VALUES(${firstName}, ${lastName}, ${city}, ${age})', student).then(() => {
-//         res.json({
-//             addedUser: req.body
-//         })
-//     })
-// })
-
-app.post("/class", (req, res) => {
+app.post("/class", async (req, res) => {
     // addClass returns false if the information is incorrect/class exists
     // Checking if addClass returns false, if it does an error is sent
-    if(!mySchool.addClass(req.body.name, req.body.teacher)) {
-        res.json({
-            error: "Please fill out all the information or Class already exists",
+    let newClass = req.body;
+
+    if(await isClassAdded(newClass)) {
+        res.status (400).json({
+            error: "Class already exists",
             "timestamp": new Date()
         })
     } else {
-        res.json({
-            class: req.body,
-            message: "created a new class",
-            timestamp: new Date().toString()
+        db.none('INSERT INTO classes(class_name, teacher) VALUES(${name}, ${teacher})', newClass).then(() => {
+            res.status (200).json({
+                class: req.body,
+                message: "created a new class",
+                timestamp: new Date().toString()
+            })
         })
     }
 })
@@ -54,6 +51,7 @@ app.post("/class", (req, res) => {
 app.post("/class/:className/enroll", (req, res) => {
     let className = req.params.className;
     req.body.name = req.body.firstName + " " + req.body.lastName;
+    let student = req.body;
 
     // enrollStudent returns false if student information is incorrect
     // Checking if false is returned, if it is then an error is sent
