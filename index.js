@@ -15,13 +15,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     })
 
-    addStudent.addEventListener("submit",(event)=>{
+    addStudent.addEventListener("submit", async(event)=>{
         event.preventDefault()
+
         let student = {name:addStudent.addStudentName.value, age:addStudent.addStudentAge.value, city:addStudent.addStudentCity.value, grade:addStudent.addStudentGrade.value}
         let newStudent = {name:addStudent.addStudentClass.value,student:student}
         try{
-            classPost = await axios.post("http://localhost:3000/school/classes",newStudent).then(res =>{
+            classPost = await axios.post("http://localhost:3000/school/students",newStudent).then(res =>{
                 debugger
+                console.log("NEW STUDENT: " + newStudent)    
+                let schoolData = res.data.mySchool.classes
+                console.log(schoolData)
             })
         } catch(err){
             console.log(err)

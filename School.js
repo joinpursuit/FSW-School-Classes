@@ -5,7 +5,17 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: "Physics",
+          teacher: "Jon A",
+          students: [
+            {name: "Jhenya",
+            age: 15,
+            city: "Brooklyn",
+            grade: 98
+          }
+          ]
+        } 
     }
   }
 
@@ -28,8 +38,13 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    this.classes
+  enrollStudent( className , student) {
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    // console.log(enrollmentClass)
+    if(this.classes[className]){
+      let enrollmentClass = this.classes[className]
+      enrollmentClass.students.push(newStudent)
+    }
     // Your code here
   }
 

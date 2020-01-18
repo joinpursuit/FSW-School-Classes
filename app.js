@@ -20,6 +20,7 @@ app.post("/school/classes", (req,res) =>{
     console.log(req.body)
     let newClass = req.body
     mySchool.addClass(newClass["name"],newClass["teacher"])
+    console.log(mySchool)
     res.json({status:"sucess", mySchool})
 })
 
@@ -27,5 +28,5 @@ app.post("/school/students", (req,res) =>{
     console.log(req.body)
     let newStudent = req.body
     mySchool.enrollStudent(newStudent["className"],newStudent["student"])
-    res.json({status:"sucess", mySchool})
+    res.json({status:"sucess", newStudent})
 })
