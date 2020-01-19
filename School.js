@@ -1,5 +1,5 @@
-const Class = require('./routes/class/Class');
-const Student = require('./routes/student/Student');
+const Class = require('./Class');
+const Student = require('./Student');
 
 class School {
   constructor() {
