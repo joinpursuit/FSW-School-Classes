@@ -3,14 +3,16 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 
-const classesRouter = require("./Class.js/index.js");
+const school = require("./School");
+
 
 app.use(cors());
 
-app.use("/classes", classesRouter)
 
 
-//app.get(/)
+app.get("/", (req, res)=>{
+  res.send("you made request")
+})
 
 
 app.listen(port,()=>{

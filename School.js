@@ -5,7 +5,35 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: "Physics",
+          teacher: "Jon A",
+          students: [
+            {
+            name: "Sihame B",
+            age: 15,
+            city: "Queens",
+            grade: 100
+            },
+            {name: "Jhenya E",
+            age: 14,
+            city: "Brooklyn",
+            grade: 98
+             },
+             {
+              name: "Ben F",
+              age: 15,
+              city: "Queens",
+              grade: 64
+             },
+             {
+              name: "Jess T",
+              age: 15,
+              city: "Queens",
+              grade: 61
+             }
+            ]
+         } 
     }
   }
 
@@ -30,6 +58,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let nStudent = new Student(student.name, student.age, student.city, student.grade)
+    return this.Classes[className].students.push(nStudent)
   }
 
 
@@ -43,6 +73,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    return this.classes[className].students
   }
 
 
