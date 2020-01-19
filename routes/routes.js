@@ -69,7 +69,8 @@ const checkStudent = (req, res, next) => {
     }
 }
 
-router.post("/", checkClass, addClass)
-router.post("/:class_name/enroll", checkStudent, addStudent)
+router.post("/", checkClass, addClass);
+router.post("/:class_name/enroll", checkStudent, addStudent);
+router.get("/:class_name/students");
 
 module.exports = router;

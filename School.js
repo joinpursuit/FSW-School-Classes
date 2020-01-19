@@ -19,11 +19,11 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.name = name
-    this.teacher = teacher
+    this.name = name;
+    this.teacher = teacher;
     this.classes[name] = newClass;
     
-    return newClass
+    return newClass;
   }
 
   /**
@@ -44,7 +44,7 @@ class School {
     
     let newStudent = new Student(name, age, city, grade);
     studentArr.push(student);
-    
+
     return newStudent;
 
   }
