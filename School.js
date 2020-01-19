@@ -19,7 +19,11 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
+    this.name = name
+    this.teacher = teacher
     this.classes[name] = newClass;
+    
+    return newClass
   }
 
   /**
@@ -30,7 +34,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    
+    let studentArr = this.classes[className]["students"]
     let {
       name,
       age,
@@ -39,7 +43,8 @@ class School {
     } = student
     
     let newStudent = new Student(name, age, city, grade);
-    this.classes[className]["students"].push(student);
+    studentArr.push(student);
+    
     return newStudent;
 
   }
