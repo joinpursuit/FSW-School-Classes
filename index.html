@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
     <title>School Project</title>
 </head>
 <body>
-    
+    <form id="classForm">
+        <h2>Add Class</h2>
+        Class Name:<br>
+        <input type="text" name="className">
+    </br>
+        Teacher:<br>
+        <input type="text" name="teacher">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="allClasses">
+        <button type="button" id="allClassesButton">Get all classes</button>
+    </div>
 </body>
 </html>

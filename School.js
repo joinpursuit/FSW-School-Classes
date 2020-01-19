@@ -5,7 +5,16 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: "Physics", 
+          teacher: "Jon A", 
+          students: [
+            {name: "Jhenya",
+            age: 14,
+            city: "Brooklyn",
+            grade: 98
+        },
+      ]} 
     }
   }
 
@@ -20,6 +29,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return this.classes
   }
 
   /**
@@ -30,8 +40,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-   this.classes[className] = student
-   console.log(this.classes)
+   this.classes[className]["students"].push(student)
    return `${student.name} has been enrolled in ${className}!`
   }
 
@@ -81,18 +90,19 @@ class School {
   }
 
   isFailing(student) {
-    student[failing] = ""
-    if (student[grade] > 70) {
-      student[failing] = true;
+    student["failing"] = undefined
+    if (student["grade"] < 70) {
+      student["failing"] = true;
     }
-    return student[failing]
+    return student
   }
 }
 
-let testSchool = new School()
-let marvin = new Student("Marvin", "25", "Laurelton", 65)
+// let testSchool = new School()
+// let marvin = new Student("Marvin", "25", "Laurelton", 65)
 
-console.log(marvin)
-console.log(testSchool.enrollStudent("Physics", marvin))
+// console.log(testSchool.addClass("Physics", "Teacher"))
+// // console.log(testSchool.enrollStudent("Physics", marvin))
 
-module.exports = School;
+
+// module.exports = testSchool;
