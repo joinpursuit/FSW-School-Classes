@@ -1,32 +1,31 @@
 const Class = require('./Class');
-const Student = require('./Student')
+//const Student = require('./Student');
+
+
 
 class School {
-  constructor(classes) {
-    this.classes = classes
-    { 
-      className1 = {
-        name: "shop",
-        teacher: "mr.adler",
-        studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
-      },
-      {
-        className2 = {
-          name: "language",
-          teacher: "mr.stkrdknmibalz",
-          studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"] 
-        },
+  constructor() {
+    this.classes = {}
+    // { 
+    //   className1 = {
+    //     name: "shop",
+    //     teacher: "mr.adler",
+    //     studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
+    //   },
+    //   {
+    //     className2 = {
+    //       name: "language",
+    //       teacher: "mr.stkrdknmibalz",
+    //       studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"] 
+    //     },
 
   
-        className3 = {
-          name: "homeEc",
-          teacher: "ms.pearl",
-          studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
-        }
+    //     className3 = {
+    //       name: "homeEc",
+    //       teacher: "ms.pearl",
+    //       studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
+    // }
         
-        }
-     
-    }
   }
 
   /**
@@ -39,6 +38,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+
   }
 
   /**
@@ -50,6 +50,7 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    this.classes[className].enrollStudent(student);
   }
 
 
@@ -63,6 +64,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+  return this.classes[className].students
   }
 
 
@@ -86,9 +88,14 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+
+
+
   }
 
+
 }
+
 
 let mySchool = new School();
 
