@@ -1,6 +1,8 @@
-const students = require("express").Router()
-let cors = require("cors")
+const express = require("express")
+const cors = require("cors")
+const students= express.Router()
 students.use(cors())
+const bodyParser = require("body-parser")
 students.use(bodyParser.urlencoded({
     extended: false
 }))

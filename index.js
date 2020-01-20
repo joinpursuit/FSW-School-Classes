@@ -9,10 +9,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     listButton.addEventListener("click", listStudents)
 })
 const addClass = async(event)=>{
+    event.preventDefault()
     let nameOfClass = document.querySelector("#className")
-    let teacherName = document.querySelector("#teacherName")
+    let nameOfTeacher = document.querySelector("#teacherName")
     let nameOfClassInput = nameOfClass.value
-    let teacherNameInput = teacherName.value
+    let teacherNameInput = nameOfTeacher.value
     let classInfo = {
         teacher:teacherNameInput,
         class:nameOfClassInput
@@ -22,7 +23,7 @@ const addClass = async(event)=>{
         let response = axios.get(`http://localhost:4000/routes/classes ${classInfo.value}`)
         debugger
         let p = document.createElement("p")
-        p.innerText = response.data
+        p.innerText = response.classInfo
         let classAdd = document.querySelector("#classAdd")
         classAdd.appendChild(p)
 
@@ -38,6 +39,7 @@ const enrollStudent = async(event)=>{
     let age = document.querySelector("#age")
     let city = document.querySelector("#city")
     let grade = document.querySelector("#grade")
+    event.preventDefault()
     let classInput = nameOfClass.value
     let nameInput = name.value
     let ageInput = age.value
@@ -59,7 +61,7 @@ const enrollStudent = async(event)=>{
      debugger
         console.log(response.data)
         let p = document.createElement("p")
-        p.innerText = response.data
+        p.innerText = response.studentInfo
         let studentEnroll = document.querySelector("#studentEnroll")
         studentEnroll.appendChild(p)
     }catch(err){
