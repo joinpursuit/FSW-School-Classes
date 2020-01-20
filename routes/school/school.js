@@ -13,4 +13,4 @@ school.post('/add',(req,res) => {
     
 })
 
-module.exports = school;
+module.exports = School;
