@@ -28,7 +28,7 @@ app.get('/',(req,res) => {
 
 app.post('/addClass',(req,res) => {
     newSchool.addClass()
-    res.json()
+    res.json(req.body)
 })
 
 

@@ -92,7 +92,7 @@ class School {
 
 }
 let pursuit = new School()
-pursuit.addClass()
+pursuit.addClass('math','joel null')
 // console.log(pursuit.enrollStudent())
 
 module.exports = School;
