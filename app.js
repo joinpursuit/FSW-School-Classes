@@ -22,14 +22,6 @@ app.use("Student",Student)
 app.use("School",School)
 
 
-// let newCourse = new Class("Javascript", "Ladovsky")
-// console.log(newCourse)
-// let deja = new Student("Deja", "30", "Brooklyn", "99")
-// console.log(deja)
-
-
-
-
 app.listen(port, ()=>{
     console.log(`server is running at: ${port}` )
 })

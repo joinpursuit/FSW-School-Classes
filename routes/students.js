@@ -1,12 +1,12 @@
 const students = require("express").Router()
 let cors = require("cors")
-const School = require("../School")
-const Class = require("../Class")
 students.use(cors())
 students.use(bodyParser.urlencoded({
     extended: false
 }))
 students.use(bodyParser.json())
+const School = require("../School")
+const Class = require("../Class")
 // Create an Express route/endpoint to handle the request as seen above.
 
 // This endpoint should return all the students enrolled on <class-name>.

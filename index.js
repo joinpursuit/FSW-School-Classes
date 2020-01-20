@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     listButton.addEventListener("click", listStudents)
 })
 const addClass = async(event)=>{
-    event.preventDefault()
     let nameOfClass = document.querySelector("#className")
     let teacherName = document.querySelector("#teacherName")
     let nameOfClassInput = nameOfClass.value
@@ -39,7 +38,6 @@ const enrollStudent = async(event)=>{
     let age = document.querySelector("#age")
     let city = document.querySelector("#city")
     let grade = document.querySelector("#grade")
-    event.preventDefault()
     let classInput = nameOfClass.value
     let nameInput = name.value
     let ageInput = age.value
