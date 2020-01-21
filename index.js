@@ -1,6 +1,6 @@
 document.addEventListener("click", () => {
     let audio = document.querySelector("audio");
-    // audio.play();
+    audio.play();
 })
 
 document.addEventListener("DOMContentLoaded", () => {
