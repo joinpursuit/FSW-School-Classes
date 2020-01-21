@@ -46,7 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
         teacher: teacher.value
       })
       .then(res => {
-        formClassRes.innerHTML = JSON.stringify(res.data, null, 4);
+        const { error, timestamp, message } = res.data;
+        let display = document.createElement("p");
+        if (error) {
+          display.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+        } else {
+          display.innerText = `Class: ${res.data.class.name} \n Teacher: ${
+            res.data.class.teacher
+          } \n Students: ${res.data.class.students.join(
+            ", "
+          )} \n Message: ${message} \n Timestamp: ${timestamp}`;
+        }
+        formClassRes.appendChild(display);
+        className1.value = "";
+        teacher.value = "";
       });
   });
 
@@ -61,6 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
     formClassRes.innerHTML = "";
     formEnrollRes.innerHTML = "";
     formListRes.innerHTML = "";
+    let display = document.createElement("p");
+    if (!className2.value) {
+      display.innerText = `Please enter a class name ...`;
+    }
     axios
       .post(`http://localhost:3000/class/${className2.value}/enroll`, {
         name: name.value,
@@ -69,8 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
         grade: grade.value
       })
       .then(res => {
-        formEnrollRes.innerHTML = JSON.stringify(res.data, null, 4);
+        const { error, timestamp, student, className, message } = res.data;
+        if (error) {
+          display.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+        } else {
+          display.innerText = `Student name: ${student.name} \n Age: ${student.age} \n City: ${student.city} \n Grade: ${student.grade} \n Class Name: ${className} \n Message: ${message} \n Timestamp: ${timestamp}`;
+        }
+        formEnrollRes.appendChild(display);
       });
+    formEnrollRes.appendChild(display);
   });
 
   let className3 = document.querySelector("#className3");
@@ -98,7 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
         city: cityList.value
       })
       .then(res => {
-        formListRes.innerHTML = JSON.stringify(res.data, null, 4);
+        res.data.students.forEach(student => {
+          let display1 = document.createElement("p");
+          display1.innerText = `Student name: ${student.name}, Age: ${student.age}, City: ${student.city}, Grade: ${student.grade}`;
+          formListRes.appendChild(display1);
+        });
+        let display2 = document.createElement("p");
+        display2.innerText = `Message: ${res.data.message} \n Timestamp: ${res.data.timestamp}`;
+        formListRes.appendChild(display2);
       });
   });
 });
