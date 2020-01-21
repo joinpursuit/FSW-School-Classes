@@ -34,7 +34,7 @@ main {
     grid-template-columns: 4% 28% 4% 28% 4% 28% 4%;
 }
 
-h2 {
+h2, h3 {
     font-family: trajanPro;
     font-weight: bold;
     color: #C1232C;
