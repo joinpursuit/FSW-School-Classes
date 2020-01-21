@@ -1,7 +1,7 @@
 document.addEventListener("click", () => {
     let audio = document.querySelector("audio");
     audio.play();
-})
+}) // End of audio.play() click listener
 
 document.addEventListener("DOMContentLoaded", () => {
     let classForm = document.querySelector("#classForm");
@@ -214,7 +214,7 @@ const appendListResponse = (data) => {
 
         students.forEach(student => {
             let li = document.createElement("li");
-            li.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+            li.innerHTML = `<b>Studend ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
             studentList.appendChild(li);
         })
         listResponse.appendChild(classHeading);

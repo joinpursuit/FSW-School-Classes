@@ -112,7 +112,7 @@ input[type=checkbox]:checked {
     background-color: #2d2c2e;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
     main {
         display: flex;
         flex-direction: column;
