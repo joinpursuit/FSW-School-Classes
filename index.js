@@ -92,9 +92,17 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           display.innerText = `Student name: ${student.name} \n Age: ${student.age} \n City: ${student.city} \n Grade: ${student.grade} \n Class Name: ${className} \n Message: ${message} \n Timestamp: ${timestamp}`;
         }
+        name.value = "";
+        age.value = "";
+        city.value = "";
+        grade.value = "";
         formEnrollRes.appendChild(display);
       });
     formEnrollRes.appendChild(display);
+    name.value = "";
+    age.value = "";
+    city.value = "";
+    grade.value = "";
   });
 
   let className3 = document.querySelector("#className3");
@@ -115,6 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       url = `http://localhost:3000/class/${className3.value}/students`;
     }
+    if (!className3.value) {
+      let routeError = document.createElement("p");
+      routeError.innerText = `Please enter a class name!`;
+      formListRes.appendChild(routeError);
+    }
     axios
       .get(url, {
         name: className3.value,
@@ -122,13 +135,18 @@ document.addEventListener("DOMContentLoaded", () => {
         city: cityList.value
       })
       .then(res => {
-        res.data.students.forEach(student => {
-          let display1 = document.createElement("p");
-          display1.innerText = `Student name: ${student.name}, Age: ${student.age}, City: ${student.city}, Grade: ${student.grade}`;
-          formListRes.appendChild(display1);
-        });
+        const { error, timestamp, message } = res.data;
         let display2 = document.createElement("p");
-        display2.innerText = `Message: ${res.data.message} \n Timestamp: ${res.data.timestamp}`;
+        if (error) {
+          display2.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+        } else {
+          res.data.students.forEach(student => {
+            let studentEl = document.createElement("p");
+            studentEl.innerText = `Student name: ${student.name}, Age: ${student.age}, City: ${student.city}, Grade: ${student.grade}`;
+            formListRes.appendChild(studentEl);
+          });
+          display2.innerText = `Message: ${message} \n Timestamp: ${timestamp}`;
+        }
         formListRes.appendChild(display2);
       });
   });
