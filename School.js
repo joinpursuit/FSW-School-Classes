@@ -33,7 +33,37 @@ class School {
               grade: 61
              }
             ]
-         } 
+         },
+        biology: {
+          name: "Biology",
+          teacher: "Sam Markson",
+          students: [
+            {
+            name: "Max R",
+            age: 15,
+            city: "Brooklyn",
+            grade: 64
+            },
+            {name: "Alex E",
+            age: 14,
+            city: "Brooklyn",
+            grade: 89
+             },
+             {
+              name: "Ben R",
+              age: 14,
+              city: "LIC",
+              grade: 63
+             },
+             {
+              name: "Lola V",
+              age: 15,
+              city: "LIC",
+              grade: 87
+             }
+            ]
+         }
+
     }
   }
 
@@ -47,6 +77,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -98,5 +129,11 @@ class School {
   }
 
 }
+
+// let c1 = new Class("a","k")
+// console.log(c1)
+
+// console.log(this.classes["a"]=c1)
+
 
 module.exports = School;

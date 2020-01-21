@@ -10,6 +10,8 @@ class Class {
     this.teacher = teacher
     this.students = []
   }
-}
+} 
+
+
 
 module.exports = Class;
