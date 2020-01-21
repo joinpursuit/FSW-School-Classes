@@ -1,0 +1,19 @@
+body{
+    background-color: lightsalmon;
+    background-image: url("./classroom-empty-blur-600x400.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+
+button,input[type=submit] {
+    background-color: lightseagreen; /* Green */
+    border: none;
+    color: white;
+    border-radius: 8px
+    /* font-size: 16px; */
+  }

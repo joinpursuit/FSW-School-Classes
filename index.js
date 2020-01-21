@@ -41,11 +41,10 @@ document.addEventListener("DOMContentLoaded", async() => {
     
     let showStudent=document.querySelector("#studentList")
     showStudent.addEventListener("click",async(el)=>{
-        document.getElementById("showingStudent").hidden=false
+        document.getElementById("showingStudent").hidden=false;
         school = await axios.get(url+"/");
-        showStudentList(school.data,el.target.form.elements[0].value)
+        showStudentList(school.data,el.target.form.elements[0].value,el.target.form.elements[1].selectedOptions[0].value)
     })
-
     showStudent.addEventListener("dblclick",()=>{
         document.getElementById("showingStudent").hidden=true
     })
@@ -63,7 +62,6 @@ const classOpt = (list)=>{
         classesOption.innerText=list[key].name;
         classesList.appendChild(classesOption);
     };
-    
     for(let key in list){
         let classesOption=document.createElement("option")
         classesOption.value=list[key].name 
@@ -73,21 +71,33 @@ const classOpt = (list)=>{
 }
 
 const show = (data)=>{
+    document.getElementById("showing").innerHTML=""
     let element = "";
     for (let key in data){
         element+="<p>"+ key +": "+ data[key].teacher+"</p>";
         for(let el of data[key].students){
             element+="<p>"+"student: ["+el.name+ ", age: "+ el.age+", city :"+el.city+", grade :"+el.grade+"] </p>"
         }
-        document.getElementById("showing").innerHTML=""
         document.getElementById("showing").innerHTML=element
     }
 }
 
-const showStudentList = (data,classSel)=>{
-    let element = "";
-    for(let el of data[classSel].students){
-        element+="<p>"+"student: ["+el.name+ ", age: "+ el.age+", city :"+el.city+", grade :"+el.grade+"] </p>"
+const showStudentList = (data,classSel,grade="")=>{
+    if(!grade){
+        document.getElementById("showingStudent").innerHTML=""
+        let element = "";
+        for(let el of data[classSel].students){
+            element+="<p>"+"student: ["+el.name+ ", age: "+ el.age+", city :"+el.city+", grade :"+el.grade+"] </p>"
+        }
+        document.getElementById("showingStudent").innerHTML=element
+    }else{
+        document.getElementById("showingStudent").innerHTML=""
+        let element = "";
+        data[classSel].students.forEach(student=>{
+            if(student.grade===grade){
+                    element+="<p>"+"student: ["+student.name+ ", age: "+ student.age+", city :"+student.city+", grade :"+student.grade+"] </p>"
+                document.getElementById("showingStudent").innerHTML=element
+            }
+        })
     }
-    document.getElementById("showingStudent").innerHTML=element
 }
