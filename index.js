@@ -1,6 +1,6 @@
 document.addEventListener("click", () => {
     let audio = document.querySelector("audio");
-    audio.play();
+    // audio.play();
 })
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -172,7 +172,7 @@ const appendListResponse = (data) => {
         let studentList = document.createElement("ul");
         students.forEach(student => {
             let li = document.createElement("li");
-            li.innerHTML = `<b>Name</b>: ${student.name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+            li.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
             studentList.appendChild(li);
         })
         listResponse.appendChild(studentList);
