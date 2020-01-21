@@ -20,10 +20,11 @@ const addClass = async(event)=>{
 
     }
     try{
-        let response = axios.get(`http://localhost:4000/routes/classes ${classInfo.value}`)
+        let response = axios.post(`http://localhost:4000/routes/classes ${classInfo}`)
         debugger
         let p = document.createElement("p")
-        p.innerText = response.classInfo
+       
+        p.innerText = response
         let classAdd = document.querySelector("#classAdd")
         classAdd.appendChild(p)
 
@@ -52,16 +53,18 @@ const enrollStudent = async(event)=>{
     // gradeInput.value = ""
     let studentInfo = {
         name: nameInput,
+        class: classInput,
         age: ageInput,
         city: cityInput,
         grade:gradeInput
     }
     try{
-     let response= axios.post(`http://localhost:4000/${nameOfClass}/${studentInfo.value}/enroll`)
+     let response= axios.post(`http://localhost:4000/${studentInfo.value}/enroll`)
      debugger
-        console.log(response.data)
+        console.log(response)
+   
         let p = document.createElement("p")
-        p.innerText = response.studentInfo
+        p.innerText = studentInfo
         let studentEnroll = document.querySelector("#studentEnroll")
         studentEnroll.appendChild(p)
     }catch(err){
@@ -74,8 +77,16 @@ console.log(err)
 }
 const updateStudent = (event)=>{
 event.preventDefault()
+
 }
 const listStudents = (event)=>{
 event.preventDefault()
+let nameOfClass = document.querySelector("#classList")
+let name = document.querySelector("#nameList")
+let city = document.querySelector("#cityList")
+let fail = document.querySelector("#fail")
+name.value =""
+city.value = ""
+fail.checked = false
 }
 
