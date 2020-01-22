@@ -189,10 +189,11 @@ const findStudent = async () => {
         } else if(firstName && lastName) {
             res = await axios.get(`http://localhost:3000/student/${firstName}/${lastName}`);
         }
-        debugger;
+        
+        appendFindStdResponse(res.data);
     }
 
-}
+} // End of findStudent() function
 
 const listStudents = async () => {
     let listClass = document.querySelector("#listClass");

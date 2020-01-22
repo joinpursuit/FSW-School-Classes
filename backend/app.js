@@ -136,16 +136,28 @@ const getStudentsByClassWithFilter = async (className, failing, city) => {
 } // End of getStudentByClassWithFilter() function
 
 const findStudentById = async (id) => {
-    return await db.any('SELECT * FROM students WHERE id=$1', id);  
+    try {
+        return await db.any('SELECT * FROM students WHERE id=$1', id);  
+    } catch (err) {
+        console.log(err);
+    }
 } // End of findStudentById() function
 
 const findStudentByNames = async (firstName, lastName) => {
-    return await db.any('SELECT * FROM students WHERE first_name=$1 AND last_name=$2', [firstName, lastName]);
+    try {
+        return await db.any('SELECT * FROM students WHERE first_name=$1 AND last_name=$2', [firstName, lastName]);
+    } catch (err) {
+        console.log(err);
+    }
 } // End of findStudentByNames() function
 
 const findStudentClasses = async (id) => {
-    return await db.any('SELECT * FROM class_enrollments RIGHT JOIN classes ON ' + 
-                        'classes.id=class_enrollments.class_id WHERE student_id=$1', id);
+    try {
+        return await db.any('SELECT * FROM class_enrollments RIGHT JOIN classes ON ' + 
+                            'classes.id=class_enrollments.class_id WHERE student_id=$1', id);
+    } catch (err) {
+        console.log(err);
+    }
 } // End of findStudentClasses() function
 
 app.post("/class", async (req, res) => {
@@ -287,7 +299,30 @@ app.get("/student/:id", async (req, res) => {
 app.get("/student/:firstName/:lastName", async (req, res) => {
     let {firstName, lastName} = req.params;
     let student = await findStudentByNames(firstName, lastName);
-    console.log(student);
+
+    if(student) {
+        if(student.length > 1) {
+            res.json({
+                students: student,
+                message: "Multiple students found",
+                timestamp: new Date().toString()
+            })
+        } else {
+            let studentClasses = await findStudentClasses(student[0].id);
+            res.json({
+                student: student,
+                classes: studentClasses,
+                message: "Retrieved student",
+                timestamp: new Date().toString()
+            })
+        }
+    } else {
+        res.json({
+            error: "No student found",
+            timestamp: new Date().toString()
+        })
+    }
+    
 })
 
 app.listen(port, () => console.log("Listening on port", port));
