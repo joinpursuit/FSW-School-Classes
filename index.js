@@ -21,7 +21,7 @@ const addClass = async(event)=>{
 
     }
     try{
-        let response = axios.post(`http://localhost:4000/Class ${classInfo}`)
+        let response = axios.post("http://localhost:4000/School/addclass")
         debugger
         console.log(response.data)
         let p = document.createElement("p")
@@ -61,9 +61,9 @@ const enrollStudent = async(event)=>{
         grade:gradeInput
     }
     try{
-     let response= axios.post(`http://localhost:4000/Student${studentInfo}`)
+     let response= axios.post("http://localhost:4000/School/addclass")
      debugger
-        console.log(studentInfo)
+        console.log(response)
    
         let p = document.createElement("p")
         p.innerText = studentInfo
