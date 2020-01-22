@@ -23,6 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
         addStudent();
     });
 
+    updateForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        updateStudent();
+    })
+
     findStudentForm.addEventListener("submit", (e) => {
         e.preventDefault();
         findStudent();
@@ -166,6 +171,33 @@ const appendStdResponse = (data) => {
     }
 } // End of appendStdResponse() function
 
+const updateStudent = async () => {
+    let updateId = document.querySelector("#updateId");
+    let updateFirst = document.querySelector("#updateFirst");
+    let updateLast = document.querySelector("#updateLast");
+    let updateAge = document.querySelector("#updateAge");
+    let updateCity = document.querySelector("#updateCity");
+    let updateResponse = document.querySelector("#updateResponse");
+
+    if(!updateId.value) {
+        let error = document.createElement("p");
+        error.innerText = "Please enter a student ID (If not known, use find student)";
+        updateResponse.appendChild(error);
+    } else {
+        let updates = [];
+        if(updateFirst.value) updates.push(await axios.patch(`http://localhost:3000/student?firstName=${updateFirst.value}`));
+        if(updateLast.value) updates.push(await axios.patch(`http://localhost:3000/student?lastName=${updateLast.value}`));
+        if(updateAge.value) updates.push(await axios.patch(`http://localhost:3000/student?age=${updateAge.value}`));
+        if(updateCity.value) updates.push(await axios.patch(`http://localhost:3000/student?city=${updateCity.value}`));
+        
+        appendUpdateResponse(updates);
+    }
+}
+
+const appendUpdateResponse = (updateData) => {
+    debugger;
+}
+
 const findStudent = async () => {
     let findStudentId = document.querySelector("#findStudentId");
     let findStudentFirst = document.querySelector("#findStudentFirst");
@@ -238,7 +270,7 @@ const appendFindStdResponse = (data) => {
         findStudentResponse.appendChild(classesHeading);
         findStudentResponse.appendChild(classesUl);
     }
-}
+} // End of appendFindStdResponse() function
 
 const listStudents = async () => {
     let listClass = document.querySelector("#listClass");
