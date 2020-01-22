@@ -77,6 +77,11 @@ p, label, input {
     grid-row: 2 / 3;
 }
 
+#findStudentForm {
+    display: flex;
+    flex-direction: column;
+}
+
 #listSection {
     grid-column: 4 / 7;
     grid-row: 2 / 3;
