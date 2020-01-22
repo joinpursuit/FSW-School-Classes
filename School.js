@@ -8,7 +8,6 @@ class School {
       //   physics: {} 
     }
   }
-
   /**
    * Add class to classes
    * 
@@ -17,7 +16,7 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
+    this.newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
 
@@ -29,8 +28,10 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
-  }
+    if(this.classes["className"])
+      this.class.students.push(student)
+    }
+  
 
 
 
