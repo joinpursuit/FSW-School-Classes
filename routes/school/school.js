@@ -13,10 +13,4 @@ school.post('/add',(req,res) => {
     
 })
 
-<<<<<<< HEAD
-module.exports = School;
-=======
 module.exports = school;
-
-//this is a commit test
->>>>>>> 7e5c45b445c454d2b27bd128af210b03d0ba1bbf

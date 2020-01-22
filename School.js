@@ -11,16 +11,18 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-        physics: [
-          {className: "Physics", professor: "Jon A"},
-
-        ]
+       
+        math:{
+          name: "math",
+          teacher:'Albert',
+          students:[]
+        }
     }
-    this.students = {
-      student1: [
-        {name: "dis me ", city: "NYC", age: 100, grade: "88"},
-      ]
-    }
+    // this.students = {
+    //   student1: [
+    //     {name: "dis me ", city: "NYC", age: 100, grade: "88"},
+    //   ]
+    // }
   }
 
   /**
@@ -33,8 +35,8 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
-    console.log(newClass);
-    
+    //console.log(newClass);
+    return this.classes
     
   }
 
@@ -92,7 +94,7 @@ class School {
 
 }
 let pursuit = new School()
-pursuit.addClass('math','joel null')
+//pursuit.addClass('math','joel null')
 // console.log(pursuit.enrollStudent())
 
 module.exports = School;
