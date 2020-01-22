@@ -179,16 +179,22 @@ const updateStudent = async () => {
     let updateCity = document.querySelector("#updateCity");
     let updateResponse = document.querySelector("#updateResponse");
 
-    if(!updateId.value) {
+    let id = updateId.value;
+    let firstName = updateFirst.value;
+    let lastName = updateLast.value;
+    let age = updateAge.value;
+    let city = updateCity.value;
+
+    if(!id) {
         let error = document.createElement("p");
         error.innerText = "Please enter a student ID (If not known, use find student)";
         updateResponse.appendChild(error);
     } else {
         let updates = [];
-        if(updateFirst.value) updates.push(await axios.patch(`http://localhost:3000/student?firstName=${updateFirst.value}`));
-        if(updateLast.value) updates.push(await axios.patch(`http://localhost:3000/student?lastName=${updateLast.value}`));
-        if(updateAge.value) updates.push(await axios.patch(`http://localhost:3000/student?age=${updateAge.value}`));
-        if(updateCity.value) updates.push(await axios.patch(`http://localhost:3000/student?city=${updateCity.value}`));
+        if(firstName) updates.push(await axios.patch(`http://localhost:3000/student/${id}?firstName=${firstName}`));
+        if(lastName) updates.push(await axios.patch(`http://localhost:3000/student/${id}?lastName=${lastName}`));
+        if(age) updates.push(await axios.patch(`http://localhost:3000/student/${id}?age=${age}`));
+        if(city) updates.push(await axios.patch(`http://localhost:3000/student/${id}?city=${city}`));
         
         appendUpdateResponse(updates);
     }

@@ -325,4 +325,26 @@ app.get("/student/:firstName/:lastName", async (req, res) => {
     
 })
 
+app.patch("/student/:id", async (req, res) => {
+    let {firstName, lastName, age, city} = req.query;
+    let {id} = req.params;
+    if(firstName) {
+        let updatedStudent = await db.one('UPDATE students SET first_name=$1 WHERE id=$2 RETURNING *', [firstName, id])
+        res.json({
+            updated: updatedStudent,
+            message: "Updated first name",
+            timestamp: new Date().toString()
+        })
+    } else if(lastName) {
+        console.log(lastName);
+        res.json({})
+    } else if(age) {
+        console.log(age);
+        res.json({})
+    } else if(city) {
+        console.log(city);
+        res.json({})
+    }
+})
+
 app.listen(port, () => console.log("Listening on port", port));
