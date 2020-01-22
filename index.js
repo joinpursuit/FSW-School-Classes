@@ -19,17 +19,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
   })
 
+  let p = document.createElement("p")
+  addClassForm.appendChild(p)
+
   addClassForm.addEventListener("submit",async(e)=>{
     e.preventDefault();
+    // console.log(classNameInput.value, teacherInput.value)
     if(classNameInput.value && teacherInput.value){
       let className = classNameInput.value;
       let teacher = teacherInput.value;
 
+    
       try{
-        let res = await axios.post("http://localhost:3000/class", {name: className, teacher: teacher })
-        
+        await axios.post("http://localhost:3000/class", {name: className, teacher: teacher }).then(res=>{
+          p.innerText = "just addded class " + res.data.newClass.name
+          // debugger
+        })
+
       }catch(err){
-        console.log(err)
+        p.innerText = "Please fill out all the information or Class already exists";
+        //timestamp: "YYYY, MM/DD HH:MM:SS"
       }
     }
 

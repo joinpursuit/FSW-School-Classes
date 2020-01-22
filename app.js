@@ -1,16 +1,18 @@
 const express = require("express");
 const cors = require("cors");
+const timestamp = require("timestamp");
 const app = express();
-const bodyParser = require("body-parser")
-const port = 3000;
+const bodyParser = require("body-parser");
 const School = require("./School");
+
+const port = 3000;
 
 let mySchool = new School()
 
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
 
 const showAllClasses = (req, res) => {
   res.json({
@@ -19,9 +21,14 @@ const showAllClasses = (req, res) => {
 }
 
 const checkIfClassExists = (req, res, next) => {
-  if(mySchool.class[req.body.name]){
-    //res.
-  
+  //console.log(mySchool.classes[req.body.name])
+  if(mySchool.classes[req.body.name]){
+
+    res.json({
+      status: 200,
+      error: "Please fill out all the information or Class already exists",
+      timestamp: req.timestamp
+    })
 } else{
   next()
 }
@@ -31,8 +38,10 @@ const addNewClass =(req, res) => {
   let addedClass = mySchool.addClass(req.body.name, req.body.teacher)
   res.json({
     status: 200,
-    message: "Added new class",
-    newClass: addedClass
+    newClass: addedClass,
+    message: "Created a new class",
+    timestamp: "YYYY, MM/DD HH:MM:SS"
+    // timestamp :req.timestamp
   })
 
 
