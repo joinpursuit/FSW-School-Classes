@@ -21,10 +21,3 @@
 
 //     TODO: Add in a new section to update the students information and not the grade
 //     the grade and class enrollment will have a different section
-//     This will require a student id (so using the find specific student is rec.)
-//     This will move list students section to a second row
-//     list students will take up the last 3 columns in row 2 (not the right most one)
-
-//     TODO: Add a find specific student section (takes in a name, and last name OR an ID)
-//     This will show the students information (ID, name, city, age, classes enrolled in and grades)
-//     Find Student will be in the first column (not the left most one)

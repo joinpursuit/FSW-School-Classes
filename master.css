@@ -40,7 +40,7 @@ h2, h3 {
     color: #C1232C;
 }
 
-p, label, input {
+p, label, input, li {
     font-family: abstergoSans;
     color: #2D2C2E;
 }

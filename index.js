@@ -195,6 +195,51 @@ const findStudent = async () => {
 
 } // End of findStudent() function
 
+const appendFindStdResponse = (data) => {
+    let findStudentResponse = document.querySelector("#findStudentResponse");
+    findStudentResponse.innerHTML = "";
+    
+    if(data.students) {
+        let students = data.students;
+        let message = document.createElement("p");
+        message.innerText = data.message;
+
+        let studentUl = document.createElement("ul");
+        students.forEach(student => {
+            let li = document.createElement("li");
+            li.innerText = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`;
+            studentUl.appendChild(li);
+        })
+
+        findStudentResponse.appendChild(message);
+        findStudentResponse.appendChild(studentUl);
+    } else if(data.error) {
+        let error = document.createElement("p");
+        error.innerText = data.error;
+        findStudentResponse.appendChild(error);
+    } else {
+        let student = data.student[0];
+        let classes = data.classes;
+
+        let studentInfo = document.createElement("p");
+        studentInfo.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`
+
+        let classesHeading = document.createElement("h3");
+        classesHeading.innerText = "Classes:" 
+
+        let classesUl = document.createElement("ul");
+        classes.forEach(foundClass => {
+            let li = document.createElement("li");
+            li.innerHTML = `<b>Class Name</b>: ${foundClass.class_name} <b>Teacher</b>: ${foundClass.teacher} <b>Grade</b>: ${foundClass.grade}`
+            classesUl.appendChild(li);
+        })
+
+        findStudentResponse.appendChild(studentInfo);
+        findStudentResponse.appendChild(classesHeading);
+        findStudentResponse.appendChild(classesUl);
+    }
+}
+
 const listStudents = async () => {
     let listClass = document.querySelector("#listClass");
     let listCity = document.querySelector("#listCity");
@@ -253,7 +298,7 @@ const appendListResponse = (data) => {
 
         students.forEach(student => {
             let li = document.createElement("li");
-            li.innerHTML = `<b>Studend ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+            li.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
             studentList.appendChild(li);
         })
         listResponse.appendChild(classHeading);
