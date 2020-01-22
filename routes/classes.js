@@ -20,7 +20,7 @@ classes.post("/", (request, response) => {
     "message": `Enter Class and Teacher name ${nameOfClass} ${nameOfTeacher}`,
     "dateAdded": new Date()
   })
-  classes.post("/:class/enroll", (request, response) => {
+  classes.post("/enroll", (request, response) => {
     let nameOfClass = request.params.nameOfClass
     let nameOfStudent = request.params.nameOfStudent
     let age = request.body.age

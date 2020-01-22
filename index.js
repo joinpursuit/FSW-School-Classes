@@ -1,3 +1,4 @@
+// let response = "http://localhost:4000/"
 document.addEventListener("DOMContentLoaded",()=>{
     let addButton = document.querySelector("#addButton")
     addButton.addEventListener("click",addClass)
@@ -16,12 +17,13 @@ const addClass = async(event)=>{
     let teacherNameInput = nameOfTeacher.value
     let classInfo = {
         teacher:teacherNameInput,
-        class:nameOfClassInput
+        classes:nameOfClassInput
 
     }
     try{
-        let response = axios.post(`http://localhost:4000/routes/classes ${classInfo}`)
+        let response = axios.post(`http://localhost:4000/Class ${classInfo}`)
         debugger
+        console.log(response.data)
         let p = document.createElement("p")
        
         p.innerText = response
@@ -59,9 +61,9 @@ const enrollStudent = async(event)=>{
         grade:gradeInput
     }
     try{
-     let response= axios.post(`http://localhost:4000/${studentInfo.value}/enroll`)
+     let response= axios.post(`http://localhost:4000/Student${studentInfo}`)
      debugger
-        console.log(response)
+        console.log(studentInfo)
    
         let p = document.createElement("p")
         p.innerText = studentInfo
@@ -89,4 +91,10 @@ name.value =""
 city.value = ""
 fail.checked = false
 }
+// const clear = () => {
+//     let functionThatClears = getfuntionThatClears();
+//     while (functionThatClears.firstChild) {
+//       functionThatClears.removeChild(functionThatClears.firstChild);
+//     }
+//   };
 
