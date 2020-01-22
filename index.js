@@ -201,7 +201,26 @@ const updateStudent = async () => {
 }
 
 const appendUpdateResponse = (updateData) => {
-    debugger;
+    let updateResponse = document.querySelector("#updateResponse");
+    let updates = updateData;
+
+    if(updates.length) {
+        let updateUl = document.createElement("ul");
+        updates.forEach((update, i) => {
+            if(update === updates[updates.length - 1]) {
+                let student = update.data.updated;
+                let {id, first_name, last_name, city, age} = student;
+                let updatedStudent = document.createElement("p");
+                updatedStudent.innerHTML = `<b>Student ID</b>: ${id} <b>First Name</b>: ${first_name} <b>Last Name</b>: ${last_name} <b>City</b>: ${city} <b>Age</b>: ${age}`;
+                updateResponse.appendChild(updatedStudent);
+            }
+            let li = document.createElement("li");
+            li.innerText = update.data.message;
+            updateUl.appendChild(li);
+        })
+
+        updateResponse.appendChild(updateUl);
+    }
 }
 
 const findStudent = async () => {
