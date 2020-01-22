@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-    console.log("test")
+let subbut = document.querySelector("#subbut")
 
 
 

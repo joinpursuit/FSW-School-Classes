@@ -1,3 +1,9 @@
+body{
+background-color: grey;
+
+
+}
+
 #divone{
 border-style: solid;
 border-color: blue;
@@ -15,11 +21,13 @@ border-color: blue;
 
 
 
-#divthree{
+div#divthree{
     border-style: solid;
     border-color:orange;
     width: 1177px;
 height:400px;
+display:flex;
+justify-content: space-evenly;
 
 
 }
@@ -28,4 +36,53 @@ height:400px;
     border-color: pink;
 
 
+}
+
+#rowa{
+    z-index:2;
+    border-style: solid;
+    border-color:grey;
+    width:20%;
+}
+
+#rowb{
+    z-index:3;
+    border-style: solid;
+    border-color:green;
+    width:20%;
+}
+#rowc{
+    text-align: center;
+    z-index:5;
+    border-style: solid;
+    border-color:purple;
+    width:40%;
+}
+#rowd{
+    border-style: solid;
+    border-color:black;
+    width:20%;
+}
+#rowe{
+    border-style: solid;
+    border-color:navy;
+    width:20%;
+}
+.buttonChoice{
+color:red;
+}
+
+input#subbut{
+cursor: pointer;
+width: 120px;
+border-style: outset;
+font-size: 18px;
+height: 30px;
+}
+
+label{
+font-size: 23px;
+}
+input#password{
+font-size: 21px;
 }
