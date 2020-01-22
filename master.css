@@ -39,13 +39,15 @@ justify-content: space-evenly;
 }
 
 #rowa{
+     text-align: center;
     z-index:2;
     border-style: solid;
-    border-color:grey;
+    border-color:red;
     width:20%;
 }
 
 #rowb{
+    text-align: center;
     z-index:3;
     border-style: solid;
     border-color:green;
@@ -56,9 +58,10 @@ justify-content: space-evenly;
     z-index:5;
     border-style: solid;
     border-color:purple;
-    width:40%;
+    width:50%;
 }
 #rowd{
+    text-align: center;
     border-style: solid;
     border-color:black;
     width:20%;
@@ -85,4 +88,8 @@ font-size: 23px;
 }
 input#password{
 font-size: 21px;
+}
+
+h1#sd{
+    display:none
 }
