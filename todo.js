@@ -18,6 +18,3 @@
 //     a drop down select of all classes and teachers (For list students too)
 //     Adds the ability to have multiple classes of the same name, with seperate teachers
 //     Maybe add a functionality to see/post teacher reviews
-
-//     TODO: Add in a new section to update the students information and not the grade
-//     the grade and class enrollment will have a different section
