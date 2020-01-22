@@ -1,0 +1,31 @@
+#divone{
+border-style: solid;
+border-color: blue;
+
+}
+
+
+#divtwo{
+    border-style: solid;
+    border-color:green;
+
+
+
+}
+
+
+
+#divthree{
+    border-style: solid;
+    border-color:orange;
+    width: 1177px;
+height:400px;
+
+
+}
+#mainContainer{
+    border-style: solid;
+    border-color: pink;
+
+
+}
