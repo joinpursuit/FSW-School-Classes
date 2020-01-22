@@ -12,11 +12,17 @@ const timeStamp = () => new Date().toLocaleString();
 
 let mySchool = new School();
 
+const showAllClasses = (req, res) => {
+    res.json({
+        allClasses: mySchool.classes
+    })
+}
+
 const addClass = (req, res, next) => {
     let className = req.body.className;
     let teacher = req.body.teacher;
     console.log(mySchool)
-    res.send({
+    res.json({
         class: mySchool.addClass(className,teacher),
         message: "Created a new class",
         timestamp: timeStamp()
@@ -26,7 +32,7 @@ const addClass = (req, res, next) => {
 const checkClass = (req, res, next) => {
     console.log("class name" ,mySchool['classes'])
     if (mySchool.classes[req.body.className]) {
-        res.send({
+        res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: timeStamp()
         })
@@ -42,8 +48,7 @@ const addStudent = (req, res, next) => {
     // let grade = req.body.grade;
     let class_name = req.params.class_name;
     console.log('classname',class_name);
-    
-    res.send({
+    res.json({
         student: mySchool.enrollStudent(class_name, req.body),
         className: class_name,
         message: "Enrolled Student",
@@ -58,7 +63,7 @@ const checkStudent = (req, res, next) => {
     if(classArr.length !== 0){
         classArr.forEach(el => {
         if (el.name === req.body.name) {
-            res.send({
+            res.json({
                 error: "Please fill out all the information for the student",
                 timestamp: timeStamp()
             })
@@ -68,9 +73,44 @@ const checkStudent = (req, res, next) => {
         next()
     }
 }
+const isFailing = (req, res, next) => {
+    let grade = req.params.class_name.students.grade
+    if (mySchool.classes[grade] < 70) {
+        res.json({
+            failing: true,
+            grade: grade
+        })
+        next();
+    } else {
+        res.json({
+            failing: false,
+            grade: grade
+        })
+        next;
+    }
+}
+
+const getStudentsByClass = (req, res, next) => {
+    let className = req.params.class_name;
+    if (mySchool.classes[className])  {
+    res.json({
+        students: mySchool.classes[className]['students'],
+        message: "Retrieved Students",
+        timestamp: timeStamp()
+    })
+} else {
+    res.json({
+        error: `Class ${className} does not exist!`,
+        timestamp: timeStamp()
+        })
+    }
+
+}
+
+router.get("/", showAllClasses);
 
 router.post("/", checkClass, addClass);
 router.post("/:class_name/enroll", checkStudent, addStudent);
-router.get("/:class_name/students");
+router.get("/:class_name/students", isFailing, getStudentsByClass);
 
 module.exports = router;
