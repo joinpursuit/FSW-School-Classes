@@ -19,6 +19,17 @@ app.use(cors())
 // app.use('/students',studentRouter)
 //app.use('/school', schoolRouter)
 
+let now = new Date()
+const classesCheck = (req, res, next) => {
+    if(newSchool['classes'][req.body.name]){
+        res.json({ 
+            "error": "Please fill out all the information for the student",
+            "timestamp": now.toString(Date.now())
+          })
+    }else {
+        next()
+    }
+}
 
 app.get('/',(req,res) => {
     res.json({
@@ -27,13 +38,13 @@ app.get('/',(req,res) => {
     })
 })
 
-app.post('/class',(req,res) => {
+app.post('/class',classesCheck,(req,res) => {
     let { name , teacher } = req.body
     
     let addedClass = newSchool.addClass(name,teacher)
     res.json({addedClass,
         "message": "Created a new class",
-        "timestamp": "YYYY, MM/DD HH:MM:SS"})
+        "timestamp": now.toString(Date.now())}) //"YYYY, MM/DD HH:MM:SS"
 })
 
 // app.get('/',(req, res) => {
