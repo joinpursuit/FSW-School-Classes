@@ -8,46 +8,39 @@ class School {
       //   physics: {} 
     }
   }
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
+  // /**
+  //  * Add class to classes
+  //  * 
+  //  * @param {string} name - Name of the class
+  //  * @param {string} teacher - Name of instructor 
+  //  * @return {Class} Class object
+  //  */
   addClass(name, teacher) {
     this.newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
+  // /**
+  //  * Enroll student in class
+  //  * 
+  //  * @param {string} className - Name of the class
+  //  * @param {Student} student - Student object
+  //  * @return {Student} Enrolled student
+  //  */
   enrollStudent(className, student) {
-    if(this.classes["className"])
-      this.class.students.push(student)
+    if(this.classes[className])
+      this.className.push(student)
     }
-  
 
-
-
-
-  /**
-   * Get all students enrolled in a class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
+  // /**
+  //  * Get all students enrolled in a class
+  //  * 
+  //  * @param {string} className - Name of the class
+  //  * @return {Student[]} Array of Student objects
+  //  */
   getStudentsByClass(className) {
     // Your code here
   }
-
-
-
 
   /**
    * Get all students and apply filters. If failing = true
