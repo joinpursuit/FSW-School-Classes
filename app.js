@@ -24,9 +24,15 @@ app.post("/school/classes", (req,res) =>{
     res.json({status:"sucess", mySchool})
 })
 
-app.post("/school/students", (req,res) =>{
-    console.log(req.body)
+let enrollStudent = (req, res, next) =>{
     let newStudent = req.body
-    mySchool.enrollStudent(newStudent["className"],newStudent["student"])
-    res.json({status:"sucess", newStudent})
+    if(mySchool.classes[newStudent["name"]]){
+        mySchool.classes[newStudent["name"]]["students"].push(newStudent["student"])
+      }
+      next()
+}
+
+app.post("/school/students", enrollStudent, (req,res) =>{
+    console.log(req.body)
+    res.json({status:"sucess", mySchool})
 })

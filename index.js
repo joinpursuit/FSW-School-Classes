@@ -3,16 +3,38 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let addStudent = document.querySelector("#addStudent")
     let studentList = document.querySelector("#studentList")
 
+    const updateClassList = (classList) =>{
+        let selectClass = document.querySelector("#addStudentClass")
+        for(key in classlist){
+            debugger
+            let option = document.createElement("option")
+            option.innerText = classList[key]["name"]
+            selectClass.appendChild(option)
+        }
+    }
+
     addClass.addEventListener("submit", async (event)=>{
         event.preventDefault()
         let newClass = {name:addClass.addClassName.value,teacher:addClass.addClassTeach.value}
+        let selectClass = document.querySelector("#addStudentClass")
+        selectClass.innerHTML = ""
         try{
             classPost = await axios.post("http://localhost:3000/school/classes",newClass).then(res =>{
+                let newClasses = res.data.mySchool.classes
                 debugger
-            })
+
+                for(key in newClasses){
+
+                     let option = document.createElement("option")
+                    option.innerText = newClasses[key]["name"]
+                    selectClass.appendChild(option)
+                }
+            }
+            )
         } catch(err){
             console.log(err)
         }
+
     })
 
     addStudent.addEventListener("submit", async(event)=>{
