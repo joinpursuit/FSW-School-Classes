@@ -1,7 +1,10 @@
-document.addEventListener("click", () => {
+const playAudio = () => {
     let audio = document.querySelector("audio");
     audio.play();
-}) // End of audio.play() click listener
+    document.removeEventListener("click", playAudio)
+} // End of playAduio() function
+
+document.addEventListener("click", playAudio) // End of audio.play() click listener
 
 document.addEventListener("DOMContentLoaded", () => {
     let classForm = document.querySelector("#classForm");
