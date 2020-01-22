@@ -18,8 +18,8 @@ CREATE TABLE students (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  city TEXT NOT NULL,
-  age INTEGER NOT NULL
+  city TEXT,
+  age INTEGER
 );
 
 CREATE TABLE class_enrollments (

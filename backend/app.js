@@ -221,8 +221,8 @@ app.post("/class/:className/enroll", async (req, res) => {
        } else {
            // If the student isn't existing then enroll in both the school AND the class
 
-            let added = await db.one('INSERT INTO students (first_name, last_name, city, age) ' + 
-                                     'VALUES(${firstName}, ${lastName}, ${city}, ${age}) RETURNING *', student);
+            let added = await db.one('INSERT INTO students (first_name, last_name) ' + 
+                                     'VALUES(${firstName}, ${lastName}) RETURNING *', student);
 
             db.none('INSERT INTO class_enrollments (class_id, student_id, grade) ' + 
                     'VALUES($1, $2, $3)', [newClass.id, added.id, student.grade])
@@ -294,7 +294,7 @@ app.get("/student/:id", async (req, res) => {
             timestamp: new Date().toString()
         })
     }
-})
+}) // End of /student/:id get route
 
 app.get("/student/:firstName/:lastName", async (req, res) => {
     let {firstName, lastName} = req.params;
@@ -323,7 +323,7 @@ app.get("/student/:firstName/:lastName", async (req, res) => {
         })
     }
     
-})
+}) // End of /student/:firstName/:lastName route
 
 app.patch("/student/:id", async (req, res) => {
     let {firstName, lastName, age, city} = req.query;
@@ -357,6 +357,6 @@ app.patch("/student/:id", async (req, res) => {
             timestamp: new Date().toString()
         })
     }
-})
+}) // End of /student/:id patch route
 
 app.listen(port, () => console.log("Listening on port", port));

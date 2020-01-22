@@ -101,14 +101,12 @@ const addStudent = () => {
     let studentClass = document.querySelector("#studentClass");
     let studentFirst = document.querySelector("#studentFirst");
     let studentLast = document.querySelector("#studentLast");
-    let studentAge = document.querySelector("#studentAge");
-    let studentCity = document.querySelector("#studentCity");
     let studentGrade = document.querySelector("#studentGrade");
     let studentSection = document.querySelector("#studentResponse");
     // Grab all needed student tags
 
     // Check if any info was empty
-    if(!studentClass.value || !studentFirst.value || !studentLast.value || !studentAge.value || !studentCity.value || !studentGrade.value){
+    if(!studentClass.value || !studentFirst.value || !studentLast.value){
         // If any inputs are empty then display an error
         studentSection.innerHTML = "";
         let p = document.createElement("p");
@@ -119,8 +117,6 @@ const addStudent = () => {
         let student = {
             firstName: studentFirst.value,
             lastName: studentLast.value,
-            age: studentAge.value,
-            city: studentCity.value,
             grade: studentGrade.value
         }
         
@@ -141,6 +137,7 @@ const appendStdResponse = (data) => {
         let err = document.createElement("p");
         err.innerText = data.error;
         studentSection.appendChild(err);
+
     } else if(data.message === "Enrolled Student") {
         // If student was fully enrolled then display
         let status = document.createElement("p");
@@ -156,17 +153,20 @@ const appendStdResponse = (data) => {
     }
 
     if(!data.error) {
+
+        let className = document.createElement("h3");
+        className.innerText = data.className;
+        studentSection.appendChild(className);
+
         // Display info for the student
         let p = document.createElement("p");
-        p.innerHTML = `<b>Name</b>: ${student.name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
+        p.innerHTML = `<b>Name</b>: ${student.name} <b>Grade</b>: ${student.grade}`;
         studentSection.appendChild(p);
 
         // Reset the input tags
         document.querySelector("#studentClass").value = "";
         document.querySelector("#studentFirst").value = "";
         document.querySelector("#studentLast").value = "";
-        document.querySelector("#studentCity").value = "";
-        document.querySelector("#studentAge").value = "";
         document.querySelector("#studentGrade").value = "";
     }
 } // End of appendStdResponse() function
@@ -198,7 +198,7 @@ const updateStudent = async () => {
         
         appendUpdateResponse(updates);
     }
-}
+} // End of updateStudent() function
 
 const appendUpdateResponse = (updateData) => {
     let updateResponse = document.querySelector("#updateResponse");
@@ -221,7 +221,7 @@ const appendUpdateResponse = (updateData) => {
 
         updateResponse.appendChild(updateUl);
     }
-}
+} // End of appendUpdateStudent() function
 
 const findStudent = async () => {
     let findStudentId = document.querySelector("#findStudentId");
