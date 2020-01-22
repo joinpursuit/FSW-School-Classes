@@ -9,6 +9,8 @@ document.addEventListener("click", playAudio) // End of audio.play() click liste
 document.addEventListener("DOMContentLoaded", () => {
     let classForm = document.querySelector("#classForm");
     let studentForm = document.querySelector("#studentForm");
+    let updateForm = document.querySelector("#updateForm");
+    let findStudentForm = document.querySelector("#findStudentForm");
     let listForm = document.querySelector("#listForm");
 
     classForm.addEventListener("submit", (e) => {
@@ -18,12 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
     studentForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        addStudent()
+        addStudent();
     });
+
+    findStudentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        findStudent();
+    })
 
     listForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        listStudents()
+        listStudents();
     });
 }) // End of DOMContentLoaded
 
@@ -158,6 +165,34 @@ const appendStdResponse = (data) => {
         document.querySelector("#studentGrade").value = "";
     }
 } // End of appendStdResponse() function
+
+const findStudent = async () => {
+    let findStudentId = document.querySelector("#findStudentId");
+    let findStudentFirst = document.querySelector("#findStudentFirst");
+    let findStudentLast = document.querySelector("#findStudentLast");
+    let findStudentResponse = document.querySelector("#findStudentResponse");
+
+    let id = findStudentId.value;
+    let firstName = findStudentFirst.value;
+    let lastName = findStudentLast.value;
+
+    if(!id && (!firstName && !lastName)) {
+        findStudentResponse.innerHTML = "";
+        let p = document.createElement("p");
+        p.innerText = "Please enter either a students id OR both first and last names.";
+        findStudentResponse.appendChild(p);
+    } else {
+        let res;
+
+        if(id) {
+            res = await axios.get(`http://localhost:3000/student/${id}`);
+        } else if(firstName && lastName) {
+            res = await axios.get(`http://localhost:3000/student/${firstName}/${lastName}`);
+        }
+        debugger;
+    }
+
+}
 
 const listStudents = async () => {
     let listClass = document.querySelector("#listClass");
