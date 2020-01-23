@@ -128,7 +128,7 @@ const addClass = async (req, res) => {
 
     // Check ig the class is already existing
     if(await isClassExisting(newClass)) {
-        res.status (400).json({
+        res.status(400).json({
             error: "Class already exists",
             "timestamp": new Date()
         });
@@ -138,7 +138,7 @@ const addClass = async (req, res) => {
         db.none('INSERT INTO classes(class_name, teacher) ' + 
                 'VALUES(${name}, ${teacher})', newClass);
 
-        res.status (200).json({
+        res.status(200).json({
             class: req.body,
             message: "created a new class",
             timestamp: new Date().toString()
@@ -174,7 +174,7 @@ const enrollStudent = async (req, res) => {
             db.none('UPDATE class_enrollments SET grade=$1 ' + 
                     'WHERE student_id=$2', [student.grade, existingStd.id]);
 
-            res.json({ 
+            res.status(200).json({ 
                 student: req.body,
                 className,
                 message: "Updated Student",
@@ -191,7 +191,7 @@ const enrollStudent = async (req, res) => {
                     'VALUES($1, $2, $3)', [newClass.id, added.id, student.grade])
        }
 
-        res.json({ 
+        res.status(200).json({ 
             student: req.body,
             className,
             message: "Enrolled Student",
@@ -199,7 +199,7 @@ const enrollStudent = async (req, res) => {
         })
 
     } else {
-        res.json({
+        res.status(400).json({
             error: `Class ${className} doesn't exist.`,
             timestamp: new Date().toString()
         })
@@ -223,7 +223,7 @@ const findStudents = async (req, res) => {
             students = await getStudentsByClass(className);
         }
 
-        res.json({
+        res.status(200).json({
             // If city or failing queries are passed, then WithFilter version of getStudentsByClass runs
             // Otherwise the normal version runs
             students,
@@ -233,7 +233,7 @@ const findStudents = async (req, res) => {
         }) 
 
     } else {
-        res.json({
+        res.status(400).json({
             error: `Class ${className} doesn't exist.`,
             timestamp: new Date().toString()
         })

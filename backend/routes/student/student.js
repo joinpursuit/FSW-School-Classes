@@ -1,5 +1,7 @@
 const student = require("express").Router();
-const {getStudentById, getStudentByName, updateStudent} = require("./../../queries/student/student.js");
+const {addStudent, getStudentById, getStudentByName, updateStudent} = require("./../../queries/student/student.js");
+
+student.post("/", addStudent);
 
 student.get("/:id", getStudentById);
 

@@ -98,15 +98,15 @@ const appendClassResponse = (data) => {
 } // End of appendClassResponse() function
 
 const addStudent = () => {
-    let studentClass = document.querySelector("#studentClass");
     let studentFirst = document.querySelector("#studentFirst");
     let studentLast = document.querySelector("#studentLast");
-    let studentGrade = document.querySelector("#studentGrade");
+    let studentCity = document.querySelector("#studentCity");
+    let studentAge = document.querySelector("#studentAge");
     let studentSection = document.querySelector("#studentResponse");
     // Grab all needed student tags
 
     // Check if any info was empty
-    if(!studentClass.value || !studentFirst.value || !studentLast.value){
+    if(!studentFirst.value || !studentLast.value || !studentCity.value || !studentAge.value) {
         // If any inputs are empty then display an error
         studentSection.innerHTML = "";
         let p = document.createElement("p");
@@ -117,10 +117,11 @@ const addStudent = () => {
         let student = {
             firstName: studentFirst.value,
             lastName: studentLast.value,
-            grade: studentGrade.value
+            city: studentCity.value,
+            age: studentAge.value
         }
         
-        postData(`http://localhost:3000/class/${studentClass.value}/enroll`, student, appendStdResponse);
+        postData(`http://localhost:3000/student/`, student, appendStdResponse);
     }
 } // End of addStudent() function
 
@@ -131,41 +132,19 @@ const appendStdResponse = (data) => {
 
     let student = data.student;
 
-    // Check if for an error
-    if(data.error) {
-        // Display it if so
-        let err = document.createElement("p");
-        err.innerText = data.error;
-        studentSection.appendChild(err);
+    let message = document.createElement("p");
+    message.innerText = "Added student";
 
-    } else if(data.message === "Enrolled Student") {
-        // If student was fully enrolled then display
-        let status = document.createElement("p");
-        status.innerText = "Student Enrolled";
-        studentSection.appendChild(status);
+    let studentInfo = document.createElement("p");
+    studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>City</b>: ${student.city} <b>Age</b>: ${student.age}`;
 
-    } else if(data.message === "Updated Student") {
-        // If student info was update then display 
-
-        let status = document.createElement("p");
-        status.innerText = "Student Updated";
-        studentSection.appendChild(status);
-    }
-
-    if(!data.error) {
-
-        // Display info for the student
-        let p = document.createElement("p");
-        p.innerHTML = `<bClass Name</b>: ${data.className}<b>Name</b>: ${student.name} <b>Grade</b>: ${student.grade}`;
-        studentSection.appendChild(p);
-
-        // Reset the input tags
-        document.querySelector("#studentClass").value = "";
-        document.querySelector("#studentFirst").value = "";
-        document.querySelector("#studentLast").value = "";
-        document.querySelector("#studentGrade").value = "";
-    }
+    studentSection.appendChild(message);
+    studentSection.appendChild(studentInfo);
 } // End of appendStdResponse() function
+
+const enrollStudent = () => {
+
+} // End of enrollStudent() function
 
 const updateStudent = async () => {
     let updateId = document.querySelector("#updateId");
@@ -266,7 +245,7 @@ const appendFindStdResponse = (data) => {
         let studentUl = document.createElement("ul");
         students.forEach(student => {
             let li = document.createElement("li");
-            li.innerText = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`;
+            li.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`;
             studentUl.appendChild(li);
         })
 
