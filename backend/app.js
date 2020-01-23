@@ -6,7 +6,7 @@ const port = 3000;
 const app = express();
 
 const classRouter = require("./routes/class/classes.js");
-const studentRouter = require("./routes/students/student.js")
+const studentRouter = require("./routes/student/student.js")
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));

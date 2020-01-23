@@ -1,4 +1,4 @@
-const {db} = require("./../../db.js");
+const {db} = require("../../db.js");
 const student = require("express").Router();
 
 const findStudentById = async (id) => {
