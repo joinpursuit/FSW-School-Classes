@@ -17,10 +17,16 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
-
-    return newClass;
+    if(!this.classes[name]){
+      let newClass = new Class(name, teacher);
+      this.classes[name] = newClass;
+  
+      return this.classes;
+    } else {
+      console.log("Class already exist")
+      return false
+    }
+   
   }
 
   /**
@@ -32,10 +38,26 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    student = new Student(name, age, city, grade)
-    this.classes[className].student.push(student)
-
-    return this.classes[className].student
+    // console.log(student);
+    // console.log(this.classes)
+    // console.log(className)
+    if(!this.classes[className]){
+      console.log("Class does not Exist!!")
+      return false
+    } else {
+      this.classes[className].students.push(student)
+      // this.classes[className].students.forEach((el) =>{
+      //   console.log("HELLO "+Object.values(el))
+      //   for(let key in el){
+      //     console.log(key)
+      //   }
+      // })
+     
+      console.log(this.classes[className].students);
+      return this.classes[className].students
+    }
+    
+    
 
   }
 
@@ -50,8 +72,13 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-
-    return this.classes[className].students
+    if(!this.classes[className]){
+      return false
+    } else {
+      console.log(this.classes[className].students)
+      return this.classes[className].students
+    }
+    
   }
 
 
@@ -88,6 +115,7 @@ class School {
 
 }
 
-mySchool.addClass('physics', 'Henry Roman');
+// let mySchool = new School();
+// mySchool.addClass('physics', 'Henry Roman');
 
 module.exports = School;

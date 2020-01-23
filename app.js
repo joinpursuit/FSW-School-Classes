@@ -1,5 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser")
+const timestamp = require('time-stamp');// ex . timestamp: req.timestamp
+const School = require('./School')
+const Student = require('./Student')
 
 const port = 3000;
 
@@ -8,23 +12,60 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+// app.use(time);
 
 let myschool = new School();
 
+const middleWareA = (req,res, next) => {
+    let studSample = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
+    let students = myschool.enrollStudent(req.params.className, studSample)
+    if(students){
+        res.json("Student has been added")
+        console.log("Middleware A has been fired");
+    } else {
+        res.json("No class at that name")
+    }
+   
+    // console.log(myschool.classes)
+//   next();
+}
+
 app.get("/", (req, res) => {
-    res.json("Hello Wellcome to Jay World")
+    console.log(myschool.classes)
+    res.json("Hello Wellcome to Jay World ")
+    
 })
+app.post("/class/:className/enroll/", middleWareA, (req, res) => {
 
-app.post("/class", (req, res) => {
-    res.json("Updating classes")
-})
-
-app.post("/class/:class-name/enroll", (req, res) => {
     res.json("Updating class enrollment")
 })
 
-app.get("/class/:class-name/students", (req, res) => {
-    res.json("List of students")
+app.post("/class/:name/:teacher", (req, res) => {
+    let nClass = myschool.addClass(req.params.name, req.params.teacher);
+    // console.log(myschool.classes)
+    if(nClass){
+        res.json({ 
+            "class": nClass,
+            "message": "Created a new class",
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss'),
+          })
+    } else {
+        res.json({ 
+            "error": "Please fill out all the information or Class already exists",
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss')
+          })
+    }
+})
+
+
+app.get("/class/:className/students", (req, res) => {
+    let sClass = myschool.getStudentsByClass(req.params.className)
+    // console.log(myschool.getStudentsByClass(req.params.className))
+    if(sClass){
+        res.json(sClass)
+    } else {
+        res.json("No such class")
+    }
 })
 
 app.listen(port, () => {
