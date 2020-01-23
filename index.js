@@ -154,13 +154,9 @@ const appendStdResponse = (data) => {
 
     if(!data.error) {
 
-        let className = document.createElement("h3");
-        className.innerText = data.className;
-        studentSection.appendChild(className);
-
         // Display info for the student
         let p = document.createElement("p");
-        p.innerHTML = `<b>Name</b>: ${student.name} <b>Grade</b>: ${student.grade}`;
+        p.innerHTML = `<bClass Name</b>: ${data.className}<b>Name</b>: ${student.name} <b>Grade</b>: ${student.grade}`;
         studentSection.appendChild(p);
 
         // Reset the input tags
@@ -178,12 +174,14 @@ const updateStudent = async () => {
     let updateAge = document.querySelector("#updateAge");
     let updateCity = document.querySelector("#updateCity");
     let updateResponse = document.querySelector("#updateResponse");
+    // Grab all needed update tags
 
     let id = updateId.value;
     let firstName = updateFirst.value;
     let lastName = updateLast.value;
     let age = updateAge.value;
     let city = updateCity.value;
+    // Set variables for the values for readability
 
     if(!id) {
         let error = document.createElement("p");
@@ -204,7 +202,7 @@ const appendUpdateResponse = (updateData) => {
     let updateResponse = document.querySelector("#updateResponse");
     let updates = updateData;
 
-    if(updates.length) {
+    if(updates[0].data.updated.name) {
         let updateUl = document.createElement("ul");
         updates.forEach((update, i) => {
             if(update === updates[updates.length - 1]) {
@@ -220,6 +218,10 @@ const appendUpdateResponse = (updateData) => {
         })
 
         updateResponse.appendChild(updateUl);
+    } else {
+        let error = document.createElement("p");
+        error.innerText = "No student found by that ID";
+        updateResponse.appendChild(error);
     }
 } // End of appendUpdateStudent() function
 
@@ -270,9 +272,9 @@ const appendFindStdResponse = (data) => {
 
         findStudentResponse.appendChild(message);
         findStudentResponse.appendChild(studentUl);
-    } else if(data.error) {
+    } else if(!data.student.length) {
         let error = document.createElement("p");
-        error.innerText = data.error;
+        error.innerText = "No student found"
         findStudentResponse.appendChild(error);
     } else {
         let student = data.student[0];

@@ -1,17 +1,17 @@
 @font-face {
     font-family: trajanPro;
-    src: url(./assets/fonts/Trajan_Reguler_Pro.ttf);
+    src: url(./fonts/Trajan_Reguler_Pro.ttf);
 }
 
 @font-face {
     font-family: trajanPro;
-    src: url(./assets/fonts/Trajan_Bold_Pro.ttf);
+    src: url(./fonts/Trajan_Bold_Pro.ttf);
     font-weight: bold;
 }
 
 @font-face {
     font-family: abstergoSans;
-    src: url(./assets/fonts/abstergo_sans_light.ttf);
+    src: url(./fonts/abstergo_sans_light.ttf);
 }
 
 header {

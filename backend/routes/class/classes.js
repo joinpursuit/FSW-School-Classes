@@ -1,4 +1,4 @@
-const db = require("./../../db.js");
+const {db} = require("./../../db.js");
 const classes = require("express").Router();
 
 const isClassExisting = async (newClass) => {
@@ -159,8 +159,8 @@ classes.post("/:className/enroll", async (req, res) => {
        // Check if the student is Existing in the school
        if(await isStudentExisting(student.firstName, student.lastName)) {
            // If Yes then enroll the student in only the course
-            let existingStd = await db.one('SELECT id FROM students WHERE first_name=$firstName AND ' + 
-                                           'last_name=$lastName', student);
+            let existingStd = await db.one('SELECT id FROM students WHERE first_name=${firstName} AND ' + 
+                                           'last_name=${lastName}', student);
 
             db.none('INSERT INTO class_enrollments (class_id, student_id) ' + 
                     'VALUES($1, $2)', [newClass.id, existingStd.id]);
@@ -177,7 +177,7 @@ classes.post("/:className/enroll", async (req, res) => {
 
             res.json({ 
                 student: req.body,
-                className: className,
+                className,
                 message: "Updated Student",
                 timestamp: new Date().toString()
             })
@@ -194,7 +194,7 @@ classes.post("/:className/enroll", async (req, res) => {
 
         res.json({ 
             student: req.body,
-            className: className,
+            className,
             message: "Enrolled Student",
             timestamp: new Date().toString()
         })
@@ -227,8 +227,8 @@ classes.get("/:className/students", async (req, res) => {
         res.json({
             // If city or failing queries are passed, then WithFilter version of getStudentsByClass runs
             // Otherwise the normal version runs
-            students: students,
-            className: className,
+            students,
+            className,
             message: "Retrieved students",
             timestamp: new Date().toString()
         }) 

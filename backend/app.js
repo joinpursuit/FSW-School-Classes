@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
-app.use("./class", classRouter);
-app.use("./student", studentRouter);
+app.use("/class", classRouter);
+app.use("/student", studentRouter);
 
 app.listen(port, () => console.log("Listening on port ", port));
