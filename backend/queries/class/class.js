@@ -23,56 +23,6 @@ const isClassExisting = async (newClass) => {
     
 } // End of isClassExisting() function
 
-const isStudentExisting = async (firstName, lastName) => {
-    try {
-        // Finding any students that match the given name and last name
-        let students =  await db.any('SELECT * FROM students ' + 
-                                     'WHERE first_name=$1 AND last_name=$2', [firstName, lastName]);
-
-        if(students.length) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (err) {
-        console.log(err);
-    }
-    
-} // End of isStudentExisting() function
-
-const isStudentEnrolled = async (student, wantedClass) => {
-    try {
-        // Find the existing student
-        let addedStudent = await db.any('SELECT * FROM students WHERE first_name=${firstName} AND ' +
-                                        'last_name=${lastName}', student);
-
-        // Check if the student is enrolled in the given class
-        let enrolled =  await db.any('SELECT * FROM students INNER JOIN class_enrollments ON ' +
-                                     'students.id=class_enrollments.student_id WHERE class_id=$1 AND ' + 
-                                     'student_id=$2',[wantedClass.id, addedStudent.id]);
-        
-        if(enrolled.length) {
-            return true;
-        } else {
-            return false;
-        }
-
-    } catch(err) {
-        console.log(err);
-    }
-    
-} // End of isStudentEnrolled() function
-
-const findClass = async (className) => {
-    try {
-        // Find the class matching the given name
-        return await db.one('SELECT * FROM classes WHERE class_name=$1', className);
-    } catch (err) {
-        console.log(err);
-    }
-    
-} // End of findClass() function
-
 const getStudentsByClass = async (className) => {
     try {
         // Grabbing the needed class ID from the given class 
@@ -128,7 +78,7 @@ const addClass = async (req, res) => {
 
     // Check ig the class is already existing
     if(await isClassExisting(newClass)) {
-        res.status(400).json({
+        res.json({
             error: "Class already exists",
             "timestamp": new Date()
         });
@@ -145,66 +95,6 @@ const addClass = async (req, res) => {
         })
     }
 } // End of addClass() function
-
-const enrollStudent = async (req, res) => {
-    let className = req.params.className;
-    req.body.name = req.body.firstName + " " + req.body.lastName;
-    let student = req.body;
-
-    // Check if class is existing
-    if(await isClassExisting(className)) {
-       let newClass = await findClass(className);
-       
-       // Check if the student is Existing in the school
-       if(await isStudentExisting(student.firstName, student.lastName)) {
-           // If Yes then enroll the student in only the course
-            let existingStd = await db.one('SELECT id FROM students WHERE first_name=${firstName} AND ' + 
-                                           'last_name=${lastName}', student);
-
-            db.none('INSERT INTO class_enrollments (class_id, student_id) ' + 
-                    'VALUES($1, $2)', [newClass.id, existingStd.id]);
-
-        // Check if the student is enrolled in the class
-       } else if(await isStudentEnrolled(student, newClass)) {
-           // If yes then update the students info in the class (grade)
-
-            let existingStd = await db.one('SELECT id FROM students WHERE first_name=${firstName} AND ' + 
-                                           'last_name=${lastName}', student);
-
-            db.none('UPDATE class_enrollments SET grade=$1 ' + 
-                    'WHERE student_id=$2', [student.grade, existingStd.id]);
-
-            res.status(200).json({ 
-                student: req.body,
-                className,
-                message: "Updated Student",
-                timestamp: new Date().toString()
-            })
-
-       } else {
-           // If the student isn't existing then enroll in both the school AND the class
-
-            let added = await db.one('INSERT INTO students (first_name, last_name) ' + 
-                                     'VALUES(${firstName}, ${lastName}) RETURNING *', student);
-
-            db.none('INSERT INTO class_enrollments (class_id, student_id, grade) ' + 
-                    'VALUES($1, $2, $3)', [newClass.id, added.id, student.grade])
-       }
-
-        res.status(200).json({ 
-            student: req.body,
-            className,
-            message: "Enrolled Student",
-            timestamp: new Date().toString()
-        })
-
-    } else {
-        res.status(400).json({
-            error: `Class ${className} doesn't exist.`,
-            timestamp: new Date().toString()
-        })
-    }
-} // End of enrollStudent() function
 
 const findStudents = async (req, res) => {
     let className = req.params.className;
@@ -233,11 +123,11 @@ const findStudents = async (req, res) => {
         }) 
 
     } else {
-        res.status(400).json({
+        res.json({
             error: `Class ${className} doesn't exist.`,
             timestamp: new Date().toString()
         })
     }
 } // End of findStudents() function
 
-module.exports = {addClass, enrollStudent, findStudents}
+module.exports = {addClass, findStudents}

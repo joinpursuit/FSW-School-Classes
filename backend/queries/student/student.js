@@ -47,7 +47,7 @@ const getStudentById = async (req, res) => {
             timestamp: new Date().toString()
         })
     } else {
-        res.status(400).json({
+        res.json({
             error: "No student found",
             timestamp: new Date().toString()
         })
@@ -75,7 +75,7 @@ const getStudentByName = async (req, res) => {
             })
         }
     } else {
-        res.status(400).json({
+        res.json({
             error: "No student found",
             timestamp: new Date().toString()
         })

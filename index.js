@@ -9,6 +9,7 @@ document.addEventListener("click", playAudio) // End of audio.play() click liste
 document.addEventListener("DOMContentLoaded", () => {
     let classForm = document.querySelector("#classForm");
     let studentForm = document.querySelector("#studentForm");
+    let enrollForm = document.querySelector("#enrollForm");
     let updateForm = document.querySelector("#updateForm");
     let findStudentForm = document.querySelector("#findStudentForm");
     let listForm = document.querySelector("#listForm");
@@ -22,6 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         addStudent();
     });
+
+    enrollForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        enrollStudent();
+    })
 
     updateForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -140,11 +146,73 @@ const appendStdResponse = (data) => {
 
     studentSection.appendChild(message);
     studentSection.appendChild(studentInfo);
+
+    document.querySelector("#studentFirst").value = "";
+    document.querySelector("#studentLast").value = "";
+    document.querySelector("#studentCity").value = "";
+    document.querySelector("#studentAge").value = "";
+
 } // End of appendStdResponse() function
 
-const enrollStudent = () => {
+const enrollStudent = async () => {
+    let enrollClass = document.querySelector("#enrollClass");
+    let enrollStudent = document.querySelector("#enrollStudent");
+    let enrollGrade = document.querySelector("#enrollGrade");
+    let enrollResponse = document.querySelector("#enrollResponse");
 
+    enrollClass = enrollClass.value;
+    let student = enrollStudent.value;
+    let grade = enrollGrade.value
+
+    if(!enrollClass || !student || !grade) {
+        enrollResponse.innerHTML = "";
+        let error = document.createElement("p");
+        error.innerText = "Please fill out all information";
+        enrollResponse.appendChild(error);
+    } else {
+        try {
+            let res = await axios.post(`http://localhost:3000/class/${enrollClass}/${student}/enroll/${grade}`);
+            appendEnrollResponse(res.data);
+        } catch(err) {
+            console.log(err);
+        }
+    }
 } // End of enrollStudent() function
+
+const appendEnrollResponse = (data) => {
+    let enrollSection = document.querySelector("#enrollResponse");
+    enrollSection.innerHTML = "";
+    
+    if(data.error) {
+            let error = document.createElement("p");
+            error.innerText = data.error;
+            enrollSection.appendChild(error);
+    } else if(data.message === "Enrolled Student") {
+        let {student, className, grade} = data;
+
+        let message = document.createElement("p");
+        message.innerHTML = data.message + ` in class <b>${className}</b>`;
+        
+        let studentInfo = document.createElement("p");
+        studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Grade</b>: ${grade}`;
+
+        enrollSection.appendChild(message);
+        enrollSection.appendChild(studentInfo);
+
+    } else if(data.message === "Updated Student") {
+        let {student, className, grade} = data;
+
+        let message = document.createElement("p");
+        message.innerHTML = data.message + ` in class <b>${className}</b>`;
+        
+        let studentInfo = document.createElement("p");
+        studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Grade</b>: ${grade}`;
+
+        enrollSection.appendChild(message);
+        enrollSection.appendChild(studentInfo);
+    }
+    
+}
 
 const updateStudent = async () => {
     let updateId = document.querySelector("#updateId");

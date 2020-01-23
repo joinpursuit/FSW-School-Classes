@@ -1,9 +1,10 @@
 const classes = require("express").Router();
-const {addClass, enrollStudent, findStudents} = require("./../../queries/class/class.js");
+const {addClass, findStudents} = require("./../../queries/class/class.js");
+const classesStudentsRouter = require("./student/students");
+
+classes.use("/:className/:studentId/", classesStudentsRouter);
 
 classes.post("/", addClass);
-
-classes.post("/:className/enroll", enrollStudent);
 
 classes.get("/:className/students", findStudents);
 
