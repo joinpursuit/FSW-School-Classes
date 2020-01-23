@@ -2,7 +2,13 @@ const {db} = require("../../db.js");
 
 const isUsernameExisting = async (username) => {
     try {
-        return await db.any("SELECT * FROM logins WHERE username=$1", username);
+        let user =  await db.any("SELECT * FROM logins WHERE username=$1", username);
+        
+        if(user.length) {
+            return true;
+        } else {
+            return false;
+        }
     } catch (err) {
         console.log(err);
     }
@@ -11,8 +17,8 @@ const isUsernameExisting = async (username) => {
 const getUser = async (req, res) => {
     try {
         let {username, password} = req.query;
-        let user = db.any("SELECT * FROM logins WHERE username=$1 AND password=$2", [username, password]);
-    
+        let user = await db.any("SELECT * FROM logins WHERE username=$1 AND passes=$2", [username, password]);
+
         if(user.length) {
             res.json({
                 user,
@@ -34,13 +40,13 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         let {username, password} = req.query;
-        if(isUsernameExisting(username)) {
+        if(await isUsernameExisting(username)) {
             res.json({
                 error: "User with that name already exists.",
                 timestamp: new Date().toString()
             })
         } else {
-            await db.none("INSERT INTO logins (username, password) VALUES($1, $2)", [username, password]);
+            await db.none("INSERT INTO logins (username, passes) VALUES($1, $2)", [username, password]);
             res.json({
                 message: "User successfully created",
                 timestamp: new Date().toString()

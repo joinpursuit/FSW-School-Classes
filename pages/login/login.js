@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let login = document.querySelector("#login");
     let loginForm = document.querySelector("#loginForm");
     let signUp = document.querySelector("#signUp");
+    let signUpForm = document.querySelector("#signUpForm");
 
     loginButton.addEventListener("click", () => {
         logSign.style.display = "none";
@@ -19,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         loginAttempt();
+    })
+
+    signUpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        signUpAttempt();
     })
 })
 
@@ -51,6 +57,30 @@ const loginAttempt = async () => {
         loginResponse.appendChild(error);
     } else {
         let res = await axios.get(`http://localhost:3000/login?username=${username.value}&password=${password.value}`);
+        debugger;
+    }
+} // End of loginAttempt() function
+
+const signUpAttempt = async () => {
+    let username = document.querySelector("#signUpUser");
+    let password = document.querySelector("#signUpPass");
+    let signUpResponse = document.querySelector("#signUpResponse");
+    signUpResponse.innerHTML = "";
+
+    if(!username.value && !password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username or password were inputted";
+        signUpResponse.appendChild(error);
+    } else if(!username.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username was inputted";
+        signUpResponse.appendChild(error);
+    } else if(!password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No password was inputted";
+        signUpResponse.appendChild(error);
+    } else {
+        let res = await axios.post(`http://localhost:3000/login?username=${username.value}&password=${password.value}`);
         debugger;
     }
 }
