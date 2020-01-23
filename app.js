@@ -27,7 +27,7 @@ const checkIfClassExists = (req, res, next) => {
     res.json({
       status: 200,
       error: "Please fill out all the information or Class already exists",
-      timestamp: req.timestamp
+      timestamp: new Date ()
     })
 } else{
   next()
@@ -40,15 +40,24 @@ const addNewClass =(req, res) => {
     status: 200,
     newClass: addedClass,
     message: "Created a new class",
-    timestamp: "YYYY, MM/DD HH:MM:SS"
+    timestamp: new Date()
     // timestamp :req.timestamp
   })
+}
 
-
+const enrollNewStudent = (req, res) => {
+  let enrolledStudent = mySchool.enrollStudent
+(req.body.studentName, req.body.studentAge, req.body.city, req.body.grade)
+res.json({
+  status: 200,
+  enrolledStudent : enrolledStudent,
+})
 }
 
 app.get("/class", showAllClasses);
 app.post("/class", checkIfClassExists, addNewClass)
+
+app.post("/class/:className/enroll", enrollNewStudent)
 
 app.listen(port,()=>{
   console.log("listening to port " + port)

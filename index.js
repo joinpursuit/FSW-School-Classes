@@ -32,16 +32,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
       try{
         await axios.post("http://localhost:3000/class", {name: className, teacher: teacher }).then(res=>{
-          p.innerText = "just addded class " + res.data.newClass.name
+          console.log(res)
+          p.innerText = "just addded class " + res.data.newClass.name + " at " + res.data.timestamp
           // debugger
         })
 
       }catch(err){
-        p.innerText = "Please fill out all the information or Class already exists";
-        //timestamp: "YYYY, MM/DD HH:MM:SS"
+        p.innerText = "Please fill out all the information or Class already exists." + " at " + new Date ();
+        
       }
     }
 
+  });
+
+  let p = document.creat("p");
+  studentBtn.appendChild("p");
+
+  studentBtn.addEventListener("submit", async() =>{
+    try{
+      await axios.post("http://localhost:3000/class/", {})
+    }catch(err){
+
+    }
   })
 
   

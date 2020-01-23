@@ -8,12 +8,12 @@ class Student {
   }
 }
 
-const varOne = 'a';
-const varTwo = 'b';
+// const varOne = 'a';
+// const varTwo = 'b';
 
-module.exports = {
-  varOne: varOne,
-  varTwo: varTwo,
-}
+// module.exports = {
+//   varOne: varOne,
+//   varTwo: varTwo,
+// }
 
 // module.exports = Student;
