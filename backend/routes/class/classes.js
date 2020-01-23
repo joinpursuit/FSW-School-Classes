@@ -1,3 +1,4 @@
+const db = require("./../../db.js");
 const classes = require("express").Router();
 
 const isClassExisting = async (newClass) => {

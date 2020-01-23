@@ -1,9 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const pgp = require("pg-promise")({});
-const connectionString = "postgres://localhost:5432/my_school_database";
-const db = pgp(connectionString);
 
 const port = 3000;
 const app = express();
