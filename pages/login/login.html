@@ -5,21 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./assets/login.css">
     <title>School Records</title>
 </head>
 <body>
     <main>
         <h1>Login</h1>
-        <form id="login">
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username">
+        <section id="logSign">
+            <button id="loginButton">Login</button>
+            <button id="signUpButton">Sign Up</button>
+        </section>
 
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password">
+        <section id="login" style="display: none">
+            <form id="loginForm">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="loginUser">
+    
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="loginPass">
+    
+                <input type="submit" value="Submit">
+            </form>
 
-            <input type="submit" value="Submit">
-        </form>
+            <section id="loginResponse"></section>
+
+            <button onclick="goBack()">Go Back</button>
+        </section>
+
+        <section id="signUp" style="display: none">
+            <form id="signUpForm">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="loginUser">
+    
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="loginPass">
+    
+                <input type="submit" value="Submit">
+            </form>
+
+            <section id="signUpResponse"></section>
+
+            <button onclick="goBack()">Go Back</button>
+        </section>
+        
     </main>
 </body>
 </html>

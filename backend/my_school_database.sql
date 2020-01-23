@@ -6,6 +6,7 @@ CREATE DATABASE my_school_database;
 DROP TABLE IF EXISTS class_enrollments;
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS logins;
 
 
 CREATE TABLE classes (
@@ -27,4 +28,10 @@ CREATE TABLE class_enrollments (
     class_id INT REFERENCES classes(id) ON DELETE CASCADE,
     student_id INT REFERENCES students(id) ON DELETE CASCADE,
     grade INT
+);
+
+CREATE TABLE logins (
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL,
+    passes TEXT NOT NULL 
 );
