@@ -14,5 +14,8 @@ classes.post("/", (request, response)=>{
   "message": `Created a ${nameOfClass} class taught by ${nameOfTeacher}`,
   "timestamp": new Date()})
 })
+classes.post("/enroll", (request, response)=>{
+
+})
 
 module.exports = classes;
