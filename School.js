@@ -4,6 +4,7 @@ const Student = require('./Student');
 class School {
   constructor() {
     this.classes = {
+      Physics:{name: "Physics", teacher: "Henry Roman", students: []},
       // className: Class Object
       //   physics: {} 
     }
@@ -20,6 +21,25 @@ class School {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
+  // addClass(name, teacher) {
+  //   let newClass = new Class(name, teacher);
+  //   if (!name || !teacher || this.classes[name]) {
+  //     let returnObj = {
+  //       "error": "Please fill out all the information or Class already exists",
+  //       "timestamp": new Date()
+  //     }
+  //     return returnObj
+  //   }
+  //   else if (!this.classes[name]) {
+  //     this.classes[name] = newClass;
+  //     let returnObj = {
+  //       "class": newClass,
+  //       "message": "Created a new class",
+  //       "timestamp": new Date()
+  //     }
+  //     return returnObj
+  //   }
+  // }
 
   /**
    * Enroll student in class
@@ -30,6 +50,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+  let newScholar = new Student(student.name, student.city, student.age, student.grade)
+  return this.classes[className].students.push(newScholar)
   }
 
 
@@ -43,6 +65,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    // return this.classes[className].student
   }
 
 
