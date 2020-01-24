@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const faker = require("faker");
 
 const port = 3000;
 const app = express();

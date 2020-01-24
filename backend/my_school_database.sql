@@ -51,3 +51,6 @@ CREATE TABLE logins (
     teacher_id INT REFERENCES teachers(id) ON DELETE CASCADE,
     student_id INT REFERENCES students(id) ON DELETE CASCADE
 );
+
+INSERT INTO admins (first_name, last_name)
+VALUES ('Test', 'Admin');
