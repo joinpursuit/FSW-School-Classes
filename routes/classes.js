@@ -6,7 +6,7 @@ const Student = require("../Student")
 let classes = express.Router()
 classes.use(cors())
 let mySchool = new School();
-classes.post("/class", (request, response)=>{
+classes.post("/classes", (request, response)=>{
     let nameOfClassInput = request.body.nameOfClassInput;
     let nameOfTeacherInput = request.body.nameOfTeacherInput;
 if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined|| nameOfTeacherInput!==undefined){
@@ -19,7 +19,7 @@ if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined
         "timestamp": new Date()})
     }
     })
-classes.post("/class/:nameOfStudentInput/enroll", (request, response)=>{
+classes.post("/classes/:nameOfStudentInput/enroll", (request, response)=>{
     let nameOfClassInput = request.params.nameOfClassInput
     let nameOfStudentInput = request.body.nameInput;
     if(nameOfStudentInput.nameInput === undefined|| nameOfStudentInput.ageInput === undefined|| nameOfStudentInput.cityInput=== undefined|| nameOfStudentInput.gradeInput === undefined){

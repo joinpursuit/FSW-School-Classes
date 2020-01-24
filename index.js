@@ -1,4 +1,4 @@
-
+let url = 
 document.addEventListener("DOMContentLoaded",()=>{
     let addButton = document.querySelector("#addButton")
     addButton.addEventListener("click",addClass)
@@ -15,44 +15,36 @@ const addClass = async(event)=>{
     let nameOfTeacher = document.querySelector("#teacherName")
     let nameOfClassInput = nameOfClass.value
     let nameOfTeacherInput = nameOfTeacher.value
+    let p = document.createElement("p")
+    let classAdd = document.querySelector("#classAdd")
+    let host = "http://localhost:4000/classes"
     let classInfo = {
         nameOfClass:nameOfClassInput,
         nameOfTeacher:nameOfTeacherInput
+ }
+ axios.post(host,classInfo).then(response=>{
+    p.innerText = response.data.message
+    classAdd.appendChild(p)
+ })
 
-    }
-    try{
-        let response = axios.post("http://localhost:4000/classes",{"nameOfClass": nameOfClassInput, "nameOfTeacher": nameOfTeacherInput})
-        console.log(response)
-        let p = document.createElement("p")
-        debugger
-
-        p.innerText = classInfo
-        let classAdd = document.querySelector("#classAdd")
-        classAdd.appendChild(p)
-
-    }catch(err){
-        console.log(err)
-    }
-
-
+    
+    
 }
 const enrollStudent = async(event)=>{
+    event.preventDefault()
     let nameOfClass = document.querySelector("#class")
     let name = document.querySelector("#name")
     let age = document.querySelector("#age")
     let city = document.querySelector("#city")
     let grade = document.querySelector("#grade")
-    event.preventDefault()
     let classInput = nameOfClass.value
     let nameInput = name.value
     let ageInput = age.value
     let cityInput = city.value
     let gradeInput = grade.value
-    // classInput.value = ""
-    // nameInput.value = ""
-    // ageInput.value = ""
-    // cityInput.value = ""
-    // gradeInput.value = ""
+    let p = document.createElement("p")
+    let studentEnroll = document.querySelector("#studentEnroll")
+    let host = "http://localhost:4000/classes"
     let studentInfo = {
         name: nameInput,
         class: classInput,
@@ -60,7 +52,11 @@ const enrollStudent = async(event)=>{
         city: cityInput,
         grade:gradeInput
     }
-
+    axios.post(host,studentInfo).then(response=>{
+        p.innerText = response.data.message
+        studentEnroll.appendChild(p)
+     })
+    
 }
 const updateStudent = async(event)=>{
     
@@ -68,3 +64,16 @@ const updateStudent = async(event)=>{
 const listStudents = async(event)=>{
     
 }
+        // try{
+        //     let response = axios.post("http://localhost:4000/classes",{"nameOfClass": nameOfClassInput, "nameOfTeacher": nameOfTeacherInput})
+        //     console.log(response)
+        //     let p = document.createElement("p")
+        //     debugger
+    
+        //     p.innerText = classInfo
+        //     let classAdd = document.querySelector("#classAdd")
+        //     classAdd.appendChild(p)
+    
+        // }catch(err){
+        //     console.log(err)
+        // }
