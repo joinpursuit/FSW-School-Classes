@@ -24,7 +24,7 @@ const addClass = async(event)=>{
  }
  console.log(classInfo)
  axios.post(host,classInfo).then(response=>{
-    p.innerText = response.data
+    p.innerText = response.data.message
     classAdd.appendChild(p)
  })
 
