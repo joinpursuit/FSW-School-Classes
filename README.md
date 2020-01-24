@@ -1,6 +1,18 @@
 # Pursuit-Core-Web-Express-Project
 
-## Introduction
+## Information
+
+The my_school_database is pre-built with 1 admin, allowing for easy
+access into the admin login.
+
+A sign up for the admin is required however. This info is needed to
+properly sign up:
+
+### ID - 1
+
+### First Name - "Test"
+
+### Last Name - "Admin"
 
 In this lab you will be developing a server that stores data for a school, and a simple frontend. The school has the following data models:
 
