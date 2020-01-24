@@ -29,4 +29,21 @@ const addTeacher = async (req, res) => {
     }
 } // End of addTeacher() function
 
-module.exports = {addTeacher};
+const getTeachers = async (req, res) => {
+    let teachers = await db.any("SELECT * FROM teachers");
+
+    if(teachers.length) {
+        res.json({
+            teachers,
+            message: "Teachers grabbed",
+            timestamp: new Date().toString()
+        });
+    } else {
+        res.json({
+            error: "No teachers found",
+            timestamp: new Date().toString()
+        })
+    }
+} // End of getTeachers() function
+
+module.exports = {addTeacher, getTeachers};
