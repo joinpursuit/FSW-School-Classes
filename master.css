@@ -260,3 +260,53 @@ justify-content: space-between;
 list-style: none;
 text-align: center;
 }
+
+ul#displayinfo{
+font-family: monospace;
+text-decoration: yellowgreen;
+font-weight: normal;
+color: yellowgreen;
+list-style: none;
+font-size: 40px;
+}
+
+li#name{
+font-family: monospace;
+text-decoration: yellowgreen;
+font-weight: normal;
+color: yellowgreen;
+list-style: none;
+font-size: 40px;
+}
+li#enrollment{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px;
+}
+li#age{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px;
+}
+li#gpa{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px;
+}
+li#city{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px;
+}
