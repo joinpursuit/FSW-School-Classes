@@ -16,7 +16,14 @@ const students = [
             name: "Madden Whitfield",
             city: "Brooklyn",
             grade: 0
-            }
+            },
+            {
+                subject: "math",
+                teacher: "Mr. Marvin Bent",
+                name: "Jill Scott",
+                city: "NYC",
+                grade: 0
+                }
 
 ]
 
@@ -38,8 +45,11 @@ students.push(info)
 
       query.get("/search/:id",(req,res)=>{
         console.log("success")
-     students.push(info)
-        res.json(students)
+   students.forEach ((el=>{
+       if (el.name === req.params.id){
+res.json(el)
+       }
+   }))
            })
 
   
