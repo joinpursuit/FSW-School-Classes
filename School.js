@@ -15,7 +15,7 @@ class School {
             grade: 70
           },
           {
-            name: "eric cartman",
+            name: "eric",
             city: "south park",
             age: 7,
             grade: 60
@@ -49,26 +49,10 @@ class School {
     }
   }
 
-  /**
-   * Add class to classes
-   *
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor
-   * @return {Class} Class object
-   */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher)
     this.classes[name] = newClass
-    return newClass
-
-    //   {
-    // "classes":
-    //     {"physics1":
-    //       { "name" : "physics1", "teacher": "mr.tang", "students": [] },
-    //       "physics2":
-    //       { "name": "physics2", "teacher": "ms.maria", "students": [] }
-    //     }
-    //   }
+    return this.classes[name]
   }
 
   /**
@@ -80,19 +64,11 @@ class School {
    * {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    this.classes[className].students.push(student)
-    // console.log(this)
+  enrollStudent(className, student, age, city, grade) {
+    let stdnt = new Student(student, city, age, grade)
+    this.classes[className].students.push(stdnt)
+    return stdnt
   }
-
-  //   {
-  // "classes":
-  //     {"physics1":
-  //       { "name" : "physics1", "teacher": "mr.tang", "students": [] },
-  //       "physics2":
-  //       { "name": "physics2", "teacher": "ms.maria", "students": [] }
-  //     }
-  //   }
 
   /**
    * Get all students enrolled in a class
@@ -136,4 +112,4 @@ let mySchool = new School()
 
 // console.log(mySchool.addClass("art", "danny"))
 
-module.exports = School
+module.exports = mySchool
