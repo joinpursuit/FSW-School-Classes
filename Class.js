@@ -1,12 +1,14 @@
 class Class {
   constructor(name, teacher) {
+    
     this.name = name
     this.teacher = teacher
     this.students = []
+
   }
   
 
- enrollStudent = (student) => {
+ addStudent = (student) => {
    this.students.push(student);
 
   }

@@ -1,86 +1,120 @@
-const Class = require('./Class');
-//const Student = require('./Student');
-
-
+const Class = require("./Class")
+const Student = require("./Student")
 
 class School {
   constructor() {
-    this.classes = {}
-    // { 
-    //   className1 = {
-    //     name: "shop",
-    //     teacher: "mr.adler",
-    //     studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
-    //   },
-    //   {
-    //     className2 = {
-    //       name: "language",
-    //       teacher: "mr.stkrdknmibalz",
-    //       studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"] 
-    //     },
-
-  
-    //     className3 = {
-    //       name: "homeEc",
-    //       teacher: "ms.pearl",
-    //       studentList: ["stan marsh", "kirk brovloski", "eric cartman", "kenny mccormick", "leopold stoch", "wendy testaburger"]
-    // }
-        
+    this.classes = {
+      physics1: {
+        name: "physics1",
+        teacher: "mr.stkurdiknmibalz",
+        students: [
+          {
+            name: "stan marsh",
+            city: "south park",
+            age: 7,
+            grade: 70
+          },
+          {
+            name: "eric cartman",
+            city: "south park",
+            age: 7,
+            grade: 60
+          },
+          {
+            name: "kenny mccormick",
+            city: "south park",
+            age: 8,
+            grade: 100
+          },
+          {
+            name: "leopold stoch",
+            city: "south park",
+            age: 7,
+            grade: 75
+          },
+          {
+            name: "wendy testaburger",
+            city: "south park",
+            age: 7,
+            grade: 99
+          },
+          {
+            name: "kirk brovloski",
+            city: "south park",
+            age: 9,
+            grade: 99
+          }
+        ]
+      }
+    }
   }
 
   /**
    * Add class to classes
-   * 
+   *
    * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
+   * @param {string} teacher - Name of instructor
    * @return {Class} Class object
    */
   addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+    let newClass = new Class(name, teacher)
+    this.classes[name] = newClass
+    return newClass
 
+    //   {
+    // "classes":
+    //     {"physics1":
+    //       { "name" : "physics1", "teacher": "mr.tang", "students": [] },
+    //       "physics2":
+    //       { "name": "physics2", "teacher": "ms.maria", "students": [] }
+    //     }
+    //   }
   }
 
   /**
    * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
+   *
+   * @param
+   * {string} className - Name of the class
+   * @param
+   * {Student} student - Student object
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
-    this.classes[className].enrollStudent(student);
+    this.classes[className].students.push(student)
+    // console.log(this)
   }
 
-
-
+  //   {
+  // "classes":
+  //     {"physics1":
+  //       { "name" : "physics1", "teacher": "mr.tang", "students": [] },
+  //       "physics2":
+  //       { "name": "physics2", "teacher": "ms.maria", "students": [] }
+  //     }
+  //   }
 
   /**
    * Get all students enrolled in a class
-   * 
+   *
    * @param {string} className - Name of the class
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
-  return this.classes[className].students
+    return this.classes[className].students
   }
-
-
-
 
   /**
    * Get all students and apply filters. If failing = true
-   * return all students that are failing the class, 
+   * return all students that are failing the class,
    * that is all students whose grade is less than 70.
-   * 
-   * 
+   *
+   *
    * If a city is passed return students whose city match
    * the city passed. If both failing and city are passed
    * return students that are failing and that live in the
    * specified city
-   * 
+   *
    * @param {string} className - Name of the class
    * @param {boolean} failing - Whether to return students that are failing the class or not
    * @param {string} city - Name of the city to match against students
@@ -88,15 +122,18 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let failingStudents = []
 
-
-
+    for (let grade in this.students) {
+      if (grade <= 70) {
+        this.students
+      }
+    }
   }
-
-
 }
 
+let mySchool = new School()
 
-let mySchool = new School();
+// console.log(mySchool.addClass("art", "danny"))
 
-module.exports = School;
+module.exports = School
