@@ -11,6 +11,13 @@
 </head>
 <body>
     <main>
+        <nav>
+            <a href="./admin.html">Home</a>
+            <a href="./classes.html">Show Classes</a>
+            <a href="./students.html">Show Students</a>
+            <a href="./teachers.html">Show Teachers</a>
+        </nav>
+        
         <section id="studentSection">
             <h2>Add Student</h2>
             <form id="studentForm" autocomplete="off">
@@ -44,6 +51,20 @@
             </form>
 
             <section id="teacherResponse"></section>
+        </section>
+
+        <section id="classSection">
+            <h2>Add Class</h2>
+            <form id="classForm" autocomplete="off">
+                <label for="className">Class Name: </label>
+                <input type="text" name="className" id="className">
+    
+                <label for="classTeacher">Teacher ID: </label>
+                <input type="text" name="classTeacher" id="classTeacher">
+    
+                <input type="submit">
+            </form>
+            <section id="classResponse"></section>
         </section>
     </main>
 </body>

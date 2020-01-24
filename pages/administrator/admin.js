@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     let studentForm = document.querySelector("#studentForm");
     let teacherForm = document.querySelector("#teacherForm");
+    let classForm = document.querySelector("#classForm");
 
     studentForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -11,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         addTeacher();
     });
+
+    classForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addClass();
+    })
 }) // End of DOMContentLoaded
 
 const postData = async (url, data, callback) => {
@@ -115,4 +121,52 @@ const appendTchResponse = (data) => {
         document.querySelector("#teacherFirst").value = "";
         document.querySelector("#teacherLast").value = "";
     }
-}
+} // End of appendTchResponse() function
+
+const addClass = async () => {
+    let className = document.querySelector("#className");
+    let classTeacher = document.querySelector("#classTeacher");
+    let classSection = document.querySelector("#classResponse");
+    // Grab the needed class tags
+
+    // Check if either of the inputs are empty
+    if(!className.value || !classTeacher.value) { 
+        // If true then add an error display
+        classSection.innerHTML = "";
+        let p = document.createElement("p");
+        p.innerText = "Please fill out all information.";
+        classSection.appendChild(p);
+    } else {
+        // If all data was entered then post it to the DB
+        let newClass = {name: className.value, teacher: classTeacher.value};
+        postData("http://localhost:3000/class", newClass, appendClassResponse);
+    }
+} // End of addClass() function
+
+const appendClassResponse = (data) => {
+    let classSection = document.querySelector("#classResponse");
+    classSection.innerHTML = "";
+    // Reset the classSection section
+
+    let newClass = data.class;
+
+    // Check if there is an error
+    if(data.error) {
+        // Display an error if so
+        let err = document.createElement("p");
+        err.innerText = "Class already exists.";
+        classSection.appendChild(err);
+    } else {
+        // Display the information of the class added if no error
+        let status = document.createElement("p");
+        status.innerText = "Class Added";
+        let p = document.createElement("p");
+        p.innerHTML = `<b>Class Name</b>: ${newClass.name} <b>Teacher</b>: ${newClass.teacher}`;
+        classSection.appendChild(status);
+        classSection.appendChild(p);
+
+        // Reset the input tags
+        document.querySelector("#className").value = "";
+        document.querySelector("#classTeacher").value = "";
+    }
+} // End of appendClassResponse() function

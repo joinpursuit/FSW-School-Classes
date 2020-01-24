@@ -45,6 +45,11 @@ p, label, input, li {
     color: #2D2C2E;
 }
 
+nav {
+    grid-column: 1 / 2;
+    background-color: #C1232C;
+}
+
 #classSection {
     grid-column: 2 / 3;
 }

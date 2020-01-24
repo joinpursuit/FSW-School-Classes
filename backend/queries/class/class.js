@@ -9,7 +9,8 @@ const isClassExisting = async (newClass) => {
         if(typeof newClass === "string") {
             classes = await db.any(`SELECT * FROM classes WHERE class_name=$1`, newClass);
         } else {
-            classes = await db.any('SELECT * FROM classes WHERE class_name=${name}', newClass);
+            let {teacher} = newClass;
+            classes = await db.any('SELECT * FROM classes WHERE class_name=$1 AND teacher=$2', [newClass.name, teacher]);
         }
         
         if(classes.length) {
