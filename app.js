@@ -20,14 +20,19 @@ const middleWareA = (req,res, next) => {
     let studSample = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
     let students = myschool.enrollStudent(req.params.className, studSample)
     if(students){
-        res.json("Student has been added")
+        res.json({ 
+            "student": students,
+            "className": req.params.className,
+            "message": "Enrolled Student",
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss')
+          })
         console.log("Middleware A has been fired");
     } else {
-        res.json("No class at that name")
+        res.json({ 
+            "error": "Please fill out all the information for the student",
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss')
+          })
     }
-   
-    // console.log(myschool.classes)
-//   next();
 }
 
 app.get("/", (req, res) => {
@@ -62,9 +67,16 @@ app.get("/class/:className/students", (req, res) => {
     let sClass = myschool.getStudentsByClass(req.params.className)
     // console.log(myschool.getStudentsByClass(req.params.className))
     if(sClass){
-        res.json(sClass)
+        res.json({
+            "students": sClass,
+            "message": "Retrieved Students",
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss')
+          })
     } else {
-        res.json("No such class")
+        res.json({ 
+            "error": `Class ${req.params.className} doesn't exist.`,
+            "timestamp": timestamp.utc('YYYY, MM/DD HH:mm:ss')
+          })
     }
 })
 
