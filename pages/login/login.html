@@ -50,18 +50,29 @@
         </section>
 
         <section id="isValidUser" style="display: none">
-            <form action="validUserForm">
+            <form id="validUserForm">
                 <select name="userType" id="userType">
-                    <option selected disabled>Select your type of account</option>
-                    <option value="admin">Administrator</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student">Student</option>
+                    <option selected disabled value="disabled">Select your type of account</option>
+                    <option value="admins">Administrator</option>
+                    <option value="teachers">Teacher</option>
+                    <option value="students">Student</option>
                 </select>
+
+                <label for="validFirst">First Name: </label>
+                <input type="text" name="validFirst" id="validFirst">
+
+                <label for="validLast">Last Name: </label>
+                <input type="text" name="validLast" id="validLast">
+
+                <label for="validId">ID Number: </label>
+                <input type="text" name="validId" id="validId">
 
                 <input type="submit">
             </form>
             
+            <section id="validUserResponse"></section>
 
+            <button onclick="goBack()">Go Back</button>
 
         </section>
         
