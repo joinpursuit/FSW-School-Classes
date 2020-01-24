@@ -57,7 +57,7 @@ res.json({
 app.get("/class", showAllClasses);
 app.post("/class", checkIfClassExists, addNewClass)
 
-app.post("/class/:className/enroll", enrollNewStudent)
+app.post("/class/:classNameInput/enroll", enrollNewStudent)
 
 app.listen(port,()=>{
   console.log("listening to port " + port)

@@ -89,8 +89,8 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    let nStudent = new Student(student.name, student.age, student.city, student.grade)
-    return this.Classes[className].students.push(nStudent)
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    return this.Classes[className].students.push(newStudent)
   }
 
 
