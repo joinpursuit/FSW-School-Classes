@@ -1,0 +1,76 @@
+@font-face {
+    font-family: trajanPro;
+    src: url(./../../../assets/fonts/Trajan_Bold_Pro.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: abstergoSans;
+    src: url(./../../../assets/fonts/abstergo_sans_light.ttf);
+}
+
+header {
+    margin-top: 25px;
+    text-align: center;
+    font-family: trajanPro;
+    color: #C1232C;
+}
+
+body {
+    background-color: #C7C8CA;
+}
+
+section {
+    padding: 25px;
+}
+
+main {
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: trajanPro;
+    font-weight: bold;
+    color: #C1232C;
+}
+
+p, label, input, li, button {
+    font-family: abstergoSans;
+    color: #2D2C2E;
+}
+
+input[type=submit], button {
+    width: fit-content;
+    box-shadow: 1px 1px 5px -1px #2d2c2e;
+	background-color:transparent;
+	border-radius:24px;
+	border:1px solid #c1232b;
+	display:inline-block;
+	cursor:pointer;
+	color:#2d2c2e;
+	font-size:12px;
+	padding:11px 21px;
+	text-decoration:none;
+    text-shadow:3px 1px 5px #c7c8ca;
+}
+
+input, button {
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+input[type=text] {
+    font-size:15px; 
+	border-style:solid; 
+    border-radius:24px; 
+	padding:11px; 
+	border-width:1px; 
+	background-color:#2d2c2e; 
+	color:#c7c8ca; 
+	box-shadow: 1px 1px 5px -1px rgba(42,42,42,.75); 
+    border-color:#c7c8ca;  
+}
+
+input[type=text]:focus {
+    outline: none;
+}
