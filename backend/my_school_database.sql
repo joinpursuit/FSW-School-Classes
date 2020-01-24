@@ -3,9 +3,11 @@ CREATE DATABASE my_school_database;
 
 \c my_school_database;
 
-DROP TABLE IF EXISTS class_enrollments;
-DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS admins;
+DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS class_enrollments;
 DROP TABLE IF EXISTS logins;
 
 CREATE TABLE students (
@@ -19,14 +21,14 @@ CREATE TABLE students (
 CREATE TABLE teachers (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
 );
 
 CREATE TABLE admins (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL
-)
+);
 
 CREATE TABLE classes (
   id SERIAL PRIMARY KEY,
@@ -45,5 +47,7 @@ CREATE TABLE logins (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
     passes TEXT NOT NULL,
-    account_type TEXT NOT NULL
+    admin_id INT REFERENCES admins(id) ON DELETE CASCADE,
+    teacher_id INT REFERENCES teachers(id) ON DELETE CASCADE,
+    student_id INT REFERENCES students(id) ON DELETE CASCADE
 );
