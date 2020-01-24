@@ -117,4 +117,21 @@ const updateStudent = async (req, res) => {
     }
 } // End of updateStudent() function
 
-module.exports = {addStudent, getStudentById, getStudentByName, updateStudent}
+const getAllStudents = async (req, res) => {
+    let students = await db.any("SELECT * FROM students");
+
+    if(students.length) {
+        res.json({
+            students,
+            message: "Students retrieved",
+            timestamp: new Date().toString()
+        })
+    } else {
+        res.json({
+            error: "No students found",
+            timestamp: new Date().toString()
+        })
+    }
+} // End of getAllStudents() function
+
+module.exports = {addStudent, getStudentById, getStudentByName, updateStudent, getAllStudents}

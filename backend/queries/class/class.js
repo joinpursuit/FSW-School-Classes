@@ -131,4 +131,21 @@ const findStudents = async (req, res) => {
     }
 } // End of findStudents() function
 
-module.exports = {addClass, findStudents}
+const getAllClasses = async (req, res) => {
+    let classes = await db.any("SELECT * FROM classes INNER JOIN teachers ON classes.teacher=teachers.id");
+
+    if(classes.length) {
+        res.json({
+            classes,
+            message: "Classes retrieved",
+            timestamp: new Date().toString()
+        })
+    } else {
+        res.json({
+            error: "No classes found",
+            timestamp: new Date().toString()
+        })
+    }
+} // End of getAllClasses() function
+
+module.exports = {addClass, findStudents, getAllClasses}
