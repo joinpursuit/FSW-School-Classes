@@ -17,21 +17,21 @@ app.use(express())
 app.get("/",(req,res)=>{
 res.json("Live and Running")
 })
-const students ={
+const inputstudents ={
 subject: "math",
 teacher: "Mr. Marvin Bent",
 name: "Jill Scott",
 city: "NYC",
 grade: 0
 }
-const elementary = []
+const students= []
 
 app.listen(port,()=>{
     console.log("youre runnin on port", port)
 })
 
 app.get("/students",(req,res)=>{
-
+students.push(inputstudents)
 res.json(students)
 
 })
