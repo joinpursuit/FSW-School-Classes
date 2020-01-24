@@ -157,6 +157,7 @@ const signUp = async (data) => {
     } else {
         document.querySelector("#signUp").style.display = "none";
         document.querySelector("#login").style.display = "inline";
+        document.querySelector("h1").innerText = "Login";
 
         let username = document.querySelector("#signUpUser");
         let password = document.querySelector("#signUpPass");
