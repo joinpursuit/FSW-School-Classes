@@ -1,8 +1,4 @@
-//     TODO: PIPEDREAM add a home page for a login (if student, teacher, or administrator) -->
-//     If no login then a signup is required
-//     Signup requires name and id match
-//     Setup with emaili and password
-
+//     TODO: 
 //     Teachers takes to a page that allows you to change student grades
 //     Default has a list of students in the class that gets RT updated with changes
 

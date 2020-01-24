@@ -1,6 +1,10 @@
 let typeOfUser;
 let user;
 
+document.addEventListener("click", () => {
+    document.querySelector("audio").play();
+})
+
 document.addEventListener("DOMContentLoaded", () => {
     let loginButton = document.querySelector("#loginButton");
     let signUpButton = document.querySelector("#signUpButton");
@@ -142,7 +146,7 @@ const login = async (data) => {
         error.innerText = "Incorrect username/password";
         loginResponse.appendChild(error);
     } else {
-        // on success take to home page
+        // on success take to home page (changes depending on typeOfUser)
         window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/index.html";
     }
 
