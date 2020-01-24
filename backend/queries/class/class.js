@@ -76,11 +76,11 @@ const getStudentsByClassWithFilter = async (className, failing, city) => {
 const addClass = async (req, res) => {
     let newClass = req.body;
 
-    // Check ig the class is already existing
+    // Check if the class is already existing
     if(await isClassExisting(newClass)) {
         res.json({
             error: "Class already exists",
-            "timestamp": new Date()
+            "timestamp": new Date().toString()
         });
 
     } else {

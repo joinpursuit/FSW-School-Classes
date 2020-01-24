@@ -8,19 +8,30 @@ DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS logins;
 
-
-CREATE TABLE classes (
-  id SERIAL PRIMARY KEY,
-  class_name TEXT NOT NULL,
-  teacher TEXT NOT NULL
-);
-
 CREATE TABLE students (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   city TEXT,
   age INTEGER
+);
+
+CREATE TABLE teachers (
+  id SERIAL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+);
+
+CREATE TABLE admins (
+  id SERIAL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
+)
+
+CREATE TABLE classes (
+  id SERIAL PRIMARY KEY,
+  class_name TEXT NOT NULL,
+  teacher INT REFERENCES teachers(id) ON DELETE CASCADE
 );
 
 CREATE TABLE class_enrollments (
@@ -33,5 +44,6 @@ CREATE TABLE class_enrollments (
 CREATE TABLE logins (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
-    passes TEXT NOT NULL 
+    passes TEXT NOT NULL,
+    account_type TEXT NOT NULL
 );
