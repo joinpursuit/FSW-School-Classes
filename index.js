@@ -1,4 +1,4 @@
-let url = 
+
 document.addEventListener("DOMContentLoaded",()=>{
     let addButton = document.querySelector("#addButton")
     addButton.addEventListener("click",addClass)
@@ -22,8 +22,9 @@ const addClass = async(event)=>{
         nameOfClass:nameOfClassInput,
         nameOfTeacher:nameOfTeacherInput
  }
+ console.log(classInfo)
  axios.post(host,classInfo).then(response=>{
-    p.innerText = response.data.message
+    p.innerText = response.data
     classAdd.appendChild(p)
  })
 
@@ -52,6 +53,7 @@ const enrollStudent = async(event)=>{
         city: cityInput,
         grade:gradeInput
     }
+    console.log(studentInfo)
     axios.post(host,studentInfo).then(response=>{
         p.innerText = response.data.message
         studentEnroll.appendChild(p)
@@ -62,18 +64,17 @@ const updateStudent = async(event)=>{
     
 }
 const listStudents = async(event)=>{
-    
+    event.preventDefault()
+    let nameOfClass = document.querySelector("#classList")
+    let fail = document.querySelector("#fail")
+    let list = document.querySelector("#list")
+    let nameOfClassInput = nameOfClass.value
+    let p = document.createElement("p")
+    let host = `http://localhost:4000/classes/`
+    axios.get(host,nameOfClassInput).then(response=>{
+        p.innerText = response.data
+        list.appendChild(p)
+
+    })
+
 }
-        // try{
-        //     let response = axios.post("http://localhost:4000/classes",{"nameOfClass": nameOfClassInput, "nameOfTeacher": nameOfTeacherInput})
-        //     console.log(response)
-        //     let p = document.createElement("p")
-        //     debugger
-    
-        //     p.innerText = classInfo
-        //     let classAdd = document.querySelector("#classAdd")
-        //     classAdd.appendChild(p)
-    
-        // }catch(err){
-        //     console.log(err)
-        // }

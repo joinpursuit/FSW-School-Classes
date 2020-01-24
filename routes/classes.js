@@ -6,7 +6,8 @@ const Student = require("../Student")
 let classes = express.Router()
 classes.use(cors())
 let mySchool = new School();
-classes.post("/classes", (request, response)=>{
+
+classes.post("/", (request, response)=>{
     let nameOfClassInput = request.body.nameOfClassInput;
     let nameOfTeacherInput = request.body.nameOfTeacherInput;
 if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined|| nameOfTeacherInput!==undefined){
@@ -19,19 +20,27 @@ if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined
         "timestamp": new Date()})
     }
     })
-classes.post("/classes/:nameOfStudentInput/enroll", (request, response)=>{
+classes.post("/:nameOfClassInput/enroll", (request, response)=>{
     let nameOfClassInput = request.params.nameOfClassInput
     let nameOfStudentInput = request.body.nameInput;
+    let cityOfStudent = request.body.ageInput;
+    let gradeOfStudent = request.body.gradeInput
+    let newStudent = new Student(nameOfStudentInput, gradeOfStudent, cityOfStudent)
     if(nameOfStudentInput.nameInput === undefined|| nameOfStudentInput.ageInput === undefined|| nameOfStudentInput.cityInput=== undefined|| nameOfStudentInput.gradeInput === undefined){
         response.json({"error": "type in valid entries"})
     }else{
         mySchool.enrollStudent(nameOfClassInput, nameOfStudentInput)
         response.json({
-            "student": {"name":nameOfStudentInput.nameInput, "age": nameOfStudentInput.ageInput, "city": nameOfStudentInput.cityInput, "age": nameOfStudentInput.ageInput},
+            "student": newStudent,
             "class": nameOfClassInput,
             "message": "enrolled, thank you!"
         })
     }        
+})
+classes.get("/:nameOfClassInput/nameOfStudentInput", (request, response)=>{
+    let nameOfClassInput = request.params.nameOfClassInput;
+    mySchool.listStudents(nameOfClassInput)
+    response.json(mySchool.listStudents(nameOfClassInput))
 })
 
 module.exports = classes;
