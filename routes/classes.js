@@ -21,11 +21,12 @@ if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined
     }
     })
 classes.post("/:nameOfClassInput/enroll", (request, response)=>{
-    let nameOfClassInput = request.params.nameOfClassInput
+    let nameOfClassInput = request.body.nameOfClassInput
     let nameOfStudentInput = request.body.nameInput;
-    let cityOfStudent = request.body.ageInput;
-    let gradeOfStudent = request.body.gradeInput
-    let newStudent = new Student(nameOfStudentInput, gradeOfStudent, cityOfStudent)
+    let ageInput= request.body.ageInput;
+    let cityInput = request.body.cityInput;
+    let gradeInput = request.body.gradeInput;
+    let newStudent = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput)
     if(nameOfStudentInput.nameInput === undefined|| nameOfStudentInput.ageInput === undefined|| nameOfStudentInput.cityInput=== undefined|| nameOfStudentInput.gradeInput === undefined){
         response.json({"error": "type in valid entries"})
     }else{
