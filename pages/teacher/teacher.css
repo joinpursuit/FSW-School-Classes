@@ -122,3 +122,13 @@ ul {
     margin: 0px;
     padding: 0px;
 }
+
+a {
+    text-decoration: none;
+    font-family: trajanPro;
+    color: #2D2C2E;
+}
+
+a:hover {
+    font-size: 20px;
+}
