@@ -20,19 +20,20 @@ if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined
         "timestamp": new Date()})
     }
     })
-classes.post("/:nameOfClassInput/enroll", (request, response)=>{
+classes.post("/enroll", (request, response)=>{
     let nameOfClassInput = request.body.nameOfClassInput
     let nameOfStudentInput = request.body.nameInput;
     let ageInput= request.body.ageInput;
     let cityInput = request.body.cityInput;
     let gradeInput = request.body.gradeInput;
-    let newStudent = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput)
-    if(nameOfStudentInput.nameInput === undefined|| nameOfStudentInput.ageInput === undefined|| nameOfStudentInput.cityInput=== undefined|| nameOfStudentInput.gradeInput === undefined){
+    let studentInfo = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput).value
+    if(studentInfo === undefined|| studentInfo.age === undefined|| studentInfo.city=== undefined|| studentInfo.grade === undefined){
         response.json({"error": "type in valid entries"})
     }else{
-        mySchool.enrollStudent(nameOfClassInput, nameOfStudentInput)
+        mySchool.enrollStudent(studentInfo)
+        console.log(studentInfo)
         response.json({
-            "student": newStudent,
+            "student": studentInfo,
             "class": nameOfClassInput,
             "message": "enrolled, thank you!"
         })

@@ -24,6 +24,7 @@ const addClass = async(event)=>{
  }
  console.log(classInfo)
  axios.post(host,classInfo).then(response=>{
+     console.log(response)
     p.innerText = response.data.message
     classAdd.appendChild(p)
  })
@@ -45,7 +46,7 @@ const enrollStudent = async(event)=>{
     let gradeInput = grade.value
     let p = document.createElement("p")
     let studentEnroll = document.querySelector("#studentEnroll")
-    let host = "http://localhost:4000/classes"
+    let host = "http://localhost:4000/classes/enroll"
     let studentInfo = {
         name: nameInput,
         class: classInput,
@@ -53,6 +54,7 @@ const enrollStudent = async(event)=>{
         city: cityInput,
         grade:gradeInput
     }
+    debugger
     console.log(studentInfo)
     axios.post(host,studentInfo).then(response=>{
         p.innerText = response.data.message
@@ -70,7 +72,7 @@ const listStudents = async(event)=>{
     let list = document.querySelector("#list")
     let nameOfClassInput = nameOfClass.value
     let p = document.createElement("p")
-    let host = `http://localhost:4000/classes/`
+    let host = `http://localhost:4000/classes/list`
     axios.get(host,nameOfClassInput).then(response=>{
         p.innerText = response.data
         list.appendChild(p)
