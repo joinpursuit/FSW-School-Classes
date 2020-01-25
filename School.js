@@ -49,9 +49,12 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let newStudent = new Student(className, student)
+    this.classes[className][students] = newStudent
     // let newStudent = new Student(className, student)
     // this.student[className] = newStudent
     //console.log(newStudent)
+    return newStudent
   }
 
 

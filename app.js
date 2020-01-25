@@ -48,6 +48,17 @@ app.post('/class',classesCheck,(req,res) => {
         "timestamp": now.toString(Date.now())}) //"YYYY, MM/DD HH:MM:SS"
 })
 
+app.post('/class/<class-name>/enroll', (req,res) => {
+    let { className, name , age , city , grade } = req.body
+
+    let enrolledStudent = newSchool.enrollStudent(className, name,age,city,grade)
+    res.json({enrolledStudent,
+        className: className,
+        message: 'Enrolled Student',
+        "timestamp": now.toString(Date.now())})
+    })
+
+
 // app.get('/',(req, res) => {
 //     res.json(req.body) // req . params
 // })
