@@ -1,413 +1,197 @@
-const playAudio = () => {
-    let audio = document.querySelector("audio");
-    audio.play();
-    document.removeEventListener("click", playAudio)
-} // End of playAduio() function
+let typeOfUser;
+let user;
 
-document.addEventListener("click", playAudio) // End of audio.play() click listener
+document.addEventListener("click", () => {
+    document.querySelector("audio").play();
+})
 
 document.addEventListener("DOMContentLoaded", () => {
-    let classForm = document.querySelector("#classForm");
-    let studentForm = document.querySelector("#studentForm");
-    let enrollForm = document.querySelector("#enrollForm");
-    let updateForm = document.querySelector("#updateForm");
-    let findStudentForm = document.querySelector("#findStudentForm");
-    let listForm = document.querySelector("#listForm");
+    let loginButton = document.querySelector("#loginButton");
+    let signUpButton = document.querySelector("#signUpButton");
+    let logSign = document.querySelector("#logSign");
+    let login = document.querySelector("#login");
+    let loginForm = document.querySelector("#loginForm");
+    let signUp = document.querySelector("#signUp");
+    let signUpForm = document.querySelector("#signUpForm");
+    let h1 = document.querySelector("h1");
+    let isValidUser = document.querySelector("#isValidUser");
+    let validUserForm = document.querySelector("#validUserForm");
 
-    classForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        addClass();
-    });
-    
-    studentForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        addStudent();
-    });
-
-    enrollForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        enrollStudent();
+    loginButton.addEventListener("click", () => {
+        h1.innerText = "Login";
+        logSign.style.display = "none";
+        login.style.display = "inline";
     })
 
-    updateForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        updateStudent();
+    signUpButton.addEventListener("click", () => {
+        h1.innerText = "Sign Up";
+        logSign.style.display = "none";
+        isValidUser.style.display = "inline";
     })
 
-    findStudentForm.addEventListener("submit", (e) => {
+    loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        findStudent();
+        loginAttempt();
     })
 
-    listForm.addEventListener("submit", (e) => {
+    validUserForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        listStudents();
-    });
-}) // End of DOMContentLoaded
+        isValidUserAttempt();
+    })
 
-const postData = async (url, data, callback) => {
-    try {
-        let res = await axios.post(url, data);
-        callback(res.data);
-    } catch (err) {
-        console.log(err);
-    }
-} // End of postData() function
+    signUpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        signUpAttempt();
+    })
+}) // End of DOMContentLoaded listener
 
-const addClass = async () => {
-    let className = document.querySelector("#className");
-    let classTeacher = document.querySelector("#classTeacher");
-    let classSection = document.querySelector("#classResponse");
-    // Grab the needed class tags
+const goBack = () => {
+    let h1 = document.querySelector("h1");
+    let logSign = document.querySelector("#logSign");
+    let login = document.querySelector("#login");
+    let signUp = document.querySelector("#signUp");
+    let isValidUser = document.querySelector("#isValidUser");
+    h1.innerText = "School Records";
+    logSign.style.display = "inline";
+    login.style.display = "none";
+    signUp.style.display = "none";
+    isValidUser.style.display = "none";
+} // End of goBack() function
 
-    // Check if either of the inputs are empty
-    if(!className.value || !classTeacher.value) { 
-        // If true then add an error display
-        classSection.innerHTML = "";
-        let p = document.createElement("p");
-        p.innerText = "Please fill out all information.";
-        classSection.appendChild(p);
+const loginAttempt = async () => {
+    const username = document.querySelector("#loginUser");
+    const password = document.querySelector("#loginPass");
+    const loginResponse = document.querySelector("#loginResponse");
+    loginResponse.innerHTML = "";
+
+    if(!username.value && !password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username or password were inputted";
+        loginResponse.appendChild(error);
+    } else if(!username.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username was inputted";
+        loginResponse.appendChild(error);
+    } else if(!password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No password was inputted";
+        loginResponse.appendChild(error);
     } else {
-        // If all data was entered then post it to the DB
-        let newClass = {name: className.value, teacher: classTeacher.value};
-        postData("http://localhost:3000/class", newClass, appendClassResponse);
+        let res = await axios.get(`http://localhost:3000/login?username=${username.value}&password=${password.value}`);
+        login(res.data);
     }
-    
-} // End of addClass() function
+} // End of loginAttempt() function
 
-const appendClassResponse = (data) => {
-    let classSection = document.querySelector("#classResponse");
-    classSection.innerHTML = "";
-    // Reset the classSection section
+const signUpAttempt = async () => {
+    let username = document.querySelector("#signUpUser");
+    let password = document.querySelector("#signUpPass");
+    let signUpResponse = document.querySelector("#signUpResponse");
+    signUpResponse.innerHTML = "";
 
-    let newClass = data.class;
-
-    // Check if there is an error
-    if(data.error) {
-        // Display an error if so
-        let err = document.createElement("p");
-        err.innerText = "Class already exists.";
-        classSection.appendChild(err);
+    if(!username.value && !password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username or password were inputted";
+        signUpResponse.appendChild(error);
+    } else if(!username.value) {
+        let error = document.createElement("p");
+        error.innerText = "No username was inputted";
+        signUpResponse.appendChild(error);
+    } else if(!password.value) {
+        let error = document.createElement("p");
+        error.innerText = "No password was inputted";
+        signUpResponse.appendChild(error);
     } else {
-        // Display the information of the class added if no error
-        let status = document.createElement("p");
-        status.innerText = "Class Added";
-        let p = document.createElement("p");
-        p.innerHTML = `<b>Class Name</b>: ${newClass.name} <b>Teacher</b>: ${newClass.teacher}`;
-        classSection.appendChild(status);
-        classSection.appendChild(p);
-
-        // Reset the input tags
-        document.querySelector("#className").value = "";
-        document.querySelector("#classTeacher").value = "";
+        let res = await axios.post(`http://localhost:3000/login?username=${username.value}&password=${password.value}&userType=${typeOfUser}&userId=${user.id}`);
+        signUp(res.data);
     }
-} // End of appendClassResponse() function
+} // End of signUpAttempt() function
 
-const addStudent = () => {
-    let studentFirst = document.querySelector("#studentFirst");
-    let studentLast = document.querySelector("#studentLast");
-    let studentCity = document.querySelector("#studentCity");
-    let studentAge = document.querySelector("#studentAge");
-    let studentSection = document.querySelector("#studentResponse");
-    // Grab all needed student tags
+const isValidUserAttempt = async () => {
+    let firstName = document.querySelector("#validFirst");
+    let lastName = document.querySelector("#validLast");
+    let id = document.querySelector("#validId");
+    let userType = document.querySelector("#userType");
+    let validUserResponse = document.querySelector("#validUserResponse");
+    let isValidUser = document.querySelector("#isValidUser");
+    let signUp = document.querySelector("#signUp");
+    validUserResponse.innerHTML = "";
 
-    // Check if any info was empty
-    if(!studentFirst.value || !studentLast.value || !studentCity.value || !studentAge.value) {
-        // If any inputs are empty then display an error
-        studentSection.innerHTML = "";
-        let p = document.createElement("p");
-        p.innerText = "Please fill out all information.";
-        studentSection.appendChild(p);
-    } else {
-        // Post the data if all data is entered
-        let student = {
-            firstName: studentFirst.value,
-            lastName: studentLast.value,
-            city: studentCity.value,
-            age: studentAge.value
-        }
-        
-        postData(`http://localhost:3000/student/`, student, appendStdResponse);
-    }
-} // End of addStudent() function
-
-const appendStdResponse = (data) => {
-    let studentSection = document.querySelector("#studentResponse");
-    studentSection.innerHTML = "";
-    // Reset the studentSection
-
-    let student = data.student;
-
-    let message = document.createElement("p");
-    message.innerText = "Added student";
-
-    let studentInfo = document.createElement("p");
-    studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>City</b>: ${student.city} <b>Age</b>: ${student.age}`;
-
-    studentSection.appendChild(message);
-    studentSection.appendChild(studentInfo);
-
-    document.querySelector("#studentFirst").value = "";
-    document.querySelector("#studentLast").value = "";
-    document.querySelector("#studentCity").value = "";
-    document.querySelector("#studentAge").value = "";
-
-} // End of appendStdResponse() function
-
-const enrollStudent = async () => {
-    let enrollClass = document.querySelector("#enrollClass");
-    let enrollStudent = document.querySelector("#enrollStudent");
-    let enrollGrade = document.querySelector("#enrollGrade");
-    let enrollResponse = document.querySelector("#enrollResponse");
-
-    enrollClass = enrollClass.value;
-    let student = enrollStudent.value;
-    let grade = enrollGrade.value
-
-    if(!enrollClass || !student || !grade) {
-        enrollResponse.innerHTML = "";
+    if(!firstName.value || !lastName.value || !id.value || userType.value === "disabled") {
         let error = document.createElement("p");
         error.innerText = "Please fill out all information";
-        enrollResponse.appendChild(error);
+        validUserResponse.appendChild(error);
     } else {
-        try {
-            let res = await axios.post(`http://localhost:3000/class/${enrollClass}/${student}/enroll/${grade}`);
-            appendEnrollResponse(res.data);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-} // End of enrollStudent() function
+        let res = await axios.get(`http:/localhost:3000/login/${userType.value}/${id.value}/${firstName.value}/${lastName.value}`)
+        let data = res.data;
 
-const appendEnrollResponse = (data) => {
-    let enrollSection = document.querySelector("#enrollResponse");
-    enrollSection.innerHTML = "";
-    
-    if(data.error) {
+        if(data.error) {
             let error = document.createElement("p");
             error.innerText = data.error;
-            enrollSection.appendChild(error);
-    } else if(data.message === "Enrolled Student") {
-        let {student, className, grade} = data;
-
-        let message = document.createElement("p");
-        message.innerHTML = data.message + ` in class <b>${className}</b>`;
-        
-        let studentInfo = document.createElement("p");
-        studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Grade</b>: ${grade}`;
-
-        enrollSection.appendChild(message);
-        enrollSection.appendChild(studentInfo);
-
-    } else if(data.message === "Updated Student") {
-        let {student, className, grade} = data;
-
-        let message = document.createElement("p");
-        message.innerHTML = data.message + ` in class <b>${className}</b>`;
-        
-        let studentInfo = document.createElement("p");
-        studentInfo.innerHTML = `<b>Name</b>: ${student.first_name} ${student.last_name} <b>Grade</b>: ${grade}`;
-
-        enrollSection.appendChild(message);
-        enrollSection.appendChild(studentInfo);
-    }
-    
-}
-
-const updateStudent = async () => {
-    let updateId = document.querySelector("#updateId");
-    let updateFirst = document.querySelector("#updateFirst");
-    let updateLast = document.querySelector("#updateLast");
-    let updateAge = document.querySelector("#updateAge");
-    let updateCity = document.querySelector("#updateCity");
-    let updateResponse = document.querySelector("#updateResponse");
-    // Grab all needed update tags
-
-    let id = updateId.value;
-    let firstName = updateFirst.value;
-    let lastName = updateLast.value;
-    let age = updateAge.value;
-    let city = updateCity.value;
-    // Set variables for the values for readability
-
-    if(!id) {
-        let error = document.createElement("p");
-        error.innerText = "Please enter a student ID (If not known, use find student)";
-        updateResponse.appendChild(error);
-    } else {
-        let updates = [];
-        if(firstName) updates.push(await axios.patch(`http://localhost:3000/student/${id}?firstName=${firstName}`));
-        if(lastName) updates.push(await axios.patch(`http://localhost:3000/student/${id}?lastName=${lastName}`));
-        if(age) updates.push(await axios.patch(`http://localhost:3000/student/${id}?age=${age}`));
-        if(city) updates.push(await axios.patch(`http://localhost:3000/student/${id}?city=${city}`));
-        
-        appendUpdateResponse(updates);
-    }
-} // End of updateStudent() function
-
-const appendUpdateResponse = (updateData) => {
-    let updateResponse = document.querySelector("#updateResponse");
-    let updates = updateData;
-
-    if(updates[0].data.updated.name) {
-        let updateUl = document.createElement("ul");
-        updates.forEach((update, i) => {
-            if(update === updates[updates.length - 1]) {
-                let student = update.data.updated;
-                let {id, first_name, last_name, city, age} = student;
-                let updatedStudent = document.createElement("p");
-                updatedStudent.innerHTML = `<b>Student ID</b>: ${id} <b>First Name</b>: ${first_name} <b>Last Name</b>: ${last_name} <b>City</b>: ${city} <b>Age</b>: ${age}`;
-                updateResponse.appendChild(updatedStudent);
-            }
-            let li = document.createElement("li");
-            li.innerText = update.data.message;
-            updateUl.appendChild(li);
-        })
-
-        updateResponse.appendChild(updateUl);
-    } else {
-        let error = document.createElement("p");
-        error.innerText = "No student found by that ID";
-        updateResponse.appendChild(error);
-    }
-} // End of appendUpdateStudent() function
-
-const findStudent = async () => {
-    let findStudentId = document.querySelector("#findStudentId");
-    let findStudentFirst = document.querySelector("#findStudentFirst");
-    let findStudentLast = document.querySelector("#findStudentLast");
-    let findStudentResponse = document.querySelector("#findStudentResponse");
-
-    let id = findStudentId.value;
-    let firstName = findStudentFirst.value;
-    let lastName = findStudentLast.value;
-
-    if(!id && (!firstName && !lastName)) {
-        findStudentResponse.innerHTML = "";
-        let p = document.createElement("p");
-        p.innerText = "Please enter either a students id OR both first and last names.";
-        findStudentResponse.appendChild(p);
-    } else {
-        let res;
-
-        if(id) {
-            res = await axios.get(`http://localhost:3000/student/${id}`);
-        } else if(firstName && lastName) {
-            res = await axios.get(`http://localhost:3000/student/${firstName}/${lastName}`);
-        }
-        
-        appendFindStdResponse(res.data);
-    }
-
-} // End of findStudent() function
-
-const appendFindStdResponse = (data) => {
-    let findStudentResponse = document.querySelector("#findStudentResponse");
-    findStudentResponse.innerHTML = "";
-    
-    if(data.students) {
-        let students = data.students;
-        let message = document.createElement("p");
-        message.innerText = data.message;
-
-        let studentUl = document.createElement("ul");
-        students.forEach(student => {
-            let li = document.createElement("li");
-            li.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`;
-            studentUl.appendChild(li);
-        })
-
-        findStudentResponse.appendChild(message);
-        findStudentResponse.appendChild(studentUl);
-    } else if(!data.student.length) {
-        let error = document.createElement("p");
-        error.innerText = "No student found"
-        findStudentResponse.appendChild(error);
-    } else {
-        let student = data.student[0];
-        let classes = data.classes;
-
-        let studentInfo = document.createElement("p");
-        studentInfo.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city}`
-
-        let classesHeading = document.createElement("h3");
-        classesHeading.innerText = "Classes:" 
-
-        let classesUl = document.createElement("ul");
-        classes.forEach(foundClass => {
-            let li = document.createElement("li");
-            li.innerHTML = `<b>Class Name</b>: ${foundClass.class_name} <b>Teacher</b>: ${foundClass.teacher} <b>Grade</b>: ${foundClass.grade}`
-            classesUl.appendChild(li);
-        })
-
-        findStudentResponse.appendChild(studentInfo);
-        findStudentResponse.appendChild(classesHeading);
-        findStudentResponse.appendChild(classesUl);
-    }
-} // End of appendFindStdResponse() function
-
-const listStudents = async () => {
-    let listClass = document.querySelector("#listClass");
-    let listCity = document.querySelector("#listCity");
-    let listFailing = document.querySelector("#listFailing");
-    let listResponse = document.querySelector("#listResponse");
-    // Grab all needed list tags
-
-    // Check if no class was entered
-    if(!listClass.value) {
-        // Display an enter class error if so
-        listResponse.innerHTML = "";
-        let p = document.createElement("p");
-        p.innerText = "Please enter a class.";
-        listResponse.appendChild(p);
-    } else {
-        let res;
-    
-        // Depending on the if the user wants failing students, students from a city or both get diff data
-        if(listFailing.checked && listCity.value) {
-            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?failing=true&city=${listCity.value}`);
-        } else if(listFailing.checked) {
-            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?failing=true`);
-        } else if(listCity.value) {
-            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students?city=${listCity.value}`);
+            validUserResponse.appendChild(error);
         } else {
-            res = await axios.get(`http://localhost:3000/class/${listClass.value}/students`);
+            user = data.person;
+            typeOfUser = userType.value;
+            isValidUser.style.display = "none";
+            signUp.style.display = "inline";
         }
-
-        // Reset input tags
-        listClass.value = "";
-        listCity.value = "";
-        listFailing.checked = false;
-
-        // Post list data
-        appendListResponse(res.data);
     }
-} // End of listStudents() function
+} // End of isValidUserAttempt
 
-const appendListResponse = (data) => {
-    let listResponse = document.querySelector("#listResponse");
-    listResponse.innerHTML = "";
-    let students = data.students;
-    // Reset listResponse section and grab data.student
-
-    // Check if any students are returned
-    if(!students) {
-        // If not then display "No students found"
-        let noStudents = document.createElement("p");
-        noStudents.innerText = "No students found.";
-        listResponse.appendChild(noStudents);
+const login = async (data) => {
+    // on fail show incorrect user/pass error
+    if(data.error) {
+        let loginResponse = document.querySelector("#loginResponse");
+        loginResponse.innerHTML = "";
+        let error = document.createElement("p");
+        error.innerText = "Incorrect username/password";
+        loginResponse.appendChild(error);
     } else {
-        // If yes then display each student
-        let studentList = document.createElement("ul");
-        let classHeading = document.createElement("h3");
-        classHeading.innerText = data.className;
-
-        students.forEach(student => {
-            let li = document.createElement("li");
-            li.innerHTML = `<b>Student ID</b>: ${student.id} <b>Name</b>: ${student.first_name} ${student.last_name} <b>Age</b>: ${student.age} <b>City</b>: ${student.city} <b>Grade</b>: ${student.grade}`;
-            studentList.appendChild(li);
-        })
-        listResponse.appendChild(classHeading);
-        listResponse.appendChild(studentList);
+        // on success take to home page (changes depending on typeOfUser)
+        let admin = data.user[0].admin_id;
+        let teacher = data.user[0].teacher_id;
+        let student = data.user[0].student_id;
+        sessionStorage.setItem("ids", JSON.stringify([admin, teacher, student]));
+        if(admin) {
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/administrator/admin.html";
+        } else if(teacher) {
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/teacher/teacher.html";
+        } else if(student) {
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/student/student.html";
+        }
+        
     }
-} // End of appendListResponse() function
+
+} // End of login() function
+
+const signUp = async (data) => {
+    document.querySelector("#signUpResponse").innerHTML = "";
+    if(data.error) {
+        let error = document.createElement("p");
+        error.innerText = data.error;
+        document.querySelector("#signUpResponse").appendChild(error);
+    } else {
+        document.querySelector("#signUp").style.display = "none";
+        document.querySelector("#login").style.display = "inline";
+        document.querySelector("h1").innerText = "Login";
+
+        let username = document.querySelector("#signUpUser");
+        let password = document.querySelector("#signUpPass");
+
+        document.querySelector("#loginUser").value = username.value;
+        document.querySelector("#signUpUser").value = password.value;
+
+        username.value = "";
+        password.value = "";
+
+        let loginResponse = document.querySelector("#loginResponse");
+        let success = document.createElement("p");
+        success.innerText = "Sign Up Successful";
+        loginResponse.appendChild(success);
+    }
+    
+    // on successful sign up take to login page with prefilled data from what was entered.
+    // reset the inputs, show signup success on the login response 
+
+    
+
+} // End of signUp() function

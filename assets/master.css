@@ -1,17 +1,17 @@
 @font-face {
     font-family: trajanPro;
-    src: url(./fonts/Trajan_Reguler_Pro.ttf);
+    src: url(./../../../assets/fonts/Trajan_Reguler_Pro.ttf);
 }
 
 @font-face {
     font-family: trajanPro;
-    src: url(./fonts/Trajan_Bold_Pro.ttf);
+    src: url(./../../../assets/fonts/Trajan_Bold_Pro.ttf);
     font-weight: bold;
 }
 
 @font-face {
     font-family: abstergoSans;
-    src: url(./fonts/abstergo_sans_light.ttf);
+    src: url(./../../../assets/fonts/abstergo_sans_light.ttf);
 }
 
 header {
@@ -30,79 +30,21 @@ section {
 }
 
 main {
-    display: grid;
-    grid-template-columns: 4% 28% 4% 28% 4% 28% 4%;
+    text-align: center;
 }
 
-h2, h3 {
+h1, h2, h3 {
     font-family: trajanPro;
     font-weight: bold;
     color: #C1232C;
 }
 
-p, label, input, li {
+p, label, input, li, button {
     font-family: abstergoSans;
     color: #2D2C2E;
 }
 
-#classSection {
-    grid-column: 2 / 3;
-}
-
-#classForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#studentSection {
-    grid-column: 4 / 5;
-}
-
-#studentForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#enrollSection {
-    grid-column: 6 / 7;
-}
-
-#enrollForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#updateSection {
-    grid-column: 4 / 5;
-    grid-row: 2 / 3;
-}
-
-#updateForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#findStudentSection {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-}
-
-#findStudentForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#listSection {
-    grid-column: 6 / 7;
-    grid-row: 2 / 3;
-}
-
-#listForm {
-    display: flex;
-    flex-direction: column;
-}
-
-input[type=submit] {
+input[type=submit], button {
     width: fit-content;
     box-shadow: 1px 1px 5px -1px #2d2c2e;
 	background-color:transparent;
@@ -117,12 +59,12 @@ input[type=submit] {
     text-shadow:3px 1px 5px #c7c8ca;
 }
 
-input {
+input, button {
     margin-bottom: 12px;
     cursor: pointer;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
     font-size:15px; 
 	border-style:solid; 
     border-radius:24px; 
@@ -134,17 +76,47 @@ input[type=text] {
     border-color:#c7c8ca;  
 }
 
-input[type=text]:focus {
+input[type=password] {
+    letter-spacing: 3px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
     outline: none;
 }
 
-input[type=checkbox]:checked {
-    background-color: #2d2c2e;
+select {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 12px;
+    cursor: pointer;
+    padding: 11px 21px;
+    outline: 0;
+    border: 1px solid #c7c8ca;
+    border-radius: 24px;
+    background: #2d2c2e;
+    color: #c7c8ca;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+select::-ms-expand {
+    display: none;
 }
 
-@media only screen and (max-width: 900px) {
-    main {
-        display: flex;
-        flex-direction: column;
-    }
+select:hover, select:focus {
+    color: #c7c8ca;
+    background: #2d2c2e;
+}
+select:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    /* border: 1px solid black; */
+    justify-content: left;
+    margin: auto;
 }
