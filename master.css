@@ -310,3 +310,32 @@ li#city{
     list-style: none;
     font-size: 40px;
 }
+li#dob{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px; 
+}
+li#fail{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px; 
+}
+
+div#mainContainerTwo{
+    display: flexbox;
+}
+
+li#subject{
+    font-family: monospace;
+    text-decoration: yellowgreen;
+    font-weight: normal;
+    color: yellowgreen;
+    list-style: none;
+    font-size: 40px; 
+}
