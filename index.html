@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./master.css" />
+    <title>Pursuit-Core-Web-Express-Project</title>
+</head>
+<body>
+
+    <div id="mainDiv"> 
+        <h1> Welcome to the School of Hogwarts!</h1>
+            <div id="addClassDivHead">
+                <h3> Please fill out the form below to add a new class</h3>
+            <div> 
+
+            <div id="addClassDivMain">
+                <form id="addClassForm"> 
+                    Class Name:<br>
+                    <input type="text" name="classN" vale="">
+                    <br>
+        
+                    Teacher:<br>
+                    <input type="text" name="teacher" vale="">
+                    <br>
+        
+                    <br><br>
+                    
+                    <button id="classBtn">Add Class</button>
+
+
+                </form>
+            </div>  
+            
+            <div id=newClassForm>
+            </div>
+
+
+            <div id=enrollStudentDiv>
+                <h3> Please fill out the form below to add a new student</h3>
+                <form id="enrollStudentForm">
+                    Class:<br>
+                    <input type="text" name="class" value="">
+                    <br>
+
+                    Name:<br>
+                    <input type="text" name="name" value="">
+                    <br>
+
+                    Age: <br>
+                    <input type="text" name="age" value="">
+                    <br>
+
+                    City: <br>
+                    <input type="text" name="city" value="">
+                    <br>
+
+                    Grade: <br>
+                    <input type="text" name="grade" value="">
+                    <br>
+
+                    <br><br>
+                    <input type="submit" value="Enroll New Student">
+                    </form> 
+            </div>
+          
+            <div id="newStudentForm"> 
+            </div>
+
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+    <div> 
+
+        <h3> If you would like to see failing students, click below</h3>
+
+        <div> 
+            <form id="form3">
+                <input type="checkbox" name="" value=""> Show Failing Students<br>
+                <input type="submit" value="Magic">
+              </form>
+        </div> 
+
+        <div id="failingStudentList">
+            <ul id="failingStudentListUL"> 
+            </ul>
+        </div> 
+
+    </div>
+
+
+
+
+
+    </div>
+    
+    
+</body>
+</html>

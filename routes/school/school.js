@@ -1,5 +1,7 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('../../Class');
+const Student = require('../students/students')
+const express = require("./node_modules/express")
+const router = express.Router();
 
 class School {
   constructor() {
@@ -29,7 +31,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(className, student);
+    this.className = new classname;
+    this.student = new Student;
   }
 
 
