@@ -1,5 +1,13 @@
 const {db} = require("./../../db");
 
+const isTeacherExisting = async (teacher) => {
+    let found = await db.any("SELECT * FROM teachers WHERE first_name=${first} AND last_name=${last}", teacher);
+
+    if(found.length) {
+        return true;
+    } else return false;
+} // End of isTeacherExisting() function
+
 const addTeacher = async (req, res) => {
     let teacher = req.body;
     let {first, last} = teacher;

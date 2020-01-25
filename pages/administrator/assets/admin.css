@@ -88,6 +88,7 @@ nav {
 }
 
 a {
+    font-family: trajanPro;
     text-decoration: none;
     color: #c7c8ca; 
     font-size: 32px;
@@ -122,4 +123,8 @@ a:hover {
 #classForm {
     display: flex;
     flex-direction: column;
+}
+
+#logout {
+    font-size: 16px;
 }
