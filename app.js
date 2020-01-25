@@ -41,7 +41,7 @@ app.post("/school/add/student/:class",(req,res)=>{
         )
     }catch(err){
         res.json(
-            { "error":err+"Please fill out all the information for the student",
+            { "error":  "Please fill out all the information for the student",
             "timestamp": timeStamp()
         }
         )
@@ -51,7 +51,6 @@ app.post("/school/add/student/:class",(req,res)=>{
 app.get("/",(req,res)=>{
     res.json("making requesting on / url")
 })
-
 
 
 app.listen(port,()=>{

@@ -62,6 +62,7 @@ const classOpt = (list)=>{
         classesOption.innerText=list[key].name;
         classesList.appendChild(classesOption);
     };
+    
     for(let key in list){
         let classesOption=document.createElement("option")
         classesOption.value=list[key].name 
