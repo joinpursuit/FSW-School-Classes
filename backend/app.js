@@ -6,7 +6,7 @@ const port = 3000;
 const app = express();
 
 const loginRouter = require("./routes/login/login.js");
-const classRouter = require("./routes/class/classes.js");
+const classRouter = require("./routes/classes/classes.js");
 const studentRouter = require("./routes/students/students.js");
 const teacherRouter = require("./routes/teachers/teachers.js");
 
