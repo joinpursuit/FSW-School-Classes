@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let li = document.createElement('li')
         add_class(course.value , teacher.value)
         debugger
-        req.body.appendchild(req.body)
+       // req.body.appendchild(req.body)
 
     })
 })

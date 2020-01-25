@@ -31,8 +31,9 @@ const classesCheck = (req, res, next) => {
     }
 }
 
-app.get('/',(req,res) => {
+app.get('/allClasses',(req,res) => {
     res.json({
+        newSchool,
         status: 200,
         message: "This is running, try other routes"
     })
