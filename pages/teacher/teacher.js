@@ -2,6 +2,14 @@ let ids = JSON.parse(sessionStorage.getItem("ids"));
 let teacher = ids[1];
 let allStudents = {};
 
+const playAudio = () => {
+    let audio = document.querySelector("audio");
+    audio.play();
+    document.removeEventListener("click", playAudio)
+} // End of playAduio() function
+
+document.addEventListener("click", playAudio) // End of audio.play() click listener
+
 document.addEventListener("DOMContentLoaded", () => {
     fillShowStudents();
     let updateForm = document.querySelector("#updateForm");

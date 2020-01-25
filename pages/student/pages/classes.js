@@ -1,6 +1,14 @@
 let ids = JSON.parse(sessionStorage.getItem("ids"));
 let student = ids[2];
 
+const playAudio = () => {
+    let audio = document.querySelector("audio");
+    audio.play();
+    document.removeEventListener("click", playAudio)
+} // End of playAduio() function
+
+document.addEventListener("click", playAudio) // End of audio.play() click listener
+
 document.addEventListener("DOMContentLoaded", async () => {
     let res = await axios.get(`http://localhost:3000/students/${student}/classes`);
     populateClasses(res.data);

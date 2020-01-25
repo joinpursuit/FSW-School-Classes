@@ -1,9 +1,13 @@
 let typeOfUser;
 let user;
 
-document.addEventListener("click", () => {
-    document.querySelector("audio").play();
-})
+const playAudio = () => {
+    let audio = document.querySelector("audio");
+    audio.play();
+    document.removeEventListener("click", playAudio)
+} // End of playAduio() function
+
+document.addEventListener("click", playAudio) // End of audio.play() click listener
 
 document.addEventListener("DOMContentLoaded", () => {
     let loginButton = document.querySelector("#loginButton");
