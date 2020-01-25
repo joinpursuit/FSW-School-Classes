@@ -19,7 +19,7 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+    return this.classes[name] = newClass;
   }
   // addClass(name, teacher) {
   //   let newClass = new Class(name, teacher);
@@ -65,7 +65,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-    // return this.classes[className].student
+    return this.classes[className].student
   }
 
 
