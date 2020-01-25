@@ -5,6 +5,6 @@ students.post("/", addStudent);
 
 students.get("/", getStudents);
 
-students.patch("/:studentId", updateStudent);
+students.patch("/:id", updateStudent);
 
 module.exports = students;

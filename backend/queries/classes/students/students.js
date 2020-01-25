@@ -110,7 +110,7 @@ const enrollStudent = async (req, res) => {
         // Check if the student is Existing in the school
         if(await isStudentExisting(studentId)) {
             // Check if the student is enrolled in the class
-            if(await isStudentEnrolled(studentId, newClass)) {
+            if(await isStudentEnrolled(classId, studentId)) {
                 // If yes then send already enrolled error
                 res.json({ 
                     error: "Already enrolled in that class",
