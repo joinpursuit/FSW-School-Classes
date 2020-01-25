@@ -8,7 +8,7 @@ const app = express();
 const loginRouter = require("./routes/login/login.js");
 const classRouter = require("./routes/class/classes.js");
 const studentRouter = require("./routes/students/students.js");
-const teacherRouter = require("./routes/teacher/teacher.js");
+const teacherRouter = require("./routes/teachers/teachers.js");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
