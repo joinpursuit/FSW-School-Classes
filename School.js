@@ -31,17 +31,11 @@ class School {
   //  * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-
-    let students = this.classes[className].students
-    let newStudent = new Student (name, city, age, grade)
-      if(!students){
-        student.push(newStudent)
-      }
-
-      return newStudent
-
-      }
-
+    let studentList = this.classes[className].students;
+    let newStudent = new Student(student)
+    studentList.push(newStudent)
+    return student
+  }
 
   
 
@@ -81,13 +75,12 @@ class School {
   //  * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    let students = this.classes
+    let students = this.classes[className].students
     let filterArr = students.filter(student => {
-      if(failing === true){
         if(student.city === city && student.grade < 70) {
           return student
-        }
-      } else if(failing === "true") {
+        
+      } else if(failing) {
         if(student.grade < 70){
           return student
         }
@@ -96,8 +89,7 @@ class School {
       }
   })
 
-  return filterArr
-
+  return filterArr  
   }
 }
 

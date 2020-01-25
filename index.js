@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 document.addEventListener("DOMContentLoaded", () => {
 
     let className = document.querySelector("#className");
@@ -15,20 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let cityList = document.querySelector("#cityList");
     let checkFailing = document.querySelector("#checkFailing");
     let listSubmit = document.querySelector("#listSubmit")
+    let form1 = document.querySelector("#one")
+    let div1 = document.querySelector("#divOne")
 
-    addClass.addEventListener("submit", (e) => {
+    form1.addEventListener("submit", (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:3000/route/${className}/${teacherName}`).then(res => {
+        axios.post(`http://localhost:3000/route/${className.value}/${teacherName.value}`).then(res => {
             let p = document.createElement("p");
-            p.innerText = res.data
-        }) catch (err){
-            
-        }
-    })
+            let newClass = className.value
+            let teacher = teacherName.value
+            p.innerText = `Teacher: ${teacher} : Class: ${newClass}` 
+            div1.appendChild(p)
+            debugger
+            }) 
+        
+    }) 
 
-    studentSubmit.addEventListener("Submit", (e) => {
-        e.preventDefault();
+    // studentSubmit.addEventListener("Submit", (e) => {
+    //     e.preventDefault();
 
-    })
+    // })
 
 })
