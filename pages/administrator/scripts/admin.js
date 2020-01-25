@@ -52,7 +52,7 @@ const addStudent = () => {
             age: studentAge.value
         }
         
-        postData(`http://localhost:3000/student/`, student, appendStdResponse);
+        postData(`http://localhost:3000/students/`, student, appendStdResponse);
     }
 } // End of addStudent() function
 
@@ -94,7 +94,7 @@ const addTeacher = () => {
             first: teacherFirst.value,
             last: teacherLast.value
         }
-        postData("http://localhost:3000/teacher", teacher, appendTchResponse);
+        postData("http://localhost:3000/teachers", teacher, appendTchResponse);
     }
 } // End of addTeacher() function
 
@@ -139,7 +139,7 @@ const addClass = async () => {
     } else {
         // If all data was entered then post it to the DB
         let newClass = {name: className.value, teacher: classTeacher.value};
-        postData("http://localhost:3000/class", newClass, appendClassResponse);
+        postData("http://localhost:3000/classes", newClass, appendClassResponse);
     }
 } // End of addClass() function
 

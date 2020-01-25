@@ -47,6 +47,30 @@ const isStudentEnrolled = async (wantedClass, studentId) => {
     
 } // End of isStudentEnrolled() function
 
+const getStudents = async(req, res) => {
+    try {
+        let {classId} = req.params;
+
+        let students = db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1", classId);
+    
+        if(students.length) {
+            res.json({
+                students,
+                message: "Students retrieved",
+                timestamp: new Date().toString()
+            })
+        } else {
+            res.json({
+                error: "No students found",
+                timestamp: new Date().toString()
+            })
+        }
+    } catch(err) {
+        console.log(err)
+    }
+    
+} // End of getStudents() function
+
 const updateStudent = async (req, res) => {
     try {
         let {classId, studentId} = req.params;
@@ -120,4 +144,4 @@ const enrollStudent = async (req, res) => {
     }
 } // End of enrollStudent() function
 
-module.exports = {updateStudent, enrollStudent};
+module.exports = {updateStudent, enrollStudent, getStudents};

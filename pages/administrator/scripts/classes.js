@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     let showClasses = document.querySelector("#showClasses");
 
-    let res = await axios.get("http:/localhost:3000/class");
+    let res = await axios.get("http:/localhost:3000/classes");
     let data = res.data;
 
     if(data.error) {

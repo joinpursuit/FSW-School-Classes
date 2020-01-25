@@ -1,8 +1,10 @@
 const classStudents = require("express").Router({mergeParams: true});
-let {updateStudent, enrollStudent} = require("./../../../queries/classes/students/students");
+let {updateStudent, enrollStudent, getStudents} = require("./../../../queries/classes/students/students");
 
-classStudents.patch("/", updateStudent);
+classStudents.get("/", getStudents);
 
-classStudents.post("/", enrollStudent);
+classStudents.patch("/:studentId", updateStudent);
+
+classStudents.post("/:studentId", enrollStudent);
 
 module.exports = classStudents;

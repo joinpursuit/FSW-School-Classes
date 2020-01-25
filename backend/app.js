@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 app.use("/login", loginRouter);
-app.use("/class", classRouter);
-app.use("/student", studentRouter);
-app.use("/teacher", teacherRouter);
+app.use("/classes", classRouter);
+app.use("/students", studentRouter);
+app.use("/teachers", teacherRouter);
 
 app.listen(port, () => console.log("Listening on port ", port));
