@@ -122,11 +122,13 @@ nav {
     justify-content: space-evenly;
     font-size: 32px;
     padding: 25px;
+    height: 500px;
 }
 
 a {
     color: #C7C8CA;
     text-decoration: none;
+    font-family: trajanPro;
 }
 
 a:hover {
@@ -145,4 +147,8 @@ a:hover {
 h1 {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+}
+
+#logout {
+    font-size: 16px;
 }

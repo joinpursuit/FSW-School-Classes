@@ -122,11 +122,13 @@ nav {
     justify-content: space-evenly;
     font-size: 32px;
     padding: 25px;
+    height: 500px;
 }
 
 a {
     color: #C7C8CA;
     text-decoration: none;
+    font-family: trajanPro;
 }
 
 a:hover {
@@ -149,4 +151,8 @@ a:hover {
 #updateForm {
     display: flex;
     flex-direction: column;
+}
+
+#logout {
+    font-size: 16px;
 }
