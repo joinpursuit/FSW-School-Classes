@@ -10,10 +10,12 @@ class Class {
 }
 
 classRoute.get("/", (req, res) => {
-  if(class) 
+  // if(class) {
+
+  // } 
   
   res.json({
-    this.name = 
+    // this.name = 
   });
 })
 
@@ -22,7 +24,7 @@ classRoute.post("/:className/enroll", (req, res) => {
 })
 
 classRoute.get("/:className/students", (req, res) => {
-  
+
 })
 
 module.exports = Class;
