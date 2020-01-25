@@ -39,7 +39,7 @@ const date = new Date ()
 route.get("/:className/students", (req, res) => {
     let className = req.params.className
     let failing = req.query.failing 
-    // let city = req.body.city
+    let city = req.query.city
     let listOfStudents = mySchool.getStudentsByClass(className);
     if(!listOfStudents){
         res.json({
