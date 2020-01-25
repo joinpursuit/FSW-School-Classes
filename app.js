@@ -14,9 +14,10 @@ let newSchool = new school ()
 app.get("/school",(req,res)=>{
     res.json(newSchool.classes)
 })
+
 app.post("/school/add/class",(req,res)=>{
     try{
-        let classAdd =newSchool.addClass(req.query.name,req.query.teacher)
+        newSchool.addClass(req.query.name,req.query.teacher)
         res.json({ 
             "class": { "name": req.query.name, "teacher": req.query.teacher, "students": []},
             "message": "Created a new class",

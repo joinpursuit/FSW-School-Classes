@@ -7,7 +7,7 @@ class School {
   constructor() {
     this.classes = {
       // Math:{"teacher": "John Doe", "students":[{name:"Kim",age:12,city:"CHI",grade:"fail"},{name:"Rachel",age:17,city:"NYC",grade:"pass"}]},
-      English:{name:"English", "teacher": "Jane Doe", "students":[{name:"Leo",age:17,city:"NYC",grade:"N/A"}]}
+      // English:{name:"English", "teacher": "Jane Doe", "students":[{name:"Leo",age:17,city:"NYC",grade:"N/A"}]}
       // className: Class Object
       //   physics: {} 
     }
