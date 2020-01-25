@@ -32,6 +32,11 @@ section {
 main {
     display: grid;
     grid-template-columns: 15% 35% 15% 20% 15%;
+    word-wrap: none;
+}
+
+section { 
+    word-wrap: none;
 }
 
 h1, h2, h3 {
@@ -111,4 +116,9 @@ input[type=checkbox]:checked {
 
 ul {
     list-style-type: none;
+}
+
+#classUl {
+    margin: 0px;
+    padding: 0px;
 }

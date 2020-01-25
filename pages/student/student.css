@@ -25,6 +25,7 @@ body {
     background-color: #C7C8CA;
     display: grid;
     grid-template-columns: 15% 85%;
+    margin: 0px;
 }
 
 section {

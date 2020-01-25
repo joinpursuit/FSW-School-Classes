@@ -50,9 +50,20 @@ const isStudentEnrolled = async (wantedClass, studentId) => {
 const getStudents = async(req, res) => {
     try {
         let {classId} = req.params;
+        let {cityName, failing} = req.query;
 
-        let students = db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1", classId);
-    
+        let students;
+        
+        if(cityName && failing) {
+            students = await db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1 AND city=$2 AND grade<70", [classId, cityName]);
+        } else if(cityName) {
+            students = await db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1 AND city=$2", [classId, cityName]);
+        } else if(failing) {
+            students = await db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1 AND grade<70", classId);
+        } else {
+            students = await db.any("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1", classId);
+        }
+
         if(students.length) {
             res.json({
                 students,
@@ -77,11 +88,11 @@ const updateStudent = async (req, res) => {
         let {grade} = req.body;
 
         if(await isClassExisting(classId) && await isStudentExisting(studentId)) {
-            let students = await db.any("SELECT * FROM class_enrollments WHERE student_id=$1 AND class_id=2", [studentId, classId]);
-            
+            let students = await db.any("SELECT * FROM class_enrollments WHERE student_id=$1 AND class_id=$2", [studentId, classId]);
+
             if(students.length) {
                 await db.none("UPDATE class_enrollments SET grade=$1 WHERE class_id=$2 AND student_id=$3", [grade, classId, studentId]);
-                let updated = await db.one("SELECT * FROM class_enrollments WHERE student_id=$1 AND class_id=$2", [studentId, classId]);
+                let updated = await db.one("SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE student_id=$1 AND class_id=$2", [studentId, classId]);
                 res.json({
                     updated,
                     message: "Student grade successfully updated",
