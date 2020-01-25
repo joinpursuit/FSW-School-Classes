@@ -61,4 +61,29 @@ const updateStudent = async (req, res) => {
     }
 } // End of updateStudent() function
 
-module.exports = {addStudent, getStudents, updateStudent};
+const getClasses = async (req, res) => {
+    try {
+        let {id} = req.params;
+
+        let classes = await db.any("SELECT * FROM class_enrollments INNER JOIN classes ON class_enrollments.class_id=classes.id INNER JOIN teachers ON classes.teacher=teachers.id WHERE student_id=$1", id);
+    
+        if(classes.length) {
+
+            res.json({
+                classes,
+                message: "Classes successfully retrieved",
+                timestamp: new Date().toString()
+            })
+        } else {
+            res.json({
+                error: "No classes found",
+                timestamp: new Date().toString()
+            })
+        }
+    } catch(err) {
+        console.log(err);
+    }
+    
+} // End of getClasses() function
+
+module.exports = {addStudent, getStudents, updateStudent, getClasses};

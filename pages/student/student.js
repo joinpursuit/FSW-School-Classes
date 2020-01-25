@@ -103,8 +103,6 @@ const appendUpdateResponse = (updateData) => {
     updateResponse.innerHTML = "";
     let updates = updateData;
 
-    debugger;
-
     if(updates[0].data.updated.id) {
         let updateUl = document.createElement("ul");
         updates.forEach((update, i) => {
