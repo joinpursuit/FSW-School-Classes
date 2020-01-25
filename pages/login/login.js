@@ -147,7 +147,18 @@ const login = async (data) => {
         loginResponse.appendChild(error);
     } else {
         // on success take to home page (changes depending on typeOfUser)
-        window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/index.html";
+        let admin = data.user[0].admin_id;
+        let teacher = data.user[0].teacher_id;
+        let student = data.user[0].student_id;
+        sessionStorage.setItem("ids", JSON.stringify([admin, teacher, student]));
+        if(admin) {
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/administrator/admin.html";
+        } else if(teacher) {
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/teacher/teacher.html";
+        } else if(student) {
+            
+        }
+        
     }
 
 } // End of login() function

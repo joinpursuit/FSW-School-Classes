@@ -3,12 +3,12 @@ CREATE DATABASE my_school_database;
 
 \c my_school_database;
 
+DROP TABLE IF EXISTS logins;
+DROP TABLE IF EXISTS class_enrollments;
+DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS teachers;
 DROP TABLE IF EXISTS admins;
-DROP TABLE IF EXISTS classes;
-DROP TABLE IF EXISTS class_enrollments;
-DROP TABLE IF EXISTS logins;
 
 CREATE TABLE students (
   id SERIAL PRIMARY KEY,

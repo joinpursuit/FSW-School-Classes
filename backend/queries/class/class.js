@@ -24,6 +24,34 @@ const isClassExisting = async (newClass) => {
     
 } // End of isClassExisting() function
 
+const isClassIdExisting = async (classId) => {
+    try {
+        let found = await db.any("SELECT * FROM class_enrollments WHERE class_id=$1", classId);
+
+        if(found.length) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch(err) {
+        console.log(err);
+    }
+} // End of isClassIdExisting() function
+
+const isStudentExisting = async (studentId) => {
+    try {
+        let found = await db.any("SLECT * FROM class_enrollments WHERE student_id$1", studentId);
+
+        if(found.length) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch(err) {
+        console.log(err);
+    }
+} // End of isStudentExisting() function
+
 const getStudentsByClass = async (className) => {
     try {
         // Grabbing the needed class ID from the given class 
@@ -41,6 +69,14 @@ const getStudentsByClass = async (className) => {
     }
    
 } // End of getStudentsByClass() function
+
+const getStudentsByClassId = async (id) => {
+    try {
+        return await db.any('SELECT * FROM class_enrollments INNER JOIN students ON class_enrollments.student_id=students.id WHERE class_id=$1', id);
+    } catch(err) {
+        console.log(err);
+    }
+} // End of getStudentsByClassId() function
 
 const getStudentsByClassWithFilter = async (className, failing, city) => {
     try {
@@ -148,4 +184,55 @@ const getAllClasses = async (req, res) => {
     }
 } // End of getAllClasses() function
 
-module.exports = {addClass, findStudents, getAllClasses}
+const updateStudent = async (req, res) => {
+    let {classId, studentId} = req.params;
+    let {grade} = req.body;
+    console.log(grade);
+    if(await isClassIdExisting(classId) && await isStudentExisting(studentId)) {
+        let students = await db.any("SELECT * FROM class_enrollments WHERE student_id=$1 AND class_id=2", [studentId, classId]);
+        
+        if(students.length) {
+            await db.none("UPDATE class_enrollments SET grade=$1 WHERE class_id=$2 AND student_id=$3", [grade, classId, studentId]);
+            let updated = await db.one("SELECT * FROM class_enrollments WHERE student_id=$1 AND class_id=$2", [studentId, classId]);
+            res.json({
+                updated,
+                message: "Student grade successfully updated",
+                timestamp: new Date().toString()
+            })
+        } else {
+            res.json({
+                error: "No student found by that ID in that class",
+                timestamp: new Date().toString()
+            })
+        }
+    }
+} // End of updateStudent() function
+
+const findStudentsByClassId = async (req, res) => {
+    try {
+        let students = await getStudentsByClassId(req.params.classId);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+const getClassByTeacher = async (req, res) => {
+    let {teacherId} = req.params;
+    console.log(teacherId);
+    let classes = await db.any('SELECT * FROM classes WHERE teacher=$1', teacherId);
+
+    if(classes.length) {
+        res.json({
+            classes,
+            message: "Classes successfully found",
+            timestamp: new Date().toString()
+        })
+    } else {
+        res.json({
+            error: "No classes found by that teacher",
+            timestamp: new Date().toString()
+        })
+    }
+} // End of getClassByTeacher
+
+module.exports = {addClass, findStudents, getAllClasses, updateStudent, getClassByTeacher}

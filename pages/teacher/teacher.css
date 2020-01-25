@@ -31,10 +31,10 @@ section {
 
 main {
     display: grid;
-    grid-template-columns: 4% 28% 4% 28% 4% 28% 4%;
+    grid-template-columns: 15% 35% 15% 20% 15%;
 }
 
-h2, h3 {
+h1, h2, h3 {
     font-family: trajanPro;
     font-weight: bold;
     color: #C1232C;
@@ -43,63 +43,6 @@ h2, h3 {
 p, label, input, li {
     font-family: abstergoSans;
     color: #2D2C2E;
-}
-
-#classSection {
-    grid-column: 2 / 3;
-}
-
-#classForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#studentSection {
-    grid-column: 4 / 5;
-}
-
-#studentForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#enrollSection {
-    grid-column: 6 / 7;
-}
-
-#enrollForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#updateSection {
-    grid-column: 4 / 5;
-    grid-row: 2 / 3;
-}
-
-#updateForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#findStudentSection {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-}
-
-#findStudentForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#listSection {
-    grid-column: 6 / 7;
-    grid-row: 2 / 3;
-}
-
-#listForm {
-    display: flex;
-    flex-direction: column;
 }
 
 input[type=submit] {
@@ -142,9 +85,17 @@ input[type=checkbox]:checked {
     background-color: #2d2c2e;
 }
 
-@media only screen and (max-width: 900px) {
-    main {
-        display: flex;
-        flex-direction: column;
-    }
+#showStudents {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+#updateStudent {
+    grid-column: 4 / 5;
+}
+
+#updateForm {
+    display: flex;
+    flex-direction: column;
 }
