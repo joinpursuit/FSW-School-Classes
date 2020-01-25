@@ -2,7 +2,7 @@ const {db} = require("./../../../db");
 
 const isClassExisting = async (classId) => {
     try {
-        let found = await db.any("SELECT * FROM class_enrollments WHERE class_id=$1", classId);
+        let found = await db.any("SELECT * FROM classes WHERE id=$1", classId);
 
         if(found.length) {
             return true;
@@ -16,7 +16,7 @@ const isClassExisting = async (classId) => {
 
 const isStudentExisting = async (studentId) => {
     try {
-        let found = await db.any("SLECT * FROM class_enrollments WHERE student_id$1", studentId);
+        let found = await db.any("SELECT * FROM students WHERE id=$1", studentId);
 
         if(found.length) {
             return true;
@@ -118,8 +118,8 @@ const enrollStudent = async (req, res) => {
                 })
             } else {
                 // If No then enroll the student in the course
-                let student = await db.one('INSERT INTO class_enrollments (class_id, student_id, grade) ' + 
-                             'VALUES($1, $2, $3) RETURNING *', [newClass.id, studentId, grade]);
+                let student = await db.one('INSERT INTO class_enrollments (class_id, student_id) ' + 
+                             'VALUES($1, $2) RETURNING *', [newClass.id, studentId]);
  
                 res.json({ 
                     student,
@@ -138,7 +138,7 @@ const enrollStudent = async (req, res) => {
  
     } else {
         res.json({
-            error: `Class ${className} doesn't exist.`,
+            error: `Class doesn't exist.`,
             timestamp: new Date().toString()
         })
     }

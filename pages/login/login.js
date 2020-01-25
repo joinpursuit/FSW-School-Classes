@@ -156,7 +156,7 @@ const login = async (data) => {
         } else if(teacher) {
             window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/teacher/teacher.html";
         } else if(student) {
-            
+            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/student/student.html";
         }
         
     }
