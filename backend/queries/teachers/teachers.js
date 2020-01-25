@@ -1,3 +1,5 @@
+const {db} = require("./../../db");
+
 const addTeacher = async (req, res) => {
     let teacher = req.body;
     let {first, last} = teacher;
