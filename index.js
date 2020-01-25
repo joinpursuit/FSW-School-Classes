@@ -56,23 +56,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
     e.preventDefault();
     let className = document.querySelector("#studentClass");
     let studentName = document.querySelector("#studentName");
+    console.log(studentName)
     let studentAge= document.querySelector("#studentAge");
     let studentCity = document.querySelector("#studentCity");
     let studentGrade = document.querySelector("#studentGrade");
     
     let classNameInput = className.value;
     let studentNameInput = studentName.value;
+    console.log(studentNameInput)
     let studentAgeInput = studentAge.value;
     let studentCityInput = studentCity.value;
     let studentGradeInput = studentGrade.value;
 
     try{
-      await axios.post(`http://localhost:3000/class/${classNameInput}/enroll`, {studentName: studentNameInput, studentAge: studentAgeInput, studentCity: studentCityInput, studentGrade: studentGradeInput})
+      await axios.post(`http://localhost:3000/class/${classNameInput.toLowerCase()}/enroll`, {studentName: studentNameInput, studentAge: studentAgeInput, studentCity: studentCityInput, studentGrade: studentGradeInput})
+      console.log ("hola")
       .then(res=>{
         console.log(res + "enroll")
-         displayStudent.innerText = "just addded student " + " at " + res.data.timestamp
-         // debugger
-        //res.data.newClass.name + " at " + res.data.timestamp
+         displayStudent.innerText = "just addded student " + res.data.newClass.name + " at " + res.data.timestamp
           // debugger
         debugger
       })

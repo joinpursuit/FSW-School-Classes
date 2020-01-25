@@ -47,7 +47,7 @@ const addNewClass =(req, res) => {
 
 const enrollNewStudent = (req, res) => {
   let enrolledStudent = mySchool.enrollStudent
-(req.body.studentName, req.body.studentAge, req.body.city, req.body.grade)
+(req.body.studentNameInput, req.body.studentAgeInput, req.body.StudentCityInput, req.body.StudentGradeInput)
 res.json({
   status: 200,
   enrolledStudent : enrolledStudent,
