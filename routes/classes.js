@@ -6,22 +6,27 @@ const Student = require("../Student")
 let classes = express.Router()
 classes.use(cors())
 let mySchool = new School();
-
+classes.get("/", (request, response)=>{
+    response.json(mySchool)
+})
 classes.post("/", (request, response)=>{
-    let nameOfClassInput = request.body.nameOfClassInput;
-    let nameOfTeacherInput = request.body.nameOfTeacherInput;
-if(mySchool.classes[nameOfClassInput]!==undefined|| nameOfClassInput!==undefined|| nameOfTeacherInput!==undefined){
-    response.json({"error": "type in valid entries"})
-}else{
-    mySchool.addClass(nameOfClassInput, nameOfTeacherInput)
+    let classes = request.body.classes;
+    let teacher = request.body.teacher;
+// console.log(classes)
+// console.log(teacher)
+// if(mySchool.classes!==undefined|| classes!==undefined|| teacher!==undefined){
+//     response.json({"error": "type in valid entries"})
+// }else{
+    mySchool.addClass(classes, teacher)
  response.json({
-        "class": {"nameOfClass": nameOfClassInput, "nameOfTeacherInput": nameOfTeacherInput},
-        "message": `Created a ${nameOfClassInput} class taught by ${nameOfTeacherInput}`,
+        "class": {"nameOfClass": classes, "teacher": teacher},
+        "message": `Created a ${classes} class taught by ${teacher}`,
         "timestamp": new Date()})
-    }
+    // }
     })
+
 classes.post("/enroll", (request, response)=>{
-    let nameOfClassInput = request.body.nameOfClassInput
+    let classes = request.body.classes
     let nameOfStudentInput = request.body.nameInput;
     let ageInput= request.body.ageInput;
     let cityInput = request.body.cityInput;
@@ -33,16 +38,16 @@ classes.post("/enroll", (request, response)=>{
         mySchool.enrollStudent(studentInfo)
         console.log(studentInfo)
         response.json({
-            "student": studentInfo,
-            "class": nameOfClassInput,
-            "message": "enrolled, thank you!"
+            "student":{'studentInfo': studentInfo } ,
+            "class": classes,
+            "message": "enrolled, thank you!" + studentInfo
         })
     }        
 })
-classes.get("/:nameOfClassInput/nameOfStudentInput", (request, response)=>{
-    let nameOfClassInput = request.params.nameOfClassInput;
-    mySchool.listStudents(nameOfClassInput)
-    response.json(mySchool.listStudents(nameOfClassInput))
+classes.get("/:classes/nameOfStudentInput", (request, response)=>{
+    let classes = request.params.classes;
+    mySchool.listStudents(classes)
+    response.json(mySchool.listStudents(classes))
 })
 
 module.exports = classes;
