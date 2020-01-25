@@ -1,6 +1,3 @@
-const student = require("express").Router();
-const {addStudent};
+const classStudentsRouter = require("express").Router();
 
-student.post("/", addStudent);
-
-module.exports = student;
+module.exports = classStudentsRouter;

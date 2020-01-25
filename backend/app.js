@@ -1,14 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const faker = require("faker");
 
 const port = 3000;
 const app = express();
 
 const loginRouter = require("./routes/login/login.js");
 const classRouter = require("./routes/class/classes.js");
-const studentRouter = require("./routes/student/student.js");
+const studentRouter = require("./routes/students/students.js");
 const teacherRouter = require("./routes/teacher/teacher.js");
 
 app.use(cors());
