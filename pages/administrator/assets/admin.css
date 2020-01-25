@@ -85,7 +85,8 @@ nav {
     text-align: center;
     justify-content: space-evenly;
     padding: 25px;
-    height: 500px;
+    height: 100vh;
+    margin: 0;
 }
 
 a {

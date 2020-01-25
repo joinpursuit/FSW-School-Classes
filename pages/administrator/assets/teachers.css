@@ -28,6 +28,7 @@ section {
 main {
     display: grid;
     grid-template-columns: 15% 4% 81%;
+    grid-template-rows: 10% 90%;
 }
 
 h1, h2, h3 {
@@ -86,7 +87,7 @@ nav {
     text-align: center;
     justify-content: space-evenly;
     padding: 25px;
-    height: 500px;
+    height: 100vh;
 }
 
 a {
