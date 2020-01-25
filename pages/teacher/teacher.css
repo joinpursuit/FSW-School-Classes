@@ -31,7 +31,7 @@ section {
 
 main {
     display: grid;
-    grid-template-columns: 15% 35% 15% 20% 15%;
+    grid-template-columns: 15% 35% 15% 30% 5%;
     word-wrap: none;
 }
 
