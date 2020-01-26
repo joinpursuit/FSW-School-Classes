@@ -19,27 +19,8 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    return this.classes[name] = newClass;
+    this.classes[name] = newClass;
   }
-  // addClass(name, teacher) {
-  //   let newClass = new Class(name, teacher);
-  //   if (!name || !teacher || this.classes[name]) {
-  //     let returnObj = {
-  //       "error": "Please fill out all the information or Class already exists",
-  //       "timestamp": new Date()
-  //     }
-  //     return returnObj
-  //   }
-  //   else if (!this.classes[name]) {
-  //     this.classes[name] = newClass;
-  //     let returnObj = {
-  //       "class": newClass,
-  //       "message": "Created a new class",
-  //       "timestamp": new Date()
-  //     }
-  //     return returnObj
-  //   }
-  // }
 
   /**
    * Enroll student in class
@@ -50,8 +31,7 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-  let newScholar = new Student(student.name, student.city, student.age, student.grade)
-  return this.classes[className].students.push(newScholar)
+  this.classes[className].students.push(student)
   }
 
 
@@ -65,7 +45,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-    return this.classes[className].student
+    return this.classes[className].students
   }
 
 
@@ -85,10 +65,16 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
+  getStudentsByClassWithFilter(className, failing) {
     // Your code here
+  //   let failing = true;
+  //   return this.classes[className].students.filter(el => {
+  //     el.grade < 70 && failing
+  //   })
   }
 
 }
+
+
 
 module.exports = School;
