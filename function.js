@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
             let lsClass = document.querySelector("#lsClass")
             let show = await axios.get(`http://localhost:3000/class/${lsClass.value}/students`).then((res)=>{
                 console.log(res.data)
+                let pResult = document.querySelector("#pResult")
+               if(res.data.message){
+                pResult.innerText = (res.data.message + " " + res.data.student)
+               } else {
+                pResult.innerText = res.data.error
+               }
             })
 
             }catch (error) {
@@ -47,6 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // debugger
             let show = await axios.post(`http://localhost:3000/class/${className.value}/${teacher.value}`).then((res)=>{
                 console.log(res.data)
+                let pClass = document.querySelector("#pClass")
+               if(res.data.message){
+                   pClass.innerText = (res.data.message + " " + res.data.timestamp)
+               } else {
+                pClass.innerText = res.data.error
+               }
             })
 
             }catch (error) {
@@ -60,6 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
              await axios.post(`http://localhost:3000/class/${stClass.value}/enroll/`).then((res)=>{
                 let student = res.data
                 console.log(student)
+                let pStudent = document.querySelector("#pStudent")
+               if(res.data.message){
+                   pStudent.innerText = res.data.message + " " + res.data.timestamp
+               } else {
+                pStudent.innerText = res.data.error
+               }
             })
 
             }catch (error) {

@@ -2,3 +2,9 @@ body{
     background-color: aquamarine;
     text-align: center;
 }
+h1{
+    margin: 50px;
+}
+p {
+    color: red;
+}

@@ -10,28 +10,31 @@
     <title>Class Project</title>
 </head>
 <body>
-    <h1>Class</h1>
+    <h1>John Jay's School Enrollment</h1>
     <form id="addClass">
-        <input type="name" id="className">
-        <input type="teacher" id="teacherName">
+        <input type="name" id="className" placeholder="Class Name">
+        <input type="teacher" id="teacherName" placeholder="Teacher Name">
         <button>Enter</button>
+        <p id="pClass"></p>
     </form>
 
     <form id= "addStudents">
 
     <input type="text" placeholder="class" id="class">
     <input type="text" placeholder="name" id="name">
-    <input type="text" placeholder="age" id="age">
+    <input type="number" placeholder="age" id="age">
     <input type="text" placeholder="city" id="city">
-    <input type="text" placeholder="grade" id="grade">
+    <input type="number" placeholder="grade" id="grade">
     <button>Enter</button>
-   
+   <p id="pStudent"></p>
     </form>
 
     <form id= "lstudents">
         <input type="text" placeholder="class" id="lsClass">
         <input type="text" placeholder="city (optional)" id="lsCity">
+        <input type="checkbox" id="checkbox"> (Show Failing Students Only)
         <button>enter</button>
+        <p id="pResult"></p>
     </form>
 
     <button id = "show">Show Classes</button>
