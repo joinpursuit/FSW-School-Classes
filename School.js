@@ -50,10 +50,9 @@ class School {
   enrollStudent(className, student) {
     // Your code here
     let newStudent = new Student(className, student)
-    this.classes[className][students] = newStudent
-    // let newStudent = new Student(className, student)
-    // this.student[className] = newStudent
-    //console.log(newStudent)
+    this.classes[className].students = newStudent;
+    //console.log(newStudent);
+    
     return newStudent
   }
 
@@ -97,6 +96,7 @@ class School {
 
 }
 let pursuit = new School()
+let newStudent = new Student ()
 //pursuit.addClass('math','joel null')
 // console.log(pursuit.enrollStudent())
 

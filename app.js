@@ -15,9 +15,9 @@ const newSchool = new School();
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(cors())
-// app.use('/classes',classRouter)
+// app.use('/class',classRouter)
 // app.use('/students',studentRouter)
-//app.use('/school', schoolRouter)
+// app.use('/school', schoolRouter)
 
 let now = new Date()
 const classesCheck = (req, res, next) => {
@@ -35,7 +35,8 @@ app.get('/allClasses',(req,res) => {
     res.json({
         newSchool,
         status: 200,
-        message: "This is running, try other routes"
+        message: "All classes listed",
+        "timestamp": now.toString(Date.now())
     })
 })
 
@@ -48,7 +49,9 @@ app.post('/class',classesCheck,(req,res) => {
         "timestamp": now.toString(Date.now())}) //"YYYY, MM/DD HH:MM:SS"
 })
 
-app.post('/class/<class-name>/enroll', (req,res) => {
+
+app.post('/class/:className/enroll', (req,res) => {
+    this.className = req.params.id
     let { className, name , age , city , grade } = req.body
 
     let enrolledStudent = newSchool.enrollStudent(className, name,age,city,grade)
@@ -59,14 +62,8 @@ app.post('/class/<class-name>/enroll', (req,res) => {
     })
 
 
-// app.get('/',(req, res) => {
-//     res.json(req.body) // req . params
-// })
-
 
 
 app.listen(port,() => {
     console.log('listening on port: ', port)
 })
-
-// newSchool.addClass('math', 'allen J')
