@@ -1,12 +1,31 @@
-const Course = require('./Course');
+const Course = require('./Course').default;
 const Student = require('./Student')
 
 class School {
   constructor() {
     this.courses = {
+      Art: {
+        courseName: "Art",
+        teacher: "Ms. Adler",
+        students: [
+          {name: "Jhenya",
+           age: 15,
+           city: "Brooklyn",
+           grade: 98     
+        }
+        ]
+      },
       
-    }
-    
+      English: {
+      courseName: "English",
+      teacher: "Mr. Griffin"
+      },
+      
+      PE: {
+        courseName: "PE",
+        teacher: "Ms. Baptista"
+      } 
+    } 
   }
 
   /**
