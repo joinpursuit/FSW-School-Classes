@@ -16,6 +16,8 @@ const addClass = async(event)=>{
     let teacher = document.querySelector("#teacherName")
     let classesInput = classes.value
     let teacherInput = teacher.value
+    classes.value = ""
+    teacher.value = ""
     let p = document.createElement("p")
     let classAdd = document.querySelector("#classAdd")
     let host = "http://localhost:4000/classes"
@@ -37,21 +39,26 @@ const addClass = async(event)=>{
 const enrollStudent = async(event)=>{
     event.preventDefault()
     let classes = document.querySelector("#class")
-    let name = document.querySelector("#name")
+    let student = document.querySelector("#student")
     let age = document.querySelector("#age")
     let city = document.querySelector("#city")
     let grade = document.querySelector("#grade")
     let classInput = classes.value
-    let nameInput = name.value
+    let nameInput = student.value
     let ageInput = age.value
     let cityInput = city.value
     let gradeInput = grade.value
+    classes.value = ""
+    student.value = ""
+    age.value = ""
+    grade.value =""
     let p = document.createElement("p")
     let studentEnroll = document.querySelector("#studentEnroll")
     let host = "http://localhost:4000/classes/enroll"
+    
     let studentInfo = {
-        name: nameInput,
-        class: classInput,
+        student: nameInput,
+        classes: classInput,
         age: ageInput,
         city: cityInput,
         grade:gradeInput
@@ -59,6 +66,7 @@ const enrollStudent = async(event)=>{
     debugger
     console.log(studentInfo)
     axios.post(host,studentInfo).then(response=>{
+        console.log(studentInfo)
         p.innerText = response.data.message
         studentEnroll.appendChild(p)
      })

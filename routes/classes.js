@@ -19,7 +19,7 @@ classes.post("/", (request, response)=>{
 // }else{
     mySchool.addClass(classes, teacher)
  response.json({
-        "class": {"nameOfClass": classes, "teacher": teacher},
+        "classes": {"nameOfClass": classes, "teacher": teacher},
         "message": `Created a ${classes} class taught by ${teacher}`,
         "timestamp": new Date()})
     // }
@@ -27,22 +27,22 @@ classes.post("/", (request, response)=>{
 
 classes.post("/enroll", (request, response)=>{
     let classes = request.body.classes
-    let nameOfStudentInput = request.body.nameInput;
-    let ageInput= request.body.ageInput;
-    let cityInput = request.body.cityInput;
-    let gradeInput = request.body.gradeInput;
-    let studentInfo = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput).value
-    if(studentInfo === undefined|| studentInfo.age === undefined|| studentInfo.city=== undefined|| studentInfo.grade === undefined){
-        response.json({"error": "type in valid entries"})
-    }else{
-        mySchool.enrollStudent(studentInfo)
-        console.log(studentInfo)
+    let student = request.body.student;
+    let age= request.body.age;
+    let city = request.body.city;
+    let grade = request.body.grade;
+    // let studentInfo = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput).value
+    // if(studentInfo === undefined|| studentInfo.age === undefined|| studentInfo.city=== undefined|| studentInfo.grade === undefined){
+    //     response.json({"error": "type in valid entries"})
+    // }else{
+    //     mySchool.enrollStudent(studentInfo)
+        mySchool.enrollStudent(classes,student, age, city,grade)
         response.json({
-            "student":{'studentInfo': studentInfo } ,
-            "class": classes,
-            "message": "enrolled, thank you!" + studentInfo
+            "student":{'student': student } ,
+            "class": {'classes':classes},
+            "message": `you ${student} have been enrolled in ${classes} Thank You!`
         })
-    }        
+    // }        
 })
 classes.get("/:classes/nameOfStudentInput", (request, response)=>{
     let classes = request.params.classes;
