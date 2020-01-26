@@ -24,6 +24,7 @@ classRouter.post("/add",(req,res)=> {
         res.json({
             "class": mySchool.classes[name],
             "message": "Created a new class",
+            "status":"ok",
             "timestamp": displayTime()
         })
     }

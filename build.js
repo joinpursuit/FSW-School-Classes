@@ -97,7 +97,7 @@ const displayTime = () =>{
   let seconds = addZero(today.getSeconds());
   
   
-  let currentDate = `${year},${month}/${date}/`;
+  let currentDate = `${month}/${date}/${year}`;
   let currentTime = `${hours}:${minutes}:${seconds}`;
 
   

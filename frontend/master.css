@@ -1,6 +1,7 @@
 body {
     display: flex;
     flex-wrap: wrap;
+    font-family: monospace;
     
     background-image:url("https://cdn.shopify.com/s/files/1/0250/1217/4900/products/31c654a56c02c36789f6abb8eb4cbf81_620x.jpg?v=1572376632");
     background-size: 300px;

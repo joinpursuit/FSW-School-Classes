@@ -15,11 +15,12 @@
             <h1>Add Class</h1>
 
         <form id="addClassForm">
-            <input type="text" placeholder="Class Name Here">
-            <input type="text" placeholder="Teacher Name Here">
-            <input type="submit" value="Submit">
+            <input id="classNameInput"   type="text" placeholder="Class Name Here">
+            <input id="teacherNameInput" type="text" placeholder="Teacher Name Here">
+            <input id="addClassSubmit" type="submit" value="Submit">
 
         </form>
+           <p id="addClassP"></p>
 
         </div>
         
@@ -31,17 +32,19 @@
             <h1>Add Student</h1>
 
         <form id="addStudentForm">
-            <select name="" id="classSelect">
+            <select id="select" name="" id="classSelect">
                 <option  disabled selected> Pick A Class</option>
-            </select>
-            <input type="text" placeholder="Student Name Here">
-            <input type="text" placeholder="Student Age Here">
-            <input type="text" placeholder="Student City Here">
-            <input type="text" placeholder="Student Grade Here">
+                <option>physics</option>
+            </select id="select">
+            <input id="studentNameInput" type="text" placeholder="Student Name Here">
+            <input id="studentAgeInput type="text" placeholder="Student Age Here">
+            <input id="studentCityInput type="text" placeholder="Student City Here">
+            <input id="studentGradeInput type="text" placeholder="Student Grade Here">
 
             <input type="submit" value="Submit">
 
         </form>
+        <p id="addStudentP"></p>
 
         </div>
         
@@ -51,7 +54,7 @@
 
     <div id="listStudent">
         <div id="listStudentDiv">
-            <h1>List Student</h1>
+            <h1>List Students</h1>
 
         <form id="listStudentForm">
             <!-- <select name="" id="classSelect">
@@ -59,6 +62,7 @@
             </select> -->
             <input type="text" placeholder="Class">
             <input type="text" placeholder="City (optional)">
+            Show Failing Students Only:<input type="checkbox" name="" id="">
             
 
             <input type="submit" value="Submit">
