@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let StName = document.querySelector("#name")
     let age = document.querySelector("#age")
     let city = document.querySelector("#city")
+    let grade = document.querySelector("#grade")
     let btn = document.querySelector("#show")
 
     const showEverything = async () =>{
@@ -35,9 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let lsClass = document.querySelector("#lsClass")
             let show = await axios.get(`http://localhost:3000/class/${lsClass.value}/students`).then((res)=>{
                 console.log(res.data)
+                // console.log(res.data.student[0])
                 let pResult = document.querySelector("#pResult")
                if(res.data.message){
-                pResult.innerText = (res.data.message + " " + res.data.student)
+                pResult.innerText = (res.data.message + " at " + res.data.students[0].name)
                } else {
                 pResult.innerText = res.data.error
                }
@@ -45,17 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }catch (error) {
             console.log(err)
+          
         }
     }
 
     const addClass = async () =>{
         try {
-            // debugger
             let show = await axios.post(`http://localhost:3000/class/${className.value}/${teacher.value}`).then((res)=>{
                 console.log(res.data)
                 let pClass = document.querySelector("#pClass")
                if(res.data.message){
-                   pClass.innerText = (res.data.message + " " + res.data.timestamp)
+                   pClass.innerText = (res.data.message + " at " + res.data.timestamp)
                } else {
                 pClass.innerText = res.data.error
                }
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addStudent = async () =>{
         try {
             
-             await axios.post(`http://localhost:3000/class/${stClass.value}/enroll/`).then((res)=>{
+             await axios.post(`http://localhost:3000/class/${stClass.value}/enroll/`,{name: StName.value, age: age.value, city: city.value, grade: grade.value}).then((res)=>{
                 let student = res.data
                 console.log(student)
                 let pStudent = document.querySelector("#pStudent")
