@@ -18,11 +18,7 @@ class School {
           students:[]
         }
     }
-    // this.students = {
-    //   student1: [
-    //     {name: "dis me ", city: "NYC", age: 100, grade: "88"},
-    //   ]
-    // }
+    
   }
 
   /**
@@ -49,8 +45,10 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    let newStudent = new Student(className, student)
-    this.classes[className].students = newStudent;
+
+    let newStudent = new Student(student.name,student.city,student.age,student.grade)
+    this.classes[className][students].push(newStudent);
+
     //console.log(newStudent);
     
     return newStudent
@@ -92,6 +90,7 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    this.classes[className][student][grade,city]
   }
 
 }
