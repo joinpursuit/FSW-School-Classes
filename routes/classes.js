@@ -48,16 +48,13 @@ classes.post("/enroll", (request, response) => {
 })
 
 classes.get("/lists", (request, response) => {
-    let classes = request.body.classes;
-    let student = request.body.classes;
-    let grade = request.body.grade;
-    mySchool.listStudents(classes, student, grade)
+    let className = request.body.classes;
+    mySchool.listStudents(className)
     response.json({
         "student": [{ "student": student }],
         "class": { "classes": classes },
-        "grade": { "city": city },
         "Time": new Date(),
-        "message": `${student}, you have been updated`
+        "message": `${className}, list of students`
     })
 })
 

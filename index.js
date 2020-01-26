@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     addButton.addEventListener("click",addClass)
     let enrollButton = document.querySelector("#enrollButton")
     enrollButton.addEventListener("click",enrollStudent)
-    let updateButton = document.querySelector("#updateButton")
-    updateButton.addEventListener("click",updateStudent)
     let listButton = document.querySelector("#listButton")
     listButton.addEventListener("click", listStudents)
 })
@@ -76,24 +74,13 @@ const enrollStudent = async(event)=>{
 
 const listStudents = async(event)=>{
     event.preventDefault()
-    let nameList = document.querySelector("#nameList")
-    let classList =document.querySelector("#classList")
-    let cityList = document.querySelector("#cityList")
-    let nameListInput = nameList.value
-    let classListInput = classList.value
-    let cityListInput = cityList.value
-    nameList.value = ""
-    classList.value=""
-    nameList.value = ""
-    let listInfo = {
-        name: nameListInput, 
-        classes:classListInput,
-        city: cityListInput
-    }
+    let className =document.querySelector("#classList")
+    let classNameInput = classList.value
+    className.value=""
     let host = `http://localhost:4000/classes/lists`
-    axios.get(host,listInfo).then(response=>{
-        debugger
-        p.innerText = response.data
+    axios.get(host,classNameInput).then(response=>{
+       console.log(response)
+        p.innerText = response.data.message
         list.appendChild(p)
         // let ul = document.createElement("ul")
         // let listStudents = document.querySelector("#listStudents")
