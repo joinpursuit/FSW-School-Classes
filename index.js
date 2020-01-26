@@ -51,10 +51,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     addStudent.addEventListener("submit", async(event)=>{
         event.preventDefault()
 
-        let student = {name:addStudent.addStudentName.value, age:addStudent.addStudentAge.value, city:addStudent.addStudentCity.value, grade:addStudent.addStudentGrade.value}
-        let newStudent = {name:addStudent.addStudentClass.value,student:student}
+        let newStudent = {name:addStudent.newStudentName.value, city:addStudent.newStudentCity.value, age:addStudent.newStudentAge.value, grade:addStudent.newStudentGrade.value}
+        let classEnroll = addStudent.addStudentClass.value
+        debugger
         try{
-            await axios.post("http://localhost:3000/school/students",newStudent).then(res =>{
+            res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent).then(res =>{
                 debugger
                 console.log("NEW STUDENT: " + newStudent)    
                 let schoolData = res.data.mySchool.classes

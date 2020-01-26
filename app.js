@@ -16,6 +16,7 @@ app.listen(port, () => {
     console.log("Listening to port ", port)
 })
 
+
 const addNewClass = (req,res,next) =>{
     let newClassName = req.body["name"]
     let newClassTeacher = req.body["teacher"]
@@ -25,27 +26,64 @@ const addNewClass = (req,res,next) =>{
     } else {
         mySchool.addClass(newClassName,newClassTeacher)
         console.log(mySchool)
-        res.json({status:"sucess", classes:mySchool["classes"]})
+        res.json({
+            class:mySchool.classes[newClassName],
+            status:"sucess",
+            message: "Created a new class",
+            timestamp: Date(Date.now()).toString()
+        })
     }
 }
 
 app.post("/school/classes", addNewClass)
 
-let enrollStudent = (req, res, next) =>{
+const studentCheck = (className, student)=>{
+    let studentList = []
+    let studentIndex = ''
+    let studentInClass = false
+
+    mySchool.classes[className]["students"].forEach(pupil =>{
+        studentList.push(pupil["name"])
+    })
+    if(studentList.includes(student["name"])){
+        studentInClass = true
+    }
+
+    return studentInClass
+    
+}
+const studentEnroll = (req, res, next) =>{
+    let enrollClass = req.params["className"] 
     let newStudent = req.body
-    if(mySchool.classes[newStudent["name"]]){
-        mySchool.classes[newStudent["name"]]["students"].push(newStudent["student"])
-      }
-      next()
+    console.log(enrollClass)
+    console.log(newStudent)
+    
+    console.log(mySchool.classes[enrollClass])
+    if(!studentCheck(enrollClass,newStudent)){
+        
+        mySchool.enrollStudent(enrollClass,newStudent )
+        next()
+    } else {
+        mySchool["classes"][enrollClass]["students"].forEach(pupil=>{
+            if(pupil.name === newStudent.name){
+                mySchool.classes[enrollClass]["students"].splice(mySchool.classes[enrollClass]["students"].indexOf(pupil),1,newStudent)
+            }
+
+        })
+        next()
+    }
+    
 }
 
-let newDate = new Date()
-let timeStamp =`${newDate.getFullYear()},${newDate.getMonth()+1}/${newDate.getDate()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`
 
-
-app.post("/school/students", enrollStudent, (req,res) =>{
-    console.log(req.body)
-    res.json({status:"sucess", mySchool, timestamp:timeStamp})
+app.post("/school/:className/enroll", studentEnroll, (req,res)=>{
+    let enrollClass = req.params["className"] 
+    res.json({
+        student: mySchool.classes[enrollClass]["students"],
+        className: enrollClass,
+        message: "Enrolled Student",
+        timestamp: Date(Date.now()).toString()
+    })
 })
 
 app.get("/school/:className/students/", (req,res)=>{

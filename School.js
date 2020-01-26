@@ -40,12 +40,10 @@ class School {
    */
   enrollStudent( className , student) {
     let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    // console.log(enrollmentClass)
-    if(this.classes[className]){
-      let enrollmentClass = this.classes[className]
-      enrollmentClass.students.push(newStudent)
-    }
-    // Your code here
+    let studentList = this.classes[className]["students"]
+    
+    studentList.push(newStudent)
+      
   }
 
 
