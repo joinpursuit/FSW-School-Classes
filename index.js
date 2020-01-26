@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
           //debugger;
     }
     const enroll_student = (studentName,city,age,grade) => {
-        axios.post('http://localhost:3000/class/:className/class', {
+        axios.post('http://localhost:3000/class/:className/enroll', {
             className: course,
             student: studentName,
             city: city,
@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addClass.addEventListener('submit', async (e) => {
         e.preventDefault()
+        course.innerHTML = ""
+        teacher.innertext =""
+
         // let ul = document.createElement('ul')
         // let li = document.createElement('li')
         add_class(course.value , teacher.value)
@@ -38,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
        // req.body.appendchild(req.body)
 
     })
-    enroll_student.addEventListener('submit', async(e) => {
+    enroll.addEventListener('submit', async(e) => {
         e.preventDefault()
         enroll_student(studentName.value, city.value, age.value, grade.value)
     
