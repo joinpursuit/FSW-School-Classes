@@ -37,7 +37,7 @@ const enrollStu = (req,res, next) => {
 
 const getStudents = (req,res, next) => {
     let className = req.params.className.toUpperCase()
-    let sClass = myschool.getStudentsByClassWithFilter(className,true,"BK")
+    let sClass = myschool.getStudentsByClassWithFilter(className,false,"")
     if(sClass){
         res.json({
             "students": sClass,

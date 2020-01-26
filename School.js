@@ -108,9 +108,11 @@ class School {
       return student.filter(stu => {return stu.grade <= 70})
      } else if(city){
      return student.filter(stu => {return stu.city <= city})
+     } else {
+       return student
      }
    } else {
-     return this.getStudentsByClass(className)
+     return student
    }
   }
 

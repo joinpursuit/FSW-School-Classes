@@ -28,21 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 debugger
             console.log(res.data)
             lsClass.innerText = ""
-                // console.log(res.data.student[0])
                 let pResult = document.querySelector("#pResult")
                 let formGetStudents = document.querySelector("#lstudents")
-                pResult.innerText = res.data.message
                if(res.data.message){
+                pResult.innerText = res.data.message
+                p.innerText = ""
                 students.forEach(stu => {
                     let p = document.createElement("p")
                   p.innerText = stu.name
                   formGetStudents.appendChild(p);
                 });
-                // debugger
-                // pResult.innerText = (res.data.message + " at " + res.data.students[0].name)
                } else {
-                   p.innerText = ""
                 pResult.innerText = res.data.error
+                   p.innerText = ""
                }
             })
 
