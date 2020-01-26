@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="frontend.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form id="form1">
+        <h1>Add Class</h1>
+        <input type="text" id="class" placeholder="Class Name">
+        <input type="text" id="teacher" placeholder="Teacher">
+        <input type="submit" id="submit1" value="submit">
+    </form>
+    <form id="form2">
+        <h1>Add Student</h1>
+        <input type="text" id="sclass" placeholder="Class">
+        <input type="text" id="sname" placeholder="Name">
+        <input type="text" id="sage" placeholder="Age">
+        <input type="text" id="scity" placeholder="City">
+        <input type="text" id="sgrade" placeholder="Grade">
+        <input type="submit" id="submit2" value="submit">
+    </form>
+    <form id="form3">
+        <h1>List Students</h1>
+        <input type="text" id="aclass" placeholder="Class">
+        <input type="text" id="acity" placeholder="City (Optional)">
+        <input type="checkbox" name="fstudents" id="failing"> Failing Students
+        <input type="submit" id="submit3" value="submit">
+        <ul></ul>
+    </form>
+</body>
+</html>

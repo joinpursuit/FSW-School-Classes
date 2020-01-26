@@ -5,35 +5,23 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: 'physics',
+          teacher: 'Mr.Schwam',
+          students:[]
+        } 
     }
   }
 
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(student.name, student.age, student.city, student.grade);
+    this.classes[`${className}`]["students"].push(newStudent);
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
