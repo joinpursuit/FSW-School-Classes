@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const showEverything = async () =>{
         try {
-            debugger
             let show = await axios.get("http://localhost:3000/").then((res)=>{
                 debugger
             })
@@ -20,27 +19,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const getClass = async () =>{
-        try {
-            debugger
-            let show = await axios.get("http://localhost:3000/").then((res)=>{
-                debugger
-            })
 
-            }catch (error) {
-            console.log(err)
-        }
-    }
     const getStudent = async () =>{
         try {
             let lsClass = document.querySelector("#lsClass")
             let show = await axios.get(`http://localhost:3000/class/${lsClass.value}/students`).then((res)=>{
-                console.log(res.data)
+                let students = res.data.students
+                debugger
+            console.log(res.data)
+            lsClass.innerText = ""
                 // console.log(res.data.student[0])
                 let pResult = document.querySelector("#pResult")
+                let formGetStudents = document.querySelector("#lstudents")
+                pResult.innerText = res.data.message
                if(res.data.message){
-                pResult.innerText = (res.data.message + " at " + res.data.students[0].name)
+                students.forEach(stu => {
+                    let p = document.createElement("p")
+                  p.innerText = stu.name
+                  formGetStudents.appendChild(p);
+                });
+                // debugger
+                // pResult.innerText = (res.data.message + " at " + res.data.students[0].name)
                } else {
+                   p.innerText = ""
                 pResult.innerText = res.data.error
                }
             })
@@ -56,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let show = await axios.post(`http://localhost:3000/class/${className.value}/${teacher.value}`).then((res)=>{
                 console.log(res.data)
                 let pClass = document.querySelector("#pClass")
+                className.value = ""
+                teacher.value = ""
                if(res.data.message){
                    pClass.innerText = (res.data.message + " at " + res.data.timestamp)
                } else {
@@ -107,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let formGetStudents = document.querySelector("#lstudents")
     formGetStudents.addEventListener("submit",(e)=>{
-        // debugger
         e.preventDefault()
         getStudent()
     })

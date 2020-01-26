@@ -38,21 +38,21 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    // console.log(student);
-    // console.log(this.classes)
-    // console.log(className)
-    if(!this.classes[className]){
+    
+    if(!this.classes[className] || student.name === "" || student.age === "" || student.city === ""|| student.grade === ""){
       console.log("Class does not Exist!!")
       return false
-    } else {
+    }else {
+        this.classes[className].students.forEach(stu => {
+          if(stu.name === student.name){
+            stu.age = student.age
+            stu.city = student.city
+            stu.grade = student.grade
+            this.classes[className].students.pop()
+          }
+        });  
+  
       this.classes[className].students.push(student)
-      // this.classes[className].students.forEach((el) =>{
-      //   console.log("HELLO "+Object.values(el))
-      //   for(let key in el){
-      //     console.log(key)
-      //   }
-      // })
-     
       console.log(this.classes[className].students);
       return this.classes[className].students
     }
@@ -100,17 +100,18 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
-    let fStudents = []
-    this.classes[className].students.forEach(el => {
-      if(city){
-        if(el.grade <= failing){
-          fStudents.push(el.name)
-        }
-      } else if(el.grade <= failing){
-        fStudents.push(el.name)
-      }
-    });
-    return fStudents
+   let student = this.getStudentsByClass(className)
+   if(student){
+     if(failing && city){
+      return student.filter(stu => { return stu.grade <= 70 && stu.city === city})
+    } else if(failing){
+      return student.filter(stu => {return stu.grade <= 70})
+     } else if(city){
+     return student.filter(stu => {return stu.city <= city})
+     }
+   } else {
+     return this.getStudentsByClass(className)
+   }
   }
 
 }
