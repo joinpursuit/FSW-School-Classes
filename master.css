@@ -4,10 +4,13 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    /* background-op; */
+    /* opacity: 0.5; */
     margin-left: 5%;
     margin-top: 5%;
     margin-right: 5%;
     font-size: larger;
+    color: orangered;
 }
 h1{
     text-align: center;

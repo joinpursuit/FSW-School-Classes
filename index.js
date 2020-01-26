@@ -18,16 +18,17 @@ document.addEventListener("DOMContentLoaded", async() => {
     
     let addClass = document.querySelector("#addClass")
     
+    let nameClass=document.querySelector("#name");
+    let teacherName=document.querySelector("#teacher");
     addClass.addEventListener("submit",async(el)=>{
         el.preventDefault();
-        let name=el.target.elements[0].title;
-        let nameClass=el.target.elements[0].value;
-        let teacher=el.target.elements[1].title;
-        let teacherName=el.target.elements[1].value;
-        let addClass =await axios.post(url+"/add/class/?"+name+`=`+nameClass+`&`+`${teacher}=`+teacherName)
+        let addClass =await axios.post(url+`/add/class/?name=${nameClass.value}&teacher=${teacherName.value}`)
         console.log(addClass.data)
         school = await axios.get(url+"/");
         classOpt(school.data)
+        nameClass.value="";
+        teacherName.value="";
+        // debugger
     });
     
     

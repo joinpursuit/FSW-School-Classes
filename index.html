@@ -19,10 +19,10 @@
 <form action="" id="addClass">
     <h3>Open Class</h3>
     <label for="Class Name">Class: </label>
-    <input type="text" placeholder="Class Subject Name" title="name" required>
+    <input type="text" placeholder="Class Subject Name" id="name" required>
     <br>
     <label for="Class Teach">Teacher: </label>
-    <input type="text" placeholder="Class Teacher Name" title="teacher" required>
+    <input type="text" placeholder="Class Teacher Name" id="teacher" required>
     <input type="submit" value="Click to Open Class">
 </form>
 
@@ -31,21 +31,21 @@
 <form id="addStudent">
         <h3>Enroll Student</h3>
         <label for="class">Class: </label>
-    <select name="classList" id="classList" required>
+    <select name="classList" id="classList" onfocus="this.value=''" required>
     <option disabled>select class</option>
     </select>
     <br>
     <label for="Student Name">Name: </label>
-    <input type="text" name="name" id="nameStudent" placeholder="Student Name" required>
+    <input type="text" name="name" id="nameStudent" placeholder="Student Name" required onfocus="this.value=''">
     <br>
     <label for="Student Age">Age: </label>
-    <input type="number" name="age" id="ageStudent" placeholder="Student Age" required>
+    <input type="number" name="age" id="ageStudent" placeholder="Student Age" required onfocus="this.value=''">
     <br>
     <label for="Student City">City: </label>
-    <input type="text" name="city" id="cityStudent" placeholder="Student City" required>
+    <input type="text" name="city" id="cityStudent" placeholder="Student City" required onfocus="this.value=''">
     <br>
     <label for="Student Grade">Grade: </label>
-    <select name="grade" id="gradeList" required>
+    <select name="grade" id="gradeList" required onfocus="this.value=''">
             <option disabled>select grade</option>
             <option value="A">A</option>
             <option value="B">B</option>
