@@ -8,25 +8,25 @@ class School {
           name: "physics",
           teacher: "Jon A",
           students: [
-            {name: "Jhenya",
+            {name: "slater",
             age: 14,
             city: "Brooklyn",
             grade: 35
             },
             {
-              "name": "Joe",
+              "name": "zach",
               "age": 14,
               "city": "Brooklyn",
               "grade": 98
           },
           {
-            "name": "mike",
+            "name": "screech",
             "age": 14,
             "city": "Queens",
             "grade": 45
           },
           {
-            "name": "ubey",
+            "name": "lisa",
             "age": 14,
             "city": "Queens",
             "grade": 98
