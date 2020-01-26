@@ -19,11 +19,11 @@ const showAllClasses = (req, res) => {
 }
 
 const addClass = (req, res, next) => {
-    let className = req.body.className;
+    let name = req.body.name;
     let teacher = req.body.teacher;
     console.log(mySchool)
     res.json({
-        class: mySchool.addClass(className,teacher),
+        class: mySchool.addClass(name,teacher),
         message: "Created a new class",
         timestamp: timeStamp()
     })
