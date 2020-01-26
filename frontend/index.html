@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome</title>
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="master.css">
+</head>
+<body>
+    <div id="addClassDiv">
+        <div id="addDiv">
+            <h1>Add Class</h1>
+
+        <form id="addClassForm">
+            <input type="text" placeholder="Class Name Here">
+            <input type="text" placeholder="Teacher Name Here">
+            <input type="submit" value="Submit">
+
+        </form>
+
+        </div>
+        
+    </div>
+
+
+    <div id="addStudent">
+        <div id="addStudentDiv">
+            <h1>Add Student</h1>
+
+        <form id="addStudentForm">
+            <select name="" id="classSelect">
+                <option  disabled selected> Pick A Class</option>
+            </select>
+            <input type="text" placeholder="Student Name Here">
+            <input type="text" placeholder="Student Age Here">
+            <input type="text" placeholder="Student City Here">
+            <input type="text" placeholder="Student Grade Here">
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+        </div>
+        
+    </div>
+
+
+
+    <div id="listStudent">
+        <div id="listStudentDiv">
+            <h1>List Student</h1>
+
+        <form id="listStudentForm">
+            <!-- <select name="" id="classSelect">
+                <option  disabled selected> Pick A Class</option>
+            </select> -->
+            <input type="text" placeholder="Class">
+            <input type="text" placeholder="City (optional)">
+            
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+        </div>
+        
+    </div>
+    
+</body>
+</html>
