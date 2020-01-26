@@ -3,9 +3,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let addStudent = document.querySelector("#addStudent")
     let studentList = document.querySelector("#studentList")
 
-    const updateClassList = async () =>{
-        let selectClass = document.querySelector("#addStudentClass")
-        selectClass.innerHTML = ""
+    let selectClass = document.querySelector("#addStudentClass")
+    let selectClassStudentList = document.querySelector("#listClass")
+    const updateClassList = async (select) =>{
+        select.innerHTML = ""
         try{
         res = await axios.get("http://localhost:3000/school/")
         
@@ -13,38 +14,39 @@ document.addEventListener("DOMContentLoaded", ()=>{
             for(key in classList){
                 let option = document.createElement("option")
                 option.innerText = classList[key]["name"]
-                selectClass.appendChild(option)
+                select.appendChild(option)
             }
         } catch (err){
             console.log(err)
         }
         }
 
-        updateClassList()
+    updateClassList(selectClass)
+    updateClassList(selectClassStudentList)
+    
+    addClass.addEventListener("submit", async (event)=>{
+        event.preventDefault()
+        let newClassName = addClass.newClassName.value.toLowerCase()
+        let newClassTeacher = addClass.newClassTeacher.value
+        let newClassInfo = {name:newClassName,teacher:newClassTeacher}
+        try{
+            res = await axios.post("http://localhost:3000/school/classes",newClassInfo)
+            debugger 
+            if(res.data.status === "failure"){
+                alert("Class already exists")
+                updateClassList(selectClass)
+                updateClassList(selectClassStudentList)
+                addClass.reset()
+            }else{
+                
+                updateClassList(selectClass)
+                updateClassList(selectClassStudentList)
+                addClass.reset()
+            }
         
-        addClass.addEventListener("submit", async (event)=>{
-            event.preventDefault()
-            let newClassName = addClass.newClassName.value.toLowerCase()
-            let newClassTeacher = addClass.newClassTeacher.value
-            let newClassInfo = {name:newClassName,teacher:newClassTeacher}
-            let selectClass = document.querySelector("#addStudentClass")
-            try{
-                res = await axios.post("http://localhost:3000/school/classes",newClassInfo)
-                debugger 
-                if(res.data.status === "failure"){
-                    alert("Class already exists")
-                    selectClass.innerHTML = ""
-                    updateClassList()
-                    addClass.reset()
-                }else{
-                    
-                    updateClassList()
-                    addClass.reset()
-                }
-            
-                } catch(err){
-                    console.log(err)
-                }
+            } catch(err){
+                console.log(err)
+            }
 
     })
 
@@ -55,12 +57,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
         let classEnroll = addStudent.addStudentClass.value
         debugger
         try{
-            res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent).then(res =>{
-                debugger
-                console.log("NEW STUDENT: " + newStudent)    
-                let schoolData = res.data.mySchool.classes
-                console.log(schoolData)
-            })
+            res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent)
+            if(res.data.status !== 200){
+                alert("Student Enrollment failed")
+            }
         } catch(err){
             console.log(err)
         }
