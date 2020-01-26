@@ -47,11 +47,12 @@ class School {
     // Your code here
 
     let newStudent = new Student(student.name,student.city,student.age,student.grade)
-    this.classes[className][students].push(newStudent);
+    this.classes[`${className}`]["students"].push(newStudent);
 
     //console.log(newStudent);
-    
     return newStudent
+    
+    
   }
 
 
@@ -66,10 +67,12 @@ class School {
     if(this.classes(className)){
       className.push(students)
     }
-      
 
-    // })
+    if(this.classes[className]){
+      return clasName[students]
+    }
   }
+  
 
 
 
@@ -90,7 +93,14 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    
     this.classes[className][student][grade,city]
+    student.filter(grade => {
+      if(grade < 65){
+        failing = grade 
+        return className.student.city[grade]
+      }
+    })
   }
 
 }
