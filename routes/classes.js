@@ -48,11 +48,10 @@ classes.post("/enroll", (request, response) => {
 })
 
 classes.get("/lists", (request, response) => {
-    let className = request.body.classes;
-    mySchool.listStudents(className)
+    let className = request.params.classes;
+    mySchool. getStudentsByClass(className)
     response.json({
-        "student": [{ "student": student }],
-        "class": { "classes": classes },
+        "className": { "classes": classes },
         "Time": new Date(),
         "message": `${className}, list of students`
     })
