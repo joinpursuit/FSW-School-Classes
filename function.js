@@ -30,6 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(err)
         }
     }
+    const getStudent = async () =>{
+        try {
+            let lsClass = document.querySelector("#lsClass")
+            let show = await axios.get(`http://localhost:3000/class/${lsClass.value}/students`).then((res)=>{
+                console.log(res.data)
+            })
+
+            }catch (error) {
+            console.log(err)
+        }
+    }
 
     const addClass = async () =>{
         try {
@@ -73,6 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault()
         addStudent()
     })
+
+    let formGetStudents = document.querySelector("#lstudents")
+    formGetStudents.addEventListener("submit",(e)=>{
+        // debugger
+        e.preventDefault()
+        getStudent()
+    })
+    
 
 
 })
