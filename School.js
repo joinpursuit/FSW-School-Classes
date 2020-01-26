@@ -3,56 +3,56 @@ const Student = require("./Student")
 
 class School {
   constructor() {
-    this.classes = {
-      physics1: {
-        name: "physics1",
-        teacher: "mr.stkurdiknmibalz",
-        students: [
-          {
-            name: "stan marsh",
-            city: "south park",
-            age: 7,
-            grade: 70
-          },
-          {
-            name: "eric",
-            city: "south park",
-            age: 7,
-            grade: 60
-          },
-          {
-            name: "kenny mccormick",
-            city: "south park",
-            age: 8,
-            grade: 100
-          },
-          {
-            name: "leopold stoch",
-            city: "south park",
-            age: 7,
-            grade: 75
-          },
-          {
-            name: "wendy testaburger",
-            city: "south park",
-            age: 7,
-            grade: 99
-          },
-          {
-            name: "kirk brovloski",
-            city: "south park",
-            age: 9,
-            grade: 99
-          }
-        ]
-      }
-    }
+    this.classes = {}
+    //   this.classes = {
+    //     physics1: {
+    //       name: "physics1",
+    //       teacher: "mr.stkurdiknmibalz",
+    //       students: [
+    //         {
+    //           name: "stan marsh",
+    //           city: "south park",
+    //           age: 7,
+    //           grade: 70
+    //         },
+    //         {
+    //           name: "eric cartman",
+    //           city: "south park",
+    //           age: 7,
+    //           grade: 60
+    //         },
+    //         {
+    //           name: "kenny mccormick",
+    //           city: "south park",
+    //           age: 8,
+    //           grade: 100
+    //         },
+    //         {
+    //           name: "leopold stoch",
+    //           city: "south park",
+    //           age: 7,
+    //           grade: 75
+    //         },
+    //         {
+    //           name: "wendy testaburger",
+    //           city: "south park",
+    //           age: 7,
+    //           grade: 99
+    //         },
+    //         {
+    //           name: "kirk brovloski",
+    //           city: "south park",
+    //           age: 9,
+    //           grade: 99
+    //         }
+    //       ]
+    //     }
+    //   }
   }
 
   addClass(name, teacher) {
     let newClass = new Class(name, teacher)
     this.classes[name] = newClass
-    return this.classes[name]
   }
 
   /**
@@ -64,9 +64,9 @@ class School {
    * {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student, age, city, grade) {
-    let stdnt = new Student(student, city, age, grade)
-    this.classes[className].students.push(stdnt)
+  enrollStudent(className, stdnt) {
+    // this.classes[className].students.push(stdnt)
+    this.classes[className].addStudent(stdnt)
     return stdnt
   }
 
@@ -98,13 +98,14 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
-    let failingStudents = []
-
-    for (let grade in this.students) {
-      if (grade <= 70) {
-        this.students
-      }
+    let arr = mySchool.classes[className].students
+    if (city !== undefined) {
+      arr = arr.filter(s => s.city === city)
     }
+    if (failing !== undefined && failing === "true") {
+      arr = arr.filter(s => s.grade < 70)
+    }
+    return arr
   }
 }
 

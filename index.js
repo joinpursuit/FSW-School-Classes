@@ -23,7 +23,7 @@ let getStudentInfoBtn = document.querySelector("#getStudentInfo")
 let div = document.querySelector("#students")
 
 getStudentInfoBtn.addEventListener("click", e => {
-  // e.preventDefault()
+  e.preventDefault()
   div.innerHTML = ""
   axios
     .get(`http://localhost:3001/class/${studentByClassInput.value}/students`)
