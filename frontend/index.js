@@ -5,14 +5,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let teacherNameInput = document.querySelector("#teacherNameInput");
   let select = document.querySelector("#select");
 
-  const populateSelect = name => {
-    let newOption = document.createElement("option");
-    newOption.innerText = name;
-    select.appendChild(newOption);
+  const populateSelect = async () => {
+    let res = await axios.get("http://localhost:3000/class");
+    let classes = Object.keys(res.data);
+
+    // debugger;
+    classes.forEach(class_ => {
+      let newOption = document.createElement("option");
+
+      newOption.innerText = class_;
+      select.appendChild(newOption);
+    });
   };
+
+  populateSelect();
 
   addClassForm.addEventListener("submit", async e => {
     e.preventDefault();
+    select.innerHTML = " ";
 
     let res = await axios.post(`http://localhost:3000/class/add`, {
       name: classNameInput.value,
@@ -24,8 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`${res.data.error} ${res.data.timestamp}`);
     }
 
-    populateSelect(classNameInput.value);
-
+    populateSelect();
     addClassForm.reset();
   });
 

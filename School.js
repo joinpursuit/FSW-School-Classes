@@ -34,7 +34,8 @@ class School {
             grade: 69
           }
         ]
-      }
+      },
+      english: { name: "english", teacher: "lee", students: [] }
     };
   }
   addClassToClasses(name, teacher) {

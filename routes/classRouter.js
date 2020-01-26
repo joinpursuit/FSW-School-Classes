@@ -2,6 +2,10 @@ const classRouter = require("express").Router();
 const mySchool = require("./../School.js");
 const displayTime = require("./../build.js");
 
+classRouter.get("/", (req, res) => {
+  res.json(mySchool.classes);
+});
+
 classRouter.post("/", (req, res) => {
   res.json(req.body);
 });
