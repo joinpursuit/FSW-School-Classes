@@ -9,30 +9,17 @@ let mySchool = new School()
 const date = new Date ()
 
 
-// route.post("/:className/enroll", (req, res) => {
-//     let className = req.params.className
-//     let name = req.body
-//     let age = req.body
-//     let city = req.body
-//     let grade = req.body
-//     let student = {
-//         name,
-//         age, 
-//         city, 
-//         grade
-//     }
-//     if(!mySchool.classes[className].student){
-//         let newStudent = mySchool.enrollStudent(className, student)
-//         res.json({
-//             student: newStudent,
-//             className: className,
-//             message: "Enrolled Student",
-//             timestamp: "YYY, MM/DD HH:MM:SS"
-//             })
-//         } else if(){
-
-//         }
-//     })
+route.post("/class/:className/enroll", (req, res) => {
+    let className = req.params.className
+    let name
+    mySchool.enrollStudent(className, req.body)
+        res.json({
+            student:{ "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade},
+            className: className,
+            message: "Enrolled Student",
+            timestamp: date
+            })
+    })
 
 
 
@@ -48,7 +35,8 @@ route.get("/:className/students", (req, res) => {
         })
     } else {
         res.json({
-            students: listOfStudents
+            name: className,                                                                                                                                                                                                                                                    
+            students: listOfStudents,
         })
     }
 
@@ -60,66 +48,43 @@ route.get("/:className/students", (req, res) => {
 //     res.json(mySchool.getStudentsByClassWithFilter(className, failing, city));
 // })
 
-route.post("/:name/:teacher", (req, res) => {
-    let name = req.params.name
-    let teacher = req.params.teacher
-    if(!mySchool.classes.name === name && !mySchool.classes.teacher === teacher){
-    mySchool.addClass(name, teacher)
+
+
+route.post("/class/:name/:teacher", (req, res) => {
+        let name = req.params.name
+        let teacher = req.params.teacher
+    if(mySchool.classes.className === name){
+        res.json({
+            error: "Please fill out all the information or Class already exists",
+            timestamp: date
+        })
+    } else {
+         mySchool.addClass(name, teacher)
          res.json({
-             class: { name: name, teacher: teacher, students: []},
+             class: { name: name, teacher: teacher, 
+             students: []},
              message: "Created new class",
+             timestamp: date
+
 
          })
-        } else {
-            res.json({
-                error: "Please fill out all the information or Class already exists",
-                timestamp: date
-                
-   
-            })        
-        }
+           
+    }
+        
 
+})
+
+route.get("/", (req,res) => {
+    res.json(mySchool)
 })
 
 
 
-// const classRoute = require('express').Router();
-// const cors = require("cors");
-// const School = require("../School.js");
-// const Student = require("../Student.js")
 
 
-// classRoute.use(cors())
-// let mySchool = new School()
 
 
-// classRoute.get("/:className/students", (req, res) => {
-//     const className = req.params
-//     let failing = req.query
-//     let city = req.query
-//     if(!mySchool.classes[className]){
-//     mySchool.getStudentsByClass(className)
-//     res.json({
-//     "error": "Class doesn't exist"
-//     })
-//     } else if (failing || city ) {
-//         let filteredArr = mySchool.getStudentsByClassWithFilter(className, failing, city);
-//         res.json({
-//             "students": [
-//                 filteredArr
-//             ],
-//             "message": "Retrieved Students",
-//             "timestamp": "YYYY, MM/DD HH:MM:SS"
-//           })
-//     } else {
-//         res.json({
-//             "students": mySchool.getStudentsByClassWithFilter(className),
-//             "message": "Retrieved Students",
-//             "timestamp": "YYYY, MM/DD HH:MM:SS"
-//         })
-//     }
 
-// })
 
 
 

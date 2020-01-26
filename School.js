@@ -31,10 +31,9 @@ class School {
   //  * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let studentList = this.classes[className].students;
-    let newStudent = new Student(student)
+    let studentList = this.classes[className].students; 
+    let newStudent = new Student(student.name, student.age, student.city)
     studentList.push(newStudent)
-    return student
   }
 
   
