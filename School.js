@@ -4,50 +4,50 @@ const Student = require("./Student")
 class School {
   constructor() {
     this.classes = {}
-    //   this.classes = {
-    //     physics1: {
-    //       name: "physics1",
-    //       teacher: "mr.stkurdiknmibalz",
-    //       students: [
-    //         {
-    //           name: "stan marsh",
-    //           city: "south park",
-    //           age: 7,
-    //           grade: 70
-    //         },
-    //         {
-    //           name: "eric cartman",
-    //           city: "south park",
-    //           age: 7,
-    //           grade: 60
-    //         },
-    //         {
-    //           name: "kenny mccormick",
-    //           city: "south park",
-    //           age: 8,
-    //           grade: 100
-    //         },
-    //         {
-    //           name: "leopold stoch",
-    //           city: "south park",
-    //           age: 7,
-    //           grade: 75
-    //         },
-    //         {
-    //           name: "wendy testaburger",
-    //           city: "south park",
-    //           age: 7,
-    //           grade: 99
-    //         },
-    //         {
-    //           name: "kirk brovloski",
-    //           city: "south park",
-    //           age: 9,
-    //           grade: 99
-    //         }
-    //       ]
-    //     }
-    //   }
+      this.classes = {
+        physics1: {
+          name: "physics1",
+          teacher: "mr.stkurdiknmibalz",
+          students: [
+            {
+              name: "stan marsh",
+              city: "south park",
+              age: 7,
+              grade: 70
+            },
+            {
+              name: "eric cartman",
+              city: "south park",
+              age: 7,
+              grade: 60
+            },
+            {
+              name: "kenny mccormick",
+              city: "south park",
+              age: 8,
+              grade: 100
+            },
+            {
+              name: "leopold stoch",
+              city: "south park",
+              age: 7,
+              grade: 75
+            },
+            {
+              name: "wendy testaburger",
+              city: "south park",
+              age: 7,
+              grade: 99
+            },
+            {
+              name: "kirk brovloski",
+              city: "south park",
+              age: 9,
+              grade: 99
+            }
+          ]
+        }
+      }
   }
 
   addClass(name, teacher) {

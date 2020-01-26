@@ -15,7 +15,7 @@ classesRouter.post("/add", (req, res) => {
     })
   } else {
     mySchool.addClass(req.body.name, req.body.teacher)
-    console.log(mySchool)
+    // console.log(mySchool)
     res.json({
       class: {
         name: `${req.body.name}`,
@@ -33,13 +33,7 @@ classesRouter.get("/:className/students", (req, res) => {
   let failing = req.query.failing
 
   let className = req.params.className
-  // let arr = mySchool.classes[className].students
-  // if (city !== undefined) {
-  //   arr = arr.filter(s => s.city === city)
-  // }
-  // if (failing !== undefined && failing === "true") {
-  //   arr = arr.filter(s => s.grade < 70)
-  // }
+  
   let arr = mySchool.getStudentsByClassWithFilter(className, failing, city);
   res.json(arr)
 })
@@ -57,14 +51,14 @@ classesRouter.post("/:className/enroll", (req, res) => {
   if (student === undefined) {
     let newStudent = new Student(name, age, city, grade)
     mySchool.enrollStudent(className, newStudent)
-    console.log(mySchool)
+    // console.log(mySchool)
     res.json(newStudent)
   } else {
     student.name = name
     student.age = age
     student.city = city
     student.grade = grade
-    console.log(mySchool)
+    // console.log(mySchool)
     res.json(student)
   }
 })
