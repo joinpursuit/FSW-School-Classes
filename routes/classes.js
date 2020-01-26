@@ -42,12 +42,25 @@ classes.post("/enroll", (request, response)=>{
             "class": {'classes':classes},
             "message": `you ${student} have been enrolled in ${classes} Thank You!`
         })
-    // }        
+          
 })
-classes.get("/:classes/nameOfStudentInput", (request, response)=>{
-    let classes = request.params.classes;
-    mySchool.listStudents(classes)
-    response.json(mySchool.listStudents(classes))
+// classes.get("/lists", (request, response)=>{
+//     let classes = request.params.classes;
+//     mySchool.listStudents(classes)
+//     response.json(mySchool.listStudents(classes))
+// })
+classes.patch("/update", (request, response)=>{
+    let classes = request.body.classes;
+    let student = request.body.classes;
+    let grade =request.body.grade;
+    mySchool.updateStudent(classes, student,grade)
+    response.json({
+        "student":{"student":student},
+        "class": {"classes": classes},
+        "city": {"city":city},
+        "Time": new Date(),
+        "message":`${student}, you have been updated`
+    })
 })
 
 module.exports = classes;
