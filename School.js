@@ -107,7 +107,7 @@ class School {
     } else if(failing){
       return student.filter(stu => {return stu.grade <= 70})
      } else if(city){
-     return student.filter(stu => {return stu.city <= city})
+     return student.filter(stu => {return stu.city === city})
      } else {
        return student
      }

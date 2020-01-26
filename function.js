@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let grade = document.querySelector("#grade")
     let btn = document.querySelector("#show")
 
+
     const showEverything = async () =>{
         try {
             let show = await axios.get("http://localhost:3000/").then((res)=>{
+                let p = document.createElement("p")
+                p.innerText = res.data
                 debugger
             })
 
@@ -23,18 +26,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const getStudent = async () =>{
         try {
             let lsClass = document.querySelector("#lsClass")
-            let show = await axios.get(`http://localhost:3000/class/${lsClass.value}/students`).then((res)=>{
+            let failing = document.querySelector("#checkbox")
+            let city = document.querySelector("#lsCity")
+            
+            let show = await axios.post(`http://localhost:3000/class/${lsClass.value}/students`,{failing: failing.checked, city: city.value}).then((res)=>{
                 let students = res.data.students
-                debugger
+                
             console.log(res.data)
             lsClass.innerText = ""
+            let p = document.querySelector(".stuName")
+            if(p){
+                p.innerText = ""
+            }
+               
                 let pResult = document.querySelector("#pResult")
                 let formGetStudents = document.querySelector("#lstudents")
                if(res.data.message){
                 pResult.innerText = res.data.message
-                p.innerText = ""
+                // let p = document.querySelector(".stuName")
+                // p.innerText = ""
                 students.forEach(stu => {
                     let p = document.createElement("p")
+                    p.class = "stuNames"
                   p.innerText = stu.name
                   formGetStudents.appendChild(p);
                 });
@@ -89,9 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    btn.addEventListener("click", ()=>{
-        showEverything()
-    })
+   
 
     let formClass = document.querySelector("#addClass")
 
