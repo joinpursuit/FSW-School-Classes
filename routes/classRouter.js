@@ -57,15 +57,47 @@ classRouter.post("/:className/enroll",(req,res)=> {
                 "message": "Enrolled Student",
                 "timestamp": displayTime()
             })
-            
         } 
-        
-    });
+    })
+});
 
+
+
+classRouter.get("/:className/students",(req,res)=> {
     
-   
+    let classChosen =  req.params.className
+    let failing = req.query.failing
+    let city = req.query.city
+    let obj = req.query
+    
+    
+    if(Object.keys(obj).length < 1){
+       let students =  mySchool.getStudentsByClass(classChosen)
+       console.log(mySchool.classes[classChosen]);
+       
+        res.json({
+            "students": students,
+            "message": "Retrieved Students",
+            "timestamp": displayTime()
+          })
+        
+    } else if (Object.keys(obj).length >= 1)  {
+        
+        let students2 = mySchool.getStudentsByClassWithFilter(classChosen,failing,city)
+        res.json({
+            "students": students2,
+            "message": "Retrieved Students",
+            "timestamp": displayTime()
+          })
 
-})
+    } //else if(mySchool.classes[classChosen].name === false) { 
+        // res.json({ 
+        //     "error": `Class ${classChosen} doesn't exist.`,
+        //     "timestamp": timestamp()
+        //   })
+    // }
+});
+
 
 
 

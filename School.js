@@ -5,14 +5,38 @@ class School {
   constructor() {
     this.classes = {
           physics: {
-          name: "Physics",
+          name: "physics",
           teacher: "Jon A",
           students: [
             {name: "Jhenya",
             age: 14,
             city: "Brooklyn",
-            grade: 98
-            }
+            grade: 35
+            },
+            {
+              "name": "Joe",
+              "age": 14,
+              "city": "Brooklyn",
+              "grade": 98
+          },
+          {
+            "name": "mike",
+            "age": 14,
+            "city": "Queens",
+            "grade": 45
+          },
+          {
+            "name": "ubey",
+            "age": 14,
+            "city": "Queens",
+            "grade": 98
+          },
+          {
+            "name": "jessy",
+            "age": 14,
+            "city": "Queens",
+            "grade": 69
+          }
           ]
         } 
     }
@@ -39,19 +63,23 @@ class School {
   }
 
   getStudentsByClassWithFilter(className, failing, city) {
-    let studentsarr = this.classes[className].students
+    let studentsArr = this.classes[className].students
     
-    return studentsarr.filter(student => {
-       if(failing && student.grade < 70 && city === student.city){
-         return student
-       }
-       else if(failing && student.grade < 70) { 
-          return student
-       }
-       else if(city){
-          return student
-       }
+    
+    return studentsArr.filter(student => {
+      if(failing  &&  student.grade < 70 && student.city === city){
+        return student
+
+      } else if (failing === undefined && student.city === city){
+        return student
+
+      } else if (failing && student.grade < 70 && city === undefined){
+        return student
+      }
+
+
     })
+    
   }
 
 }
@@ -59,6 +87,10 @@ class School {
 
 
 let mySchool = new School();
+
+// console.log(mySchool.getStudentsByClassWithFilter("physics",false,"Queens"));
+
+
 
 
 module.exports = mySchool;
