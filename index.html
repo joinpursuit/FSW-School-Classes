@@ -11,33 +11,40 @@
         <h1>Welcome to the Pursuit School</h1>
         <form action="submit" id="addClass">
             <h4>Add Class</h4>
-            Class Name:<br>
-            <input type="text" name="addClassName" required><br>
-            Teacher:<br>
-            <input type="text" name="addClassTeach" required><br>
+            Class Name:
+            <input type="text" name="newClassName" required>
+            Teacher:
+            <input type="text" name="newClassTeacher" required>
             <input type="submit" value="Submit">
         </form>
         <form action="submit" id="addStudent">
             <h4>Add Student</h4>
-                Class:<br>
+                Class:
             <select name="addStudentClass" id="addStudentClass"></select>
-                Name:<br>
-            <input type="text" name="addStudentName" required><br>
-                Age:<br>
-            <input type="text" name="addStudentAge" required><br>
-                City:<br>
-            <input type="text" name="addStudentCity" required><br>
-                Grade:<br>
-            <input type="text" name="addStudentGrade" required><br>
+                Name:
+            <input type="text" name="newStudentName" required>
+                Age:
+            <input type="text" name="newStudentAge" required>
+                City:
+            <input type="text" name="newStudentCity" required>
+                Grade:
+            <select name="newStudentGrade" id="" required>
+                <option value="" disabled selected> select a Grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+            </select>
             <input type="submit" value="Submit">
         </form>
         <form action="submit" id="studentList">
             <h4>Student List</h4>
-            Class:<br>
-            <input type="search" name="listClass"><br>
-            City:<br>
-            <input type="text" name="listCity" placeholder="optional"><br>
-            <input type="checkbox" name="failingStudents">Show Failing Students Only<br>
+            Class:
+            <input type="search" name="listClass" required>
+            City:
+            <input type="text" name="listCity" placeholder="optional">
+            <input type="checkbox" name="failingStudents" >Show Failing Students Only
             <input type="submit" value="submit">
         </form>
         <div id="studentListResults"></div>
