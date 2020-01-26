@@ -74,65 +74,78 @@ const checkStudent = (req, res, next) => {
     }
 }
 
-// const getStudentsByClass = (req, res, next) => {
-//     let className = req.params.class_name;
-//     let failing = req.query.failing;
-//     let city = req.query.city;
-//     if (failing && city) {
-//         mySchool.getStudentsByClassWithFilter(className, failing, city)
-//     } else if (mySchool.classes[className])  {
-//     res.json({
-//         students: mySchool.classes[className]['students'],
-//         message: "Retrieved Students",
-//         timestamp: timeStamp()
-//     })
-//     // next();
-// } else {
-//     res.json({
-//         error: `Class ${className} does not exist!`,
-//         timestamp: timeStamp()
-//         })
-//     }
+const getStudentsByClass = (req, res, next) => {
+    let className = req.params.class_name;
+    try {
+        if (mySchool.classes[className])  {
+            res.json({
+                students: mySchool.getStudentsByClass(className),
+                message: "Retrieved Students",
+                timestamp: timeStamp()
+            })
+        } 
+    } catch (err) {
+        next(err)
+    }
 
-// }
+}
+
+const validateClass = (req, res, next) => {
+    let className = req.params.class_name;
+    if (!mySchool.classes[className]) {
+        res.json({
+            error: `Class ${className} does not exist!`,
+            timestamp: timeStamp()
+        })
+    } else {
+        next();
+    }
+}
 
 const classWithFilter = (req, res, next) => {
     let chosenClass = req.params.class_name;
     let failing = req.query.failing;
     let city = req.query.city;
-    if (failing === "true" && city) {
-        res.json({
-            students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
-            message: `Retrieved Failing Students in ${city}`,
-            timestamp: timeStamp()
-        })
-    } else if (failing === 'false' && city) {
-        res.status(200).json({
-            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
-            message: "Retreived ALL Passing Students",
-            timestamp: timeStamp()
-        })
-
-    } else if (failing === 'false') {
-        res.status(200).json({
-            students: mySchool.getStudentsByClass(chosenClass),
-            message: "Retrieved ALL Passing Students",
-            timestamp: timeStamp()
-        })
-
-    }else if (failing === 'true') {
-        res.status(200).json({
-            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
-            message: "Retrieved ALL Passing Students",
-            timestamp: timeStamp()
-        })
-
-    } else if (city) {
-        res.status(200).json({
-            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing, city),
-            message: `Retrieved ALL students in ${city}`,
-            timestamp: timeStamp()
-        })
+    try {
+        if (failing === "true" && city) {
+            res.json({
+                students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
+                message: `Retrieved Failing Students in ${city}`,
+                timestamp: timeStamp()
+            })
+        } else if (failing === 'false' && city) {
+            res.status(200).json({
+                students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
+                message: "Retreived ALL Passing Students",
+                timestamp: timeStamp()
+            })
+    
+        } else if (failing === 'false') {
+            res.status(200).json({
+                students: mySchool.getStudentsByClass(chosenClass),
+                message: "Retrieved ALL Passing Students",
+                timestamp: timeStamp()
+            })
+    
+        }else if (failing === 'true') {
+            res.status(200).json({
+                students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
+                message: "Retrieved ALL Passing Students",
+                timestamp: timeStamp()
+            })
+    
+        } else if (city) {
+            res.status(200).json({
+                students: mySchool.getStudentsByClassWithFilter(chosenClass,failing, city),
+                message: `Retrieved ALL students in ${city}`,
+                timestamp: timeStamp()
+            })
+        } else {
+            next();
+        }
+    } catch (err) {
+        next(err)
+        console.log(err);
     }
         // query all students failing in city, getStudentFailingInCity()
     //     mySchool.classes[chosenClass]['students'].filter(student => {
@@ -176,6 +189,6 @@ router.get("/", showAllClasses);
 
 router.post("/", checkClass, addClass);
 router.post("/:class_name/enroll", checkStudent, addStudent);
-router.get("/:class_name/students", classWithFilter);
+router.get("/:class_name/students", validateClass, classWithFilter, getStudentsByClass);
 
 module.exports = router;
