@@ -1,0 +1,35 @@
+body {
+    height: 100vh;
+    display: flex;
+    background-size: cover;
+    color: white;
+    text-decoration: underline;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forms {
+    flex-direction: row;
+}
+
+.inputs{
+    border: 1px solid greenyellow;
+    border-radius: 5%;
+}
+
+.submit:hover{
+    color: red;
+    cursor: pointer;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+ul{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    flex-direction: column;
+}
