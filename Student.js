@@ -16,4 +16,4 @@ class Student {
 //   varTwo: varTwo,
 // }
 
-// module.exports = Student;
+ module.exports = Student;

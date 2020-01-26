@@ -75,10 +75,12 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
+    
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
     return newClass
   }
+
 
   /**
    * Enroll student in class
@@ -89,8 +91,15 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-    let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    return this.Classes[className].students.push(newStudent)
+     let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    //return this.Classes[className].students.push(newStudent)
+    if(this.classes[className].students[student.name]){
+      return "This student is already enrolled in this class"
+    }else{
+      this.classes[className].students.push(newStudent);
+      return student
+      
+    }
   }
 
 

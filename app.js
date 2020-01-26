@@ -1,9 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const timestamp = require("timestamp");
 const app = express();
 const bodyParser = require("body-parser");
-const School = require("./School");
+const School = require("./School.js");
 
 const port = 3000;
 
@@ -14,6 +13,11 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 
+const timestamp = () => {
+  let date = new Date()
+  return ` ${date.getFullYear()}, ${date.getMonth() + 1}/${date.getDate()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+}
+
 const showAllClasses = (req, res) => {
   res.json({
    allClasses: mySchool.classes
@@ -21,15 +25,20 @@ const showAllClasses = (req, res) => {
 }
 
 const checkIfClassExists = (req, res, next) => {
-  //console.log(mySchool.classes[req.body.name])
-  if(mySchool.classes[req.body.name]){
-
-    res.json({
-      status: 200,
-      error: "Please fill out all the information or Class already exists",
-      timestamp: new Date ()
-    })
-} else{
+ 
+  // if(!req.body.name || !req.body.teacher){
+  //   res.json({
+  //     status: 400,
+  //     error: "Please fill out all the information.",
+  //     timestamp: timestamp()
+  //   })
+  if(mySchool.classes[req.body.name] ){
+  res.json({
+    status: 400,
+    error: "The Class already exist",
+    timestamp: timestamp()
+  })
+}else {
   next()
 }
 }
@@ -40,24 +49,31 @@ const addNewClass =(req, res) => {
     status: 200,
     newClass: addedClass,
     message: "Created a new class",
-    timestamp: new Date()
-    // timestamp :req.timestamp
+    timestamp: timestamp()
+    
   })
 }
 
 const enrollNewStudent = (req, res) => {
-  let enrolledStudent = mySchool.enrollStudent
-(req.body.studentNameInput, req.body.studentAgeInput, req.body.StudentCityInput, req.body.StudentGradeInput)
-res.json({
+  let className = req.params.className;
+  let student = req.body
+  let enrolledStudent = mySchool.enrollStudent(className, student)
+  res.json({
+  
   status: 200,
-  enrolledStudent : enrolledStudent,
+  enrolledStudent: enrolledStudent,
+  className: className,
+  message: "Student is enrolled",
+  timestamp: timestamp()
+
 })
 }
 
+
 app.get("/class", showAllClasses);
 app.post("/class", checkIfClassExists, addNewClass)
-
-app.post("/class/:classNameInput/enroll", enrollNewStudent)
+// app.post("/class/:classNameInput/enroll", enrollNewStudent)
+app.post("/class/:className", enrollNewStudent)
 
 app.listen(port,()=>{
   console.log("listening to port " + port)

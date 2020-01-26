@@ -17,16 +17,19 @@
     <input type="text" id="className" placeholder="Class Name">
     <input type="text" id="teacher" placeholder="Teacher">
     <button id="classBtn">Add Class</button>
+    <p id=pClass></p>
   </form>
 
   <h2>Add a Student</h2>
   <form action="" id="studentForm">
-    <input type="text" id="studentClass" placeholder="Class">
+    <!-- <input type="text" id="studentClass" placeholder="Class">-->
+    <select id="studentClass"></select>
     <input type="text" id="studentName" placeholder="Name">
-    <input type="number" id="studentAge" placeholder="Age">
+    <input type="number" min=0 id="studentAge" placeholder="Age">
     <input type="text" id="studentCity" placeholder=" City">
-    <input type="text" id="studentGrade" placeholder="Grade">
+    <input type="num" min=0 id="studentGrade" placeholder="Grade">
     <button id="studentBtn">Add Student</button> 
+    <p id="pStudent"></p>
   </form>
 
   <h2>List Student</h2>
