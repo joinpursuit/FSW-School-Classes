@@ -17,7 +17,8 @@ class School {
    * @param {string} teacher - Name of instructor 
    * @return {Class} Class object
    */
-  addClass(name, teacher) {
+  
+   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
@@ -30,7 +31,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    this.classes[className]["student"].push(student)
+    let newStudent = new Student(student.name, student.city, student.age, student.grade)
+    this.classes[className].students.push(newStudent)
+
   }
 
 
@@ -44,7 +47,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    return this.class[className]["student"]
+    return this.class[className]["students"]
   }
 
 
@@ -70,12 +73,16 @@ class School {
       presentClass.filter(stud=>{
         return stud.city === city
       })
-    } else if(failing === ){
+    } else if(failing === true){
       presentClass.filter(stud =>{
         return stud.grade
       })
    }
- }
+  }
 }
+module.exports = School
+let newSchool = new School()
+console.log(newSchool)
+//newSchool.addClass("math","Kong")
+//console.log(newSchool.this.student)
 
-module.exports = School;
