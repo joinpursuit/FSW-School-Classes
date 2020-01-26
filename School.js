@@ -4,8 +4,7 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+      
     }
   }
 
@@ -19,7 +18,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
-    return newClass
+    return newClass;
   }
 
   /**
@@ -31,9 +30,9 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-      let student = new Student(name, age, city, grade)
-      this.classes[className].student.push(student)
-      return student
+      student = new Student(name, age, city, grade)
+      this.classes[className][students].push(student)
+      
   }
 
 
@@ -72,14 +71,28 @@ class School {
     // Your code here
     let filterArr = []
     // let grade = this.classes[className]["students"]["grade"]
-    // let cityName = this.classes[className]["students"]["city"]
+    let cityName = this.classes[className]["students"]["city"]
 
     filterArr = this.classes.filter(el => {
       return el["students"]
     } )
-    if(failing === true && city === ){
-      filterArr.filter(el => {
-
+    if(failing === "true" && city !== ""){
+      return filterArr.filter(student => {
+        if(city === student.city && student.grade < 70  ) {
+          return student
+        }
+      })
+    }else if(failing === "true") {
+      return filterArr.filter(student => {
+        if(student.grade < 70) {
+          return student
+        }
+      })
+    }else if(city !== ""){
+      return filterArr.filter(student => {
+        if(city === student.city) {
+          return student
+        }
       })
     }
 
