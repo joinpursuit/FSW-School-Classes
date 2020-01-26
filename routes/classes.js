@@ -6,29 +6,30 @@ const Student = require("../Student")
 let classes = express.Router()
 classes.use(cors())
 let mySchool = new School();
-classes.get("/", (request, response)=>{
+classes.get("/", (request, response) => {
     response.json(mySchool)
 })
-classes.post("/", (request, response)=>{
+classes.post("/", (request, response) => {
     let classes = request.body.classes;
     let teacher = request.body.teacher;
-// console.log(classes)
-// console.log(teacher)
-// if(mySchool.classes!==undefined|| classes!==undefined|| teacher!==undefined){
-//     response.json({"error": "type in valid entries"})
-// }else{
+    // console.log(classes)
+    // console.log(teacher)
+    // if(mySchool.classes!==undefined|| classes!==undefined|| teacher!==undefined){
+    //     response.json({"error": "type in valid entries"})
+    // }else{
     mySchool.addClass(classes, teacher)
- response.json({
-        "classes": {"nameOfClass": classes, "teacher": teacher},
+    response.json({
+        "classes": { "nameOfClass": classes, "teacher": teacher },
         "message": `Created a ${classes} class taught by ${teacher}`,
-        "timestamp": new Date()})
-    // }
+        "timestamp": new Date()
     })
+    // }
+})
 
-classes.post("/enroll", (request, response)=>{
+classes.post("/enroll", (request, response) => {
     let classes = request.body.classes
     let student = request.body.student;
-    let age= request.body.age;
+    let age = request.body.age;
     let city = request.body.city;
     let grade = request.body.grade;
     // let studentInfo = new Student(nameOfStudentInput,ageInput, cityInput, gradeInput).value
@@ -36,30 +37,30 @@ classes.post("/enroll", (request, response)=>{
     //     response.json({"error": "type in valid entries"})
     // }else{
     //     mySchool.enrollStudent(studentInfo)
-        mySchool.enrollStudent(classes,student, age, city,grade)
-        response.json({
-            "student":{'student': student } ,
-            "class": {'classes':classes},
-            "message": `you ${student} have been enrolled in ${classes} Thank You!`
-        })
-          
+    mySchool.enrollStudent(classes, student, age, city, grade)
+    response.json({
+        "student": { 'student': student },
+        "class": { 'classes': classes },
+        "message": `you ${student} have been enrolled in ${classes} Thank You!`
+    })
+
 })
 // classes.get("/lists", (request, response)=>{
 //     let classes = request.params.classes;
 //     mySchool.listStudents(classes)
 //     response.json(mySchool.listStudents(classes))
 // })
-classes.patch("/update", (request, response)=>{
+classes.patch("/update", (request, response) => {
     let classes = request.body.classes;
     let student = request.body.classes;
-    let grade =request.body.grade;
-    mySchool.updateStudent(classes, student,grade)
+    let grade = request.body.grade;
+    mySchool.updateStudent(classes, student, grade)
     response.json({
-        "student":{"student":student},
-        "class": {"classes": classes},
-        "city": {"city":city},
+        "student": { "student": student },
+        "class": { "classes": classes },
+        "grade": { "city": city },
         "Time": new Date(),
-        "message":`${student}, you have been updated`
+        "message": `${student}, you have been updated`
     })
 })
 
