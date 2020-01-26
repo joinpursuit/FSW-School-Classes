@@ -28,11 +28,14 @@ app.post('/class/:name/:teacher', (req, res) => {
             res.send(mySchool.classes) 
         }
 })
-app.post('/', (req, res) => {
+app.post('/class/:className/', (req, res) => {
 
 })
-app.get('/', (req,res) => {
-    news
+app.get('/class/:className/students', (req,res) => {
+    // mySchool.classes[mySchool.addClass("math", "brandon")]
+    let className = req.params.className
+    res.send(mySchool.classes[className]["students"])
+
 })
 
 
