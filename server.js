@@ -32,7 +32,7 @@ const validateClass = (req, res, next) => {
 
 app.post("/class", validateClass, (req, res) => {
    mySchool.addClass(req.body.name, req.body.teacher)
-   let newClass = {name: req.body.name, teacher: req.body.teacher}
+   let newClass = { name: req.body.name, teacher: req.body.teacher }
    res.status(200).json({
       status: "success",
       message: "Created a new class",
@@ -72,9 +72,9 @@ const validateStudent = (req, res, next) => {
    }
 }
 
-app.post("/class/:className/enroll", validateClassName, validateStudent, (req, res) => { 
+app.post("/class/:className/enroll", validateClassName, validateStudent, (req, res) => {
    let className = req.params.className;
-   let student = {name: req.body.name, city: req.body.city, age: req.body.age, grade: req.body.grade}
+   let student = { name: req.body.name, city: req.body.city, age: req.body.age, grade: req.body.grade }
 
    mySchool.enrollStudent(className, student);
 
@@ -95,6 +95,13 @@ app.get("/class/:className/students/", validateClassName, (req, res) => {
       status: "success",
       message: "Retrieve All Students in Class",
       student: students
+   })
+})
+
+app.get("/class", (req, res) => {
+   res.json({
+      message: "success",
+      classes: mySchool.classes
    })
 })
 

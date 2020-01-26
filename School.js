@@ -4,7 +4,7 @@ const Student = require('./Student');
 class School {
   constructor() {
     this.classes = {
-      Physics:{name: "Physics", teacher: "Henry Roman", students: []},
+      // Physics:{name: "Physics", teacher: "Henry Roman", students: []},
       // className: Class Object
       //   physics: {} 
     }
@@ -67,10 +67,9 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing) {
     // Your code here
-  //   let failing = true;
-  //   return this.classes[className].students.filter(el => {
-  //     el.grade < 70 && failing
-  //   })
+    return this.classes[className].students.filter(student => {
+      student.grade < 70
+    })
   }
 
 }

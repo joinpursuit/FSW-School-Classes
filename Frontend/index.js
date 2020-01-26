@@ -6,26 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
    studentEntry.addEventListener("submit", addStudent);
 
    let displayAllStudents = document.querySelector("#finalForm");
-   displayAllStudents.addEventListener("submit", displayRoster)
+   displayAllStudents.addEventListener("submit", displayRoster);
+
 })
+
 let url = "http://localhost:4000/class";
 
 const addClass = async (e) => {
    e.preventDefault()
    let className = document.querySelector("#className");
-   let classInput = className.value;
-
    let teacherName = document.querySelector("#teacher");
+   let classInput = className.value;
    let teacherInput = teacherName.value;
 
    let displayClass = document.querySelector("#classPrint")
+
    try {
-      let result = await axios.post(url, { name: classInput, teacher: teacherInput })
-      
-      displayClass.innerText = classInput+": "+JSON.stringify(result.data.class)
-      
-      classInput = "";
-      teacherInput = "";
+      let res = await axios.post(url, { name: classInput, teacher: teacherInput })
+
+      displayClass.innerText = classInput + ": " + JSON.stringify(res.data.class)
+
+
    } catch (err) {
       console.log(err)
    }
@@ -50,8 +51,8 @@ const addStudent = async (e) => {
 
    let displayStudent = document.querySelector("#studentPrint")
    try {
-      let result = await axios.post(url +"/"+ inputCourseName + "/enroll", {name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade})
-      
+      let result = await axios.post(url + "/" + inputCourseName + "/enroll", { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade })
+
       displayStudent.innerText = JSON.stringify(result.data.student)
 
    } catch (err) {
@@ -64,11 +65,23 @@ const displayRoster = async (e) => {
    let classData = document.querySelector("#classList");
    let classVal = classData.value;
    let showStudents = document.querySelector("#rosterPrint")
-   try{
-      let res = await axios.get(url+"/"+classVal+"/students")
-      
+   try {
+      let res = await axios.get(url + "/" + classVal + "/students")
+
       showStudents.innerText = "student(s): " + JSON.stringify(res.data.student)
    } catch (err) {
       console.log(err)
+   }
+}
+
+const displayFailingStudents = async () => {
+   let checkbox = document.querySelector("checkbox")
+   if (checkbox.checked == true) {
+      try {
+         let res = await axios.get(url + "/" + classVal + "/students/?failing=true")
+         debugger
+      } catch (err) {
+         console.log(err)
+      }
    }
 }
