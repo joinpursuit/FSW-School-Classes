@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   let newClassDiv = document.querySelector("#newClassDiv")
   let newClassForm = document.querySelector("#newClassForm")
+  let classList = document.querySelector("#classList")
+
+  const populateClasses = async () => {
+    
+  }
 
   newClassForm.addEventListener("submit", async (e) => {
     e.preventDefault()
