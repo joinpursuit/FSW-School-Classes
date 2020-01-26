@@ -73,44 +73,109 @@ const checkStudent = (req, res, next) => {
         next()
     }
 }
-const isFailing = (req, res, next) => {
-    let grade = req.params.class_name.students.grade
-    if (mySchool.classes[grade] < 70) {
+
+// const getStudentsByClass = (req, res, next) => {
+//     let className = req.params.class_name;
+//     let failing = req.query.failing;
+//     let city = req.query.city;
+//     if (failing && city) {
+//         mySchool.getStudentsByClassWithFilter(className, failing, city)
+//     } else if (mySchool.classes[className])  {
+//     res.json({
+//         students: mySchool.classes[className]['students'],
+//         message: "Retrieved Students",
+//         timestamp: timeStamp()
+//     })
+//     // next();
+// } else {
+//     res.json({
+//         error: `Class ${className} does not exist!`,
+//         timestamp: timeStamp()
+//         })
+//     }
+
+// }
+
+const classWithFilter = (req, res, next) => {
+    let chosenClass = req.params.class_name;
+    let failing = req.query.failing;
+    let city = req.query.city;
+    if (failing === "true" && city) {
         res.json({
-            failing: true,
-            grade: grade
+            students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
+            message: `Retrieved Failing Students in ${city}`,
+            timestamp: timeStamp()
         })
-        next();
-    } else {
-        res.json({
-            failing: false,
-            grade: grade
+    } else if (failing === 'false' && city) {
+        res.status(200).json({
+            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
+            message: "Retreived ALL Passing Students",
+            timestamp: timeStamp()
         })
-        next;
+
+    } else if (failing === 'false') {
+        res.status(200).json({
+            students: mySchool.getStudentsByClass(chosenClass),
+            message: "Retrieved ALL Passing Students",
+            timestamp: timeStamp()
+        })
+
+    }else if (failing === 'true') {
+        res.status(200).json({
+            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
+            message: "Retrieved ALL Passing Students",
+            timestamp: timeStamp()
+        })
+
+    } else if (city) {
+        res.status(200).json({
+            students: mySchool.getStudentsByClassWithFilter(chosenClass,failing, city),
+            message: `Retrieved ALL students in ${city}`,
+            timestamp: timeStamp()
+        })
     }
+        // query all students failing in city, getStudentFailingInCity()
+    //     mySchool.classes[chosenClass]['students'].filter(student => {
+    //         if (failing && student.grade < 70 && student.city.toLowerCase() === city.toLowerCase()) {
+    //             result.push(student);
+    //             res.json({
+    //                 students: result,
+    //                 message: `Retrieved Failing Students in ${city}`,
+    //                 timestamp: timeStamp()
+    //             })
+    //         }
+    //     })
+    //     // next();
+    // } else if (failing) {
+    //     // query all students failing, getStudentFailing()
+    //     mySchool.classes[chosenClass]['students'].filter(student => {
+    //         if (failing && student.grade < 70) {
+    //             result.push(student);
+    //             res.json({
+    //                 students: result,
+    //                 message: "Retrieved ALL Failing Students",
+    //                 timestamp: timeStamp()
+    //             })
+    //         }
+    //     })
+    //     // next();
+    // } else {
+    //     // query all students in city, getStudentCity()
+
+    //     res.json({
+    //         failing: false,
+    //         grade: grade
+    //     })
+    //     // next();
+    // }
 }
 
-const getStudentsByClass = (req, res, next) => {
-    let className = req.params.class_name;
-    if (mySchool.classes[className])  {
-    res.json({
-        students: mySchool.classes[className]['students'],
-        message: "Retrieved Students",
-        timestamp: timeStamp()
-    })
-} else {
-    res.json({
-        error: `Class ${className} does not exist!`,
-        timestamp: timeStamp()
-        })
-    }
 
-}
 
 router.get("/", showAllClasses);
 
 router.post("/", checkClass, addClass);
 router.post("/:class_name/enroll", checkStudent, addStudent);
-router.get("/:class_name/students", isFailing, getStudentsByClass);
+router.get("/:class_name/students", classWithFilter);
 
 module.exports = router;

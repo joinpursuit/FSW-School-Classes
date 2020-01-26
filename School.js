@@ -80,32 +80,66 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    let currentClass = this.classes[className][students];
+    // let currentClass = this.classes[className];
+    console.log('failing',typeof failing)
+    console.log('failing',failing)
+
+    let studentArr = this.classes[className]['students'];
     let result = [];
-    if (city && failing) {
-      mySchool.classes[className]['students'].forEach(student => {
-        if (student.city === city && student.grade < 70) {
+    // console.log(mySchool.classes[className]);
+    if (failing === 'true' && city) {
+      console.log("first city", city)
+      studentArr.filter(student => {
+        if (student.grade < 70 && student.city === city) {
+          console.log("filtered city", city)
           result.push(student);
+          console.log("result", result);
+          
         }
       })
-    } else {
-      if (city) {
-        mySchool.classes[className]['students'].forEach(student => {
-          if (student.city === city) {
+    } else if (failing === 'false' && city) {
+        studentArr.filter(student => {
+          if (student.grade >= 70 && student.city === city) {
             result.push(student);
           }
-        })
-      } else {
-        mySchool.classes[className]['students'].forEach(student => {
+      })
+    } else if (failing === 'true') {
+        studentArr.filter(student => {
           if (student.grade < 70) {
             result.push(student);
           }
         })
-      }
+    } else if (city) {
+      console.log('city',city);
+      
+        studentArr.filter(student => {
+          if (student.city === city) {
+            result.push(student);
+          }
+        })
     }
+    
     return result
   }
 
+  // getStudentsFailing(className) {
+  //   let chosenClass = this.classes[className]['students'];
+  //   console.log(chosenClass);
+  //   let students = mySchool.chosenClass['students'];
+  //   let result = [];
+  //   students.forEach(student => {
+  //     if (student.grade < 70) {
+  //       result.push(student);
+  //     }
+  //     return result;
+  //   })
+  // }
+
+  // getStudentsByClassWithFilter()
 }
 
+let mySchool = new School();
+// console.log(mySchool.getStudentsByClassWithFilter("physics", true, "Queens"))
+
 module.exports = School;
+

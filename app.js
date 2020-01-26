@@ -7,10 +7,10 @@ const port = 3000;
 
 let mySchool = school;
 
-let classRouter = require("./routes/routes")
+let classRouter = require("./routes/routes.js")
 app.use("/class", classRouter);
-// app.use(cors());
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(bodyParser.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.listen(port, () => console.log("Listening to port", port));
