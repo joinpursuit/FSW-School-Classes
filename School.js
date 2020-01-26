@@ -5,7 +5,7 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-        physics: {name: "Physics", teacher: "Jon A", students: [{name: "Jhenya E", city: "Brooklyn", age:"15", grade: "80" }]} 
+        // physics: {name: "Physics", teacher: "Jon A", students: [{name: "Jhenya E", city: "Brooklyn", age:"15", grade: "80" }]} 
 
     }
   }
@@ -21,6 +21,7 @@ class School {
    addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -32,7 +33,9 @@ class School {
    */
   enrollStudent(className, student) {
     let newStudent = new Student(student.name, student.city, student.age, student.grade)
+    console.log(className)
     this.classes[className].students.push(newStudent)
+    
 
   }
 

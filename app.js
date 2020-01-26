@@ -37,16 +37,16 @@ app.get('/class/student', (req, res)=>{
     })
 })
 
-// const addNewClass
 
-app.post("/class", (req,res)=>{
+const addNewClass = (req,res)=>{
     let name = req.body.name
     let teacher = req.body.teacher
+    console.log(name)
     //let mySchool = new School()
     if(!mySchool.classes[name]){
         let newClass = mySchool.addClass(name, teacher)
         res.json({
-        class: mySchool.classes[name],
+            class: newClass,
             message:"Class Created"
 
         })
@@ -56,7 +56,9 @@ app.post("/class", (req,res)=>{
             error: "Class already Exists"
         })
     }
-})
+}
+
+app.post("/class", addNewClass)
 
 
 
