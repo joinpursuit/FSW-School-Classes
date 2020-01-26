@@ -29,7 +29,9 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
-    return this.classes
+    newClass[name] = name; 
+    newClass[teacher] = teacher;
+    return newClass
   }
 
   /**
@@ -40,12 +42,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-   this.classes[className]["students"].push(student)
-   return `${student.name} has been enrolled in ${className}!`
+    student = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className]["students"].push(student)
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
@@ -54,7 +53,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    let students = Object.values(this.classes[className])
+    let students = Object.values(this.classes[className]["students"])
     return students
   }
 
@@ -75,15 +74,17 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
+
+
   getStudentsByClassWithFilter(className, failing, city) {
-    let students = Object.values(this.classes[className])
-    students.filter((student) => {
+    let students = Object.values(this.classes[className]["students"])
+    students.forEach((student) => {
       this.isFailing(student)
-      if (student[failing] === true && student[city] == city) {
+      if (failing === "yes" && student["failing"] === true && student["city"] == city) {
         return `This is a failing student from ${city}: ${student}`
-      } else if (student[city] === city) {
+      } else if (student["city"] === city) {
         return student
-      } else if (student[failing] === true) {
+      } else if (student["failing"] === true) {
         return student
       }
     }) 
@@ -98,11 +99,11 @@ class School {
   }
 }
 
-// let testSchool = new School()
+let school = new School()
 // let marvin = new Student("Marvin", "25", "Laurelton", 65)
 
 // console.log(testSchool.addClass("Physics", "Teacher"))
 // // console.log(testSchool.enrollStudent("Physics", marvin))
 
 
-// module.exports = testSchool;
+module.exports = school;

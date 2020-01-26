@@ -13,15 +13,44 @@
     <form id="classForm">
         <h2>Add Class</h2>
         Class Name:<br>
-        <input type="text" name="className">
+        <input id="classInput" type="text" name="className">
     </br>
         Teacher:<br>
-        <input type="text" name="teacher">
+        <input id="teacherInput" type="text" name="teacher">
         <button type="submit">Submit</button>
     </form>
+<div id="studentsByClass">
+    <form id="classSearch">
+        <h2>Search by Class</h2>
+        Class Name:<br>
+        <input id="classSearchInput" type="text" name="classSearch">
+        <button id="classSearchButton" type="submit">Submit</button>
+    </form>
+</div>
+<div id="enrollStudentsDiv">
+    <form id="enrollStudents">
+        <h2>Enroll Students Here!</h2>
+        Student Name:<br>
+        <input id="studentNameInput" type="text" name="StudentName">
+        <br>
+        Age:<br>
+        <input id="studentAgeInput" type="text" name="StudentAge">
+        <br>
+        City:<br>
+        <input id="studentCityInput "type="text" name="StudentCity">
+        <br>
+        Class:<br>
+        <input id="classToEnroll" type="text" name="classSelect">
+        <br>
+        <button id="enrollButton" type="submit">Submit</button>
 
+    </form>
+</div>
     <div id="allClasses">
         <button type="button" id="allClassesButton">Get all classes</button>
+        <button type="button" id="collapse">Close</button>
     </div>
+
+    <div id="messages"></div>
 </body>
 </html>
