@@ -41,7 +41,8 @@ classes.post("/enroll", (request, response) => {
     response.json({
         "student": { 'student': student },
         "class": { 'classes': classes },
-        "message": `you ${student} have been enrolled in ${classes} Thank You!`
+        "message": `you ${student} have been enrolled in ${classes} Thank You!`,
+        "timestamp": new Date()
     })
 
 })
@@ -50,13 +51,13 @@ classes.post("/enroll", (request, response) => {
 //     mySchool.listStudents(classes)
 //     response.json(mySchool.listStudents(classes))
 // })
-classes.patch("/update", (request, response) => {
+classes.get("/lists", (request, response) => {
     let classes = request.body.classes;
     let student = request.body.classes;
     let grade = request.body.grade;
     mySchool.updateStudent(classes, student, grade)
     response.json({
-        "student": { "student": student },
+        "student": [{ "student": student }],
         "class": { "classes": classes },
         "grade": { "city": city },
         "Time": new Date(),

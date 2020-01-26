@@ -73,29 +73,7 @@ const enrollStudent = async(event)=>{
      })
     
 }
-const updateStudent = async(event)=>{
-    event.preventDefault()
-    let className = document.querySelector("#classUpdate")
-    let gradeUpdate = document.querySelector("#gradeUpdate")
-    let classNameInput = className.value
-    let gradeUpdateInput = gradeUpdate.value
-    className.value = ""
-    studentName.value = ""
-    let updateInfo ={
-        classes: classNameInput,
-        grade: gradeUpdateInput
-    }
-    let host = `http://localhost:3000/update`
-    axios.patch(host, updateInfo).then(result=>{
-        console.log(result)
-        let p = document.createElement("p")
-        p.innerText = result.data.message
-        let update = document.querySelector("#update")
-        update.appendChild(p)
-    })
 
-    
-}
 const listStudents = async(event)=>{
     event.preventDefault()
     let nameList = document.querySelector("#nameList")
