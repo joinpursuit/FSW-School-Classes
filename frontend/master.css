@@ -1,4 +1,4 @@
-body {
+/* body {
     display: flex;
     flex-wrap: wrap;
     font-family: monospace;
@@ -6,55 +6,163 @@ body {
     background-image:url("https://cdn.shopify.com/s/files/1/0250/1217/4900/products/31c654a56c02c36789f6abb8eb4cbf81_620x.jpg?v=1572376632");
     background-size: 300px;
     
+} */
+
+body {
+    background-image: url("https://cdn.shopify.com/s/files/1/0250/1217/4900/products/31c654a56c02c36789f6abb8eb4cbf81_620x.jpg?v=1572376632");
+    background-size: cover;
+    /* image-orientation: ; */
+    height: 100vh;
+    background-repeat: no-repeat;
+    /* position: fixed; */
+    overflow: hidden;
+    /* margin-top: -100px; */
+  }
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
 }
+
+img {
+    size: 100px;
+}
+  .container {
+    display: grid;
+    grid-auto-flow: column;
+    
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-around;
+    align-items: baseline;
+    margin-top: 10%;
+    margin-left: 10%;
+  }
+
 #addClassDiv{
     
     background-color:#8C1B04;
-    width: 300px;
-    height: 300px;
-    border-radius: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+    width: max-content;
+    display: flex;
+    /* width: 300px;
+    height: 300px;*/
+ border-radius: 15%;
+ margin-top: auto;
+    /* padding-left: 5%;
+    padding-right: 5%; */
+}
+
+#classNameInput {
+    margin-top: -350%;
+
+}
+
+#studentListClassInput {
+    margin-top: -30%;
+}
+
+#addDiv {
+    margin-top: 45%;
+}
+
+
+input {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+    padding: .25px;
+}
+
+#addClassTitle {
+   display: flex;
+   justify-content: center;
+   margin-left: -75px;
+   margin-top: -140%;
+   height: fit-content;
+   /* padding-top: 5px; */
+}
+
+#addStudentTitle {
+    margin-left: -65px;
+    justify-content: center;
+    margin-left: -75px;
+    margin-top: -50%;
+    height: fit-content;
+    width: max-content;
+    /* padding-top: 5px;
     
-    
-    
+    /* margin-left: -65px;
+    justify-content: center;
+   margin-left: -75px;
+   margin-top: -25px; */
+   /* padding-top: 5px; */
+}
+#studentListTitle {
+    margin-left: -65px;
+    justify-content: center;
+   margin-left: -75px;
+   margin-top: -50%;
+   height: fit-content;
+   width: max-content;
+
 }
 #addClassForm{
     background-color:#8C1B04;
-    width: 200px;
-    height: 200px;
+    width: 15%;
+    margin-top: 45%;
     border-radius: 50px;
     
-    align-items: center;
-
-    padding: 10px;
-    
+    /* align-items: center; */
+    /* padding: 5%; */
 }
+
+#button{
+    margin-top: 0px;
+    margin-left: 100%;
+}
+
+#button2 {
+    margin-right: 100%;
+}
+
 h1{
     padding-left: 70px;
     color:#8C1B04;
-   
 }
 
 #addStudent{
+    background-color:#8C1B04;
+    width: fit-content;
     display: flex;
+    /* width: 300px;
+    height: 300px;*/
+    margin-top: -5%;
+    /* margin-top: -50%; */
+ border-radius: 10%;
+    /* padding-left: 5%;
+    padding-right: 5%; */
+
+    /* display: flex;
     background-color:#8C1B04;
     width: 300px;
     height: 300px;
     border-radius: 50px;
     padding-left: 50px;
-    padding-right: 50px;
+    padding-right: 50px; */
     
     
 }
 #addStudentForm{
     background-color:#8C1B04;
-    width: 200px;
+    width: 25%;
+    display: block;
+    margin-top: -15px;
+    margin-left: 15%;
+    /* width: 200px;
     height: 200px;
     direction: ltr;
     border-radius: 50px;
     align-content: flex-end;
-    padding: 10px;
+    padding: 10px; */
     
 }
 h1{
@@ -64,16 +172,28 @@ h1{
 
 
 #listStudent{
+    background-color:#8C1B04;
+    width: fit-content;
     display: flex;
+    /* width: 300px;
+    height: 300px;*/
+ border-radius: 15%;
+    /* padding-left: 5%;
+    padding-right: 5%; */
+    /* display: flex;
     background-color:#8C1B04;
     width: 300px;
     height: 300px;
     border-radius: 50px;
     padding-left: 50px;
-    padding-right: 50px;
-    
-    
+    padding-right: 50px; */
+     
 }
+
+#select {
+    margin-left: 60%;
+}
+
 #listStudentForm{
     background-color:#8C1B04;
     width: 200px;
@@ -81,6 +201,7 @@ h1{
     direction: ltr;
     border-radius: 50px;
     align-content: flex-end;
+    margin-left: 20%;
     
 }
 h1{

@@ -10,9 +10,15 @@
     <link rel="stylesheet" href="master.css">
 </head>
 <body>
+    <h1>
+        <img id="title" src="https://fontmeme.com/permalink/200126/055f3c112e93b027eef72f86b4a81b5b.png"/>
+    </h1>
+    <div class="container">
     <div id="addClassDiv">
         <div id="addDiv">
-            <h1>Add Class</h1>
+            <h1>
+                <img id="addClassTitle" src="https://fontmeme.com/permalink/200126/c447383a418114fcbdd129f30d0bbeb0.png"/>
+            </h1>
 
         <form id="addClassForm">
             <input id="classNameInput"   type="text" placeholder="Class Name Here">
@@ -29,11 +35,13 @@
 
     <div id="addStudent">
         <div id="addStudentDiv">
-            <h1>Add Student</h1>
+            <h1>
+                <img id="addStudentTitle" src="https://fontmeme.com/permalink/200126/94b49c146305ec13442850960c73d548.png"/>
+            </h1>
 
         <form id="addStudentForm">
             <select id="select" name="" id="classSelect">
-                <option  disabled selected> Pick A Class</option>
+                <option id="pickAClass" disabled selected> Pick A Class</option>
                 <option>physics</option>
             </select id="select">
             <input id="studentNameInput" type="text" placeholder="Student Name Here">
@@ -41,7 +49,7 @@
             <input id="studentCityInput type="text" placeholder="Student City Here">
             <input id="studentGradeInput type="text" placeholder="Student Grade Here">
 
-            <input type="submit" value="Submit">
+            <input id="button" type="submit" value="Submit">
 
         </form>
         <p id="addStudentP"></p>
@@ -54,23 +62,26 @@
 
     <div id="listStudent">
         <div id="listStudentDiv">
-            <h1>List Students</h1>
+            <h1>
+                <img id="studentListTitle" src="https://fontmeme.com/permalink/200126/378aa72bd0c6a3b16ba5ad5452b334a6.png"/>
+            </h1>
 
         <form id="listStudentForm">
             <!-- <select name="" id="classSelect">
                 <option  disabled selected> Pick A Class</option>
             </select> -->
-            <input type="text" placeholder="Class">
+            <input id="studentListClassInput" type="text" placeholder="Class">
             <input type="text" placeholder="City (optional)">
             Show Failing Students Only:<input type="checkbox" name="" id="">
             
 
-            <input type="submit" value="Submit">
+            <input id="button2"type="submit" value="Submit">
 
         </form>
 
         </div>
         
+    </div>
     </div>
     
 </body>
