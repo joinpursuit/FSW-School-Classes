@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form1.addEventListener("submit", async (e) => {
         e.preventDefault();
         try { 
-        axios.post(`http://localhost:3000/route/class/${className.value}/${teacherName.value}`).then(res => {
-            let p = document.createElement("p");
+        axios.post(`http://localhost:3000/class/${className.value}/${teacherName.value}`).then(res => {
+            let result = document.createElement("p");
             let newClass = className.value.charAt(0).toUpperCase() + className.value.slice(1)
             let teacher = teacherName.value.charAt(0).toUpperCase() + teacherName.value.slice(1)
-            p.innerText = `Teacher: ${teacher} : Class: ${newClass}` 
-            div1.appendChild(p)
+            result.innerText = `Teacher: ${teacher} : Class: ${newClass}` 
+            div1.appendChild(result)
             debugger
             }) 
         }catch(err){
@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form2.addEventListener("submit", async (e) => {
         e.preventDefault()
         try {
-            axios.post(`http://localhost:3000/route/class/${enrollClass.value}/enroll`, {name: enrollName.value, age: enrollAge.value, city: enrollCity.value, grade: enrollGrade.value});
-            let enrolledStudent = res.data
-            debugger
-            let p = document.createElement(p)
-            p.innerText = `New Enrolled Student: ${enrolledStudent}`
-            div2.appendChild(p)
+            axios.post(`http://localhost:3000/class/${enrollClass.value}/enroll`, {name: enrollName.value, age: enrollAge.value, city: enrollCity.value, grade: enrollGrade.value}).then(res => {
+                let enrolledStudent = res.config.data
+                    let result = document.createElement("p")
+                    result.innerText = `New Enrolled Student: ${enrolledStudent}`
+                    div2.appendChild(result)
+                })
         } catch (err){
             console.log(err)
         }
@@ -56,14 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
     form3.addEventListener("submit", async (e) => {
         e.preventDefault();
         try{
-            axios.get(`http://localhost:3000/route/${classList.value}/students`).then(res => {
+            axios.get(`http://localhost:3000/${classList.value}/students`).then(res => {
                 let name = res.data.name
                 let students = res.data.students
                 debugger
-                let p = document.querySelector("p");
-                p.innerText = `Class: ${name}, Student List: ${students}`
-                div3.appendChild(p)
-                debugger
+
+                        let p = document.createElement("p");
+                        p.innerText = `Class: ${name}, Student List: ${students}`
+                        div3.appendChild(p)
                 
             })
         }catch(err){

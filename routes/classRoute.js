@@ -1,111 +1,77 @@
-const route = require('express').Router();
-const cors = require("cors");
-const School = require("../School");
-const Student = require("../Student")
+// const route = require('express').Router();
+// const cors = require("cors");
+// const School = require("../School");
+// const Student = require("../Student")
 
 
-route.use(cors())
-let mySchool = new School()
-const date = new Date ()
+// route.use(cors())
+// let mySchool = new School()
+// const date = new Date ()
 
 
 
-route.post("/class/:className/enroll", (req, res) => {
+// route.post("/class/:className/enroll", (req, res) => {
     
+//     let newStudent = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
     
-    mySchool.enrollStudent(req.params.className, req.body)
-        res.json({
-            "student": {name: req.body.name, age: req.body.name, city: req.body.city, grade: req.body.grade},
-            "className": req.params.className,
-            "message": "Enrolled Student",
-            "timestamp": date
-            })
-    })
-
-
-
-route.get("/:className/students", (req, res) => {
-    let className = req.params.className
-    let failing = req.query.failing 
-    let city = req.query.city
-    let listOfStudents = mySchool.getStudentsByClass(className);
-    if(!listOfStudents){
-        res.json({
-            "error": `Class ${className} doesn't exist.`,
-            "timestamp": date
-        })
-    } else {
-        res.json({
-            name: className,                                                                                                                                                                                                                                                    
-            students: listOfStudents,
-        })
-    }
-
-})
-
-
-
-route.post("/class/:name/:teacher", (req, res) => {
-        let name = req.params.name
-        let teacher = req.params.teacher
-    if(mySchool.classes.className === name ){
-        res.json({
-            error: "Please fill out all the information or Class already exists",
-            timestamp: date
-        })
-    } else {
-         mySchool.addClass(name, teacher)
-         res.json({
-             class: { name: name, teacher: teacher, 
-             students: []},
-             message: "Created new class",
-             timestamp: date
-
-
-         })
-           
-    }
-        
-
-})
-
-route.get("/", (req,res) => {
-    res.json(mySchool)
-})
-
-
-
-
+//    let studentInfo = mySchool.enrollStudent(req.params.className, newStudent)
+//         res.json({
+//             "student": studentInfo,
+//             "className": req.params.className,
+//             "message": "Enrolled Student",
+//             "timestamp": date
+//             })
+//     })
 
 
 
 // route.get("/:className/students", (req, res) => {
-//     const className = req.params
-//     let failing = req.body.failing
-//     let city = req.body.city
-//     let listOfStudents = mySchool.getStudentsByClass(className)
-//     if(!mySchool.classes[className]){
-//     mySchool.getStudentsByClass(className)
-//     res.json({
-//     "error": "Class doesn't exist"
-//     })
-//     } else if (failing || city ) {
-//         let filteredArr = mySchool.getStudentsByClassWithFilter(className, failing, city);
+//     let className = req.params.className
+//     let failing = req.query.failing 
+//     let city = req.query.city
+//     let listOfStudents = mySchool.getStudentsByClass(className);
+//     if(!listOfStudents){
 //         res.json({
-//             "students": [
-//                 filteredArr
-//             ],
-//             "message": "Retrieved Students",
+//             "error": `Class ${className} doesn't exist.`,
 //             "timestamp": date
-//           })
+//         })
 //     } else {
 //         res.json({
-//             "students": listOfStudents,
-//             "message": "Retrieved Students",
-//             "timestamp": date
+//             name: className,                                                                                                                                                                                                                                                    
+//             students: listOfStudents,
 //         })
 //     }
 
+// })
+
+
+
+// route.post("/class/:name/:teacher", (req, res) => {
+//         let name = req.params.name
+//         let teacher = req.params.teacher
+//     if(mySchool.classes.className === name ){
+//         res.json({
+//             error: "Please fill out all the information or Class already exists",
+//             timestamp: date
+//         })
+//     } else {
+//          mySchool.addClass(name, teacher)
+//          res.json({
+//              class: { name: name, teacher: teacher, 
+//              students: []},
+//              message: "Created new class",
+//              timestamp: date
+
+
+//          })
+           
+//     }
+        
+
+// })
+
+// route.get("/", (req,res) => {
+//     res.json(mySchool)
 // })
 
 
@@ -114,6 +80,34 @@ route.get("/", (req,res) => {
 
 
 
+// // route.get("/:className/students", (req, res) => {
+// //     const className = req.params
+// //     let failing = req.body.failing
+// //     let city = req.body.city
+// //     let listOfStudents = mySchool.getStudentsByClass(className)
+// //     if(!mySchool.classes[className]){
+// //     mySchool.getStudentsByClass(className)
+// //     res.json({
+// //     "error": "Class doesn't exist"
+// //     })
+// //     } else if (failing || city ) {
+// //         let filteredArr = mySchool.getStudentsByClassWithFilter(className, failing, city);
+// //         res.json({
+// //             "students": [
+// //                 filteredArr
+// //             ],
+// //             "message": "Retrieved Students",
+// //             "timestamp": date
+// //           })
+// //     } else {
+// //         res.json({
+// //             "students": listOfStudents,
+// //             "message": "Retrieved Students",
+// //             "timestamp": date
+// //         })
+// //     }
+
+// // })
 
 
 
@@ -125,4 +119,11 @@ route.get("/", (req,res) => {
 
 
 
-module.exports = route;
+
+
+
+
+
+
+
+// module.exports = route;
