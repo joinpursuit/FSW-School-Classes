@@ -1,6 +1,6 @@
-const Class = require('../../Class');
-const Student = require('../students/students')
-const express = require("./node_modules/express")
+const Class = require('./Class');
+const Student = require('./Student')
+const express = require("express")
 const router = express.Router();
 
 class School {

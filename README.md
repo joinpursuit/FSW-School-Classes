@@ -98,7 +98,10 @@ An error response should look like:
 
 | Method | Endpoint                     | Request Body                                       |
 | ------ | ---------------------------- | -------------------------------------------------- |
-| `POST` | `/class/<class-name>/enroll` | Student properties: `name`, `age`, `city`, `grade` |
+| `POST` | `/class/:className/enroll` | Student properties: `name`, `age`, `city`, `grade` |
+
+
+//
 
 - Create an Express route/endpoint to handle the request as seen above.
 - Add the new student to `<class-name>` class. 
