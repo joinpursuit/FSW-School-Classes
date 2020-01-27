@@ -33,10 +33,17 @@ classesRouter.get("/:className/students", (req, res) => {
   let failing = req.query.failing
 
   let className = req.params.className
-  
-  let arr = mySchool.getStudentsByClassWithFilter(className, failing, city);
+
+  let arr = mySchool.getStudentsByClassWithFilter(className, failing, city)
   res.json(arr)
 })
+
+classesRouter.get("/:city/students"),
+  (req, res) => {
+    let city = req.params.city
+    let arr = mySchool.getStudentsByCity(city)
+    res.json(arr)
+  }
 
 classesRouter.post("/:className/enroll", (req, res) => {
   let className = req.params.className
@@ -51,14 +58,12 @@ classesRouter.post("/:className/enroll", (req, res) => {
   if (student === undefined) {
     let newStudent = new Student(name, age, city, grade)
     mySchool.enrollStudent(className, newStudent)
-    // console.log(mySchool)
     res.json(newStudent)
   } else {
     student.name = name
     student.age = age
     student.city = city
     student.grade = grade
-    // console.log(mySchool)
     res.json(student)
   }
 })
