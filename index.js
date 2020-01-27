@@ -59,11 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
             axios.get(`http://localhost:3000/${classList.value}/students`).then(res => {
                 let name = res.data.name
                 let students = res.data.students
-                debugger
-
+                if(students){
+                    students.forEach(student => {
                         let p = document.createElement("p");
-                        p.innerText = `Class: ${name}, Student List: ${students}`
+                        p.innerText = `Class: ${name.charAt(0).toUpperCase() + name.slice(1)}, 
+                                        Student List: ${student.name.charAt(0).toUpperCase() + student.name.slice(1)}`
                         div3.appendChild(p)
+                    })
+                }
                 
             })
         }catch(err){

@@ -31,7 +31,7 @@ class School {
   //  * @return {Student} Enrolled student
    */
   enrollStudent(className, student) { 
-    let classObj = this.classes[className]["students"]
+    let classObj = this.classes[className].students
     let newStudent = new Student(student.name, student.age, student.city, student.grade)
     classObj.push(newStudent)
   }
