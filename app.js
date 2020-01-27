@@ -51,11 +51,12 @@ app.post('/class',classesCheck,(req,res) => {
 
 
 app.post('/class/:className/enroll', (req,res) => {
-    let { name , age , city , grade } = req.body
+    let { student , age , city , grade } = req.body
     let className = req.params.className
-    // this.class[className][student].push(student)
-    let enrolledStudent = newSchool.enrollStudent(className,{name,age,city,grade})
-    console.log(req.body);
+    //this.class[className][student].push(studentName)
+    let enrolledStudent = newSchool.enrollStudent(className,{name:student,age,city,grade})
+    //enrolledStudent.push(studentName)
+   console.log(req.body);
     
     res.json({enrolledStudent,
          className: className,

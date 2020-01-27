@@ -45,9 +45,10 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-
+    //console.log(student);
+    
     let newStudent = new Student(student.name,student.city,student.age,student.grade)
-    this.classes[`${className}`]["students"].push(newStudent);
+    this.classes[className]["students"].push(newStudent);
 
     //console.log(newStudent);
     return newStudent
@@ -97,9 +98,12 @@ class School {
     this.classes[className][student][grade,city]
     student.filter(grade => {
       if(grade < 65){
-        failing = grade 
+        grade = true
         return className.student.city[grade]
       }
+        else{
+          false 
+        }
     })
   }
 

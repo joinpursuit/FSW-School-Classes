@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         })
           //debugger;
     }
-    const enroll_student = (studentName,city,age,grade) => {
-        axios.post('http://localhost:3000/class/:className/enroll', {
+    const enroll_student = (className,studentName,city,age,grade) => {
+        axios.post(`http://localhost:3000/class/${className}/enroll`, {
             className: course,
             student: studentName,
             city: city,
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             grade: grade 
 
         })
+        debugger
     }
 
     addClass.addEventListener('submit', async (e) => {
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     enroll.addEventListener('submit', async(e) => {
         e.preventDefault()
-        enroll_student(studentName.value, city.value, age.value, grade.value)
+        enroll_student(className.value,studentName.value, city.value, age.value, grade.value)
     
 
     })
