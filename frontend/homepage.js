@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let addClassName = document.querySelector("#class1");
         let addTeacherName = document.querySelector("#teacherName");
         let res = await axios.post("http://localhost:4000/class", {name: addClassName.value, teacher: addTeacherName.value});
-        console.log(res.data);
+
         let ul = document.querySelector("ul");
         let li = document.createElement("li");
         li.innerText = res.data.message;
@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let enrollAge = document.querySelector("#age");
         let enrollCity = document.querySelector("#city2");
         let enrollGrade = document.querySelector("#grade");
-        let res = await axios.post("http://localhost:4000/class/%{enrollClassName.value}/enroll", {class: enrollClassName.value, name: enrollStudentName.value, age: enrollAge.value, city: enrollCity.value, grade: enrollGrade.value});
+        let res = await axios.post("http://localhost:4000/class/" + enrollClassName.value + "/enroll", {name: enrollStudentName.value, age: enrollAge.value, city: enrollCity.value, grade: enrollGrade.value});
+        console.log(res);
+        // debugger;
     });
     
     // const listStudentForm = document.querySelector("#form3");

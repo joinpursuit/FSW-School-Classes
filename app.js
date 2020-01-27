@@ -45,12 +45,12 @@ app.post("/class", (req, res) => {
     };
 });
 
-app.post("/:name/enroll", (req, res) => {
+app.post("/class/:className/enroll", (req, res) => {
     try {
-        mySchool.enrollStudent(req.body.class, req.body.name);
+        mySchool.enrollStudent(req.params.className, req.body.name);
         res.json({
                 "student": { "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade },
-                "className": req.body.class,
+                "className": req.params.className,
                 "message": "Enrolled Student",
                 "timestamp": "YYYY, MM/DD HH:MM:SS"
         });
