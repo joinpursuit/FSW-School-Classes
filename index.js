@@ -92,7 +92,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
       displayStudent.innerText = `Please fill out all the information or the class doesn't exist.`;
     }
   })
-
+  const listStudent = async(e)=>{
+    e.preventDefault();
+    let res = document.querySelector
   
-
+  }
 })

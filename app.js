@@ -72,7 +72,7 @@ const enrollNewStudent = (req, res) => {
 //   console.log(className);
   
 // }
-const listStudent = (req, res, next) =>{
+const listStudentR = (req, res, next) =>{
   if (!mySchool.classes[req.params.className]) {
     res.json({
       error: `Class ${req.params.className} doesn't exist.`,
@@ -97,7 +97,7 @@ const listStudent = (req, res, next) =>{
 app.get("/class", showAllClasses);
 app.post("/class", checkIfClassExists, addNewClass)
 app.post("/class/:className", enrollNewStudent)
-app.get("/class/:className/Students", listStudent)
+app.get("/class/:className/Students", listStudentR)
 
 app.listen(port,()=>{
   console.log("listening to port " + port)
