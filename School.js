@@ -3,11 +3,10 @@ const Student = require("./Student")
 
 class School {
   constructor() {
-    // this.classes = {}
     this.classes = {
       physics1: {
         name: "physics1",
-        teacher: "mr.stkurdiknmibalz",
+        teacher: "mr.stkrdiknmibalz",
         students: [
           {
             name: "stan marsh",
@@ -70,7 +69,7 @@ class School {
     console.log(arr)
     if (city !== undefined) {
       arr = arr.filter(s => s.city === city)
-      // console.log(arr)
+      console.log(s.city)
     }
     if (failing !== undefined && failing === "true") {
       arr = arr.filter(s => s.grade < 70)
@@ -80,22 +79,26 @@ class School {
 
   //the following code attemps to grab student array by city:
 
-  // getStudentsByCity(city) {
-  //   let studentByCityArr = []
-  //   for (let className in this.classes) {
-  //     for (let students in className) {
-  //       students.forEach(el => {
-  //         if (el.city === city) {
-  //           studentByCityArr.push(el)
-  //         }
-  //       })
-  //       return studentByCityArr
-  //     }
-  //   }
-  // className.students[0].city
-  //   }
+  getStudentsByCity(city) {
+    console.log(city)
+    let studentByCityArr = []
+    for (let className in this.classes) {
+      for (let students in className) {
+        students.forEach(el => {
+          if (el.city === city) {
+            
+            studentByCityArr.push(el)
+          }
+        })
+        return studentByCityArr
+      }
+    }
+    className.students[0].city
+  }
 }
 
 let mySchool = new School()
 
 module.exports = mySchool
+
+

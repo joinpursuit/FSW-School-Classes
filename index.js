@@ -59,20 +59,20 @@ getStudentInfoBtn.addEventListener("click", e => {
         div.appendChild(ul)
       })
     })
-  // // } else {
-  // axios.get(`http://localhost:3001/class/${studentByCityInput.value}/students`).then(res => {
-  //   // console.log(res)
-  //     // debugger
-  //   res.data.forEach(el => {
-  //     let ul = document.createElement("ul")
-  //     let li = document.createElement("li")
-  //     li.innerText = el.city
-  //     ul.appendChild(li)
-  //     div.appendChild(ul)
+  // } else {
+  axios.get(`http://localhost:3001/class/${studentByCityInput.value}/students`).then(res => {
+    // console.log(res)
+      // debugger
+    res.data.forEach(el => {
+      let ul = document.createElement("ul")
+      let li = document.createElement("li")
+      li.innerText = el.city
+      ul.appendChild(li)
+      div.appendChild(ul)
 
-  //   })
+    })
 
-  // })
+  })
 
-  // }
+  
 })
