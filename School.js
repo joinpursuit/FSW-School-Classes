@@ -28,8 +28,9 @@ class School {
   //  * @return {Student} Enrolled student
   //  */
   enrollStudent(className, student) {
-    if(this.classes[className])
+    if(this.classes[className]){
       this.className.push(student)
+      }
     }
 
   // /**
@@ -39,23 +40,25 @@ class School {
   //  * @return {Student[]} Array of Student objects
   //  */
   getStudentsByClass(className) {
-    // Your code here
+    // if(className === this.newClass.name){
+      return this.newClass.students
+    // }
   }
 
-  /**
-   * Get all students and apply filters. If failing = true
-   * return all students that are failing the class, 
-   * that is all students whose grade is less than 70.
-   * If a city is passed return students whose city match
-   * the city passed. If both failing and city are passed
-   * return students that are failing and that live in the
-   * specified city
-   * 
-   * @param {string} className - Name of the class
-   * @param {boolean} failing - Whether to return students that are failing the class or not
-   * @param {string} city - Name of the city to match against students
-   * @return {Student[]} Array of Student objects
-   */
+  // /**
+  //  * Get all students and apply filters. If failing = true
+  //  * return all students that are failing the class, 
+  //  * that is all students whose grade is less than 70.
+  //  * If a city is passed return students whose city match
+  //  * the city passed. If both failing and city are passed
+  //  * return students that are failing and that live in the
+  //  * specified city
+  //  * 
+  //  * @param {string} className - Name of the class
+  //  * @param {boolean} failing - Whether to return students that are failing the class or not
+  //  * @param {string} city - Name of the city to match against students
+  //  * @return {Student[]} Array of Student objects
+  //  */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
   }
