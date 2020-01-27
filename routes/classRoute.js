@@ -1,7 +1,7 @@
 const route = require('express').Router();
 const cors = require("cors");
-const School = require("../School.js");
-const Student = require("../Student.js")
+const School = require("../School");
+const Student = require("../Student")
 
 
 route.use(cors())
@@ -11,14 +11,14 @@ const date = new Date ()
 
 
 route.post("/class/:className/enroll", (req, res) => {
-    let className = req.params.className
-    let studentInfo = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
-    mySchool.enrollStudent(className, studentInfo )
+    
+    
+    mySchool.enrollStudent(req.params.className, req.body)
         res.json({
-            student: studentInfo,
-            className: className,
-            message: "Enrolled Student",
-            timestamp: date
+            "student": {name: req.body.name, age: req.body.name, city: req.body.city, grade: req.body.grade},
+            "className": req.params.className,
+            "message": "Enrolled Student",
+            "timestamp": date
             })
     })
 
@@ -42,12 +42,6 @@ route.get("/:className/students", (req, res) => {
     }
 
 })
-
-// route.get("/:className/students/", (req, res) => {
-//     let className = req.params.className
-//     let failing = req.params.failing
-//     res.json(mySchool.getStudentsByClassWithFilter(className, failing, city));
-// })
 
 
 

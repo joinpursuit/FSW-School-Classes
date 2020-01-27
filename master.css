@@ -1,3 +1,15 @@
 body {
     color: white; 
+    background-image: url("https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/1293704/910/607/m1/fpnw/wm0/backtoschool-.jpg?1463842503&s=45aac03fdfe64bdceff92b3b6d609a85");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+h1, h2 {
+    font-family: "Comic Sans MS", cursive, sans-serif; 
+}
+
+h1 {
+    display: grid;
+    justify-content: center;
 }

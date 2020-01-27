@@ -30,10 +30,9 @@ class School {
   //  * @param {Student} student - Student object
   //  * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    let studentList = this.classes[className].students; 
-    // let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    studentList.push(student)
+  enrollStudent(className, student) { 
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className]["students"].push(student)
   }
 
   

@@ -3,24 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let className = document.querySelector("#className");
     let teacherName = document.querySelector("#teacherName");
     let addClass = document.querySelector("#addClass");
-    let studentClass = document.querySelector("#studentClass");
-    let studentName = document.querySelector("#studentName");
-    let studentAge = document.querySelector("#studentAge");
-    let studenCity = document.querySelector("#studentCity");
-    let studentGrade = document.querySelector("#studentGrade");
-    let studentSubmit = document.querySelector("#studentSubmit");
+    let enrollClass = document.querySelector("#studentClass");
+    let enrollName = document.querySelector("#studentName");
+    let enrollAge = document.querySelector("#studentAge");
+    let enrollCity = document.querySelector("#studentCity");
+    let enrollGrade = document.querySelector("#studentGrade");
     let classList = document.querySelector("#classList");
     let cityList = document.querySelector("#cityList");
     let checkFailing = document.querySelector("#checkFailing");
     let listSubmit = document.querySelector("#listSubmit")
     let form1 = document.querySelector("#one")
+    let form2 = document.querySelector("#two")
     let form3 = document.querySelector("#three")
     let div1 = document.querySelector("#divOne")
+    let div2 = document.querySelector("#divTwo")
     let div3 = document.querySelector("#three")
 
  
 
-    form1.addEventListener("submit", (e) => {
+    form1.addEventListener("submit", async (e) => {
         e.preventDefault();
         try { 
         axios.post(`http://localhost:3000/route/class/${className.value}/${teacherName.value}`).then(res => {
@@ -37,12 +38,22 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }) 
 
-    // studentSubmit.addEventListener("Submit", (e) => {
-    //     e.preventDefault();
+    form2.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        try {
+            axios.post(`http://localhost:3000/route/class/${enrollClass.value}/enroll`, {name: enrollName.value, age: enrollAge.value, city: enrollCity.value, grade: enrollGrade.value});
+            let enrolledStudent = res.data
+            debugger
+            let p = document.createElement(p)
+            p.innerText = `New Enrolled Student: ${enrolledStudent}`
+            div2.appendChild(p)
+        } catch (err){
+            console.log(err)
+        }
+    })
 
-    // })
 
-    form3.addEventListener("submit", (e) => {
+    form3.addEventListener("submit", async (e) => {
         e.preventDefault();
         try{
             axios.get(`http://localhost:3000/route/${classList.value}/students`).then(res => {
