@@ -61,16 +61,38 @@ const addNewStudent = (req, res) => {
 
 // displaying students, getting the grades
 const displayStudents= (req, res) => {
-    // console.log(req.params)
-    let studentsList = mySchool["classes"][`${req.params["className"]}`]["students"]
-    res.json(studentsList)
+    let className = req.params["className"];
+    let failing = (req.query["failing"]);
+    let city = req.query["city"];
+    if(failing === 'true' || city != ''){
+        console.log("wrong route")
+        console.log(failing)
+        console.log(city)
+        res.json({
+            "students": mySchool.getStudentsByClassWithFilter(className, failing, city),
+            "message": "Retrieved Filtered Students",
+            "timestamp": timestamp.toString(Date.now())
+        })
+    } else if(mySchool["classes"][`${className}`]){
+        console.log("hello")
+        res.json({
+            "students": mySchool.getStudentsByClass(className),
+            "message": "Retrieved Students",
+            "timestamp": timestamp.toString(Date.now())
+        }) 
+    } else {
+        res.json({ 
+            "error": `Class ${className} doesn't exist.`,
+            "timestamp": timestamp.toString(Date.now())
+        })
+    }
 }
 
 app.get("/", allClasses);
 app.post("/class", checkClass, addNewClass);
 //Double check the add new student, cannot test as I have not create a student class yet
 app.post("/class/:className/enroll", checkStudent, addNewStudent);
-app.get("/class/:className/students/", displayStudents);
+app.get("/class/:className/students", displayStudents);
 //req.query is an object that can be keyed into and find the values of
 // /class/physics/students/?failing=(true)&city=(nyc)
 
