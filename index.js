@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   displayButton.addEventListener("click", async()=>{
     try {
-      
       let res = await axios.get("http://localhost:3000/class")
       let p = document.createElement("p")
       p.innerText = JSON.stringify(res.data.allClasses)
@@ -50,33 +49,25 @@ document.addEventListener("DOMContentLoaded", ()=>{
     teacherInput.value = "";
     
   });
-
-  
-
   const populateSelect = async()=> {
 
-    // console.log('input', classNameInput.value);
-    
     try {
+      
       let res = await axios.get(`http://localhost:3000/class`)
-      // debugger
+      debugger
       let data =res.data.allClasses
+     
       for(let key in data){
         let option = document.createElement("option");
         option.innerText = key
         className.appendChild(option)
-        //console.log('classname', className)
+        
       }
-      // o.innerText = JSON.stringify(res.data.allClasses)
-      // allClassesDiv.appendChild(p)
-
     } catch(err){
       console.log(err);
-      
     }
   }
   populateSelect()
-  
  
   studentForm.addEventListener("submit", async(e) =>{
     e.preventDefault();
@@ -96,12 +87,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     try{
       
       let res = await axios.post(`http://localhost:3000/class/${classNameInput}`, {name: studentNameInput, age: studentAgeInput, city: studentCityInput, grade: studentGradeInput})
-    // let studentObj = {name: res.data.enrollStudent.name, age: res.data.enrollStudent.age, city: res.data.enrollStudent.city, grade: res.data.enrollStudent.grade}
-      //let studentInfoEnroll = 
       displayStudent.innerText = JSON.stringify(res.data.className, res.data.enrolledStudent)
-      // displayStudent.innerText = JSON.stringify(`${studentObj}enrolled in: ${res.data.className}`)
-      debugger
-      
     }catch(err){
       displayStudent.innerText = `Please fill out all the information or the class doesn't exist.`;
     }

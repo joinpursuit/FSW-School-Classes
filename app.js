@@ -25,13 +25,6 @@ const showAllClasses = (req, res) => {
 }
 
 const checkIfClassExists = (req, res, next) => {
- 
-  // if(!req.body.name || !req.body.teacher){
-  //   res.json({
-  //     status: 400,
-  //     error: "Please fill out all the information.",
-  //     timestamp: timestamp()
-  //   })
   if(mySchool.classes[req.body.name] ){
   res.json({
     status: 400,
@@ -59,9 +52,7 @@ const enrollNewStudent = (req, res) => {
   let student = req.body
   console.log(`"1" ${className}`)
   console.log(`"2"${student}`)
-  //let enrolledStudent = mySchool.enrollStudent(className, student)
   let enrolledStudent = res.data.enrolledStudent
-  //console.log(`"3" ${res.data.enrolledStudent}`)
   res.json({
   status: 200,
   enrolledStudent: res.data.enrolledStudent,
@@ -84,10 +75,7 @@ const enrollNewStudent = (req, res) => {
 
 
 app.get("/class", showAllClasses);
-
 app.post("/class", checkIfClassExists, addNewClass)
-//app.get("/class/:className", newClass)
-// app.post("/class/:classNameInput/enroll", enrollNewStudent)
 app.post("/class/:className", enrollNewStudent)
 
 app.listen(port,()=>{
