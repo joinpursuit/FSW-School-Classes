@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let addClassForm = document.querySelector("#addClass");
   let studentForm = document.querySelector("#studentForm");
   let className = document.querySelector("#studentClass");
+  let addList = document.querySelector("listBtn")
  
 
   displayButton.addEventListener("click", async()=>{
@@ -92,9 +93,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
       displayStudent.innerText = `Please fill out all the information or the class doesn't exist.`;
     }
   })
-  const listStudent = async(e)=>{
+  addList.addEventListener("click", studentList)
+  const studentList = async(e)=>{
     e.preventDefault();
-    let res = document.querySelector
-  
+    let responseList = document.querySelector('#ListResponse');
+    let selectedClass= document.querySelector('#searchClass').value
+    let city = document.querySelector('#searchCity').value
+    let checkBox = document.querySelector('#failingStudents').checked
+    let responseList = await axios.get(`http://localhost:3000/class/${selectedClass}/students?city=${city}&failing=${checkBox}`)
+    responseList.innetText = JSON.stringify(responseList.data)
   }
 })
