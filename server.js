@@ -98,12 +98,32 @@ app.get("/class/:className/students/", validateClassName, (req, res) => {
    })
 })
 
-app.get("/class", (req, res) => {
-   res.json({
-      message: "success",
-      classes: mySchool.classes
+// const showAll = (req, res, next) => {
+//    let failing = req.query.failing;
+//    let className = req.params.className;
+//    let students = mySchool.getStudentsByClass(className)
+//    if (!failing) {
+//       res.status(200).json({
+//          status: "success",
+//          message: "Retrieve All Students in Class",
+//          student: students,
+//          timestamp: new Date()
+//       })
+//    } else {
+//       next()
+//    }
+// }
+
+app.get("/class/:className/students/failing", validateClassName, (req, res) => {
+   let className = req.params.className;
+   let failingStudents = mySchool.getStudentsByClassWithFilter(className)
+   res.status(200).json({
+      status: "success",
+      message: "Retrieve Failing Students in Class",
+      student: failingStudents
    })
 })
+
 
 app.listen(port, () => {
    console.log(`Server is listening on port ${port}`)

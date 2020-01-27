@@ -4,7 +4,7 @@ const Student = require('./Student');
 class School {
   constructor() {
     this.classes = {
-      // Physics:{name: "Physics", teacher: "Henry Roman", students: []},
+      Physics:{name: "Physics", teacher: "Henry Roman", students: [{name: "Karen", city: "Brooklyn", age: 21, grade: 55}, {name: "Will", city: "Philly", age: 51, grade: 90}]},
       // className: Class Object
       //   physics: {} 
     }
@@ -65,11 +65,13 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing) {
+  getStudentsByClassWithFilter(className) {
     // Your code here
-    return this.classes[className].students.filter(student => {
-      student.grade < 70
+    let studentArr = this.classes[className].students;
+    let failArr = studentArr.filter(student => {
+        return student.grade <= 70
     })
+    return failArr
   }
 
 }

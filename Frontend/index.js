@@ -10,19 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })
 
-let url = "http://localhost:4000/class";
-
 const addClass = async (e) => {
    e.preventDefault()
    let className = document.querySelector("#className");
    let teacherName = document.querySelector("#teacher");
+
    let classInput = className.value;
    let teacherInput = teacherName.value;
 
-   let displayClass = document.querySelector("#classPrint")
+   let displayClass = document.querySelector("#classPrint");
 
    try {
-      let res = await axios.post(url, { name: classInput, teacher: teacherInput })
+      let res = await axios.post(`http://localhost:4000/class`, { name: classInput, teacher: teacherInput })
 
       displayClass.innerText = classInput + ": " + JSON.stringify(res.data.class)
 
@@ -37,23 +36,23 @@ const addStudent = async (e) => {
    let courseName = document.querySelector("#courseName")
    let inputCourseName = courseName.value
 
-   let studentName = document.querySelector("#studentName")
-   let inputStudentName = studentName.value
+   let studentName = document.querySelector("#studentName");
+   let inputStudentName = studentName.value;
 
-   let studentCity = document.querySelector("#city")
-   let inputCity = studentCity.value
+   let studentCity = document.querySelector("#city");
+   let inputCity = studentCity.value;
 
-   let studentAge = document.querySelector("#age")
-   let inputAge = studentAge.value
+   let studentAge = document.querySelector("#age");
+   let inputAge = studentAge.value;
 
-   let studentGrade = document.querySelector("#grade")
-   let inputGrade = studentGrade.value
+   let studentGrade = document.querySelector("#grade");
+   let inputGrade = studentGrade.value;
 
-   let displayStudent = document.querySelector("#studentPrint")
+   let displayStudent = document.querySelector("#studentPrint");
    try {
-      let result = await axios.post(url + "/" + inputCourseName + "/enroll", { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade })
+      let result = await axios.post(`http://localhost:4000/class/${inputCourseName}/enroll`, { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade });
 
-      displayStudent.innerText = JSON.stringify(result.data.student)
+      displayStudent.innerText = JSON.stringify(result.data.student);
 
    } catch (err) {
       console.log(err)
@@ -63,25 +62,37 @@ const addStudent = async (e) => {
 const displayRoster = async (e) => {
    e.preventDefault()
    let classData = document.querySelector("#classList");
-   let classVal = classData.value;
-   let showStudents = document.querySelector("#rosterPrint")
-   try {
-      let res = await axios.get(url + "/" + classVal + "/students")
+   let classNameInput = classData.value;
 
-      showStudents.innerText = "student(s): " + JSON.stringify(res.data.student)
-   } catch (err) {
-      console.log(err)
-   }
-}
-
-const displayFailingStudents = async () => {
-   let checkbox = document.querySelector("checkbox")
-   if (checkbox.checked == true) {
+   let checkbox = document.querySelector("#checkbox");
+   let showStudents = document.querySelector("#rosterPrint");
+   
+   if(checkbox.checked === false) {
       try {
-         let res = await axios.get(url + "/" + classVal + "/students/?failing=true")
-         debugger
+         let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students`)
+         
+         showStudents.innerText = "student(s): " + JSON.stringify(res.data.student)
+
       } catch (err) {
          console.log(err)
       }
    }
+   else {
+      displayFailingStudents(classNameInput);
+   }
 }
+//displays all students in classVal input field
+
+const displayFailingStudents = async (classNameInput) => {
+   let classData = document.querySelector("#rosterPrint");
+   
+      try {
+         let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students/failing`)
+         let failingStudentArr = res.data.student;
+
+         classData.innerText = JSON.stringify(failingStudentArr)
+
+      } catch (err) {
+         console.log("there was an error with display failing students frontend ", err)
+      }
+   }
