@@ -32,7 +32,7 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student(student.name, student.city, student.age, student.grade)
+    let newStudent = new Student(student.className,student.name, student.city, student.age, student.grade)
     console.log(className)
     this.classes[className].students.push(newStudent)
     

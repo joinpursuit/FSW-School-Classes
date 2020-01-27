@@ -45,13 +45,14 @@ const addStudent = async() =>{
     try{
         let form2 = document.querySelector("#form2")
         form2.addEventListener("submit",async(event)=>{
+            debugger
             event.preventDefault()
             let name = document.querySelector("#name")
             let age = document.querySelector("#age")
             let city = document.querySelector("#city")
             let grade = document.querySelector("#grade")
-            debugger
-            await axios.post("http://localhost:7000/class/add", {name:name.value, age:age.value, city:city.value, grade:grade.value})
+           
+            await axios.post("http://localhost:7000/class/add", {className: classes.value, name:name.value, age:age.value, city:city.value, grade:grade.value})
             let ul = document.querySelector("ul")
             let li = document.createElement("li")
             li.innerText = name.value
@@ -62,6 +63,17 @@ const addStudent = async() =>{
         console.log(err)
     }
     addStudent()
+
+    const listStudent = async() =>{
+        try{
+            let ul = document.querySelector("#listStudent")
+            let select = document.querySelector("submitStudent")
+            let res = await axios.get("http://localhost:7000/class/student")
+            debugger
+        }catch(err){
+            console.log(err)
+        }
+    }
 
 
 
