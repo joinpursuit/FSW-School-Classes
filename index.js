@@ -22,9 +22,28 @@ let getStudentInfoBtn = document.querySelector("#getStudentInfo")
 
 let div = document.querySelector("#students")
 
+addClassInfoBtn.addEventListener("click", e => {
+  e.preventDefault()
+  formAddClass.innerHtml = ""
+  axios.post(`http://localhost:3001/class/add`).then(res => {
+    // debugger
+    formAddClass.classList.add("hidden")
+    res.data.class.teacher = teacherInput.value
+    res.data.class.name = classInput.value
+
+    let p = document.createElement("p")
+    p.innerText = `Teacher : ${res.data.class.teacher}, Class: ${res.data.class.name}`
+    formDiv.appendChild(p)
+
+  })
+
+
+})
+
+
+
+
 getStudentInfoBtn.addEventListener("click", e => {
-  // debugger
-  // console.log(e)
   e.preventDefault()
   div.innerHTML = ""
   axios

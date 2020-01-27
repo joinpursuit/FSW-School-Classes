@@ -10,12 +10,11 @@ classesRouter.post("/add", (req, res) => {
   let classNames = req.body.name
   if (mySchool.classes[classNames]) {
     res.json({
-      error: "Please fill out all the information for the student",
+      error: "Please fill out all the information",
       timestamp: "YYYY, MM/DD HH:MM:SS"
     })
   } else {
     mySchool.addClass(req.body.name, req.body.teacher)
-    // console.log(mySchool)
     res.json({
       class: {
         name: `${req.body.name}`,
