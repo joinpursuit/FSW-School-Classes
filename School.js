@@ -35,15 +35,15 @@ class School {
    */
   enrollStudent(className, student) {
     let studentArr = this.classes[className]["students"]
-    let {
-      name,
-      age,
-      city,
-      grade
-    } = student
+    // let {
+    //   name,
+    //   age,
+    //   city,
+    //   grade
+    // } = student
     
-    let newStudent = new Student(name, age, city, grade);
-    studentArr.push(student);
+    let newStudent = new Student(student.studentName, student.age, student.city, student.grade);
+    studentArr.push(newStudent);
 
     return newStudent;
 
@@ -81,30 +81,31 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // let currentClass = this.classes[className];
-    console.log('failing',typeof failing)
-    console.log('failing',failing)
+    // console.log('failing',typeof failing)
+    // console.log('failing',failing)
 
     let studentArr = this.classes[className]['students'];
     let result = [];
     // console.log(mySchool.classes[className]);
     if (failing === 'true' && city) {
       console.log("first city", city)
-      studentArr.filter(student => {
+      studentArr.forEach(student => {
         if (student.grade < 70 && student.city === city) {
           console.log("filtered city", city)
           result.push(student);
           console.log("result", result);
           
         }
+        
       })
     } else if (failing === 'false' && city) {
-        studentArr.filter(student => {
+        studentArr.forEach(student => {
           if (student.grade >= 70 && student.city === city) {
             result.push(student);
           }
       })
     } else if (failing === 'true') {
-        studentArr.filter(student => {
+        studentArr.forEach(student => {
           if (student.grade < 70) {
             result.push(student);
           }
@@ -112,11 +113,17 @@ class School {
     } else if (city) {
       console.log('city',city);
       
-        studentArr.filter(student => {
+        studentArr.forEach(student => {
           if (student.city === city) {
             result.push(student);
           }
         })
+    } else {
+      studentArr.forEach(student => {
+        if (student.grade >= 70) {
+          result.push(student)
+        }
+      })
     }
     
     return result

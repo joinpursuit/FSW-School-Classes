@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./index.js"></script>
+    <script src="./index.js" async></script>
+    <link rel="stylesheet" href="./master.css"/>
     <title>Express Project</title>
 </head>
 <body>
@@ -25,12 +26,15 @@
     <div id="addStudentDiv">
     <h1>Add Student</h1>
         <form id="addStudent">
-            <input id="class" type="text" placeholder="Class">
+            <select name="" id="class" >
+                <option value="" selected disabled>Choose a class</option>
+            </select>
+            <!-- <input id="class" type="text" placeholder="Class"> -->
             <input id="studentName" type="text" placeholder="Student's Name">
             <input id="age" type="text" placeholder="Age">
             <input id="city" type="text" placeholder="City">
             <input id="grade" type="text" placeholder="Grade">
-            <button id="addStudents">Submit</button>
+            <button type="submit" id="addStudents">Submit</button>
         </form>
     </div>
     <hr>

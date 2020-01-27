@@ -41,15 +41,16 @@ const checkClass = (req, res, next) => {
     }
 }
 
-const addStudent = (req, res, next) => {
+const addStudent = (req, res) => {
     // let name = req.body.name;
     // let age = req.body.age;
     // let city = req.body.city;
     // let grade = req.body.grade;
     let class_name = req.params.class_name;
     console.log('classname',class_name);
+    let qqq = mySchool.enrollStudent(class_name, req.body)
     res.json({
-        student: mySchool.enrollStudent(class_name, req.body),
+        student: qqq,
         className: class_name,
         message: "Enrolled Student",
         timestamp: timeStamp()
@@ -60,28 +61,31 @@ const checkStudent = (req, res, next) => {
     let className = req.params.class_name;
     let classArr = mySchool['classes'][className]['students'];
     console.log(mySchool["classes"][className]["students"])
-    if(classArr.length !== 0){
+    if(classArr.length){
         classArr.forEach(el => {
-        if (el.name === req.body.name) {
-            res.json({
-                error: "Please fill out all the information for the student",
-                timestamp: timeStamp()
-            })
-        } 
-    })
-    } else{
+            if (el.name === req.body.studentName) {
+                res.json({
+                    error: "Student already exists!",
+                    timestamp: timeStamp()
+                })
+            } else{
+                next()
+            }
+        }) 
+    } else {
         next()
     }
 }
 
-const getStudentsByClass = (req, res, next) => {
+const studentsByClass = (req, res, next) => {
     let className = req.params.class_name;
     try {
         if (mySchool.classes[className])  {
             res.json({
                 students: mySchool.getStudentsByClass(className),
                 message: "Retrieved Students",
-                timestamp: timeStamp()
+                timestamp: timeStamp(),
+                allClasses:{Science:[]}
             })
         } 
     } catch (err) {
@@ -92,10 +96,14 @@ const getStudentsByClass = (req, res, next) => {
 
 const validateClass = (req, res, next) => {
     let className = req.params.class_name;
+    console.log(req.params.class_name)
+    console.log(req.query.city)
+    console.log(req.query.failing)
     if (!mySchool.classes[className]) {
         res.json({
             error: `Class ${className} does not exist!`,
-            timestamp: timeStamp()
+            timestamp: timeStamp(),
+            allClasses: ['you', 'reached validate error']
         })
     } else {
         next();
@@ -110,35 +118,42 @@ const classWithFilter = (req, res, next) => {
         if (failing === "true" && city) {
             res.json({
                 students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
-                message: `Retrieved Failing Students in ${city}`,
-                timestamp: timeStamp()
+                message: `failing true in city: Retrieved Failing Students in ${city}`,
+                timestamp: timeStamp(),
+                allClasses: ['you', 'reached filter error']
             })
         } else if (failing === 'false' && city) {
+            console.log("hey im here")
             res.status(200).json({
                 students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
-                message: "Retreived ALL Passing Students",
-                timestamp: timeStamp()
+                message: "failing false in city: Retreived ALL Passing Students",
+                timestamp: timeStamp(),
+                allClasses: ['you', 'reached filter error']
             })
     
         } else if (failing === 'false') {
+
             res.status(200).json({
-                students: mySchool.getStudentsByClass(chosenClass),
-                message: "Retrieved ALL Passing Students",
-                timestamp: timeStamp()
+                students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
+                message: "failing false: Retrieved ALL Passing Students",
+                timestamp: timeStamp(),
+                allClasses: ['you', 'reached validate error']
             })
     
         }else if (failing === 'true') {
             res.status(200).json({
-                students: mySchool.getStudentsByClassWithFilter(chosenClass,failing,city),
-                message: "Retrieved ALL Passing Students",
-                timestamp: timeStamp()
+                students: mySchool.getStudentsByClass(chosenClass),
+                message: "failing true: Retrieved ALL Passing Students",
+                timestamp: timeStamp(),
+                allClasses: ['you', 'reached validate error']
             })
     
         } else if (city) {
             res.status(200).json({
                 students: mySchool.getStudentsByClassWithFilter(chosenClass,failing, city),
-                message: `Retrieved ALL students in ${city}`,
-                timestamp: timeStamp()
+                message: `students in city: Retrieved ALL students in ${city}`,
+                timestamp: timeStamp(),
+                allClasses: ['you', 'reached validate error']
             })
         } else {
             next();
@@ -189,6 +204,6 @@ router.get("/", showAllClasses);
 
 router.post("/", checkClass, addClass);
 router.post("/:class_name/enroll", checkStudent, addStudent);
-router.get("/:class_name/students", validateClass, classWithFilter, getStudentsByClass);
+router.get("/:class_name/students", validateClass, classWithFilter, studentsByClass);
 
 module.exports = router;
