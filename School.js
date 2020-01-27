@@ -90,6 +90,8 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
+    console.log('classname...', className)
+    console.log('student...', student)
     // Your code here
      let newStudent = new Student(student.name, student.age, student.city, student.grade)
     //return this.Classes[className].students.push(newStudent)

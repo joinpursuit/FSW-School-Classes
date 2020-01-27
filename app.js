@@ -44,34 +44,49 @@ const checkIfClassExists = (req, res, next) => {
 }
 
 const addNewClass =(req, res) => {
-  let addedClass = mySchool.addClass(req.body.name, req.body.teacher)
+   mySchool.addClass(req.body.name, req.body.teacher)
   res.json({
     status: 200,
-    newClass: addedClass,
+    newClass: req.body.name,
+    teacher: req.body.teacher,
     message: "Created a new class",
     timestamp: timestamp()
-    
   })
 }
 
 const enrollNewStudent = (req, res) => {
   let className = req.params.className;
   let student = req.body
-  let enrolledStudent = mySchool.enrollStudent(className, student)
+  console.log(`"1" ${className}`)
+  console.log(`"2"${student}`)
+  //let enrolledStudent = mySchool.enrollStudent(className, student)
+  let enrolledStudent = res.data.enrolledStudent
+  //console.log(`"3" ${res.data.enrolledStudent}`)
   res.json({
-  
   status: 200,
-  enrolledStudent: enrolledStudent,
+  enrolledStudent: res.data.enrolledStudent,
   className: className,
   message: "Student is enrolled",
   timestamp: timestamp()
-
 })
 }
+// const newClass = (req, res) =>{
+//   let className = req.params.className;
+//   res.json({
+//     status:200,
+//     className: className,
+//     message: "Student is enrolled",
+//     timestamp: timestamp()
+//   })
+//   console.log(className);
+  
+// }
 
 
 app.get("/class", showAllClasses);
+
 app.post("/class", checkIfClassExists, addNewClass)
+//app.get("/class/:className", newClass)
 // app.post("/class/:classNameInput/enroll", enrollNewStudent)
 app.post("/class/:className", enrollNewStudent)
 
