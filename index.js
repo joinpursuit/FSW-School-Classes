@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let div1 = document.querySelector("#divOne")
     let div3 = document.querySelector("#three")
 
+ 
+
     form1.addEventListener("submit", (e) => {
         e.preventDefault();
         try { 
@@ -46,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             axios.get(`http://localhost:3000/route/${classList.value}/students`).then(res => {
                 let name = res.data.name
                 let students = res.data.students
+                debugger
                 let p = document.querySelector("p");
                 p.innerText = `Class: ${name}, Student List: ${students}`
                 div3.appendChild(p)

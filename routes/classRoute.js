@@ -9,12 +9,13 @@ let mySchool = new School()
 const date = new Date ()
 
 
+
 route.post("/class/:className/enroll", (req, res) => {
     let className = req.params.className
-    let name
-    mySchool.enrollStudent(className, req.body)
+    let studentInfo = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
+    mySchool.enrollStudent(className, studentInfo )
         res.json({
-            student:{ "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade},
+            student: studentInfo,
             className: className,
             message: "Enrolled Student",
             timestamp: date
@@ -53,7 +54,7 @@ route.get("/:className/students", (req, res) => {
 route.post("/class/:name/:teacher", (req, res) => {
         let name = req.params.name
         let teacher = req.params.teacher
-    if(mySchool.classes.className === name){
+    if(mySchool.classes.className === name ){
         res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: date
@@ -84,7 +85,34 @@ route.get("/", (req,res) => {
 
 
 
+// route.get("/:className/students", (req, res) => {
+//     const className = req.params
+//     let failing = req.body.failing
+//     let city = req.body.city
+//     let listOfStudents = mySchool.getStudentsByClass(className)
+//     if(!mySchool.classes[className]){
+//     mySchool.getStudentsByClass(className)
+//     res.json({
+//     "error": "Class doesn't exist"
+//     })
+//     } else if (failing || city ) {
+//         let filteredArr = mySchool.getStudentsByClassWithFilter(className, failing, city);
+//         res.json({
+//             "students": [
+//                 filteredArr
+//             ],
+//             "message": "Retrieved Students",
+//             "timestamp": date
+//           })
+//     } else {
+//         res.json({
+//             "students": listOfStudents,
+//             "message": "Retrieved Students",
+//             "timestamp": date
+//         })
+//     }
 
+// })
 
 
 

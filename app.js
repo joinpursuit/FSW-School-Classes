@@ -3,8 +3,9 @@ const cors = require("cors");
 const app = express(); 
 const port = 3000;
 const bodyParser = require("body-parser");
-// const School = require("./School.js");
+const School = require("./School.js");
 const classRouter = require("./routes/classRoute.js")
+
 
 app.use("/route", classRouter)
 app.use(cors());

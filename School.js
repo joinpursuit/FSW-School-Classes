@@ -32,8 +32,8 @@ class School {
    */
   enrollStudent(className, student) {
     let studentList = this.classes[className].students; 
-    let newStudent = new Student(student.name, student.age, student.city)
-    studentList.push(newStudent)
+    // let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    studentList.push(student)
   }
 
   
