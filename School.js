@@ -68,10 +68,15 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city)
+  getStudentsByClassWithFilter(className, failing, city) {
+  let students = this.getStudentsByClass(className);
+
+    
+    }
+
+  }
 
 
-}
 
 
 module.exports = School;
