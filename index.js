@@ -46,16 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
         teacher: teacher.value
       })
       .then(res => {
-        const { error, timestamp, message } = res.data;
+        const { error, message } = res.data;
         let display = document.createElement("p");
         if (error) {
-          display.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+          display.innerText = `Error: ${error} \n Timestamp: ${new Date().toString()}`;
         } else {
           display.innerText = `Class: ${res.data.class.name} \n Teacher: ${
             res.data.class.teacher
           } \n Students: ${res.data.class.students.join(
             ", "
-          )} \n Message: ${message} \n Timestamp: ${timestamp}`;
+          )} \n Message: ${message} \n Timestamp: ${new Date().toString()}`;
         }
         formClassRes.appendChild(display);
         className1.value = "";
@@ -86,11 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
         grade: grade.value
       })
       .then(res => {
-        const { error, timestamp, student, className, message } = res.data;
+        const { error, student, className, message } = res.data;
         if (error) {
-          display.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+          display.innerText = `Error: ${error} \n Timestamp: ${new Date().toString()}`;
         } else {
-          display.innerText = `Student name: ${student.name} \n Age: ${student.age} \n City: ${student.city} \n Grade: ${student.grade} \n Class Name: ${className} \n Message: ${message} \n Timestamp: ${timestamp}`;
+          display.innerText = `Student name: ${student.name} \n Age: ${
+            student.age
+          } \n City: ${student.city} \n Grade: ${
+            student.grade
+          } \n Class Name: ${className} \n Message: ${message} \n Timestamp: ${new Date().toString()}`;
         }
         name.value = "";
         age.value = "";
@@ -135,17 +139,17 @@ document.addEventListener("DOMContentLoaded", () => {
         city: cityList.value
       })
       .then(res => {
-        const { error, timestamp, message } = res.data;
+        const { error, message } = res.data;
         let display2 = document.createElement("p");
         if (error) {
-          display2.innerText = `Error: ${error} \n Timestamp: ${timestamp}`;
+          display2.innerText = `Error: ${error} \n Timestamp: ${new Date().toString()}`;
         } else {
           res.data.students.forEach(student => {
             let studentEl = document.createElement("p");
             studentEl.innerText = `Student name: ${student.name}, Age: ${student.age}, City: ${student.city}, Grade: ${student.grade}`;
             formListRes.appendChild(studentEl);
           });
-          display2.innerText = `Message: ${message} \n Timestamp: ${timestamp}`;
+          display2.innerText = `Message: ${message} \n Timestamp: ${new Date().toString()}`;
         }
         formListRes.appendChild(display2);
       });
