@@ -1,6 +1,9 @@
 const Class = require('./Class');
 const Student = require('./Student')
+const SchoolRouter = require("./School.js")
+
 const express = require("express")
+
 const router = express.Router();
 
 class School {
@@ -23,6 +26,7 @@ class School {
     this.classes[name] = newClass;
   }
 
+
   /**
    * Enroll student in class
    * 
@@ -31,12 +35,10 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student(className, student);
-    this.className = new classname;
-    this.student = new Student;
+    console.log(this.classes[className].students.push(student))
+    // this.classes[className].enrollStudent(student);
+    // console.log(student);
   }
-
-
 
 
   /**
@@ -46,7 +48,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    console.log(this.classes[className].students)
   }
 
 
@@ -66,10 +68,10 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
+  getStudentsByClassWithFilter(className, failing, city)
+
 
 }
+
 
 module.exports = School;
