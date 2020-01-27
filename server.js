@@ -94,25 +94,10 @@ app.get("/class/:className/students/", validateClassName, (req, res) => {
    res.status(200).json({
       status: "success",
       message: "Retrieve All Students in Class",
-      student: students
+      student: students,
+      timestamp: new Date()
    })
 })
-
-// const showAll = (req, res, next) => {
-//    let failing = req.query.failing;
-//    let className = req.params.className;
-//    let students = mySchool.getStudentsByClass(className)
-//    if (!failing) {
-//       res.status(200).json({
-//          status: "success",
-//          message: "Retrieve All Students in Class",
-//          student: students,
-//          timestamp: new Date()
-//       })
-//    } else {
-//       next()
-//    }
-// }
 
 app.get("/class/:className/students/failing", validateClassName, (req, res) => {
    let className = req.params.className;
@@ -120,7 +105,8 @@ app.get("/class/:className/students/failing", validateClassName, (req, res) => {
    res.status(200).json({
       status: "success",
       message: "Retrieve Failing Students in Class",
-      student: failingStudents
+      student: failingStudents,
+      timestamp: new Date()
    })
 })
 
