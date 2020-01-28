@@ -52,26 +52,17 @@ const enrollNewStudent = (req, res) => {
   let student = req.body
   console.log(`"1" ${className}`)
   console.log(`"2"${student}`)
-  let enrolledStudent = res.data.enrolledStudent
+  //let enrolledStudent = res.data.enrolledStudent
+  let newStudent = mySchool.enrollStudent(className, student)
   res.json({
   status: 200,
-  enrolledStudent: res.data.enrolledStudent,
+  enrolledStudent: newStudent,
   className: className,
   message: "Student is enrolled",
   timestamp: timestamp()
 })
 }
-// const newClass = (req, res) =>{
-//   let className = req.params.className;
-//   res.json({
-//     status:200,
-//     className: className,
-//     message: "Student is enrolled",
-//     timestamp: timestamp()
-//   })
-//   console.log(className);
-  
-// }
+
 const listStudentR = (req, res, next) =>{
   if (!mySchool.classes[req.params.className]) {
     res.json({

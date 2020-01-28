@@ -99,7 +99,7 @@ class School {
       return "This student is already enrolled in this class"
     }else{
       this.classes[className].students.push(newStudent);
-      return student
+      return newStudent
       
     }
   }
