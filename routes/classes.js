@@ -47,11 +47,11 @@ classes.post("/enroll", (request, response) => {
 
 })
 
-classes.get("/lists", (request, response) => {
-    let className = request.params.classes;
+classes.get("/:className/lists", (request, response) => {
+    let className = request.body.className;
     mySchool. getStudentsByClass(className)
     response.json({
-        "className": { "classes": classes },
+        "className": { "classes": className },
         "Time": new Date(),
         "message": `${className}, list of students`
     })

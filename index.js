@@ -23,12 +23,19 @@ const addClass = async (event) => {
         classes: classesInput,
         teacher: teacherInput
     }
-    console.log(classInfo)
-    axios.post(host, classInfo).then(response => {
-        console.log(response)
-        p.innerText = response.data.message
-        classAdd.appendChild(p)
-    })
+    try{
+let response = axios.post(host, classInfo)
+p.innerText = response.data.message
+classAdd.appendChild(p)
+    }catch(error){
+console.log(error)
+    }
+    // console.log(classInfo)
+    // axios.post(host, classInfo).then(response => {
+    //     console.log(response)
+    //     p.innerText = response.data.message
+    //     classAdd.appendChild(p)
+    // })
 
 }
 const enrollStudent = async (event) => {
@@ -47,6 +54,7 @@ const enrollStudent = async (event) => {
     student.value = ""
     age.value = ""
     grade.value = ""
+    city.value = ""
     let p = document.createElement("p")
     let studentEnroll = document.querySelector("#studentEnroll")
     let host = "http://localhost:4000/classes/enroll"
@@ -58,22 +66,31 @@ const enrollStudent = async (event) => {
         city: cityInput,
         grade: gradeInput
     }
-
-    console.log(studentInfo)
-    axios.post(host, studentInfo).then(response => {
-        console.log(studentInfo)
+    try{
+        let response = await axios.post(host, studentInfo)
         p.innerText = response.data.message
         studentEnroll.appendChild(p)
-    })
+    }catch(error){
+console.log(error)
+    }
+
+    // console.log(studentInfo)
+    // axios.post(host, studentInfo).then(response => {
+    //     console.log(studentInfo)
+    //     p.innerText = response.data.message
+    //     studentEnroll.appendChild(p)
+    // })
 
 }
 
 const getStudentsByClass = async (event) => {
     event.preventDefault()
-    let className = document.querySelector("#classList").value
+    let className = document.querySelector("#classList")
+    let classNameInput = className.value;
     className.value = ""
-    let host = `http://localhost:4000/classes/lists`
+    let host = `http://localhost:4000/classes/${classNameInput}/lists`
     axios.get(host, className).then(response => {
+        debugger
         console.log(response)
         let ul = document.querySelector("ul")
         let li = document.createElement("li")
