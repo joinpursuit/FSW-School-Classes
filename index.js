@@ -1,64 +1,106 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded",async()=>{
+
+  
 
 
-   
- 
-let headerspan = document.querySelector(".headerspan")
-let adlist = document.querySelector("#adlist")
-let evlist = document.querySelector("#evlist")
-let calist = document.querySelector("#calist")
-let melist = document.querySelector("#melist")
+
+
+//       const optionChoice = async()=>{
+//             axios.get(`http://localhost:3000/query/specialsearch`).then(res=>{
+//                   let allInfo = res.data
+//             allInfo.forEach((el)=>{
+//                   let option = document.createElement("option")
+//                   option.value = "test"
+//                   option.innerText = el.name
+//                   console.log(option.value)
+//                   let select = document.querySelector("select")
+//                   select.appendChild(option)
+//                })
+//           })
+               
+//       }
+// optionChoice()
+
+
+
+
+
+
+
 
 let findname = document.querySelector("#findname")
-findname.addEventListener("click",()=>{ 
+findname.addEventListener("click",async()=>{
       axios.get(`http://localhost:3000/query/search/${nameinput.value}`).then(res=>{
-            let allinfo = res.data 
-            let studentinfo = Object.values(allinfo)
-           console.log(studentinfo)
-      if (studentinfo.length < 3){
-            fail.innerText = "No Match Found"
-      }else{   
+            console.log(res.data)
+            let studentInfo = res.data
             let name = document.querySelector("#name")
-            name.innerText = "Name: " + studentinfo[2]
-            let enrollment = document.querySelector("#enrollment")
-            enrollment.innerText = "Enrollment Date: 4/9/2000"
-            let gpa = document.querySelector("#gpa")
-            gpa.innerText = "GPA: " + studentinfo[4]
-            let city = document.querySelector("#city")
-            city.innerText = "City: " + studentinfo[3]
+            name.innerText = studentInfo.name
             let dob = document.querySelector("#dob")
-            dob.innerText = "dob: " + studentinfo[5]
-          }            
-     }) 
-}) 
+            dob.innerText = studentInfo.dob
+            let city = document.querySelector("#city")
+            city.innerText = studentInfo.city
+            let gpa = document.querySelector("#gpa")
+            gpa.innerText = studentInfo.gpa
+      })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+      
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
+
 
 //---------
 
 
-let findsub = document.querySelector("#findsub")
-findsub.addEventListener("click",()=>{ 
-      let subjectin = document.querySelector("#subjectin")  
-      axios.get(`http://localhost:3000/query/subject/${subjectin.value}`).then(res=>{
-            let infosub = res.data 
-            console.log(infosub)
-            let subject = document.querySelector("#subject")
-            subject.innerText = infosub.class + " class Roster: " + infosub.roster
-                 
-     }) 
-}) 
 
-//--------------
 
-let postinfo = document.querySelector("#postinfo")
-postinfo.addEventListener("submit",()=>{ 
-        axios.post(`http://localhost:3000/query/input/`, {name: namepost.value,age:agepost.value, city:citypost.value}) .then(res=>{
-            let infosub = res.data 
-            console.log(infosub)
-            let subject = document.querySelector("#subject")
-            subject.innerText = infosub.class + " class Roster: " + infosub.roster
-                 
-     }) 
-}) 
 
 
 
