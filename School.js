@@ -137,14 +137,25 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    let arrayStudent = this.classes[className].students.filter(student => {
+      
+      if (failing === "true" && city !== "") {
+        if (city === student.city)
+        if (student.grade < 70)
+        return arrayStudent
+      }
+      else if (failing === "true") {
+        if (student.grade < 70)
+          return arrayStudent
+
+      }
+      else if (city === student.city) {
+        return arrayStudent
+      }
+    })
+
+    return arrayStudent
   }
-
 }
-
-// let c1 = new Class("a","k")
-// console.log(c1)
-
-// console.log(this.classes["a"]=c1)
-
 
 module.exports = School;

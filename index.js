@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let addClassForm = document.querySelector("#addClass");
   let studentForm = document.querySelector("#studentForm");
   let className = document.querySelector("#studentClass");
-  let addList = document.querySelector("listBtn");
+  let addList = document.querySelector("#listBtn");
   let classNameSelected ="";
  
 
@@ -108,13 +108,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
   })
   addList.addEventListener("click", async(e)=>{
+    //addList.addEventListener("click", async()=>{
     e.preventDefault();
     let responseList = document.querySelector('#ListResponse');
     let selectedClass= document.querySelector('#searchClass').value
     let city = document.querySelector('#searchCity').value
     let checkBox = document.querySelector('#failingStudents').checked
+    //debugger
     let res = await axios.get(`http://localhost:3000/class/${selectedClass}/students?city=${city}&failing=${checkBox}`)
-    responseList.innerText = JSON.stringify(res.data)
+    //let res = await axios.get(`http://localhost:3000/class/${selectedClass}`)
+    debugger
+    responseList.innerText = JSON.stringify(res.data.students)
   
 })
 
