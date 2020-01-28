@@ -32,7 +32,6 @@ class School {
     // Your code here
       student = new Student(name, age, city, grade)
       this.classes[className][students].push(student)
-      
   }
 
 
