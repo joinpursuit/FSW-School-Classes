@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="schoolIndex.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="schoolData.css">
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
+    <title>NRS</title>
+</head>
+<body>
+    <div>
+        <h1>Nilber Remon Elementary</h1>
+        <h2>School for the Awkwardly-Gifted</h2>
+    </div>
+    <div>
+        <form id="addClassForm">
+            <h2>Sanction a Class @NRES</h2>
+            <input class="input" type="text" id="className" placeholder="Class Name">
+            <input class="input" type="text" id="teacherName" placeholder="Teacher Name">
+            <input class="submit" type="submit" id="submitClass" value="Add">
+        </form>
+    </div>
+    <div>
+        <form id="enrollStudentForm">
+            <h2>Enroll a Student @NRES</h2>
+            <input class="input" type="text" id="studentClass" placeholder="Class">
+            <input class="input" type="text" id="studentName" placeholder="Name">
+            <input class="input" type="text" id="studentAge" placeholder="Age">
+            <input class="input" type="text" id="studentCity" placeholder="City">
+            <input class="input" type="text" id="studentGrade" placeholder="Grade">
+            <input class="submit" type="submit" id="submitStudent" value="Add">
+        </form>
+    </div>
+    <div>
+        <form id="filterForm">
+            <h2>List NRES Students By Filters</h2>
+            <input class="input" type="text" id="filterClass" placeholder="Class">
+            <input class="input" type="text" id="filterCity" placeholder="City (Optional)">
+            <input type="checkbox" id="failStudents"> Failures (Optional)
+            <input class="submit" type="submit" id="submitFilter" value="Filter">
+            <ul></ul>
+        </form>
+    </div>
+</body>
+</html>
