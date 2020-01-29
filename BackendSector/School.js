@@ -68,4 +68,7 @@ class School {
 
 }
 
+
+let timestamp = new Date().toString()
+
 module.exports = School;
