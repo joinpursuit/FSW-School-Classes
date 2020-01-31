@@ -30,12 +30,7 @@ classAdd.appendChild(p)
     }catch(error){
 console.log(error)
     }
-    // console.log(classInfo)
-    // axios.post(host, classInfo).then(response => {
-    //     console.log(response)
-    //     p.innerText = response.data.message
-    //     classAdd.appendChild(p)
-    // })
+
 
 }
 const enrollStudent = async (event) => {
@@ -74,12 +69,6 @@ const enrollStudent = async (event) => {
 console.log(error)
     }
 
-    // console.log(studentInfo)
-    // axios.post(host, studentInfo).then(response => {
-    //     console.log(studentInfo)
-    //     p.innerText = response.data.message
-    //     studentEnroll.appendChild(p)
-    // })
 
 }
 
@@ -89,13 +78,15 @@ const getStudentsByClass = async (event) => {
     let classNameInput = className.value;
     className.value = ""
     let host = `http://localhost:4000/classes/${classNameInput}/lists`
-    axios.get(host, className).then(response => {
-        debugger
-        console.log(response)
-        let ul = document.querySelector("ul")
-        let li = document.createElement("li")
-        li.innerText = response.data.message
-        ul.appendChild(li)
-    })
+    try{
+        let response = await axios.post(host, className)
+            let ul = document.querySelector("ul")
+            let li = document.createElement("li")
+            li.innerText = response.data.message
+            ul.appendChild(li)
 
+    }catch(error){
+        console.log(error)
+    }
 }
+
