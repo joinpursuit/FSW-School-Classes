@@ -7,4 +7,8 @@ class Student {
   }
 }
 
+// let danielle = new Student("danielle", 21, "Queens", "sophmore");
+// console.log(danielle);
 module.exports = Student;
+
+

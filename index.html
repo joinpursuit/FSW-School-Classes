@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./master.css">
+    <title> Storing School Data </title>
+</head>
+<body>
+    <div>
+
+        <h2> To Add Class Fill Out Below </h2>
+    <div class="formInfo" id="addClassDiv">
+        <form class="inputForm" id="form1AddClass" action="submit">
+           Class Name <input type="text" name="" id="className">
+           Teacher <input type="text" id="classTeacher">
+        </form>
+    </div>
+
+    <h2> To Add Student Fill Out Below</h2>
+    <div class="formInfo" id="addStudentDiv">
+        <form class="inputForm" id="form2AddStudent" action="submit"> 
+           Class <input type="text" name="" id="class">
+           Name <input type="text" name="" id="class">
+           Age <input type="text" name="" id="class">
+           City <input type="text" name="" id="class">
+           Grade <input type="text" name="" id="class"> 
+        </form>
+    </div id="">
+
+    <h2> To List All Students Fill Out Below (Use checkbox to display failing students)</h2>
+    <div class="formInfo" id="listStudentsDiv">
+        <form class="inputForm" id="form3ListStudent" action="">
+           Class <input type="text" name="" id="listStudentsClass">
+           City (optional) <input type="text" name="" id="studentCity">
+           Show Failing Students <input type="checkbox" name="" id="showFailingStudents">
+        </form>
+
+        <h3> School Enrollment </h3>
+    </div>
+        <button type="submit" id='showAllClasses'> CLick Me </button>
+        <div id="description">
+    </div>
+
+</div>
+</body>
+</html>
