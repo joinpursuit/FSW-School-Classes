@@ -13,6 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    document.addEventListener("DOMContentLoaded", () => {
+        let enrollStudent = document.querySelector("#course")
+        try {
+            let res = await axios.get(`http://localhost:3000/student`)
+        } catch (error) {
+            
+        }
+    })
+
     
 
 

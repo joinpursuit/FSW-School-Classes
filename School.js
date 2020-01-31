@@ -10,20 +10,50 @@ class School {
         students: [
           {name: "Jhenya",
            age: 15,
-           city: "Brooklyn",
-           grade: 98     
-        }
+           city: "Syracuse",
+           grade: 98,     
+          },
+          {name: "Jennifer",
+          age: 14,
+          city: "Oswego",
+          grade: 53
+          }
         ]
       },
       
       English: {
       courseName: "English",
-      teacher: "Mr. Griffin"
+      teacher: "Mr. Griffin",
+      students: [
+        {name: "Carol",
+        age: 16,
+        city: "Ithaca",
+        grade: 99
+        },
+        {name: "Anna",
+        age: 15,
+        city: "New York",
+        grade: 60
+        }
+      ]
       },
       
       PE: {
         courseName: "PE",
-        teacher: "Ms. Baptista"
+        teacher: "Ms. Baptista",
+        students: [
+        {name: "Carol",
+        age: 17,
+        city: "Buffalo",
+        grade: 40
+        },
+        {name: "Anna",
+        age: 15,
+        city: "Elmira",
+        grade: 90
+        }
+        ]
+        
       } 
     } 
   }
