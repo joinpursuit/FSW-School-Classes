@@ -9,36 +9,37 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let className = document.querySelector("#studentClass");
   let addList = document.querySelector("#listBtn");
   let classNameSelected ="";
+  let pAllClasses = document.createElement("p")
+  allClassesDiv.appendChild(pAllClasses)
  
 
   displayButton.addEventListener("click", async()=>{
+    pAllClasses.innerText = ""
     try {
       let res = await axios.get("http://localhost:3000/class")
-      let p = document.createElement("p")
-      p.innerText = JSON.stringify(res.data.allClasses)
-      allClassesDiv.appendChild(p)
+      pAllClasses.innerText = JSON.stringify(res.data.allClasses)
 
     } catch(err){
       console.log(err); 
     }
   })
 
-  let p = document.querySelector("#pClass")
-  addClassForm.appendChild(p)
+  let pClass = document.querySelector("#pClass")
+  addClassForm.appendChild(pClass)
 
   addClassForm.addEventListener("submit",async(e)=>{
     e.preventDefault();
     let classNameV = classNameInput.value;
     let teacher = teacherInput.value;
     if(!classNameV || !teacher){
-      p.innerText ="Please fill out all the information"
+      pClass.innerText ="Please fill out all the information"
       
     } else {
       try {
         let res = await axios.post("http://localhost:3000/class", {name: classNameV, teacher: teacher })
         
         if(res.data.newClass){
-          p.innerText = JSON.stringify(`Created a new class: name: ${res.data.newClass }, teacher: ${res.data.teacher }`)
+          pClass.innerText = JSON.stringify(`Created a new class: name: ${res.data.newClass }, teacher: ${res.data.teacher }`)
           let li = document.createElement("li")
           debugger
           li.innerText = res.data.newClass
@@ -47,10 +48,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
           option.innerText = res.data.newClass
           className.appendChild(option)
         }else{
-          p.innerText = res.data.error
+          pClass.innerText = res.data.error
         }
       } catch(err){
-        p.innerText = `Please fill out all the information or Class already exists `
+        pClass.innerText = `Please fill out all the information or Class already exists `
         
       }
     }
@@ -112,7 +113,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     e.preventDefault();
     let responseList = document.querySelector('#ListResponse');
     let selectedClass= document.querySelector('#searchClass').value
-    let city = document.querySelector('#searchCity').value
+    let cityInput = document.querySelector('#searchCity') ;
+    let city = cityInput.value;
     let checkBox = document.querySelector('#failingStudents').checked
     //debugger
     let res = await axios.get(`http://localhost:3000/class/${selectedClass}/students?city=${city}&failing=${checkBox}`)

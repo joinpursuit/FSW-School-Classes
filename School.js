@@ -138,19 +138,19 @@ class School {
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
     let arrayStudent = this.classes[className].students.filter(student => {
-      
+   console.log(this.classes[className])
       if (failing === "true" && city !== "") {
         if (city === student.city)
         if (student.grade < 70)
-        return arrayStudent
+        return student
       }
       else if (failing === "true") {
         if (student.grade < 70)
-          return arrayStudent
+          return student
 
       }
-      else if (city === student.city) {
-        return arrayStudent
+      else if (city == student.city) {
+        return student
       }
     })
 

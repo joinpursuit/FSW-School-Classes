@@ -79,6 +79,12 @@ const listStudentR = (req, res, next) =>{
       timestamp: timestamp()
     })
     return
+  } else if (req.query.failing == "true" || req.query.city) {
+    res.json({
+      students : mySchool.getStudentsByClassWithFilter(
+        req.params.className, req.query.failing, req.query.city
+      )
+    })
   }
 
   next()
@@ -88,7 +94,7 @@ const listStudentR = (req, res, next) =>{
 app.get("/class", showAllClasses);
 app.post("/class", checkIfClassExists, addNewClass)
 app.post("/class/:className", enrollNewStudent)
-app.get("/class/:className/Students", listStudentR)
+app.get("/class/:className/students", listStudentR)
 
 app.listen(port,()=>{
   console.log("listening to port " + port)
