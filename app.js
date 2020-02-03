@@ -10,34 +10,35 @@ app.use(bodypaser.json());
 const School = require("./School.js");
 const Student = require("./Student.js");
 
-
 let mySchool = new School();
 
 app.get("/", (req, res)=>{
-    res.json(mySchool);
+   let {name, teacher} = req.body;
+
+    if(!mySchool.classes.hasOwnProperty(name) && name !== "" && teacher !== ""){
+        mySchool.addClass(name, teacher);
+        res.json({
+            class: { name: name, teacher: teacher, students:[]},
+            message: "Created a new class",
+            timestamp: new Date().toString()
+          });
+    }else{
+        res.json({
+            error: "Either some information is missing or the class already exist",
+            timestamp: new Date().toString()
+              
+        });
+    }
 })
 
 app.post("/class", (req, res)=>{
-    if(!req.body.name || req.body.name === mySchool.classes){
-        res.json(
-            {"error": "Please fill out all the information or Class already exists",
-            "timestamp": "lol"
-        })
-    }else{
+
         let newClass = mySchool.addClass(req.body.name, req.body.teacher);
         res.json(newClass);
-    }
-    console.log(mySchool.classes)
+        console.log(newClass)
 
 });
-app.post("/class/:className/enroll", (req, res)=>{
-    let newStudent = mySchool.
-    enrollStudent(req.params.className, {name: req.body.name, age: Number(req.body.age), city: req.body.city, grade: Number(req.body.grade)});
-    res.json(newStudent)
-});
-app.post("/class/:className/enroll", (req, res)=>{
 
-})
 
 
 app.listen(port,() =>{
