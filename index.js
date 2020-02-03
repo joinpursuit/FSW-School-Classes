@@ -24,7 +24,6 @@ const addClass = async (event) => {
         teacher: teacherInput
     }
     try{
-          // console.log(classInfo)
         let response = await axios.post(host, classInfo)
         console.log(response)
 p.innerText = response.data.message
@@ -32,12 +31,6 @@ classAdd.appendChild(p)
     }catch(error){
 console.log(error)
     }
-    // console.log(classInfo)
-    // axios.post(host, classInfo).then(response => {
-    //     console.log(response)
-    //     p.innerText = response.data.message
-    //     classAdd.appendChild(p)
-    // })
 
 }
 const enrollStudent = async (event) => {
@@ -85,15 +78,14 @@ const getStudentsByClass = async (event) => {
     let className = document.querySelector("#classList")
     let classNameInput = className.value;
     className.value = ""
-    let check = document.querySelector("#fail")
+    let failing = document.querySelector("#fail")
     let host = `http://localhost:4000/classes/${classNameInput}/lists`
     let response = await axios.post(host, className)
     let ul = document.querySelector("ul")
     let li = document.createElement("li")
     
-    
     try{
-        if(check.checked === false){
+        if(failing.checked === false){
             let result = axios.get(response)
             let students = classNameInput
             for(let el of result.data){

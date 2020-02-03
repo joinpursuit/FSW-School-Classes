@@ -12,10 +12,11 @@ classes.get("/", (request, response) => {
 classes.post("/", (request, response) => {
     let classes = request.body.classes;
     let teacher = request.body.teacher;
-    if(classes.length===0|| teacher.length===0){
+    if(classes === classes && teacher===teacher){
+    }else if(classes.length===0|| teacher.length===0){
         response.json({message: "Please fill out all the information or Class already exists"})
     }else{
-    mySchool.addClass(classes, teacher,)
+    mySchool.addClass(classes, teacher)
     response.json({
         "classes": { "nameOfClass": classes, "teacher": teacher ,"students": []},
         "message": `Created a ${classes} class taught by ${teacher}`,
@@ -33,9 +34,9 @@ classes.post("/enroll", (request, response) => {
     if(student.length=== 0|| age.length === 0|| city.length=== 0|| grade.length === 0){
         response.json({message: "Please fill out all the information for the student"})
     }else{
-    mySchool.enrollStudent(classes, student, age, city, grade)
+    mySchool.enrollStudent(student, age, city, grade)
     response.json({
-        "student": { 'student': new Student() },
+        "student": { 'student': new Student(student, age, city, grade) },
         "class": { 'classes': classes },
         "message": ` ${student}, you have been enrolled in ${classes} Thank You!`,
         "timestamp": new Date()
