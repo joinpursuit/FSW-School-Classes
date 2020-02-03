@@ -58,13 +58,23 @@ app.post("/class/:className/enroll", (req, res)=>{
 });
 
 app.get("/class/:className/students", (req, res)=>{
+
     try{
-        let allStudents = mySchool.getStudentsByClass(req.params.className);
-        res.status(200).json({
-            students: allStudents,
-            message: "Retrived Students",
-            timestamp: new Date().toString()
+        if(req.query.failing < 70 || req.query.city){
+            let fallingCities = mySchool.getStudentsByClassWithFilter(req.params.className, req.query.failing, req.query.city);
+            res.status(200).json({
+                students: fallingCities,
+                message: "this is the list of failing students and cities",
+                timestamp: new Date().toString()
+            })
+        }else{
+            let allStudents = mySchool.getStudentsByClass(req.params.className);
+            res.status(200).json({
+                students: allStudents,
+                message: "Retrived Students",
+                timestamp: new Date().toString()
         })
+        }
     }catch(err){
 
         res.status(200).json({
