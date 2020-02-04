@@ -1,5 +1,6 @@
 
 let formOne = document.querySelector("#addClass");
+let formTwo = document.querySelector("#addStudent")
 let h3 = document.querySelector("#addClassHead")
 formOne.addEventListener("submit", async (e)=>{
     e.preventDefault();
@@ -14,10 +15,27 @@ formOne.addEventListener("submit", async (e)=>{
         debugger
         className.value = "";
         teacherClass.value = "";
-        h3.innerText = res.data.message;
+        h3.innerText = res.data.class.name + res.data.class.teacher
         
     }catch(err){
-        h3.innerText = err.responce.data.message;
         debugger;
+        h3.innerText = ""
+        h3.innerText = err.response.data.error + err.response.data.timestamp;
+
     }
+})
+formTwo.addEventListener("submit", async(e)=>{
+    e.preventDefault();
+    let stuClass = document.querySelector("#stuClass");
+    let stuName = document.querySelector("#stuName");
+    let stuAge = document.querySelector("#stuAge");
+    let stuCity = document.querySelector("#stuCity");
+    let stuGrade = document.querySelector("#stuGrade");
+
+    try{
+        let res = await axios.
+    }catch(err){
+
+    }
+
 })

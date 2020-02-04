@@ -12,27 +12,65 @@ const Student = require("./Student.js");
 
 let mySchool = new School();
 
-app.post("/class", (req, res)=>{
+const checkClass = (req, res, next) =>{
+    let subject = mySchool.classes[req.body.class];
+    if(!subject){
+        next()
+    }else{
+        res.status(400).json({
+            error:"This class already exists",
+            timestamp: new Date().toString()
+        })
+    }
+}
+
+app.post("/class", checkClass, (req, res)=>{
     try{
-        let subject = new Class(
-            req.body.name,
-            req.body.teacher
-        )
-        let newSubject = mySchool.addClass(subject);
+
+        let newSubject = mySchool.addClass(req.body.class, req.body.teacher);
         res.status(200).json({
             class: newSubject,
             message: "You have created a new class",
             timestamp: new Date().toString()
         })
     }catch(err){
-        res.status(200).json({
+        res.status(400).json({
             error: "Please fill out all the information required",
             timestamp: new Date().toString()
         })
     }
 })
 
-app.post("/class/:className/enroll", (req, res)=>{
+const test = ( req, res, next )=>{
+    console.log("middle Hit")
+    if(req.query.failing < 70 || req.query.city){
+        let fallingCities = mySchool.getStudentsByClassWithFilter(req.params.className, req.query.failing, req.query.city);
+        res.status(200).json({
+            students: fallingCities,
+            message: "this is the list of failing students and cities",
+            timestamp: new Date().toString()
+        });
+    }
+    next();
+}
+
+const checkForStudents = (req, res, next) =>{
+    let verifyStu = mySchool.classes.physics.students;
+    console.log(req.body, req.params)
+    verifyStu.forEach(student =>{
+        if(student.name === req.body.name){
+            res.status(400).json({
+                error:"This student already exists",
+                timestamp: new Date().toString()
+            })
+        }else{
+            next();
+        }
+    })
+}
+
+app.post("/class/:className/enroll", checkForStudents, (req, res)=>{
+
     try{
         let newStudent = new Student (
             req.body.name,
@@ -49,7 +87,7 @@ app.post("/class/:className/enroll", (req, res)=>{
         })
 
     }catch(err){
-        res.status(200).json({
+        res.status(400).json({
             error: "this class does not exist",
             timestamp: new Date().toString()
         })
@@ -57,34 +95,25 @@ app.post("/class/:className/enroll", (req, res)=>{
 
 });
 
-app.get("/class/:className/students", (req, res)=>{
+app.get("/class/:className/students", test, (req, res)=>{
 
     try{
-        if(req.query.failing < 70 || req.query.city){
-            let fallingCities = mySchool.getStudentsByClassWithFilter(req.params.className, req.query.failing, req.query.city);
-            res.status(200).json({
-                students: fallingCities,
-                message: "this is the list of failing students and cities",
-                timestamp: new Date().toString()
-            })
-        }else{
-            let allStudents = mySchool.getStudentsByClass(req.params.className);
-            res.status(200).json({
+        let allStudents = mySchool.getStudentsByClass(req.params.className);
+        res.status(200).json({
                 students: allStudents,
                 message: "Retrived Students",
                 timestamp: new Date().toString()
         })
-        }
     }catch(err){
 
-        res.status(200).json({
+        res.status(400).json({
             message: "this class does not exist",
-            timestamp: new Date().toString()
+            timestamp: new Date().toString(),
+            test: req.test
         })
 
     }
 })
-
 
 
 app.listen(port,() =>{

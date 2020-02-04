@@ -6,7 +6,9 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {name: "physics",
+                  teacher: "Sosa",
+                  students: [{name:"jon"}]} 
     }
   }
 
