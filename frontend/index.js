@@ -1,7 +1,8 @@
 
 let formOne = document.querySelector("#addClass");
 let formTwo = document.querySelector("#addStudent")
-let h3 = document.querySelector("#addClassHead")
+let h3 = document.querySelector("#addClassHead");
+console.log("hello")
 formOne.addEventListener("submit", async (e)=>{
     e.preventDefault();
     let className = document.querySelector("#className");
@@ -24,7 +25,8 @@ formOne.addEventListener("submit", async (e)=>{
 
     }
 })
-formTwo.addEventListener("submit", async(e)=>{
+
+formTwo.addEventListener("submit", async (e)=>{
     e.preventDefault();
     let stuClass = document.querySelector("#stuClass");
     let stuName = document.querySelector("#stuName");
@@ -33,9 +35,15 @@ formTwo.addEventListener("submit", async(e)=>{
     let stuGrade = document.querySelector("#stuGrade");
 
     try{
-        let res = await axios.
+        let res = await axios.post(`http://localhost:3000/class/${stuClass.value}/enroll`,{
+            name: stuName.value,
+            age: stuAge.value,
+            city: stuCity.value,
+            grade: stuGrade.value
+        })
+        debugger
     }catch(err){
-
+        debugger
     }
 
 })

@@ -70,7 +70,6 @@ const checkForStudents = (req, res, next) =>{
 }
 
 app.post("/class/:className/enroll", checkForStudents, (req, res)=>{
-
     try{
         let newStudent = new Student (
             req.body.name,
