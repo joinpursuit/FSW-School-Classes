@@ -41,7 +41,12 @@ const populateTeacherSelect = async () => {
     let classTeacher = document.querySelector("#classTeacher");
     try {
         let res = await axios.get("http://localhost:3000/teachers");
-        debugger;
+        let teachers = res.data.teachers;
+        teachers.forEach(teacher => {
+            let option = document.createElement("option");
+            option.innerText = `${teacher.first_name} ${teacher.last_name}`;
+            classTeacher.appendChild(option);
+        })
     } catch(err) {
         console.log(err);
     }

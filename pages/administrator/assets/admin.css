@@ -98,6 +98,7 @@ a {
 
 select {
     font-family: abstergoSans;
+    font-size: 15px;
     display: inline-block;
     width: 100%;
     cursor: pointer;
