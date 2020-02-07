@@ -96,6 +96,37 @@ a {
     font-size: 32px;
 }
 
+select {
+    font-family: abstergoSans;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 15px;
+    outline: 0;
+    border: 1px solid #c7c8ca;
+    border-radius: 24px;
+    background: #2d2c2e;
+    color: #c7c8ca;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover,
+select:focus {
+    color: #2d2c2e;
+    background: #c1232b;
+}
+
+select:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 a:hover {
     font-size: 34px;
 }
