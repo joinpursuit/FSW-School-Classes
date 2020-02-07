@@ -45,6 +45,7 @@ const populateTeacherSelect = async () => {
         teachers.forEach(teacher => {
             let option = document.createElement("option");
             option.innerText = `${teacher.first_name} ${teacher.last_name}`;
+            option.value = teacher.id;
             classTeacher.appendChild(option);
         })
     } catch(err) {
@@ -154,7 +155,7 @@ const addClass = async () => {
     // Grab the needed class tags
 
     // Check if either of the inputs are empty
-    if(!className.value || !classTeacher.value) { 
+    if(!className.value || classTeacher.value === "disabled") { 
         // If true then add an error display
         classSection.innerHTML = "";
         let p = document.createElement("p");

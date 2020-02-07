@@ -3,8 +3,7 @@ const {db} = require("./../../db");
 const isClassExisting = async (newClass) => {
     try {
         let {teacher} = newClass;
-        let classes = await db.any('SELECT * FROM classes WHERE class_name=$1 AND teacher=$2', 
-                                   [newClass.name, teacher]);
+        let classes = await db.any('SELECT * FROM classes WHERE class_name=$1 AND teacher=$2', [newClass.name, teacher]);
         
         if(classes.length) {
             return true;
@@ -14,7 +13,6 @@ const isClassExisting = async (newClass) => {
     } catch (err) {
         console.log(err);
     }
-    
 } // End of isClassExisting() function
 
 const addClass = async (req, res) => {
