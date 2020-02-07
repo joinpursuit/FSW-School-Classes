@@ -59,7 +59,7 @@ INSERT INTO students (first_name, last_name, city, age)
 VALUES ('James', 'Eubanks', 'Kansas City', 20),
 ('Isaiah', 'Collazo', 'Brooklyn', 20),
 ('McKenzie', 'Ramos', 'Los Angeles', 22),
-('Jordan', 'Kaplan', 'Raleigh', 21)
+('Jordan', 'Kaplan', 'Raleigh', 21),
 ('Kahoelani', 'Taylor', 'Honolulu', 21);
 
 INSERT INTO teachers (first_name, last_name)
@@ -69,7 +69,7 @@ VALUES ('Adam', 'Sloss'),
 ('Seth', 'Abner'),
 ('Karol', 'Gomez');
 
-INSERT INTO classes (class_name, teacher_id)
+INSERT INTO classes (class_name, teacher)
 VALUES ('Physics', 1),
 ('Calculus', 1),
 ('Metacognitive Approaches to Scientific Inquiry', 3),
@@ -87,4 +87,4 @@ VALUES (1, 2, 99),
 (4, 3, 69),
 (4, 5, 90),
 (5, 1, 95),
-(5, 4, 40)
+(5, 4, 40);
