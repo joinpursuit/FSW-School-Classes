@@ -110,6 +110,7 @@ select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    margin-bottom: 12px;
 }
 
 select::-ms-expand {
