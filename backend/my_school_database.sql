@@ -54,3 +54,37 @@ CREATE TABLE logins (
 
 INSERT INTO admins (first_name, last_name)
 VALUES ('Test', 'Admin');
+
+INSERT INTO students (first_name, last_name, city, age) 
+VALUES ('James', 'Eubanks', 'Kansas City', 20),
+('Isaiah', 'Collazo', 'Brooklyn', 20),
+('McKenzie', 'Ramos', 'Los Angeles', 22),
+('Jordan', 'Kaplan', 'Raleigh', 21)
+('Kahoelani', 'Taylor', 'Honolulu', 21);
+
+INSERT INTO teachers (first_name, last_name)
+VALUES ('Adam', 'Sloss'),
+('Ian', 'Porter'),
+('Dana', 'Porter'),
+('Seth', 'Abner'),
+('Karol', 'Gomez');
+
+INSERT INTO classes (class_name, teacher_id)
+VALUES ('Physics', 1),
+('Calculus', 1),
+('Metacognitive Approaches to Scientific Inquiry', 3),
+('History', 2),
+('Journalism', 4),
+('Databases and Data Algorithms', 5);
+
+INSERT INTO class_enrollments (class_id, student_id, grade)
+VALUES (1, 2, 99),
+(1, 4, 53),
+(2, 1, 64),
+(2, 2, 87),
+(3, 3, 58),
+(3, 5, 78),
+(4, 3, 69),
+(4, 5, 90),
+(5, 1, 95),
+(5, 4, 40)

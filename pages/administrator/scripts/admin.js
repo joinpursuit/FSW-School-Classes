@@ -7,6 +7,7 @@ const playAudio = () => {
 document.addEventListener("click", playAudio) // End of audio.play() click listener
 
 document.addEventListener("DOMContentLoaded", () => {
+    populateTeacherSelect();
     let studentForm = document.querySelector("#studentForm");
     let teacherForm = document.querySelector("#teacherForm");
     let classForm = document.querySelector("#classForm");
@@ -35,6 +36,16 @@ const postData = async (url, data, callback) => {
         console.log(err);
     }
 } // End of postData() function
+
+const populateTeacherSelect = async () => {
+    let classTeacher = document.querySelector("#classTeacher");
+    try {
+        let res = await axios.get("http://localhost:3000/teachers");
+        debugger;
+    } catch(err) {
+        console.log(err);
+    }
+} // End of populateTeacherSelect() function
 
 const addStudent = () => {
     let studentFirst = document.querySelector("#studentFirst");
