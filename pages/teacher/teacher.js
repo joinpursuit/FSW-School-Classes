@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const fillShowStudents = async () => {
     let res = await axios.get(`http://localhost:3000/teachers/${teacher}/classes`);
-    let students = document.querySelector("#students");
+    
     students.innerHTML = "";
 
     if(res.data.error) {

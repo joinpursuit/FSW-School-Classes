@@ -156,11 +156,11 @@ const login = async (data) => {
         let student = data.user[0].student_id;
         sessionStorage.setItem("ids", JSON.stringify([admin, teacher, student]));
         if(admin) {
-            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/administrator/admin.html";
+            window.location.href = "./pages/administrator/admin.html";
         } else if(teacher) {
-            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/teacher/teacher.html";
+            window.location.href = "./pages/teacher/teacher.html";
         } else if(student) {
-            window.location.pathname = "./Users/isaiah/Desktop/Pursuit/Unit3/Pursuit-Core-Web-Express-Project/pages/student/student.html";
+            window.location.href = "./pages/student/student.html";
         }
         
     }
