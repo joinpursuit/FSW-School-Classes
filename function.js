@@ -11,11 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const showEverything = async () =>{
         try {
-            let show = await axios.get("http://localhost:3000/").then((res)=>{
-                let p = document.createElement("p")
-                p.innerText = res.data
-                debugger
-            })
+            let show = await axios.get("http://localhost:3000/")
+            let p = document.createElement("p")
+            p.innerText = show.data
 
             }catch (error) {
             console.log(err)
@@ -28,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let lsClass = document.querySelector("#lsClass")
             let failing = document.querySelector("#checkbox")
             let city = document.querySelector("#lsCity")
+        
             
             let show = await axios.post(`http://localhost:3000/class/${lsClass.value}/students`,{failing: failing.checked, city: city.value}).then((res)=>{
                 let students = res.data.students
@@ -40,11 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
                
                 let pResult = document.querySelector("#pResult")
+                let divResult = document.querySelector("#divResult")
+                divResult.innerHTML = "";
                 let formGetStudents = document.querySelector("#lstudents")
                if(res.data.message){
                 pResult.innerText = res.data.message
                 // let p = document.querySelector(".stuName")
-                // p.innerText = ""
+                // p.innerHTML = ""
                 students.forEach(stu => {
                     let p = document.createElement("p")
                     p.class = "stuNames"
@@ -120,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let formGetStudents = document.querySelector("#lstudents")
     formGetStudents.addEventListener("submit",(e)=>{
         e.preventDefault()
+        
         getStudent()
     })
     

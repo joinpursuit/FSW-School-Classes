@@ -6,7 +6,7 @@ body{
 }
 #page{
     height: 80%;
-    width: 100%;
+    width: 60%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -20,7 +20,7 @@ body{
 }
 img{
     height: 400px;
-    widows: 100%;;
+    widows: 50px;
     padding-bottom: 50px;
 }
 
