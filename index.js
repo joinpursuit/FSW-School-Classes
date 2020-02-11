@@ -64,6 +64,7 @@ const addStudent = async() =>{
     }
     addStudent()
 
+    
     const listStudent = async() =>{
         try{
             let ul = document.querySelector("#listStudent")
