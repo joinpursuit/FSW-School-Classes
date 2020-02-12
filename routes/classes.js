@@ -26,7 +26,7 @@ classes.post("/add", (request, response) => {
         mySchool.addClass(request.body.class, request.body.teacher)
         response.json({
             status: "ok",
-            message: request.body.class + "was added"
+            message: request.body.class + " was added" 
 
         })
     }catch(error){

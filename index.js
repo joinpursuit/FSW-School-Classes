@@ -4,6 +4,19 @@ let studentEnroll = document.querySelector("#studentEnroll")
 let addStudent = document.querySelector("#addStudent")
 let list = document.querySelector("#list")
 let listStudents = document.querySelector("#listStudents")
+addClass.addEventListener("submit",async (e)=>{
+    e.preventDefault()
+            let classes = document.querySelector("#className")
+            let teacher = document.querySelector("#teacherName")
+            let classesInput = classes.value
+            let teacherInput = teacher.value
+            let p = document.createElement("p")
+            let host = await axios.post(`http://localhost:4000/classes/add`, {teacher: teacherInput, class: classesInput})
+            p.innerText = host.data.message
+            classAdd.appendChild(p)
+            addClass.reset()
+
+})
 // document.addEventListener("DOMContentLoaded", () => {
 //     let addButton = document.querySelector("#addButton")
 //     addButton.addEventListener("click", addClass)
@@ -14,25 +27,16 @@ let listStudents = document.querySelector("#listStudents")
     
 //     const addClass = async (event) => {
 //         event.preventDefault()
-//         let classes = document.querySelector("#className")
-//         let teacher = document.querySelector("#teacherName")
-//         let classesInput = classes.value
-//         let teacherInput = teacher.value
 //         classes.value = ""
 //         teacher.value = ""
-//         let p = document.createElement("p")
 //         let classAdd = document.querySelector("#classAdd")
-//         let host = "http://localhost:4000/classes/add"
+//       
     
-//         let classInfo = {
-//             classes: classesInput,
-//             teacher: teacherInput
-//         }
 //         try{
 //             let response = await axios.post(host, classInfo)
 //             console.log(response)
-//     p.innerText = response.data.message
-//     classAdd.appendChild(p)
+// 
+//   
 //         }catch(error){
 //     console.log(error)
 //         }
