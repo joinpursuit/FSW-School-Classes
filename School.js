@@ -5,7 +5,8 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-        physics: {name:"physics", teacher:"Flynn"} 
+      //   physics: {} 
+
     }
   }
 
@@ -30,6 +31,9 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let newStudent = new Student(student.name, student.age, student.city, student.grade);
+    this.classes[name].students.push(newStudent);
+
   }
 
 
@@ -42,7 +46,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students
   }
 
 
@@ -63,7 +67,17 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    let students = this.classes[className].students;
+    if (failing === true) {
+      return students.filter((el) => {
+        return (el.grade < 65)
+      });
+    } else if (failing) {
+      return students.failing((el) => {
+        return el.grade < 65
+      })
+    }
+
   }
 
 }
