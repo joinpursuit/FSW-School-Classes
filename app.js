@@ -15,6 +15,24 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.post("/class", (req, res) => {
+    let addClass = req.body
+    console.log(addClass)
+    if(mySchool.classes.includes(req.body)) {
+        res.json({
+            error: "Please fill out all the information or Class already exists",
+            timestamp: "YYYY, MM/DD HH:MM:SS"
+        })
+    }else {
+        mySchool.classes.push(req.body)
+        res.json({
+            addClass,
+            message: "Created a new class",
+            timestamp: "YYYY, MM/DD HH:MM:SS"
+        })
+    }
+
+})
 app.post('/class/:name/:teacher', (req, res) => {
     let keys = Object.keys(mySchool.classes)
 

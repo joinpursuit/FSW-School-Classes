@@ -1,22 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+  const School = require("../School")
+
   let addClassForm = document.querySelector("#addClass")
   let addStudentForm = document.querySelector("#addStudent")
   let listStudentsForm = document.querySelector("#listStudents")
   let listStudentsInput = document.querySelector("#listStudentsInput") 
-  let classNameInput = document.querySelector("#classNameInput") 
-  let teacherNameInput = document.querySelector("#teacherNameInput") 
-
+  
   addClassForm.addEventListener("submit", async (e) => {
     e.preventDefault()
-    let inputValue1 = classNameInput.value
-    let inputValue2 = teacherNameInput.value
-    let url = `http://localhost:3000/class/${inputValue1}/${inputValue2}`
-    axios.post(url).then(res => {
-        console.log(res)
-        debugger
-    })
+    let classNameInput = document.querySelector("#classNameInput") 
+    let teacherNameInput = document.querySelector("#teacherNameInput") 
     
-    
+    await axios.post("http://localhost:3000/class/", School.addClass(classNameInput.value, teacherNameInput.value))  
   })
 
  addStudentForm.addEventListener("submit", (e) => {
@@ -34,6 +28,4 @@ document.addEventListener("DOMContentLoaded", () => {
         li.innerHTML = ""
     })
     // debugger
-})
-
 })
