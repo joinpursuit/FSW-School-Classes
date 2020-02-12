@@ -3,9 +3,7 @@ const Student = require('./Student')
 
 class School {
   constructor() {
-    this.classes = {
-      
-    }
+    this.classes = []
   }
 
   /**
