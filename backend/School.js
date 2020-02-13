@@ -1,10 +1,9 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('../backend/Class');
+const Student = require('../backend/Student')
 
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
         physics: {
           name: "Physics", 
           teacher: "Jon A", 
@@ -28,10 +27,7 @@ class School {
 
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
-    newClass[name] = name; 
-    newClass[teacher] = teacher;
-    return newClass
+    newClass.name = name;
   }
 
   /**
@@ -41,6 +37,7 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
+
   enrollStudent(className, student) {
     student = new Student(student.name, student.age, student.city, student.grade)
     this.classes[className]["students"].push(student)
@@ -77,25 +74,7 @@ class School {
 
 
   getStudentsByClassWithFilter(className, failing, city) {
-    let students = Object.values(this.classes[className]["students"])
-    students.forEach((student) => {
-      this.isFailing(student)
-      if (failing === "yes" && student["failing"] === true && student["city"] == city) {
-        return `This is a failing student from ${city}: ${student}`
-      } else if (student["city"] === city) {
-        return student
-      } else if (student["failing"] === true) {
-        return student
-      }
-    }) 
-  }
-
-  isFailing(student) {
-    student["failing"] = undefined
-    if (student["grade"] < 70) {
-      student["failing"] = true;
-    }
-    return student
+    
   }
 }
 
@@ -106,4 +85,4 @@ let school = new School()
 // // console.log(testSchool.enrollStudent("Physics", marvin))
 
 
-module.exports = school;
+module.exports = School;

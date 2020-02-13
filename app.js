@@ -3,32 +3,27 @@ const cors =  require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const port = 3000;
-const school = require("./School.js")
+const School = require("./backend/School");
 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.use(cors())
+let mySchool = new School();
 
-app.get("/", (req, res) => {
-    res.send(school.classes)
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(cors());
+
+app.post("/class", (req, res, next) => {
+     res.json("Added a class!")
+});
+
+app.post("/class/:className/enroll", (req, res, next) => {
+    res.json("enrolled a new student")
 })
-app.post("/class/:className/addClass", (req, res) => {
-    res.send(req.body)
+
+app.get("/class/:className/students", (req, res, next) => {
+    res.json("got all students for a class!")
 })
-
-// app.get("/classes/:className", (req, res) => {
-//     res.json(school.getStudentsByClass(req.params.className))
-// })
-
-// app.post("/classes/enroll/:className", (req, res) => {
-//     console.log(req.body, req.params.className)
-//     res.json(school.enrollStudent(req.params.student, req.params.className))
-// })
-
-// app.get("/classes/filter/:className", (req, res) => {
-// })
 
 
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`)
-})
+});
