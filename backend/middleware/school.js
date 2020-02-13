@@ -1,10 +1,13 @@
 let school = require("../db/school")
 
 const addNewClass = (req,res)=>{
+    
     let name = req.body.name
     let teacher = req.body.teacher
-    if(!mySchool.classes[name]){
-        let newClass = mySchool.addClass(name, teacher)
+    console.log(name, teacher, school)
+    if(!school.classes[name]){
+
+        let newClass = school.addClass(name, teacher)
         res.json({
             class: newClass,
             message:"Class Created"

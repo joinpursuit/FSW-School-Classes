@@ -1,4 +1,8 @@
-const student = require("./student")
+const Student = require("./student");
+const Class = require("./Class")
+
+
+
 
 class School {
   constructor() {
@@ -19,7 +23,7 @@ class School {
     let newStudent = new Student(student.className,student.name, student.city, student.age, student.grade)
     //console.log(className)
     this.classes[className].students.push(newStudent)
-    
+    return newStudent
 
   }
 
