@@ -32,4 +32,17 @@ const getAllClass = (req, res, next) =>{
     }
 }
 
-module.exports = {addNewClass, getAllClass}
+
+const addStudent = (req, res, next) =>{
+    try{
+        let newStudent = school.enrollStudent(req.body);
+        res.json({
+            status:"succeess",
+            message:"Student was added",
+            body: newStudent
+        })
+    }catch(err){
+        next(err)
+    }
+}
+module.exports = {addNewClass, getAllClass, addStudent}

@@ -3,7 +3,7 @@ const cors = require("cors")
 const app = express()
 const port = 7000
 const bodyParser = require("body-parser")
-const {getAllClass, addNewClass} = require("./backend/middleware/school")
+const {getAllClass, addNewClass, addStudent} = require("./backend/middleware/school")
 
 
 app.use(bodyParser.urlencoded({extended:false}))
@@ -14,6 +14,7 @@ app.use(cors())
 
 app.get('/class', getAllClass);
 app.post('/class',addNewClass);
+app.post('/class/:className/enroll',addStudent)
 
 
 
