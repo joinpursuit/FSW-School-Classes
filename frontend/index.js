@@ -8,10 +8,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const updateClassList = async (select) =>{
         select.innerHTML = ""
+        let selectOption = document.createElement("option")
+        selectOption.innerText = "Select a class"
+        selectOption.disabled = true
+        selectOption.selected = true
+        select.appendChild(selectOption)
         try{
         res = await axios.get("http://localhost:3000/school/")
-        
-        let classList = res.data.mySchool.classes
+        debugger
+        let classList = res.data.classes
             for(key in classList){
                 let option = document.createElement("option")
                 option.innerText = classList[key]["name"]
@@ -31,7 +36,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         let newClassTeacher = addClass.newClassTeacher.value
         let newClassInfo = {name:newClassName,teacher:newClassTeacher}
         try{
-            res = await axios.post("http://localhost:3000/school/classes",newClassInfo)
+            res = await axios.post("http://localhost:3000/school/class",newClassInfo)
         
             if(res.data.status === "failure"){
                 alert("Class already exists")

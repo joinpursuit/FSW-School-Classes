@@ -1,6 +1,13 @@
 let school = require("../db/db")
 
 
+const getAllClasses = (req,res)=>{
+    res.json({
+        status: "sucess",
+        classes: school.classes,
+        timestamp: Date(Date.now()).toString()
+    })
+}
 const addNewClass = (req,res) =>{
     let newClassName = req.body["name"]
     let newClassTeacher = req.body["teacher"]
@@ -70,4 +77,4 @@ const addNewStudent = (req, res) =>{
 
 
 
-module.exports = {addNewClass,addNewStudent};
+module.exports = {addNewClass,addNewStudent,getAllClasses};

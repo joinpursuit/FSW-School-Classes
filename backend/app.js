@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser")
 const port = 3000;
 const app = express();
-const {addNewClass,addNewStudent} = require( "../backend/Queries/middlewear")
+const {addNewClass,addNewStudent,getAllClasses} = require( "../backend/Queries/middlewear")
 
 
 
@@ -18,6 +18,7 @@ app.listen(port, () => {
 
 
 
+app.get("/school",getAllClasses)
 app.post("/school/class", addNewClass)
 app.post("/school/:className/enroll",addNewStudent)
 
@@ -41,6 +42,3 @@ app.post("/school/:className/enroll",addNewStudent)
 //         timestamp: Date(Date.now()).toString()})
 // })
 
-// app.get("/school",(req,res) =>{
-//     res.json({mySchool})
-// })
