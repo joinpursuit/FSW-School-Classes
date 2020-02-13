@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     let selectClass = document.querySelector("#addStudentClass")
     let selectClassStudentList = document.querySelector("#listClass")
+
     const updateClassList = async (select) =>{
         select.innerHTML = ""
         try{
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         let newClassInfo = {name:newClassName,teacher:newClassTeacher}
         try{
             res = await axios.post("http://localhost:3000/school/classes",newClassInfo)
-            debugger 
+        
             if(res.data.status === "failure"){
                 alert("Class already exists")
                 updateClassList(selectClass)
@@ -55,22 +56,38 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         let newStudent = {name:addStudent.newStudentName.value, city:addStudent.newStudentCity.value, age:addStudent.newStudentAge.value, grade:addStudent.newStudentGrade.value}
         let classEnroll = addStudent.addStudentClass.value
-        debugger
+        
         try{
             res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent)
-            if(res.data.status !== 200){
+            if(res.status !== 200){
                 alert("Student Enrollment failed")
+                addStudent.reset()
             }
         } catch(err){
             console.log(err)
         }
     })
 
-    studentList.addEventListener("submit",(event)=>{
+    studentList.addEventListener("submit", async (event)=>{
         event.preventDefault()
-        let showFail = studentList.failingStudents
-        let showCity = studentList.listCity
-        // let showFailing = document.querySelector("#failingStudents")
+        let results = document.querySelector("#studentListResults")
+        let showFail = studentList.failingStudents.checked
+        let showCity = studentList.listCity.value
         debugger
+        let className = studentList.newClassName.value
+
+        if(showCity===""){
+            showCity = "all"
+        }
+
+        debugger
+        try{
+            res = await axios.post(`http://localhost:3000/class/${className}/students/?failing=${showFail}&city=${showCity}`)
+            debugger
+            
+        } catch(err){
+            console.log(err)
+        }
+        
     })
 })
