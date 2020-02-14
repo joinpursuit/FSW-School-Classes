@@ -6,9 +6,11 @@ const Class = require("./Class")
 
 class School {
   constructor() {
-    this.classes = [
+    this.classes ={
+      
+    }
    
-    ]
+    
   }
 
 
@@ -19,12 +21,14 @@ class School {
   }
 
 
-  enrollStudent(student) {
-    let newStudent = new Student(student.name, student.city, student.age, student.grade)
-    //console.log(className)
-    this.classes.push(newStudent)
-    return newStudent
-
+  enrollStudent(className, student) {
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    if(this.classes[className]){
+      let enroll = this.classes[className]
+      enroll.students.push(newStudent)
+    }
+    let allStudents = this.classes[className]["students"]
+    allStudents.push(newStudent)
   }
 
 

@@ -35,11 +35,14 @@ const getAllClass = (req, res, next) =>{
 
 const addStudent = (req, res, next) =>{
     try{
-        let newStudent = school.enrollStudent(req.body);
+        let newStudent = req.body
+        let classRegistration = req.params["className"]
+        school.enrollStudent(classRegistration, newStudent)
         res.json({
-            status:"succeess",
+            status: newStudent,
             message:"Student was added",
-            body: newStudent
+            body: classRegistration,
+            
         })
     }catch(err){
         next(err)
