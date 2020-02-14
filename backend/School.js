@@ -12,22 +12,13 @@ class School {
     this.classes[name] = newClass;
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
-
   enrollStudent(className, student) {
+    let newStudent = new Student(student.name, student.city, student.age, student.grade)
     if (this.classes.hasOwnProperty(className)) {
-      this.classes[className].students.push(newStudent)
+      this.classes.hasOwnProperty[className].students.push(newStudent)
     }
-    // return newStudent; 
+    return newStudent; 
   }
-
-
 
   /**
    * Get all students enrolled in a class
@@ -36,7 +27,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    return this.classes[className].students
+    return this.classes[className].students;
   }
 
 

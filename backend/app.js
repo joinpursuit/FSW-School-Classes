@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json());
 app.use(time.init)
 
-let newSchool = new School();
+let mSchool = new School();
 
 app.get("/", (req,res,next) => {
     res.json("GET request on app.js")
@@ -24,10 +24,10 @@ app.post("/", (req,res,next) => {
 
 app.post('/class/', (req, res, next) => {
     try {
-        let addClass = newSchool.addClass(req.body.name, req.body.teacher);
+        let addClass = mySchool.addClass(req.body.name, req.body.teacher);
         res.json({
             status: "success",
-            message: "Add Class",
+            message: "Created a new class",
             name: req.body.name,
             teacher: req.body.teacher,
             addClass
@@ -39,10 +39,10 @@ app.post('/class/', (req, res, next) => {
 
 app.post('/class/:className/enroll', (req,res,next) => {
     try{
-        let newStudent = newSchool.enrollStudent(req.params.className, req.body);
+        let newStudent = mySchool.enrollStudent(req.params.className, req.body);
         res.json({
             status: "success",
-            message: "Enroll Student",
+            message: "Enrolled Student",
             className: req.params.className,
             student: {name: req.body.name, age: req.body.age, city: req.body.city, grade: req.body.grade},
             newStudent
@@ -51,23 +51,21 @@ app.post('/class/:className/enroll', (req,res,next) => {
         next(err)
     }
 })
-// app.post("/class", (req,res) => {
-//     mySchool.addClass(req.body.classname, req.body.teacher)
-//     console.log(req.body)
-//     res.json({ 
-//         "class": { 
-//             "name": req.body.classname, 
-//             "teacher": req.body.teacher, 
-//             "students": []
-//         },
-//         "message": "Created a new class",
-//         "timestamp": Date.now()
-//       })
-// })
 
-// app.post("/class/:classname/enroll", (req,res) => {
-//     console.log(req.body)
-// })
+
+app.get("/:className/students", (req,res,next) => {
+    try{
+        let allStudents = mySchool.getStudentsByClass(req.params)
+        res.json({
+            status: "success",
+            message: "Retrieved Students",
+            students: [],
+            allStudents
+        })
+    } catch(err) {
+        next(err)
+    }
+})
 
 // app.get("/class/:classname/enroll", (req,res) => {
 //     res.json({
