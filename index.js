@@ -1,9 +1,9 @@
 const addClass = async () => {
     let className = document.querySelector("#className").value;
     let teacher = document.querySelector("#teacher").value;
-    axios.post("http://localhost:3000/addClass", {className, teacher});
-    className = ""
-    teacher = ""
+    axios.post("http://localhost:3000/class", {className, teacher});
+    className.innerHTML = " "
+    teacher.innerHTML = " "
 }
 
 const enrollStudent = async () => {
