@@ -16,7 +16,7 @@ class School {
   //  * @return {Class} Class object
   //  */
   addClass(name, teacher) {
-    this.newClass = new Class(name, teacher);
+    let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
   }
 
@@ -43,7 +43,7 @@ class School {
     let searchClass = this.classes;
     for(let i = 0; i < searchClass.length; i++){
       if(searchClass[i].name === className){
-        return searchClass[i].students
+        return searchClass[i].students;
       }
     }
   }
