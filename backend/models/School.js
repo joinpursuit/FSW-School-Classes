@@ -1,9 +1,6 @@
 const Class = require('./Classes');
 const Student = require('./Student')
-// const SchoolRouter = require("./School.js/index.js.js")
 
-// const express = require("express")
-// const router = express.Router();
 
 class School {
   constructor() {
@@ -64,19 +61,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
 
-//   getStudentsByClassWithFilter(className, failing, city) {
-//     let studentsAr = this.classes[className].students;
-//     if (failing && city) {
-//       return studentsArr.filter(
-//         student => student["grade"] < 70 && student["city"] === city
-//       );
-//     } else if (failing) {
-//       return studentsArr.filter(student => student["grade"] < 70);
-//     } else if (city) {
-//       return studentsArr.filter(student => student["city"] === city);
-//     }
-//   }
-// }
+
   getStudentsByClassWithFilter(className, failing, city) {
     if(failing && city) {
       this.classes[className].students.filter(el => {
