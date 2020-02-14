@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(timestamp.init);
 
 let mySchool = new School();
+mySchool.addClass
 
 app.get("/classes", (req, res) => {
   try {
