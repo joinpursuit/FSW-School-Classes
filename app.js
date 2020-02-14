@@ -20,7 +20,7 @@ mySchool.enrollStudent("World History", {name: "Jay Fowler", age: 25, city: "Bro
 mySchool.enrollStudent("World History", {name: "Carlos Bell", age: 25, city: "Bronx", grade: 86})
 mySchool.enrollStudent("World History", {name: "Floyd Mayweather", age: 41, city: "Calabasas", grade: 68})
 
-app.get("/classes", (req, res) => {
+app.get("/class", (req, res) => {
   try {
     let {timestamp} = req
     res.status(200).json({
@@ -39,7 +39,7 @@ app.get("/classes", (req, res) => {
   }
 });
 
-app.post("/classes/add", (req, res) => {
+app.post("/class", (req, res) => {
   let {timestamp} = req
   let {className, teacher} = req.body
 
@@ -61,11 +61,12 @@ app.post("/classes/add", (req, res) => {
   }
 });
 
-app.post("/classes/enroll", (req, res) => {
+app.post("/class/:className/enroll", (req, res) => {
   
   try{
     let {timestamp} = req
-    let {className, name, age, grade, city} = req.body
+    let {className} = req.params
+    let {name, age, grade, city} = req.body
     age = parseInt(age)
     grade = parseInt(grade)
     let newStudent = mySchool.enrollStudent(className, {name, age, grade, city})
@@ -85,6 +86,57 @@ app.post("/classes/enroll", (req, res) => {
     })
   }
 });
+
+const filterStudents = (req, res, next) => {
+  try{
+    let filter = Object.keys(req.query)
+    if (filter.length){
+      let {timestamp} = req
+      let {className} = req.params
+      let {failing, city} = req.query
+      failing === "false" ? failing = false : failing = true
+      let students = mySchool.getStudentsByClassWithFilter(className,failing,city)
+  
+      res.json({
+        status: "success",
+        message: "Retrieved all students with filter(s) applied.",
+        payload: students,
+        timestamp
+      })
+    } else {
+      next()
+    }
+  } catch(err){
+    res.status(500).json({
+      status: "error",
+      message: "Unable to filter students.",
+      payload: null,
+      timestamp
+    })
+  }
+}
+
+app.get("/class/:className/students", filterStudents, (req, res) => {
+  try{
+    let {timestamp} = req
+    let {className} = req.params
+    let students = mySchool.getStudentsByClass(className)
+
+    res.status(200).json({
+      status: "success",
+      message: `Retrieved all students from ${className}.`,
+      payload: students,
+      timestamp
+    })
+  } catch(err){
+    res.status(500).json({
+      status: "error",
+      message: "Unable to retrieve students in class",
+      payload: null,
+      timestamp
+    })
+  }
+})
 
 app.listen(port, () => {
   console.log(`The server is running on port ${port}`);
