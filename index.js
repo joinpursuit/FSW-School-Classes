@@ -12,12 +12,12 @@ const enrollStudent = async () => {
     let age = document.querySelector("#age").value;
     let city = document.querySelector("#city").value;
     let grade = document.querySelector("#grade").value;
-    axios.post("http://localhost:3000/enrollStudent", {name, age, city, grade});
-    addClass = ""
-    name = ""
-    age = ""
-    city = ""
-    grade = ""
+    axios.post(`http://localhost:3000/enrollStudent/:${addClass}`, {name, age, city, grade});
+    addClass.innerHTML = " "
+    name.innerHTML = " "
+    age.innerHTML = ""
+    city.innerHTML = ""
+    grade.innerHTML = ""
 }
 
 const listStudent = async () => {

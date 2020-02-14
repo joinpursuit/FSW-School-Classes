@@ -1,5 +1,5 @@
 const Class = require('./Class');
-const Student = require('./Student')
+const Student = require('./Student');
 
 class School {
   constructor() {
@@ -28,9 +28,9 @@ class School {
   //  * @return {Student} Enrolled student
   //  */
   enrollStudent(className, student) {
-    if(this.classes[className]){
-      this.className.push(student)
-      }
+    let enrollClass = this.classes[className].students;
+    let newStudent = new Student(student.name, student.age, student.city, student.grade);
+    enrollClass.push(newStudent)
     }
 
   // /**
@@ -40,9 +40,12 @@ class School {
   //  * @return {Student[]} Array of Student objects
   //  */
   getStudentsByClass(className) {
-    // if(className === this.newClass.name){
-      return this.newClass.students
-    // }
+    let searchClass = this.classes;
+    for(let i = 0; i < searchClass.length; i++){
+      if(searchClass[i].name === className){
+        return searchClass[i].students
+      }
+    }
   }
 
   // /**
