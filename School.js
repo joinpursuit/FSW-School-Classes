@@ -8,7 +8,7 @@ class School {
       // className: Class Object
         physics: {name: "physics",
                   teacher: "Sosa",
-                  students: [{name:"jon"}]} 
+                  students: []} 
     }
   }
 

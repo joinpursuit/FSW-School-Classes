@@ -10,13 +10,13 @@ formOne.addEventListener("submit", async (e)=>{
 
     try{
         let res = await axios.post("http://localhost:3000/class",{
-            class: className.value,
+            name: className.value,
             teacher: teacherClass.value
         });
         debugger
         className.value = "";
         teacherClass.value = "";
-        h3.innerText = res.data.class.name + res.data.class.teacher
+        h3.innerText = `${res.data.class.name} + ${res.data.class.teacher}`
         
     }catch(err){
         debugger;
