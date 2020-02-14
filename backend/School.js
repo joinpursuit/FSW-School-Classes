@@ -6,13 +6,7 @@ class School {
     this.classes = [];
   }
 
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
+
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
@@ -25,17 +19,12 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  // let mikeStudent = {
-  //   name: 'mike',
-  //   city: 'ny',
-  //   age: '24',
-  //   grade: '65',
-  // }
-  enrollStudent(className, student) {
-    console.log('youve reached the schoolsjs enroll student functions')
-    // console.log(this.classes[className].student)
-    // push students into above ^^^^^
 
+  enrollStudent(className, student) {
+    if (this.classes.hasOwnProperty(className)) {
+      this.classes[className].students.push(newStudent)
+    }
+    // return newStudent; 
   }
 
 
@@ -47,9 +36,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    if(this.classes[className].students === 0) throw {message: "No students in this class", status: 404 }
     return this.classes[className].students
-  
   }
 
 

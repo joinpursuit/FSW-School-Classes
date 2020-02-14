@@ -37,8 +37,19 @@ app.post('/class/', (req, res, next) => {
     }
 })
 
-app.use((err, req, res, next) => {
-    res.status(err.status).json(err)
+app.post('/class/:className/enroll', (req,res,next) => {
+    try{
+        let newStudent = newSchool.enrollStudent(req.params.className, req.body);
+        res.json({
+            status: "success",
+            message: "Enroll Student",
+            className: req.params.className,
+            student: {name: req.body.name, age: req.body.age, city: req.body.city, grade: req.body.grade},
+            newStudent
+        })
+    } catch(err) {
+        next(err)
+    }
 })
 // app.post("/class", (req,res) => {
 //     mySchool.addClass(req.body.classname, req.body.teacher)
