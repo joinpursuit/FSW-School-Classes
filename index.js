@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault()
     let teacherName = document.querySelector("#teacherName").value
     let newClassName = document.querySelector("#newClassName").value
-    let res = await axios.post(`http://localhost:3000/classes/add`, {teacher: teacherName, class: newClassName})
+    let res = await axios.post(`http://localhost:3000/classes/add`, {teacher: teacherName, className: newClassName})
     let p = document.createElement("p")
     console.log(res.data)
     p.innerText = res.data.message

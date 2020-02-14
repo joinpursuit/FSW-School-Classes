@@ -22,35 +22,44 @@ mySchool.enrollStudent("world_history", {name: "Floyd Mayweather", age: 41, city
 
 app.get("/classes", (req, res) => {
   try {
-    res.json({
-      classes: mySchool.classes,
-      message: "Request has been completed successfully",
-      timestamp: req.timestamp
+    let {timestamp} = req
+    res.status(200).json({
+      status: "success",
+      message: "Retrieved all classes",
+      payload: mySchool.classes,
+      timestamp
     });
   } catch (err) {
-    res.json({
-      error: "Your request could not be completed",
-      timestamp: req.timestamp
+    res.status(404).json({
+      status: "error",
+      message: "No classes were found",
+      payload: null,
+      timestamp
     });
   }
 });
 
 app.post("/classes/add", (req, res) => {
+  let {timestamp} = req
+  let {className, teacher} = req.body
   try {
-    mySchool.addClass(req.body.class, req.body.teacher);
+    let newClass = mySchool.addClass(className, teacher);
     res.json({
-      message: `${req.body.class} was added successfully.`,
-      timestamp: req.timestamp
+      status: "success",
+      message: `${className} was added successfully.`,
+      payload: newClass,
+      timestamp
     });
   } catch (err) {
-    console.log(err);
-    res.json({
-      error:
-        "Class could not be created. Class may already exist. Please try again.",
-      timestamp: req.timestamp
+    res.status(500).json({
+      status: "error",
+      message: "Server is unable to create class",
+      payload: null,
+      timestamp
     });
   }
 });
+
 app.post("/classes/enroll", (req, res) => {
   
   try{
