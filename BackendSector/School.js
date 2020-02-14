@@ -37,31 +37,28 @@ class School {
   getStudentsByClassWithFilter(className, city, fail) {
     let studentFilter = [];
     let schoolClass = this.classes[className]["students"]
-    if(fail === 'true' && city !== null){
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["city"] === city && studentArray[i]["grade"] < 70){
-          filterArr.push(studentArray[i]);
-        }
-      }
-    } else if(failing === 'true' && city === ""){
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["grade"] < 70){~
-          filterArr.push(studentArray[i])
+      if(fail === true && city !== null){
+        for (let student of schoolClass){
+          if(student["grade"] < 70 && student["city"] === city){
+            studentFilter.push(student);
           }
         }
-    } else if(failing != 'true' && city != "") {
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["city"] === city){
-          filterArr.push(studentArray[i])
+      } else if(fail === false && city !== null){
+        for (let student of schoolClass){
+          if(student["city"] === city){
+            studentFilter.push(student)
+          }
         }
-      }
-    }
-    return filterArr
+      } else if(fail === true & city === null){
+          if(student["grade"] < 70){
+            studentFilter.push(student)
+          }
+      } else if(fail === false && city === null) {
+          return schoolClass
+          }
+    return studentFilter
   }
-  }
-
 }
-
 
 let timestamp = new Date().toString()
 
