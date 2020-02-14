@@ -11,7 +11,14 @@ app.use(bodyParser.json());
 app.use(timestamp.init);
 
 let mySchool = new School();
-mySchool.addClass
+mySchool.addClass("environmental_science", "Ms. Obot")
+mySchool.enrollStudent("environmental_science", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 91})
+mySchool.enrollStudent("environmental_science", {name: "Perry Platypus", age: 6, city: "Fowlerton", grade: 91})
+mySchool.enrollStudent("environmental_science", {name: "Peter Rollock", age: 45, city: "Bronx", grade: 55})
+mySchool.addClass("world_history", "Mr. Urrico")
+mySchool.enrollStudent("world_history", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 96})
+mySchool.enrollStudent("world_history", {name: "Carlos Bell", age: 25, city: "Bronx", grade: 86})
+mySchool.enrollStudent("world_history", {name: "Floyd Mayweather", age: 41, city: "Calabasas", grade: 68})
 
 app.get("/classes", (req, res) => {
   try {
