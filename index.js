@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let newStudentDiv = document.querySelector("#addNewStudent")
   let newStudentForm = document.querySelector("#newStudentForm")
   let classSelect = document.querySelector("#classSelect")
+  let displayStudents = document.querySelector("#displayStudents")
+  let getStudentsForm = document.querySelector("#getStudentsForm")
 
   const fillClassSelection = async () => {
     let res = await axios.get("http://localhost:3000/class")
@@ -42,4 +44,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   })
 
-})
+  getStudentsForm.addEventListener("submit", async (e) => {
+    e.preventDefault()
+    displayStudents.innerHTML = ""
+    let className = classSelect.value
+    let failing = document.querySelector("#failing").checked
+    let studentCity = document.querySelector("#studentCity").value
+    if (failing && studentCity){
+      let res = await axios.get(`http://localhost:3000/class/${className}/students/?failing=${failing}&city=${studentCity}`)
+      let students = res.data.payload
+      students.forEach((student) => {
+        let {name, city, age, grade} = student
+        let p = document.createElement("p")
+        p.innerText = `Name: ${name} | City: ${city} | Age: ${age} | Grade: ${grade}`
+        displayStudents.appendChild(p)
+      })
+    } else if (studentCity){
+      console.log(studentCity)
+      let res = await axios.get(`http://localhost:3000/class/${className}/students/?city=${studentCity}`)
+      let students = res.data.payload
+      students.forEach((student) => {
+        let {name, city, age, grade} = student
+        let p = document.createElement("p")
+        p.innerText = `Name: ${name} | City: ${city} | Age: ${age} | Grade: ${grade}`
+        displayStudents.appendChild(p)
+      })
+    } else if (failing){
+      let res = await axios.get(`http://localhost:3000/class/${className}/students/?failing=${failing}`)
+      let students = res.data.payload
+      students.forEach((student) => {
+        let {name, city, age, grade} = student
+        let p = document.createElement("p")
+        p.innerText = `Name: ${name} | City: ${city} | Age: ${age} | Grade: ${grade}`
+        displayStudents.appendChild(p)
+      })
+    } else {
+      let res = await axios.get(`http://localhost:3000/class/${className}/students/`)
+      let students = res.data.payload
+      students.forEach((student) => {
+        let {name, city, age, grade} = student
+        let p = document.createElement("p")
+        p.innerText = `Name: ${name} | City: ${city} | Age: ${age} | Grade: ${grade}`
+        displayStudents.appendChild(p)
+      })
+    }
+    
+  })
+
+  fillClassSelection()
+  })

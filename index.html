@@ -31,18 +31,20 @@
       <button type="submit">Submit</button>
     </form>
   </div>
-  <div id="getStudents">
+  <div id="getStudentsDiv">
     <h2>Display Students</h2>
-    <form>
+    <form id="getStudentsForm">
       <select id="classSelect">
         <option selected disabled> Choose a class</option>
       </select>
       <input type="checkbox" name="failing" id="failing">
-      <label for="checkbox"> Failing students only?</label>
+      <label for="failing"> Failing students only?</label>
       <input type="text" name="studentCity" id="studentCity" placeholder="City (optional)">
       <button type="submit">Submit</button>
     </form>
+    <div id="displayStudents">
 
+    </div>
   </div>
 </body>
 </html>

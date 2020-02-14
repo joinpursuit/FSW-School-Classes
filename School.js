@@ -69,11 +69,11 @@ class School {
     let students = this.classes[className]["students"]
     if (failing === true && city){
       return students.filter((stu) => {
-        return (stu.grade < 70) && (stu.city === city)
+        return (stu.grade < 70) && (stu.city.toLowerCase() === city.toLowerCase())
       })
     } else if (city){
       return students.filter((stu) => {
-        return stu.city === city
+        return stu.city.toLowerCase() === city.toLowerCase()
       }) 
     } else if (failing){
       return students.filter((stu) => {
