@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 let mySchool = new School();
 
+// Create a Class w/ Course Name and Teacher
 app.post("/class", (req, res) => {
     try {
         let className = req.body.name;
@@ -25,9 +26,21 @@ app.post("/class", (req, res) => {
         console.log(err)
     }
 })
+// Get Entire List of Classes
+app.get("/class", (req, res) => {
+    try{
+        res.json(mySchool.classes)
+    } catch (err) {
+        console.log(err)
+    }
+})
 
-app.get("/", (req, res) => {
-    res.json("working")
+app.get("/students", (req, res)=> {
+    try {
+        res.json("working")
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 app.listen(port, () => console.log("You're on port", port))
