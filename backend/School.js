@@ -3,14 +3,7 @@ const Student = require('./Student')
 
 class School {
   constructor() {
-    this.classes = {
-      // className: Class Object
-        Physics: {
-          name: "Physics",
-          teacher: 'Neil de Grase Tyson',
-          students: ["Phil", "Fred"],
-        } 
-    }
+    this.classes = [];
   }
 
   /**
@@ -42,6 +35,7 @@ class School {
     console.log('youve reached the schoolsjs enroll student functions')
     // console.log(this.classes[className].student)
     // push students into above ^^^^^
+
   }
 
 
@@ -53,8 +47,9 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // console.log(this.classes[className].students)
-    console.log("Got students by Class")
+    if(this.classes[className].students === 0) throw {message: "No students in this class", status: 404}
+    return this.classes[className].students
+  
   }
 
 
@@ -75,7 +70,9 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    if(failing === true) {
+      return 
+    }
   }
 
 }
