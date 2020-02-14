@@ -6,6 +6,6 @@ app.post("/", nRES.addClass);
 
 app.post("/:className/enroll", nRES.enrollStudent);
 
-app.get("/:className/students", nRES.getStudentsByClass, nRES.getStudentsByClassWithFilter)
+app.get("/:className/students", nRES.getStudentsByClassWithFilter)
 
 module.exports = classes
