@@ -1,11 +1,10 @@
-const classes = require("express").Router()
-const School = require("../School.js")
-let nRES = new School()
+const classRoutes = require("express").Router()
+const {addClass, enrollStudent, studentFilter} = require("../databaseMiddleware")
 
-app.post("/", nRES.addClass);
+classRoutes.post("/", addClass);
 
-app.post("/:className/enroll", nRES.enrollStudent);
+classRoutes.post("/:class/enroll", enrollStudent);
 
-app.get("/:className/students", nRES.getStudentsByClassWithFilter)
+classRoutes.get("/:class/students", studentFilter)
 
-module.exports = classes
+module.exports = classRoutes

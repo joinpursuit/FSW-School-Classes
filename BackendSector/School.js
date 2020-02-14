@@ -10,17 +10,19 @@ class School {
   }
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    for (let name of this.classes){
-      if(!name === newClass["name"]){
-        this.classes[name] = newClass;
+    if(this.classes[name]){
+        throw {Status:500, Message: "Class already exists at NRES"}
       }
-    }
+    this.classes[name] = newClass;
+    return this.classes
   }
   enrollStudent(className, student) {
     let student = new Student(student.name, student.age, student.city, student.grade);
-    if(!this.classes[className]["students"].includes(student)){
-      this.classes[className]["students"].push(student);
+    if(this.classes[className]["students"].includes(student)){
+      throw {Status:500, Message: "Student has already been enrolled for indoctrination"}
     }
+    this.classes[className]["students"].push(student);
+    return student
   } 
   // getStudentsByClass(className) {
   //   return this.classes[className]["students"]
@@ -51,6 +53,6 @@ class School {
   }
 }
 
-let timestamp = new Date().toString()
+
 
 module.exports = School;
