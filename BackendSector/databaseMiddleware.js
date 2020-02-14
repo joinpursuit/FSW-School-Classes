@@ -1,0 +1,1 @@
+let school = require("./databaseSchool");

@@ -4,9 +4,9 @@ class Student {
     this.city = city
     this.age = age
     this.grade = grade
+    
   }
 }
 
-K
 
 module.exports = Student;

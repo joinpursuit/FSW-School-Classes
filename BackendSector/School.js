@@ -5,49 +5,21 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+      //  
     }
   }
-
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    
   }
-
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
   enrollStudent(className, student) {
-    // Your code here
+    let student = new Student(student.name, student.age, student.city, student.grade);
+    this.classes[className]["students"].push(student);
   }
-
-
-
-
-  /**
-   * Get all students enrolled in a class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes.className.students
   }
-
-
-
-
   /**
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 
@@ -62,8 +34,30 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+  getStudentsByClassWithFilter(className, city, fail) {
+    let studentFilter = [];
+    let schoolClass = this.classes[className]["students"]
+    if(fail === 'true' && city !== null){
+      for(let i = 0; i < studentArray.length; i++){
+        if(studentArray[i]["city"] === city && studentArray[i]["grade"] < 70){
+          filterArr.push(studentArray[i]);
+        }
+      }
+    } else if(failing === 'true' && city === ""){
+      for(let i = 0; i < studentArray.length; i++){
+        if(studentArray[i]["grade"] < 70){~
+          filterArr.push(studentArray[i])
+          }
+        }
+    } else if(failing != 'true' && city != "") {
+      for(let i = 0; i < studentArray.length; i++){
+        if(studentArray[i]["city"] === city){
+          filterArr.push(studentArray[i])
+        }
+      }
+    }
+    return filterArr
+  }
   }
 
 }

@@ -58,3 +58,8 @@ h2 {
     -1px 1px 0 white,
     1px 1px 0 white;
 }
+
+input {
+    font-size: 18px;
+    font-family: 'Schoolbell', cursive;
+}
