@@ -11,14 +11,14 @@ app.use(bodyParser.json());
 app.use(timestamp.init);
 
 let mySchool = new School();
-mySchool.addClass("environmental_science", "Ms. Obot")
-mySchool.enrollStudent("environmental_science", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 91})
-mySchool.enrollStudent("environmental_science", {name: "Perry Platypus", age: 6, city: "Fowlerton", grade: 91})
-mySchool.enrollStudent("environmental_science", {name: "Peter Rollock", age: 45, city: "Bronx", grade: 55})
-mySchool.addClass("world_history", "Mr. Urrico")
-mySchool.enrollStudent("world_history", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 96})
-mySchool.enrollStudent("world_history", {name: "Carlos Bell", age: 25, city: "Bronx", grade: 86})
-mySchool.enrollStudent("world_history", {name: "Floyd Mayweather", age: 41, city: "Calabasas", grade: 68})
+mySchool.addClass("Environmental Science", "Ms. Obot")
+mySchool.enrollStudent("Environmental Science", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 91})
+mySchool.enrollStudent("Environmental Science", {name: "Perry Platypus", age: 6, city: "Fowlerton", grade: 91})
+mySchool.enrollStudent("Environmental Science", {name: "Peter Rollock", age: 45, city: "Bronx", grade: 55})
+mySchool.addClass("World History", "Mr. Urrico")
+mySchool.enrollStudent("World History", {name: "Jay Fowler", age: 25, city: "Bronx", grade: 96})
+mySchool.enrollStudent("World History", {name: "Carlos Bell", age: 25, city: "Bronx", grade: 86})
+mySchool.enrollStudent("World History", {name: "Floyd Mayweather", age: 41, city: "Calabasas", grade: 68})
 
 app.get("/classes", (req, res) => {
   try {
@@ -42,9 +42,10 @@ app.get("/classes", (req, res) => {
 app.post("/classes/add", (req, res) => {
   let {timestamp} = req
   let {className, teacher} = req.body
+
   try {
     let newClass = mySchool.addClass(className, teacher);
-    res.json({
+    res.status(200).json({
       status: "success",
       message: `${className} was added successfully.`,
       payload: newClass,
@@ -63,18 +64,24 @@ app.post("/classes/add", (req, res) => {
 app.post("/classes/enroll", (req, res) => {
   
   try{
-    let stuInfo = req.body
-    mySchool.enrollStudent(stuInfo.class, {name: stuInfo.name, age: stuInfo.age, grade: stuInfo.grade, city: stuInfo.city})
-    res.json({
-      info: mySchool.classes[stuInfo.class].students,
-      message: `${stuInfo.name} has been successfully enrolled in ${stuInfo.class}.`,
-      timestamp: timestamp.init
+    let {timestamp} = req
+    let {className, name, age, grade, city} = req.body
+    age = parseInt(age)
+    grade = parseInt(grade)
+    let newStudent = mySchool.enrollStudent(className, {name, age, grade, city})
+
+    res.status(200).json({
+      status: "success",
+      message: `${name} has been successfully enrolled in ${className}.`,
+      payload: newStudent,
+      timestamp
     })
   } catch(err){
-    console.log(err)
-    res.json({
-      error: "Student could not be enrolled. Student may already be in class. Please try again.",
-      timestamp: req.timestamp
+    res.status(500).json({
+      status: "error",
+      message: "Server is unable to enroll student",
+      payload: null,
+      timestamp
     })
   }
 });

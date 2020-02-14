@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let grade = document.querySelector("#grade").value
     let city = document.querySelector("#city").value
 
-    let res = await axios.post("http://localhost:3000/classes/enroll",{class: className, name, age, grade, city})
+    let res = await axios.post("http://localhost:3000/classes/enroll",{className, name, age, grade, city})
     let p = document.createElement("p")
     console.log(res.data)
     p.innerText = res.data.message
