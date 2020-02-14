@@ -22,13 +22,15 @@ app.post("/", (req,res,next) => {
     res.json("POST request on app.js")
 })
 
-app.get('/students/:class/', (req, res, next) => {
+app.post('/class/', (req, res, next) => {
     try {
-        let students = newSchool.getStudentsByClass();
+        let addClass = newSchool.addClass(req.body.name, req.body.teacher);
         res.json({
             status: "success",
-            message: "All Students By Class",
-            students
+            message: "Add Class",
+            name: req.body.name,
+            teacher: req.body.teacher,
+            addClass
         })
     } catch(err) {
         next(err)

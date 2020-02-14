@@ -47,7 +47,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    if(this.classes[className].students === 0) throw {message: "No students in this class", status: 404}
+    if(this.classes[className].students === 0) throw {message: "No students in this class", status: 404 }
     return this.classes[className].students
   
   }
