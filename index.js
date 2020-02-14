@@ -36,7 +36,7 @@ const listStudent = async (event) => {
     let scity = document.querySelector("#scity").value;
     try {
         let res = await axios.get(`http://localhost:3000/class/:${sclass}/students`);
-        
+        res.data
     } catch (err) {
         console.log(err)
     }
