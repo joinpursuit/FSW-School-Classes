@@ -63,9 +63,9 @@ const enrollNewStudent = (req, res, next) => {
 const getStudents = (req, res, next) => {
   try{
     let className = req.params.className;
-    let failing = req.query.failing;
-    let city = req.query.city;
-    let listOfStudents = mySchool.getStudentsByClass(className, failing, city);
+    let failing = req.body.failing;
+    let city = req.body.city;
+    let listOfStudents = mySchool.getStudentsByClassWithFilter(className, failing, city);
     if (listOfStudents) {
       res.status(200).json({
         student: listOfStudents,

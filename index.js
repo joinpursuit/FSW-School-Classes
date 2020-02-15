@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form1.addEventListener("submit", async e => {
     e.preventDefault();
     try {
-      axios.post(`http://localhost:3000/class/${className.value}/${teacherName.value}`).then(res => {
+      await axios.post(`http://localhost:3000/class/${className.value}/${teacherName.value}`).then(res => {
           let result = document.createElement("p");
           let newClass =
             className.value.charAt(0).toUpperCase() + className.value.slice(1);
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form2.addEventListener("submit", async e => {
     e.preventDefault();
     try {
-      axios.post(`http://localhost:3000/class/${enrollClass.value}/enroll`, {
+      await axios.post(`http://localhost:3000/class/${enrollClass.value}/enroll`, {
           name: enrollName.value,
           age: enrollAge.value,
           city: enrollCity.value,
@@ -60,16 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
   form3.addEventListener("submit", async e => {
     e.preventDefault();
     try {
-      axios.get(`http://localhost:3000/${classList.value}/students`).then(res => {
-          let name = res.data.name;
-          let students = res.data.students;
-          let p = document.createElement("p");
+      await axios.get(`http://localhost:3000/${classList.value}/students`, {failing: checkFailing.checked, city: cityList.value}).then(res => {
+        debugger
+          let students = res.data.student;
           if (students) {
             students.forEach(student => {
+              if(cityList.value === student.city && checkFailing.checked === true ){
               let p = document.createElement("p");
-              p.innerText = `Class: ${name.charAt(0).toUpperCase() +name.slice(1)}, 
-                            Student List: ${student.name.charAt(0).toUpperCase() +student.name.slice(1)}`;
+              p.innerText = `Class: ${classList.value.charAt(0).toUpperCase() +classList.value.slice(1)}, 
+                            Student List: ${student.name.charAt(0).toUpperCase() +student.name.slice(1)}, ${student.city.charAt(0).toUpperCase() + student.city.slice(1)},
+                            ${student.grade}`;
               div3.appendChild(p);
+              } else if(cityList.value === student.city){
+                let p = document.createElement("p");
+                p.innerText = `Class: ${classList.value.charAt(0).toUpperCase() +classList.value.slice(1)}, 
+                              Student List: ${student.name.charAt(0).toUpperCase() +student.name.slice(1)}, ${student.city.charAt(0).toUpperCase() + student.city.slice(1)}`
+                              div3.appendChild(p)
+              } else if(checkFailing.checked === true){
+                let p = document.createElement("p")
+                p.innerText = `Class: ${classList.value.charAt(0).toUpperCase() +classList.value.slice(1)}, ${student.grade}`
+                div3.appendChild(p)
+              }
             });
           }
         });

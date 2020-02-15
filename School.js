@@ -76,14 +76,16 @@ class School {
   getStudentsByClassWithFilter(className, failing, city) {
     let students = this.classes[className].students
     let filterArr = students.filter(student => {
-        if(student.city === city && student.grade < 70) {
+        if(student.city === city && student.grade <= 70) {
           return student
         
       } else if(failing) {
-        if(student.grade < 70){
+        if(student.grade <= 70){
           return student
         }
       } else if(student.city === city){
+        return student
+      } else {
         return student
       }
   })

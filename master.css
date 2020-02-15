@@ -16,4 +16,18 @@ h1 {
 
 p {
     background-color:tan;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 10px 5px 5px darkgrey; 
+    padding: 20px;
+    display: grid;
+    justify-content: center;
+}
+
+input {
+    border-radius: 15px;
+    width: 20%;
+    display: grid;
+    justify-content: left;
+
 }
