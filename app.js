@@ -94,9 +94,27 @@ const studentExist=(request,response,next)=>{
 
 }
 const studentBody=(request,response)=>{
-    
+    let className = request.params.nameOfClass;
+    let failing = request.query.failing;
+    let city = request.query.city;
+    if (failing === 'true') {
+        failing = true;
+    } else {
+        failing = false;
+    }
+    let filtered = [];
+    if (!failing && !city) {
+        filtered = mySchool.getStudentsByClass(className);
+    } else {
+        response.json({
+            students: filtered,
+            message: "Retrieved Students",
+            timestamp: new Date()
+        }) 
 
+    }
 }
+
 
 app.post("/class",checkClassName,addClass,ifRepeated)
 app.post("/class/:className",classExist,enrollStudent,studentExist)
