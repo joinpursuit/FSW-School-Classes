@@ -75,34 +75,3 @@ listStudents.addEventListener("submit",async(e)=>{
     }
 })
 
-// const getStudentsByClass = async (event) => {
-//     event.preventDefault()
-//     let className = document.querySelector("#classList")
-//     let classNameInput = className.value;
-//     className.value = ""
-//     let failing = document.querySelector("#fail")
-//     let host = `http://localhost:4000/classes/${classNameInput}/lists`
-//     let response = await axios.post(host, className)
-//     let ul = document.querySelector("ul")
-//     let li = document.createElement("li")
-    
-//     try{
-//         if(failing.checked === false){
-//             let result = axios.get(response)
-//             classNameInput.innerText = JSON.stringify(response.data.students)
-//             for(let el of result.data){
-//                 students += el
-                
-//                 li.innerText = students.message
-//                 ul.appendChild(li)
-//             }
-
-//         }else{
-            
-//         }
-
-//     }catch(error){
-//         console.log(error)
-//     }
-// }
-

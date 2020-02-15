@@ -57,7 +57,7 @@ const enrollStudent=(request,response)=>{
     let grade = request.body.grade;
     let className = request.params.class_name;
     let newStudent = new Student(name, age, city, grade, className)
-    let enrolledStudent = mySchool.enrollStudent(className, newStudent);
+    let enrolledStudent = mySchool.enrollStudent(request.params['className'], newStudent);
     if(!enrolledStudent){
         response.json({
             error: "student does not exist",
@@ -115,7 +115,7 @@ const studentBody=(request,response)=>{
     }
 }
 
-
+app.get("/")
 app.post("/class",checkClassName,addClass,ifRepeated)
 app.post("/class/:className",classExist,enrollStudent,studentExist)
 app.get("/class/:className/students",classExist,studentBody)
