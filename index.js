@@ -104,12 +104,16 @@ studentForm.addEventListener("submit", async (e) => {
         let p = document.createElement("p");
         // p.innerText = JSON.stringify(res.data);
         p.innerText = `${res.data.timestamp}: ${res.data.message} in ${res.data.className}`;
-        console.log(res.data)
+        // console.log(res.data)
         container.appendChild(p);
     } catch (err) {
         // console.log('in the catch');
         // debugger
         console.log(err)
+        // res.status(400).json({
+        //     status: "error",
+        //     message: "Student already exists"
+        // })
     }
 })
 
@@ -138,12 +142,12 @@ const addClass = async () => {
     }
 }
 
+let className = document.querySelector("#className");
+let teacherName = document.querySelector("#teacherName");
 const addClassToDom = async () => {
     data = await addClass();
     // console.log(data);
     let container = document.querySelector("#addClassDiv");
-    let className = document.querySelector("#className");
-    let teacherName = document.querySelector("#teacherName");
     className.innerHTML = "";
     teacherName.innerHTML = "";
 
@@ -163,21 +167,20 @@ const addClassToDom = async () => {
 const checkBoxChange = async (check) => {
     let classList = document.querySelector("#classList").value;
     let cityList = document.querySelector("#cityList").value;
-        // console.log(check.checked);
-        // console.log(check)
+    let studentList = document.querySelector("#listOfStudents");
         try {
             let res = await axios.get(`http://localhost:3000/class/${classList}/students?failing=${check}&city=${cityList}`);
-            // console.log(res);
-            // console.log('this is allClasses', res.data.student);
-            // console.log(res);
 
             let allStudents = res.data.students 
-            console.log(res.data.students);
+            // console.log(res.data.students);
+            classList.innerText = "";
+            cityList.innerText = "";
+            studentList.innerHTML = "";
             allStudents.forEach(student => {
                 let li = document.createElement("li");
-                li.id = "studenntList";
-                li.innerText = student;
-
+                li.id = "studentList";
+                li.innerText = student.name;
+                studentList.appendChild(li);
             })
             return allClasses
             
