@@ -21,7 +21,7 @@ const showAllClasses = (req, res) => {
 const addClass = (req, res, next) => {
     let name = req.body.name;
     let teacher = req.body.teacher;
-    console.log(mySchool)
+    // console.log(mySchool)
     res.json({
         class: mySchool.addClass(name, teacher),
         message: "Created a new class",
@@ -30,8 +30,8 @@ const addClass = (req, res, next) => {
 }
 
 const checkClass = (req, res, next) => {
-    console.log("class name" ,mySchool['classes'])
-    if (mySchool.classes[req.body.className]) {
+    console.log('body',req.body.name)
+    if (mySchool.classes[req.body.name]) {
         res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: timeStamp()
@@ -47,10 +47,10 @@ const addStudent = (req, res) => {
     // let city = req.body.city;
     // let grade = req.body.grade;
     let class_name = req.params.class_name;
-    console.log('classname',class_name);
-    console.log(mySchool)
+    // console.log('classname',class_name);
+    // console.log(mySchool)
     let qqq = mySchool.enrollStudent(class_name, req.body)
-    console.log(mySchool)
+    console.log('qqq',qqq)
     res.json({
         student: qqq,
         className: class_name,
@@ -62,7 +62,7 @@ const addStudent = (req, res) => {
 const checkStudent = (req, res, next) => {
     let className = req.params.class_name;
     let classArr = mySchool['classes'][className]['students'];
-    console.log(mySchool["classes"][className]["students"])
+    // console.log(mySchool["classes"][className]["students"])
     if(classArr.length){
         classArr.forEach(el => {
             if (el.name === req.body.studentName) {
@@ -98,9 +98,9 @@ const studentsByClass = (req, res, next) => {
 
 const validateClass = (req, res, next) => {
     let className = req.params.class_name;
-    console.log(req.params.class_name)
-    console.log(req.query.city)
-    console.log(req.query.failing)
+    // console.log(req.params.class_name)
+    // console.log(req.query.city)
+    // console.log(req.query.failing)
     if (!mySchool.classes[className]) {
         res.json({
             error: `Class ${className} does not exist!`,
@@ -116,7 +116,7 @@ const classWithFilter = (req, res, next) => {
     let chosenClass = req.params.class_name;
     let failing = req.query.failing;
     let city = req.query.city;
-    console.log('qweqwe', chosenClass, failing, city)
+    // console.log('qweqwe', chosenClass, failing, city)
     try {
         if (failing === "true" && city) {
             let students = mySchool.getStudentsByClassWithFilter(chosenClass, failing, city)

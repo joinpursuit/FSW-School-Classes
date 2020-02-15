@@ -15,9 +15,9 @@
     </div>
     <div id="addClassDiv" class="form">
         <h1>Add Class</h1>
-        <form id="addClass">
-            <input id="className" type="text" placeholder="Class Name">
-            <input id="teacherName" type="text" placeholder="Professor Name">
+        <form id="addClass" >
+            <input id="className" type="text" placeholder="Class Name" required>
+            <input id="teacherName" type="text" placeholder="Professor Name" required>
             <button id="addClasses">Submit</button>
             <p></p>
         </form>
@@ -25,15 +25,15 @@
     <hr>
     <div id="addStudentDiv" class="form">
     <h1>Add Student</h1>
-        <form id="addStudent">
+        <form id="addStudent" >
             <select name="" id="class" >
                 <option value="" selected disabled>Choose a class</option>
             </select>
             <!-- <input id="class" type="text" placeholder="Class"> -->
-            <input id="studentName" type="text" placeholder="Student's Name">
-            <input id="age" type="text" placeholder="Age">
-            <input id="city" type="text" placeholder="City">
-            <input id="grade" type="text" placeholder="Grade">
+            <input required id="studentName" type="text" placeholder="Student's Name">
+            <input required id="age" type="text" placeholder="Age">
+            <input required id="city" type="text" placeholder="City">
+            <input required id="grade" type="text" placeholder="Grade">
             <button type="submit" id="addStudents">Submit</button>
         </form>
     </div>
@@ -41,8 +41,8 @@
     <div id="studentListDiv" class="form">
     <h1>List of Students</h1>
         <form id="studentList">
-            <input id="classList" type="text" placeholder="Class">
-            <input id="cityList" type="text" placeholder="City">
+            <input required id="classList" type="text" placeholder="Class">
+            <input required id="cityList" type="text" placeholder="City">
             <input id="checkbox" type="checkbox">
             <button id="list">Submit</button>
             <p id="listOfStudents"></p>

@@ -62,6 +62,8 @@ allClassesBtn.addEventListener("click", async () => {
 classForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addClassToDom();
+    document.querySelector("#className").value = "";
+    document.querySelector("#teacherName").value = "";
 })
 
 listForm.addEventListener("submit", (e) => {
@@ -82,18 +84,18 @@ studentForm.addEventListener("submit", async (e) => {
     let grade = document.querySelector("#grade").value;
     let container = document.querySelector("#addStudentDiv");
     // let cnp = document.createElement("p");
-    let snp = document.createElement("p");
-    let ap = document.createElement("p");
-    let cp = document.createElement("p");
-    let gp = document.createElement("p");
-    // cnp.innerText = className;
-    snp.innerText = studentName;
-    ap.innerText = age;
-    cp.innerText = city;
-    gp.innerText = grade;
-    container.append(snp, ap, cp, gp);
+    // let snp = document.createElement("p");
+    // let ap = document.createElement("p");
+    // let cp = document.createElement("p");
+    // let gp = document.createElement("p");
+    // // cnp.innerText = className;
+    // snp.innerText = studentName;
+    // ap.innerText = age;
+    // cp.innerText = city;
+    // gp.innerText = grade;
+    // container.append(snp, ap, cp, gp);
     try {
-        let res = await axios.post(`http://localhost:3000/class/${className}/enroll`, {
+        let { data} = await axios.post(`http://localhost:3000/class/${className}/enroll`, {
             className,
             studentName,
             age,
@@ -103,9 +105,20 @@ studentForm.addEventListener("submit", async (e) => {
         // console.log('adding student',res);
         let p = document.createElement("p");
         // p.innerText = JSON.stringify(res.data);
-        p.innerText = `${res.data.timestamp}: ${res.data.message} in ${res.data.className}`;
         // console.log(res.data)
+        console.log("add student", data)
+        if (data.student) {
+            p.innerText = `${data.timestamp}: Enrolled ${data.student.name} in ${data.className}`;
+            
+        } else {
+            p.innerText = `${data.timestamp}: ${data.error}`
+        }
         container.appendChild(p);
+        document.querySelector("#studentName").value = "";
+        document.querySelector("#age").value = "";
+        document.querySelector("#city").value = "";
+        document.querySelector("#grade").value = "";
+        
     } catch (err) {
         // console.log('in the catch');
         // debugger
@@ -117,26 +130,34 @@ studentForm.addEventListener("submit", async (e) => {
     }
 })
 
+const clearInputs = () => {
+
+}
 
 const populateSelect = (className) => {
-    let option = document.createElement("option");
-    option.innerText = className;
-    // console.log('new class option=>', option )
-    select.appendChild(option);
+    if (className) {
+        let option = document.createElement("option");
+        option.innerText = className;
+        select.appendChild(option);
+    } else {
+        console.log("Class already added!");
+    }
 }
+
 
 const addClass = async () => {
     try {
         let name = document.querySelector("#className").value;
         let teacher = document.querySelector("#teacherName").value;
-        let res = await axios.post("http://localhost:3000/class", {
+        let {data:data} = await axios.post("http://localhost:3000/class", {
             name,
             teacher
         });  
-        // console.log('THis is res=> ',res)
-        populateSelect(name);
-        console.log('add class ',res)
-        return res; 
+        // console.log('THis is res=> ',data)
+        // populateSelect(name);
+        // console.log('add class ',res)
+        // checkClass();
+        return data; 
     } catch (error) {
         console.log(error);
     }
@@ -148,20 +169,24 @@ const addClassToDom = async () => {
     data = await addClass();
     // console.log(data);
     let container = document.querySelector("#addClassDiv");
-    className.innerHTML = "";
-    teacherName.innerHTML = "";
+
+
 
     let newClass = document.createElement("div");
     newClass.id = 'newClass';
     
     let addedClass = document.createElement("p");
     addedClass.id = "addedClass";
-    addedClass.innerText = `${data.data.timestamp}: ${data.data.message}, ${data.data.class.name} with ${data.data.class.teacher}`;
-
-
-    newClass.append(addedClass);
-
+    
+    if (data.error) {
+        newClass.innerText = `${data.timestamp}: ${data.error}`;
+    } else {
+        addedClass.innerText = `${data.timestamp}: ${data.message}, ${data.class.name} with ${data.class.teacher}`;
+        newClass.append(addedClass);
+        populateSelect(data.class.name);
+    }
     container.append(newClass);
+
 }
 
 const checkBoxChange = async (check) => {
@@ -173,8 +198,6 @@ const checkBoxChange = async (check) => {
 
             let allStudents = res.data.students 
             // console.log(res.data.students);
-            classList.innerText = "";
-            cityList.innerText = "";
             studentList.innerHTML = "";
             allStudents.forEach(student => {
                 let li = document.createElement("li");
@@ -182,6 +205,8 @@ const checkBoxChange = async (check) => {
                 li.innerText = student.name;
                 studentList.appendChild(li);
             })
+            document.querySelector("#classList").value = "";
+            document.querySelector("#cityList").value = "";
             return allClasses
             
             // allClasses.forEach(el => {
