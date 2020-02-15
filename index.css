@@ -1,0 +1,15 @@
+body{
+  background-image: url("./media/Eastside_High_School_logo_low_res.png");
+  background-repeat: repeat;
+}
+
+div{
+  display: block;
+  background-color: white;
+  border: 4px solid orange;
+  margin: auto;
+}
+h1 {
+  text-shadow: 2px 2px 5px orange;
+  color: white;
+}

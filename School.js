@@ -1,5 +1,5 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('./Class.js');
+const Student = require('./Student.js')
 
 class School {
   constructor() {
@@ -19,6 +19,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -29,7 +30,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className]["students"].push(newStudent)
+    return newStudent
   }
 
 
@@ -42,7 +45,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className]["students"]
   }
 
 
@@ -62,8 +65,21 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+  getStudentsByClassWithFilter(className, failing = false, city = "") {
+    let students = this.classes[className]["students"]
+    if (failing === true && city){
+      return students.filter((stu) => {
+        return (stu.grade < 70) && (stu.city.toLowerCase() === city.toLowerCase())
+      })
+    } else if (city){
+      return students.filter((stu) => {
+        return stu.city.toLowerCase() === city.toLowerCase()
+      }) 
+    } else if (failing){
+      return students.filter((stu) => {
+        return stu.grade < 70
+      })
+    }
   }
 
 }
