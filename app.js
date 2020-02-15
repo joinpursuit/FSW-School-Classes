@@ -13,8 +13,28 @@ app.use(bodyParser.json());
 let mySchool = new School();
 const date = new Date();
 
-app.post("/class/:className/enroll", (req, res) => {
-  try {
+const addNewClass = (req, res, next) => {
+  try{
+    let name = req.params.name;
+    let teacher = req.params.teacher;
+    if (!mySchool.classes.className) {
+      mySchool.addClass(name, teacher);
+      res.status(200).json({
+        class: { name: name, teacher: teacher, students: [] },
+        message: "Created new class",
+        timestamp: date
+      });
+    }
+  }catch(err){
+    res.status(400).json({
+        error: "Please fill out all the information or Class already exists",
+        timestamp: date
+    });
+  }
+}
+
+const enrollNewStudent = (req, res, next) => {
+  try{
     let newStudent = new Student(
       req.body.name,
       req.body.age,
@@ -23,19 +43,23 @@ app.post("/class/:className/enroll", (req, res) => {
     );
 
     let studentInfo = mySchool.enrollStudent(req.params.className, newStudent);
-    res.json({
+    res.status(200).json({
       student: studentInfo,
       className: req.params.className,
       message: "Enrolled Student",
       timestamp: date
     });
-  } catch (err) {
-    res.json({
+  }catch(err){
+    res.status(400).json({
       error: "Please fill out all the information for the student",
       timestamp: date
     });
+    next()
   }
-});
+}
+
+
+app.post("/class/:className/enroll", enrollNewStudent)
 
 app.get("/:className/students", (req, res) => {
   let className = req.params.className;
@@ -55,23 +79,7 @@ app.get("/:className/students", (req, res) => {
   }
 });
 
-app.post("/class/:name/:teacher", (req, res) => {
-  let name = req.params.name;
-  let teacher = req.params.teacher;
-  if (!mySchool.classes.className) {
-    mySchool.addClass(name, teacher);
-    res.json({
-      class: { name: name, teacher: teacher, students: [] },
-      message: "Created new class",
-      timestamp: date
-    });
-  } else {
-    res.json({
-      error: "Please fill out all the information or Class already exists",
-      timestamp: date
-    });
-  }
-});
+app.post("/class/:name/:teacher", addNewClass)
 
 app.get("/class", (req, res) => {
   res.json(mySchool);

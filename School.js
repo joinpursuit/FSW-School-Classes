@@ -33,7 +33,7 @@ class School {
   enrollStudent(className, student) { 
     let classObj = this.classes[className].students
     let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    classObj.push(newStudent)
+    return classObj.push(newStudent)
   }
 
   
@@ -92,6 +92,5 @@ class School {
   }
 }
 
-// let mySchool = new School();
 
 module.exports = School;
