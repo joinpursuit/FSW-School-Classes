@@ -51,7 +51,26 @@ if(mySchool.classes[className]){
 
 }
 const enrollStudent=(request,response)=>{
-
+    let name = request.body.name;
+    let age = request.body.age;
+    let city = request.body.city;
+    let grade = request.body.grade;
+    let className = request.params.class_name;
+    let newStudent = new Student(name, age, city, grade, className)
+    let enrolledStudent = mySchool.enrollStudent(className, newStudent);
+    if(!enrolledStudent){
+        response.json({
+            error: "student does not exist",
+            time: new Date()
+        })
+    }else {
+        response.json({
+            student : enrolledStudent,
+            class: className,
+            message: 'Enrolled ',
+            time: new Date()
+        })
+    }
 }
 const classExist=(request,response,next)=>{
     let className = (request.params.nameOfClass)
@@ -64,6 +83,14 @@ const classExist=(request,response,next)=>{
     }
 }
 const studentExist=(request,response,next)=>{
+    if(!request.body.name||!request.body.age|| !request.body.city|| !request.body.grade){
+        response.json({
+            error: "student exists",
+            time: new Date()
+        })
+    }else{
+        next()
+    }
 
 }
 const studentBody=(request,response)=>{
