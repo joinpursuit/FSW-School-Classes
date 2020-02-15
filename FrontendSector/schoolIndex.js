@@ -15,9 +15,11 @@ let enrollStudentError = document.querySelector("#enrollStudentError")
 
 let filterForm = document.querySelector("#filterForm")
 let filterClass = document.querySelector("#filterClass")
+let filterCIty = document.querySelector("#filterCity")
 let filterFailStudents = document.querySelector("#filterFailStudents")
 let submitFilter = document.querySelector("#submitFilter")
 let filterError = document.querySelector("#filterError")
+let ul = document.querySelector("ul")
 
 addClassForm.addEventListener("submit", async event => {
     event.preventDefault()
@@ -48,14 +50,17 @@ enrollStudentForm.addEventListener("submit", async event => {
     enrollStudentForm.reset()
 })
 
+
+const renderData = (className, data) => {
+    
+}
+
 filterForm.addEventListener("submit", async event => {
     event.preventDefault()
     try {
-        let res = await axios.get("http://localhost:3000/class", {
-        
-        });
+        let res = await axios.get(`http://localhost:3000/class?className=${filterClass.value}&city=${filterCity.value}&fail=${filterFailStudents.value}`);
     } catch (error) {  
-        enrollStudentError.innerText = error
+        filterError.innerText = error
     }
     enrollStudentForm.reset()
 })

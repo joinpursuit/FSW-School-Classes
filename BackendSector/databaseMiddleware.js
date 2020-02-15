@@ -37,7 +37,7 @@ const enrollStudent = (req, res, next) => {
 
 const studentFilter = (req, res, next) => {
     try {
-        let filter = school.getStudentsByClassWithFilter(req.body.class, req.body.city, re.body.fail)
+        let filter = school.getStudentsByClassWithFilter(req.query.className, req.query.city, req.query.fail)
         res.json({
             filter,
             status: "Success",

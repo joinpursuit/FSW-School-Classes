@@ -14,7 +14,7 @@ class School {
         throw {Status:500, Message: "Class already exists at NRES"}
       }
     this.classes[name] = newClass;
-    return this.classes
+    return newClass
   }
   enrollStudent(student) {
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
