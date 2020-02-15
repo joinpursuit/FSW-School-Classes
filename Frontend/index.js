@@ -96,8 +96,8 @@ const displayRoster = async (e) => {
    if(checkbox.checked === false) {
       try {
          let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students`)
-         debugger
-         showStudents.innerText = "student(s): " + JSON.stringify(res.data.message)
+         
+         showStudents.innerText = "student(s): " + JSON.stringify(res.data.body)
 
       } catch (err) {
          console.log(err)
