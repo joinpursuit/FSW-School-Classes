@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if(res.data.newClass){
           pClass.innerText = JSON.stringify(`Created a new class: name: ${res.data.newClass }, teacher: ${res.data.teacher }`)
           let li = document.createElement("li")
-          debugger
           li.innerText = res.data.newClass
           className.appendChild(li)
           let option = document.createElement("option");
@@ -107,6 +106,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       console.log(err)
       displayStudent.innerText = `Please fill out all the information or the class doesn't exist.`;
     }
+
   })
   addList.addEventListener("click", async(e)=>{
     //addList.addEventListener("click", async()=>{
@@ -120,8 +120,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let res = await axios.get(`http://localhost:3000/class/${selectedClass}/students?city=${city}&failing=${checkBox}`)
     //let res = await axios.get(`http://localhost:3000/class/${selectedClass}`)
     debugger
-    responseList.innerText = JSON.stringify(res.data.students)
-  
+    responseList.innerText = JSON.stringify(res.data.students) 
 })
 
 })

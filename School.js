@@ -117,10 +117,6 @@ class School {
     // Your code here
     return this.classes[className].students
   }
-
-
-
-
   /**
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 

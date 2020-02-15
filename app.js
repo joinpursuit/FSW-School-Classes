@@ -37,11 +37,11 @@ const checkIfClassExists = (req, res, next) => {
 }
 
 const addNewClass =(req, res) => {
-   mySchool.addClass(req.body.name, req.body.teacher)
+   let addedClass = mySchool.addClass(req.body.name, req.body.teacher)
   res.json({
     status: 200,
-    newClass: req.body.name,
-    teacher: req.body.teacher,
+    newClass: addedClass.name,
+    teacher: addedClass.teacher,
     message: "Created a new class",
     timestamp: timestamp()
   })
@@ -66,7 +66,7 @@ const enrollNewStudent = (req, res) => {
 const listStudentR = (req, res, next) =>{
   if (!mySchool.classes[req.params.className]) {
     res.json({
-      error: `Class ${req.params.className} doesn't exist.`,
+      error: `Class doesn't exist.`,
       timestamp: timestamp()
     })
     return
