@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     } else if (studentCity){
       console.log(studentCity)
-      let res = await axios.get(`http://localhost:3000/class/${className}/students/?city=${studentCity}`)
+      let res = await axios.get(`http://localhost:3000/class/${className}/students/?failing=false&city=${studentCity}`)
       let students = res.data.payload
       students.forEach((student) => {
         let {name, city, age, grade} = student
