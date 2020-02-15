@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 let mySchool = new School();
 const date = new Date();
 
+
+
 const addNewClass = (req, res, next) => {
   try{
     let name = req.params.name;
@@ -58,26 +60,32 @@ const enrollNewStudent = (req, res, next) => {
   }
 }
 
+const getStudents = (req, res, next) => {
+  try{
+    let className = req.params.className;
+    let failing = req.query.failing;
+    let city = req.query.city;
+    let listOfStudents = mySchool.getStudentsByClass(className, failing, city);
+    if (listOfStudents) {
+      res.status(200).json({
+        student: listOfStudents,
+        message: "Retrieved filtered students",
+        timestamp: date
+      });
+    }
+  }catch(err){
+      res.status(400).json({
+        error: `Class ${className} doesn't exist`,
+        timestamp: date
+      })
+      next()
+  }
+}
+
 
 app.post("/class/:className/enroll", enrollNewStudent)
 
-app.get("/:className/students", (req, res) => {
-  let className = req.params.className;
-  let failing = req.query.failing;
-  let city = req.query.city;
-  let listOfStudents = mySchool.getStudentsByClass(className);
-  if (!listOfStudents) {
-    res.json({
-      error: `Class ${className} doesn't exist.`,
-      timestamp: date
-    });
-  } else {
-    res.json({
-      name: className,
-      students: listOfStudents
-    });
-  }
-});
+app.get("/:className/students", getStudents)
 
 app.post("/class/:name/:teacher", addNewClass)
 

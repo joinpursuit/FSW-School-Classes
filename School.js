@@ -20,7 +20,7 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+    return this.classes[name] = newClass;
   }
 
   /**
