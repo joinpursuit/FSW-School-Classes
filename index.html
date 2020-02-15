@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="frontend.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./index.js"></script>
-    <title>School</title>
+    <link rel="stylesheet" href="school.css">
+    <title>Document</title>
 </head>
 <body>
-    
-    
+    <form id="form1" class="forms">
+        <h1>Add a Class</h1>
+        <input class="inputs" type="text" id="class" placeholder="Class Name" onfocus="this.value=''">
+        <input class="inputs" type="text" id="teacher" placeholder="Teacher" onfocus="this.value=''">
+        <input class="submit" type="submit" value="submit">
+    </form>
+    <form id="form2" class="forms">
+        <h1>Add a Student</h1>
+        <input class="inputs" type="text" id="studentClass" placeholder="Class">
+        <input class="inputs" type="text" id="studentName" placeholder="Name">
+        <input class="inputs" type="text" id="studentAge" placeholder="Age">
+        <input class="inputs" type="text" id="studentCity" placeholder="City">
+        <input class="inputs" type="number" id="studentGrade" placeholder="Grade">
+        <input class="submit" type="submit" value="submit">
+    </form>
+    <form id="form3" class="forms">
+        <h1>List all Students</h1>
+        <input class="inputs" type="text" id="passingClass" placeholder="Class">
+        <input class="inputs" type="text" id="city" placeholder="City (Optional)">
+        <input type="checkbox" name="fstudents" id="failing"> Failing Students
+        <input class="submit" type="submit" value="submit">
+        <ul></ul>
+    </form>
 </body>
 </html>

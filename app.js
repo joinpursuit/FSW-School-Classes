@@ -3,19 +3,20 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
-const School = new School();
+const School = require("./School")
+let newSchool = new School();
 const timeStamp = new Date();
 
 app.use(cors());
-app.use(bosyParser.urlcoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const allClasses = (req,res) => {
-    res.json(School);
+    res.json(newSchool);
 }
 
 const classCheck = (req, res, next) => {
-    if(School[classes][req.body.name]){
+    if(newSchool[classes][req.body.name]){
         res.json({
             error:" Info either has already been submited or missing sections",
             timeStamp:timeStamp.toString(Date.now())
@@ -27,7 +28,7 @@ const classCheck = (req, res, next) => {
 }
 
 const checkStudent = (req, res, next) => {
-    let enrolledStudents = School[classes][`${req.params["className"]}`]["students"];
+    let enrolledStudents = newSchool[classes][`${req.params["className"]}`]["students"];
     for(let i = 0; i < enrolledStudents.length; i++){
         if(enrolledStudents[i]["name"] === req.body.name){
             res.json({
@@ -41,7 +42,7 @@ const checkStudent = (req, res, next) => {
 }
 
 const addNewClass = (req, res) => {
-    School.addClass(req.body.name, neq.body.teacher);
+    newSchool.addClass(req.body.name, neq.body.teacher);
     res.json({
         class:{ "name": req.body.name, "teacher": req.body.teacher, "students": []},
         message: "Added a new class",
@@ -50,7 +51,7 @@ const addNewClass = (req, res) => {
 }
 
 const addNewStudent = (req, res) => {
-    mySchool.enrollStudent(req.params["className"], req.body);
+    newSchool.enrollStudent(req.params["className"], req.body);
     res.json({
         student:{ "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade },
         className:req.params["className"],
@@ -72,10 +73,10 @@ const displayStudents = (req, res) => {
             "message": "Retrieved Filtered Students",
             "timestamp": timeStamp.toString(Date.now())
         })
-    } else if(mySchool["classes"][className]){
+    } else if(newSchool["classes"][className]){
         console.log("hello")
         res.json({
-            "students": School.getStudentsByClass(className),
+            "students": newSchool.getStudentsByClass(className),
             "message": "Retrieved Students",
             "timestamp": timeStamp.toString(Date.now())
         }) 
@@ -88,6 +89,10 @@ const displayStudents = (req, res) => {
 }
 
 app.get("/", allClasses);
-app.post("/class", checkClass, addNewClass);
+app.post("/class", classCheck, addNewClass);
 app.post("/class/:className/enroll", checkStudent, addNewStudent);
 app.get("/class/:className/students", displayStudents);
+
+app.listen(port, () => {
+    console.log(`The server is running on port ${port}`);
+  });
