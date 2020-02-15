@@ -93,3 +93,8 @@ input[type="submit"]:focus {
     background-color: rgba(38, 92, 163, 0.8);
     color: white
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+}

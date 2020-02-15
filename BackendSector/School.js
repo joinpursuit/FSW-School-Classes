@@ -16,13 +16,13 @@ class School {
     this.classes[name] = newClass;
     return this.classes
   }
-  enrollStudent(className, student) {
-    let student = new Student(student.name, student.age, student.city, student.grade);
-    if(this.classes[className]["students"].includes(student)){
+  enrollStudent(student) {
+    let newStudent = new Student(student.name, student.age, student.city, student.grade);
+    if(this.classes[student.class]["students"].includes(student.name)){
       throw {Status:500, Message: "Student has already been enrolled for indoctrination"}
     }
-    this.classes[className]["students"].push(student);
-    return student
+    this.classes[student.class]["students"].push(newStudent);
+    return newStudent
   } 
   // getStudentsByClass(className) {
   //   return this.classes[className]["students"]
