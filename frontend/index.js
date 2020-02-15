@@ -74,6 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let studentListCityInput = document.querySelector("#studentListCityInput");
   let checkbox = document.querySelector("#checkbox");
   let failing;
+  let modalUl = document.querySelector("#modalUl");
+  let modal = document.querySelector("#modal");
+  let exitButton = document.querySelector("#exitButton");
+
+  exitButton.addEventListener("click", () => {
+    modal.close();
+  });
 
   checkbox.addEventListener("click", () => {
     if (checkbox.checked) {
@@ -83,6 +90,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const populateUl = studentsArr => {
+    modalUl.innerHTML = "";
+    studentsArr.forEach(student => {
+      let li = document.createElement("li");
+      li.innerText = student.name;
+      modalUl.appendChild(li);
+    });
+  };
+
   listStudentForm.addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -90,8 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
       let res = await axios.get(
         `http://localhost:3000/class/${studentListClassInput.value}/students?failing=${failing}`
       );
+      populateUl(res.data.students);
+      modal.showModal();
     } else {
-      let res = await axios.get(`http://localhost:3000/class/students`);
+      let res = await axios.get(
+        `http://localhost:3000/class/${studentListClassInput.value}/students`
+      );
+      populateUl(res.data.students);
+      modal.showModal();
     }
   });
 });
