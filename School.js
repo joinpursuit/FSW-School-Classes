@@ -28,30 +28,18 @@ class School {
     return this.classes[className]["students"]
   }
 
-  getStudentsByClassWithFilter(className, failing, city) {
-    let filterArr = [];
-    let studentArray = this.classes[`${className}`]["students"]
-    if(failing === 'true' && city != ""){
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["city"] === city && studentArray[i]["grade"] < 70){
-          filterArr.push(studentArray[i]);
-        }
-      }
-    } else if(failing === 'true' && city === ""){
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["grade"] < 70){
-          filterArr.push(studentArray[i])
-          }
-        }
-    } else if(failing != 'true' && city != "") {
-      for(let i = 0; i < studentArray.length; i++){
-        if(studentArray[i]["city"] === city){
-          filterArr.push(studentArray[i])
-        }
-      }
+  getStudentsByClassWithFilter(className, failing = false, city = "") {
+    let students = this.classes[className]["students"]
+    if(failing === true && city){
+      return students.filter((stu) => {
+        return (stu.grade < 70) && (stu.city.toLowerCase()) === city.toLowerCase()
+      })
+    }else if (failing){
+      return students.filter((stu) => {
+        return stu.grade < 70
+      })
     }
-    return filterArr
-  }
+  }   
 
 }
 
