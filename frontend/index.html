@@ -31,19 +31,13 @@
             <input type="text" name="newStudentName" required>
             
             <label for="newStudentAge">Age:</label>
-            <input type="text" name="newStudentAge" required>
+            <input type="number" name="newStudentAge" required>
             
             <label for="newStudentCity">City:</label>
             <input type="text" name="newStudentCity" required>
                 
             <label for="newStudentGrade">Grade:</label>
-            <select name="newStudentGrade" id="" required>
-                <option value="" disabled selected> select a Grade</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="F">F</option>
+            <input type="number" name="newStudentGrade" id="newStudentGrade">
             </select>
 
             <input type="submit" value="Submit">
@@ -64,6 +58,7 @@
             <input type="submit" value="submit">
         </form>
         <ul id="studentListResults"></ul>
+        <footer id="results"></footer>
         
     
     </body>

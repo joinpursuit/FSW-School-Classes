@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     let selectClass = document.querySelector("#addStudentClass")
     let selectClassStudentList = document.querySelector("#listClass")
+    let results = document.querySelector("#results")
 
     const updateClassList = async (select) =>{
         select.innerHTML = ""
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     addClass.addEventListener("submit", async (event)=>{
         event.preventDefault()
+        results.innerHTML = ""
         let newClassName = addClass.newClassName.value.toLowerCase()
         let newClassTeacher = addClass.newClassTeacher.value
         let newClassInfo = {name:newClassName,teacher:newClassTeacher}
@@ -39,34 +41,47 @@ document.addEventListener("DOMContentLoaded", ()=>{
             res = await axios.post("http://localhost:3000/school/class",newClassInfo)
         
             if(res.data.status === "failure"){
-                alert("Class already exists")
+                let h4 = document.createElement("h4")
+                h4.innerText="Class already exists"
+                results.appendChild(h4)
                 updateClassList(selectClass)
                 updateClassList(selectClassStudentList)
                 addClass.reset()
             }else{
-                
+                let h4 = document.createElement("h4")
+                h4.innerText="Success Class added"
+                results.appendChild(h4)
                 updateClassList(selectClass)
                 updateClassList(selectClassStudentList)
                 addClass.reset()
             }
-        
-            } catch(err){
+            
+        } catch(err){
                 console.log(err)
             }
-
-    })
-
-    addStudent.addEventListener("submit", async(event)=>{
-        event.preventDefault()
-
-        let newStudent = {name:addStudent.newStudentName.value, city:addStudent.newStudentCity.value, age:addStudent.newStudentAge.value, grade:addStudent.newStudentGrade.value}
-        let classEnroll = addStudent.addStudentClass.value
+            
+        })
         
-        try{
-            res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent)
-            if(res.status !== 200){
-                alert("Student Enrollment failed")
-                addStudent.reset()
+        addStudent.addEventListener("submit", async(event)=>{
+            event.preventDefault()
+            
+            let newStudent = {name:addStudent.newStudentName.value, city:addStudent.newStudentCity.value, age:addStudent.newStudentAge.value, grade:addStudent.newStudentGrade.value}
+            let classEnroll = addStudent.addStudentClass.value
+            
+            try{
+                res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent)
+                debugger
+                if(res.data.status === "failure"){
+                    let h4 = document.createElement("h4")
+                    h4.innerText="Student Enrollment failed, student already enrolled"
+                    results.appendChild(h4)
+                    addStudent.reset()
+                } else {
+                    let h4 = document.createElement("h4")
+                    h4.innerText="Student Enrollment successful, student  enrolled"
+                    results.appendChild(h4)
+                    addStudent.reset()
+
             }
         } catch(err){
             console.log(err)
