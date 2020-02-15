@@ -12,9 +12,8 @@
 <div id="classDiv">
     <h3>Add New Class</h3>
     <form id="newCLass">
-        <input type="text" id="class" name="class" placeholder="Class Name">
-        <input type="text" id="teacher" name="teacher" placeholder="Teacher's Name">
-
+        <input type="text" id="newClass" name="class" placeholder="Class Name">
+        <input type="text" id="newTeacher" name="teacher" placeholder="Teacher's Name">
         <button type="submit">Submit</button>
     </form>
 </div>
@@ -26,21 +25,23 @@
         <input type="text" id="student" name="student" placeholder="Student's Name">
         <input type="text" id="city" name="city" placeholder="Student's City">
         <input type="text" id="age" name="age" placeholder="Student's Age">
-        <!-- <input type="text" id="class" name="class" placeholder="Student's Class"> -->
-        <select name="classSelect" id="classSelect">
+        <input type="text" id="class" name="class" placeholder="Student's Class">
+        <!-- <select name="classSelect" id="classSelect">
             <option value=""selected disabled>Student's Class</option>
-        </select>
+        </select> -->
         <input type="text" id="grade" name="grade" placeholder="Student's Grade">
         <button type="submit">Submit</button>
     </form>
 
 </div>
 
-<div id="ShowAllDiv">
-    <h3>Show all Students</h3>
-<button>
-    Enrolled Students
-</button>
+<div id="sortDiv">
+    <h3>Sort by Student</h3>
+    <input type="text" id="sortClass" name="class" placeholder="Class Name">
+    <input type="text" id="sortCity" name="city" placeholder="City Name">
+    <label for="">Only Display Failing Students?</label>
+    <input type="checkbox" id="failingStudent">
+    <button type="submit">Submit</button>
 </div>
     
 </body>
