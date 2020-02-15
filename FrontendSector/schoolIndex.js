@@ -19,6 +19,7 @@ let filterCIty = document.querySelector("#filterCity")
 let filterFailStudents = document.querySelector("#filterFailStudents")
 let submitFilter = document.querySelector("#submitFilter")
 let filterError = document.querySelector("#filterError")
+let studentFilterList = document.querySelector("#studentFilterList")
 let ul = document.querySelector("ul")
 
 addClassForm.addEventListener("submit", async event => {
@@ -52,15 +53,24 @@ enrollStudentForm.addEventListener("submit", async event => {
 
 
 const renderData = (className, data) => {
-    
+    studentFilterList.innerHTML = ""
+    h2 = document.createElement("h2")
+    h2.innerText = className
+    studentFilterList.appendChild(h2)
+    data.forEach(student => {
+        let li = document.createElement("li")
+        li.innerText = `${student.name} \n ${student.city} \n ${student.grade}`
+        ul.appendChild(li)
+    })
 }
 
 filterForm.addEventListener("submit", async event => {
     event.preventDefault()
     try {
         let res = await axios.get(`http://localhost:3000/class?className=${filterClass.value}&city=${filterCity.value}&fail=${filterFailStudents.value}`);
+        renderData(filterClass.value, res.data)
     } catch (error) {  
         filterError.innerText = error
     }
-    enrollStudentForm.reset()
+    filterForm.reset()
 })
