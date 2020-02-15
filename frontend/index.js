@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let res = await axios.get("http://localhost:3000/class");
     let classes = Object.keys(res.data);
 
-    // debugger;
-    classes.forEach(class_ => {
+    classes.forEach(className => {
       let newOption = document.createElement("option");
 
-      newOption.innerText = class_;
+      newOption.innerText = className;
+      newOption.value = className;
       select.appendChild(newOption);
     });
   };
@@ -38,16 +38,60 @@ document.addEventListener("DOMContentLoaded", () => {
     addClassForm.reset();
   });
 
-  let addStudentP = document.querySelector("#addStudentP");
   let addStudentDiv = document.querySelector("#addStudentDiv");
   let addStudent = document.querySelector("#addStudent");
   let addStudentForm = document.querySelector("#addStudentForm");
-  let StudentNameInput = document.querySelector("#StudentNameInput");
+  let studentNameInput = document.querySelector("#studentNameInput");
   let studentAgeInput = document.querySelector("#studentAgeInput");
   let studentCityInput = document.querySelector("#studentCityInput");
   let studentGradeInput = document.querySelector("#studentGradeInput");
 
+  let currentVal;
+
+  select.addEventListener("change", e => {
+    currentVal = e.target.value;
+  });
+
   addStudentForm.addEventListener("submit", async e => {
     e.preventDefault();
+
+    let res = await axios.post(
+      `http://localhost:3000/class/${currentVal}/enroll`,
+      {
+        name: studentNameInput.value,
+
+        age: studentAgeInput.value,
+        city: studentCityInput.value,
+        grade: studentGradeInput.value
+      }
+    );
+
+    alert(res.data.message);
+  });
+
+  let listStudentForm = document.querySelector("#listStudentForm");
+  let studentListClassInput = document.querySelector("#studentListClassInput");
+  let studentListCityInput = document.querySelector("#studentListCityInput");
+  let checkbox = document.querySelector("#checkbox");
+  let failing;
+
+  checkbox.addEventListener("click", () => {
+    if (checkbox.checked) {
+      failing = true;
+    } else {
+      failing = false;
+    }
+  });
+
+  listStudentForm.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    if (failing) {
+      let res = await axios.get(
+        `http://localhost:3000/class/${studentListClassInput.value}/students?failing=${failing}`
+      );
+    } else {
+      let res = await axios.get(`http://localhost:3000/class/students`);
+    }
   });
 });

@@ -77,5 +77,6 @@ class School {
 let mySchool = new School();
 
 // console.log(mySchool.getStudentsByClassWithFilter("physics",false,"Queens"));
+// console.log(mySchool.classes.physics);
 
 module.exports = mySchool;

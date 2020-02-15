@@ -21,7 +21,7 @@
             </h1>
 
         <form id="addClassForm">
-            <input id="classNameInput"   type="text" placeholder="Class Name Here">
+            <input required id="classNameInput"   type="text" placeholder="Class Name Here">
             <input id="teacherNameInput" type="text" placeholder="Teacher Name Here">
             <input id="addClassSubmit" type="submit" value="Submit">
 
@@ -44,12 +44,13 @@
                 <option id="pickAClass" disabled selected> Pick A Class</option>
                 
             </select id="select">
-            <input id="studentNameInput" type="text" placeholder="Student Name Here">
-            <input id="studentAgeInput type="text" placeholder="Student Age Here">
-            <input id="studentCityInput type="text" placeholder="Student City Here">
-            <input id="studentGradeInput type="text" placeholder="Student Grade Here">
+            
+            <input  required id="studentNameInput" type="text" placeholder="Student Name Here">
+            <input required id="studentAgeInput" type="text" placeholder="Student Age Here">
+            <input required id="studentCityInput" type="text" placeholder="Student City Here">
+            <input  id="studentGradeInput" type="text" placeholder="Student Grade Here">
 
-            <input id="button" type="submit" value="Submit">
+            <input  id="button" type="submit" value="Submit">
 
         </form>
         <p id="addStudentP"></p>
@@ -71,13 +72,17 @@
                 <option  disabled selected> Pick A Class</option>
             </select> -->
             <input id="studentListClassInput" type="text" placeholder="Class">
-            <input type="text" placeholder="City (optional)">
-            Show Failing Students Only:<input type="checkbox" name="" id="">
+            <input id="studentListCityInput" type="text" placeholder="City (optional)">
+            Show Failing Students Only:<input type="checkbox"  id="checkbox">
             
 
             <input id="button2"type="submit" value="Submit">
 
         </form>
+
+        <dialog id="modal">
+            <button value="cancel">Exit</button>
+        </dialog>
 
         </div>
         

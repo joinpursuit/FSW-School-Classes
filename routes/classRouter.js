@@ -31,6 +31,16 @@ classRouter.post("/add", (req, res) => {
   }
 });
 
+const isStudentEnrolled = (studentName, className) => {
+  let studentsArr = mySchool.classes[className].students;
+
+  return studentsArr.some(student => {
+    if (studentName === student.name) {
+      return true;
+    }
+  });
+};
+
 classRouter.post("/:className/enroll", (req, res) => {
   let className = req.params.className;
   let studentName = req.body.name;
@@ -39,32 +49,41 @@ classRouter.post("/:className/enroll", (req, res) => {
   let studentGrade = req.body.grade;
   let studentsArr = mySchool.classes[className].students;
 
-  studentsArr.forEach(student => {
-    if (studentName === "" || studentAge === "" || studentCity === "") {
-      res.json({
-        error: "Please fill out all the information for the student",
-        timestamp: displayTime()
-      });
-    } else if (student.name === studentName) {
-      student.name = studentName;
-      student.age = studentAge;
-      student.city = studentCity;
-      student.grade = studentGrade;
-    } else {
-      let result = mySchool.enrollStudent(
-        className,
-        studentName,
-        studentAge,
-        studentCity
-      );
-      res.json({
-        student: result,
-        className: className,
-        message: "Enrolled Student",
-        timestamp: displayTime()
-      });
-    }
-  });
+  const UpdateStudentInfo = (student, className) => {
+    studentsArr.forEach(studentInClass => {
+      if (student === studentInClass.name) {
+        studentInClass.name = className;
+        studentInClass.name = student;
+        studentInClass.age = studentAge;
+        studentInClass.city = studentCity;
+        studentInClass.grade = studentGrade;
+        res.json({
+          student: studentName,
+          message: "Updated Student",
+          timestamp: displayTime()
+        });
+      }
+    });
+  };
+
+  if (isStudentEnrolled(studentName, className)) {
+    UpdateStudentInfo(studentName, className);
+  } else {
+    let result = mySchool.enrollStudent(
+      className,
+      studentName,
+      studentAge,
+      studentCity,
+      studentGrade
+    );
+
+    res.json({
+      student: result,
+      className: className,
+      message: "Enrolled Student",
+      timestamp: displayTime()
+    });
+  }
 });
 
 classRouter.get("/:className/students", (req, res) => {
@@ -73,10 +92,13 @@ classRouter.get("/:className/students", (req, res) => {
   let city = req.query.city;
   let obj = req.query;
 
-  if (Object.keys(obj).length < 1) {
+  if (!mySchool.classes.hasOwnProperty(classChosen)) {
+    res.json({
+      error: `Class ${classChosen} doesn't exist.`,
+      timestamp: displayTime()
+    });
+  } else if (Object.keys(obj).length < 1) {
     let students = mySchool.getStudentsByClass(classChosen);
-    console.log(mySchool.classes[classChosen]);
-
     res.json({
       students: students,
       message: "Retrieved Students",
@@ -93,12 +115,7 @@ classRouter.get("/:className/students", (req, res) => {
       message: "Retrieved Students",
       timestamp: displayTime()
     });
-  } //else if(mySchool.classes[classChosen].name === false) {
-  // res.json({
-  //     "error": `Class ${classChosen} doesn't exist.`,
-  //     "timestamp": timestamp()
-  //   })
-  // }
+  }
 });
 
 module.exports = classRouter;
