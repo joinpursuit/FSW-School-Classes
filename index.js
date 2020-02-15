@@ -4,14 +4,14 @@ let select = document.querySelector('#class');
 let listForm = document.querySelector("#studentList");
 let allClassesBtn = document.querySelector("#allClasses");
 let showAllClasses = document.querySelector("#showAllClasses");
-let p = document.createElement("p");
-showAllClasses.appendChild(p);
+let allClass = document.createElement("p");
+showAllClasses.appendChild(allClass);
 
 const getClasses = async () => {
     try {
         let res = await axios.get("http://localhost:3000/class");
         let classes = res.data.allClasses;
-        console.log(classes)
+        // console.log(classes)
         for (let key in classes) {
             let option = document.createElement("option");
             option.innerText = key;
@@ -25,9 +25,30 @@ const getClasses = async () => {
 getClasses();
 allClassesBtn.addEventListener("click", async () => {
     try {
+        allClass.innerHTML = "";
         let res = await axios.get("http://localhost:3000/class");
-        let allClasses = JSON.stringify(res.data.allClasses);
-        p.innerHTML = allClasses;
+        console.log(res.data.allClasses)
+        // debugger;
+        // let allClasses = JSON.stringify(res.data.allClasses);
+        let allClasses = res.data.allClasses;
+        for (let key in allClasses) {
+            let classes = allClasses[key];
+            let className = document.createElement("p");
+            let teacherName = document.createElement("p");
+            className.innerText = classes.name;
+            className.id = "nameOfClass";
+            teacherName.innerText = classes.teacher;
+            teacherName.id ="professor"
+            allClass.append(className, teacherName);
+            let students = classes.students;
+            students.forEach(student => {
+                let p = document.createElement("p");
+                p.id = "students";
+                p.innerText = student.name;
+                allClass.appendChild(p);
+            })
+            // p.innerHTML = allClasses;
+        }
             // if (!p.innerHTML) {
             // } else {
             //     p.innerHTML = "";
@@ -46,7 +67,7 @@ classForm.addEventListener("submit", (e) => {
 listForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let check = document.querySelector("#checkbox").checked;
-    console.log(check);
+    // console.log(check);
     
     checkBoxChange(check);
 
@@ -71,13 +92,7 @@ studentForm.addEventListener("submit", async (e) => {
     cp.innerText = city;
     gp.innerText = grade;
     container.append(snp, ap, cp, gp);
-    
-console.log('in the formjhfjyfjytf');
-
-
     try {
-        console.log('in the try', className);
-        
         let res = await axios.post(`http://localhost:3000/class/${className}/enroll`, {
             className,
             studentName,
@@ -85,13 +100,14 @@ console.log('in the formjhfjyfjytf');
             city,
             grade
         })
-        console.log('adding student',res);
-        
+        // console.log('adding student',res);
         let p = document.createElement("p");
-        p.innerText = JSON.stringify(res.data);
+        // p.innerText = JSON.stringify(res.data);
+        p.innerText = `${res.data.timestamp}: ${res.data.message} in ${res.data.className}`;
+        console.log(res.data)
         container.appendChild(p);
     } catch (err) {
-        console.log('in the catch');
+        // console.log('in the catch');
         // debugger
         console.log(err)
     }
@@ -101,7 +117,7 @@ console.log('in the formjhfjyfjytf');
 const populateSelect = (className) => {
     let option = document.createElement("option");
     option.innerText = className;
-    console.log('new class option=>', option )
+    // console.log('new class option=>', option )
     select.appendChild(option);
 }
 
@@ -113,8 +129,9 @@ const addClass = async () => {
             name,
             teacher
         });  
-        console.log('THis is res=> ',res)
+        // console.log('THis is res=> ',res)
         populateSelect(name);
+        console.log('add class ',res)
         return res; 
     } catch (error) {
         console.log(error);
@@ -123,19 +140,22 @@ const addClass = async () => {
 
 const addClassToDom = async () => {
     data = await addClass();
-    console.log(data);
-    
+    // console.log(data);
     let container = document.querySelector("#addClassDiv");
+    let className = document.querySelector("#className");
+    let teacherName = document.querySelector("#teacherName");
+    className.innerHTML = "";
+    teacherName.innerHTML = "";
 
     let newClass = document.createElement("div");
     newClass.id = 'newClass';
-    let className = document.createElement("p");
-    let teacherName = document.createElement("p");
     
-    className.innerText = data.data.class.name;
-    teacherName.innerText = data.data.class.teacher;
+    let addedClass = document.createElement("p");
+    addedClass.id = "addedClass";
+    addedClass.innerText = `${data.data.timestamp}: ${data.data.message}, ${data.data.class.name} with ${data.data.class.teacher}`;
 
-    newClass.append(className,teacherName);
+
+    newClass.append(addedClass);
 
     container.append(newClass);
 }
@@ -144,25 +164,33 @@ const checkBoxChange = async (check) => {
     let classList = document.querySelector("#classList").value;
     let cityList = document.querySelector("#cityList").value;
         // console.log(check.checked);
-        console.log(check)
+        // console.log(check)
         try {
-            let res = await axios.get(`http://localhost:3000/class/${classList}/students/?failing=${check}&city=${cityList}`);
-            console.log(res);
-            console.log('this is allClasses', res.data.allClasses);
-            console.log(res);
-        
-            let result = [];
-            let allClasses = res.data.allClasses[classList]; 
-            allClasses.forEach(el => {
-                if (el.toLowerCase() === classList.toLowerCase()) {
-                    el['students'].forEach(student => {
-                        if (student.city === cityList && student.grade < 70) {
-                            result.push(student);
-                        }
-                        return result;
-                    })
-                }
+            let res = await axios.get(`http://localhost:3000/class/${classList}/students?failing=${check}&city=${cityList}`);
+            // console.log(res);
+            // console.log('this is allClasses', res.data.student);
+            // console.log(res);
+
+            let allStudents = res.data.students 
+            console.log(res.data.students);
+            allStudents.forEach(student => {
+                let li = document.createElement("li");
+                li.id = "studenntList";
+                li.innerText = student;
+
             })
+            return allClasses
+            
+            // allClasses.forEach(el => {
+            //     if (el === classList) {
+            //         el['students'].forEach(student => {
+            //             if (student.city === cityList && student.grade < 70) {
+            //                 result.push(student);
+            //             }
+            //             return result;
+            //         })
+            //     }
+            // })
         } catch (err) {
             console.log(err)
         }

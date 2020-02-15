@@ -23,7 +23,7 @@ const addClass = (req, res, next) => {
     let teacher = req.body.teacher;
     console.log(mySchool)
     res.json({
-        class: mySchool.addClass(name,teacher),
+        class: mySchool.addClass(name, teacher),
         message: "Created a new class",
         timestamp: timeStamp()
     })
@@ -48,7 +48,9 @@ const addStudent = (req, res) => {
     // let grade = req.body.grade;
     let class_name = req.params.class_name;
     console.log('classname',class_name);
+    console.log(mySchool)
     let qqq = mySchool.enrollStudent(class_name, req.body)
+    console.log(mySchool)
     res.json({
         student: qqq,
         className: class_name,
@@ -114,10 +116,13 @@ const classWithFilter = (req, res, next) => {
     let chosenClass = req.params.class_name;
     let failing = req.query.failing;
     let city = req.query.city;
+    console.log('qweqwe', chosenClass, failing, city)
     try {
         if (failing === "true" && city) {
+            let students = mySchool.getStudentsByClassWithFilter(chosenClass, failing, city)
+            
             res.json({
-                students: mySchool.getStudentsByClassWithFilter(chosenClass, failing, city),
+                students: students ,
                 message: `failing true in city: Retrieved Failing Students in ${city}`,
                 timestamp: timeStamp(),
                 allClasses: ['you', 'reached filter error']
