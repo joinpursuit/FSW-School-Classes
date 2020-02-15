@@ -16,12 +16,38 @@ app.use(bodyParser.json())
 let mySchool = new School();
 
 const checkClassName = (request,response,next)=>{
-
+if(!request.body.name||!request.body.teacher){
+    response.json({
+        error:"not valid data"
+    })
+}else{
+    next()
+}
 }
 const addClass =(request,response)=>{
+    let newClass = mySchool.addClass(request.body.name,request.body.teacher)
+    if(newClass=== newClass){
+        response.json({
+            error:"class exist",
+            time: new Date()
+        })
+    }else{
+        response.json({
+            class: newClass,
+            message: "created new class",
+            time: new Date()
+        })
+    }
 
 }
 const ifRepeated =(request,response,next)=>{
+let className = request.params.nameOfClass
+if(mySchool.classes[className]){
+    response.json({
+        error:"class exists",
+        time: new Date()
+    })
+}
 
 }
 const enrollStudent=(request,response)=>{
@@ -40,7 +66,8 @@ const classExist=(request,response,next)=>{
 const studentExist=(request,response,next)=>{
 
 }
-const studentBody=(request,response,next)=>{
+const studentBody=(request,response)=>{
+    
 
 }
 
