@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express School Project</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+<body>
+    <h1>The School of Hard Knocks</h1>
+<div id="classDiv">
+    <h3>Add New Class</h3>
+    <form id="newCLass">
+        <input type="text" id="class" name="class" placeholder="Class Name">
+        <input type="text" id="teacher" name="teacher" placeholder="Teacher's Name">
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+<div id="studentDiv">
+    <h3>Add New Student</h3>
+    <form id="newStudent">
+        <input type="text" id="student" name="student" placeholder="Student's Name">
+        <input type="text" id="city" name="city" placeholder="Student's City">
+        <input type="text" id="age" name="age" placeholder="Student's Age">
+        <!-- <input type="text" id="class" name="class" placeholder="Student's Class"> -->
+        <select name="classSelect" id="classSelect">
+            <option value=""selected disabled>Student's Class</option>
+        </select>
+        <input type="text" id="grade" name="grade" placeholder="Student's Grade">
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+
+<div id="ShowAllDiv">
+    <h3>Show all Students</h3>
+<button>
+    Enrolled Students
+</button>
+</div>
+    
+</body>
+</html>
