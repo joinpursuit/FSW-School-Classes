@@ -16,7 +16,8 @@ addClass.addEventListener("submit",async (e)=>{
             try{
 
                 let host = await axios.post(`http://localhost:4000/class`, {teacher: teacherInput, class: classesInput})
-                p.innerText = host.data.message
+                debugger
+                p.innerText = host.data
                 classAdd.appendChild(p)
             }catch(error){
                 
@@ -66,6 +67,7 @@ listStudents.addEventListener("submit",async(e)=>{
     try{
         
         let host = await axios.post(`http://localhost:4000/class/${className}/students?failing=${failing}&city=${city}`, {className:className,failing:failing})
+        debugger
         host.forEach(el=>{
         li.innerText = el.name + el.age + el.city + el.grade
         ul.appendChild(li)

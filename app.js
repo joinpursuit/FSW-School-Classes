@@ -41,13 +41,14 @@ const addClass =(request,response)=>{
 
 }
 const ifRepeated =(request,response,next)=>{
-let className = request.params.nameOfClass
-if(mySchool.classes[className]){
+let className = request.body.name
+if(!mySchool.classes[className]){
     response.json({
         error:"class exists",
         time: new Date()
     })
 }
+next()
 
 }
 const enrollStudent=(request,response)=>{
@@ -55,7 +56,7 @@ const enrollStudent=(request,response)=>{
     let age = request.body.age;
     let city = request.body.city;
     let grade = request.body.grade;
-    let className = request.params.class_name;
+    let className = request.params.name;
     let newStudent = new Student(name, age, city, grade, className)
     let enrolledStudent = mySchool.enrollStudent(request.params['className'], newStudent);
     if(!enrolledStudent){
@@ -73,7 +74,7 @@ const enrollStudent=(request,response)=>{
     }
 }
 const classExist=(request,response,next)=>{
-    let className = (request.params.nameOfClass)
+    let className = (request.params.name)
     if(!mySchool.classes[className]){
         response.json({
 
@@ -94,7 +95,7 @@ const studentExist=(request,response,next)=>{
 
 }
 const studentBody=(request,response)=>{
-    let className = request.params.nameOfClass;
+    let className = request.body.name;
     let failing = request.query.failing;
     let city = request.query.city;
     if (failing === 'true') {
