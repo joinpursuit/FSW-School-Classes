@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let p = document.createElement("p")
     p.innerText = res.data.message
     newClassDiv.appendChild(p)
-    newClassForm.reset()  
+    newClassForm.reset()
+    setTimeout(() => location.reload(), 1000)
+
   })
 
   newStudentForm.addEventListener("submit", async (e) => {
