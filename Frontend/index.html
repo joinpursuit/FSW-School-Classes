@@ -27,8 +27,10 @@
    <div id="addStudent">
       <h1>Enter Student Info</h1>
       <form id="studentEntry" autocomplete="off">
-         <label for="courseName">Class Name:</label>
-         <input type="text" id="courseName" required onfocus="this.value=''"><br>
+         <label for="classList">Class Name:</label>
+         <select id="classList"> 
+            <option value="" disabled selected>Select a class</option>
+         </select><br>
          <label for="studentName">Name:</label>
          <input type="text" id="studentName" required onfocus="this.value=''"><br>
          <label for="city">City:</label>
@@ -47,8 +49,10 @@
    <div id="listStudent">
       <h1>Display Students </h1>
       <form id="finalForm" autocomplete="off">
-         <label for="classList">Class:</label>
-         <input type="text" id="classList" required onfocus="this.value=''"><br>
+         <label for="classList2">Class Name:</label>
+         <select id="classList2"> 
+            <option value="" disabled selected>Select a class</option>
+         </select><br>
          <label for="checkbox">Show Failing Students Only:</label>
          <input type="checkbox" id="checkbox">
          <button type="submit">click</button>

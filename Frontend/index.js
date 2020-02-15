@@ -7,34 +7,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
    let displayAllStudents = document.querySelector("#finalForm");
    displayAllStudents.addEventListener("submit", displayRoster);
-
+   
+   getAllClasses('#classList');
+   getAllClasses('#classList2');
+   
 })
 
 const addClass = async (e) => {
    e.preventDefault()
+   console.log(e)
    let className = document.querySelector("#className");
    let teacherName = document.querySelector("#teacher");
-
+   
    let classInput = className.value;
    let teacherInput = teacherName.value;
 
    let displayClass = document.querySelector("#classPrint");
-
+   
    try {
       let res = await axios.post(`http://localhost:4000/class`, { name: classInput, teacher: teacherInput })
-
-      displayClass.innerText = classInput + ": " + JSON.stringify(res.data.class)
-
+      
+      displayClass.innerText = `${res.data.message} called ${res.data.body.name}`
+   
+   getAllClasses('#classList')
+   getAllClasses('#classList2')
 
    } catch (err) {
+      
       console.log(err)
    }
 }
 
+const getAllClasses = async (id) => {
+   try {
+      let classList = document.querySelector(id);
+      
+      classList.innerHTML = "";
+      let res = await axios.get("http://localhost:4000/class")
+      let classes = res.data.body
+      for (let key in classes) {
+         let option = document.createElement('option');
+         option.innerText = key;
+         option.value = key;
+         classList.append(option)
+      }
+   } catch (err) {
+      console.log(err)
+   }
+
+}
+
 const addStudent = async (e) => {
    e.preventDefault()
-   let courseName = document.querySelector("#courseName")
-   let inputCourseName = courseName.value
+   let courseName = document.querySelector("#classList");
+   let inputCourseName = courseName.value;
 
    let studentName = document.querySelector("#studentName");
    let inputStudentName = studentName.value;
@@ -50,9 +76,9 @@ const addStudent = async (e) => {
 
    let displayStudent = document.querySelector("#studentPrint");
    try {
-      let result = await axios.post(`http://localhost:4000/class/${inputCourseName}/enroll`, { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade });
-
-      displayStudent.innerText = JSON.stringify(result.data.student);
+      let res = await axios.post(`http://localhost:4000/class/${inputCourseName}/enroll`, { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade });
+      console.log(res.data)
+      displayStudent.innerText = res.data.message;
 
    } catch (err) {
       console.log(err)
@@ -61,7 +87,7 @@ const addStudent = async (e) => {
 
 const displayRoster = async (e) => {
    e.preventDefault()
-   let classData = document.querySelector("#classList");
+   let classData = document.querySelector("#classList2");
    let classNameInput = classData.value;
 
    let checkbox = document.querySelector("#checkbox");
@@ -70,8 +96,8 @@ const displayRoster = async (e) => {
    if(checkbox.checked === false) {
       try {
          let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students`)
-         
-         showStudents.innerText = "student(s): " + JSON.stringify(res.data.student)
+         debugger
+         showStudents.innerText = "student(s): " + JSON.stringify(res.data.message)
 
       } catch (err) {
          console.log(err)
@@ -88,7 +114,7 @@ const displayFailingStudents = async (classNameInput) => {
    
       try {
          let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students/failing`)
-         let failingStudentArr = res.data.student;
+         let failingStudentArr = res.data.body;
 
          classData.innerText = JSON.stringify(failingStudentArr)
 
