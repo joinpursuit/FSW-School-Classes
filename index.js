@@ -13,9 +13,14 @@ addClass.addEventListener("submit",async (e)=>{
             classesInput.value = ""
             teacherInput.value = ""
             let p = document.createElement("p")
-            let host = await axios.post(`http://localhost:4000/classes`, {teacher: teacherInput, class: classesInput})
-            p.innerText = host.data.message
-            classAdd.appendChild(p)
+            try{
+
+                let host = await axios.post(`http://localhost:4000/class`, {teacher: teacherInput, class: classesInput})
+                p.innerText = host.data.message
+                classAdd.appendChild(p)
+            }catch(error){
+                
+            }
       
     
 
@@ -33,22 +38,41 @@ addStudent.addEventListener("submit",async(e)=>{
         grade.value = ""
         city.value = ""
         let p = document.createElement("p")
-        let host = await axios.post(`http://localhost:4000/classes/enroll`, {class: className, name, age, grade, city})
-        debugger
-        p.innerText = host.data.message
-        studentEnroll.appendChild(p)
+        try{
+
+            let host = await axios.post(`http://localhost:4000/class/${className}`, {class: className, name, age, grade, city})
+            debugger
+            p.innerText = host.data
+            studentEnroll.appendChild(p)
+        }catch(error){
+            console.log(error)
+        }
   
 })
 listStudents.addEventListener("submit",async(e)=>{
     e.preventDefault()
     let className = document.querySelector("#classList").value
+    let city = document.querySelector("#cityList").value
     className.value = ""
+    city.value =""
     let failing = document.querySelector("#fail")
     let ul = document.querySelector("ul")
     let li = document.createElement("li")
-    let host = await axios.post(`http://localhost:4000/classes/lists`, {className:className,failing:failing})
-    li.innerText = host.data.message
-    ul.appendChild(li)
+    if (failing.checked) {
+        failing = 'true';
+    } else {
+        failing = 'false';
+    }
+    try{
+        
+        let host = await axios.post(`http://localhost:4000/class/${className}/students?failing=${failing}&city=${city}`, {className:className,failing:failing})
+        host.forEach(el=>{
+        li.innerText = el.name + el.age + el.city + el.grade
+        ul.appendChild(li)
+        })
+    }catch(error){
+        console.log(error)
+    }
 })
 
 // const getStudentsByClass = async (event) => {
