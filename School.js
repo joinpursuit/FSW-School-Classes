@@ -5,7 +5,45 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: "physics",
+          teacher: "Smith",
+          students: [
+            {
+              name: "Jan",
+              age: 15,
+              city: "Brooklyn",
+              grade: 98
+            },
+            
+          ]
+        }, 
+        english: {
+          name: "physics",
+          teacher: "Smith",
+          students: [
+            {
+              name: "Greg",
+              age: 17,
+              city: "Brooklyn",
+              grade: 58
+            },
+            
+          ]
+        },
+        physics: {
+          name: "physics",
+          teacher: "Smith",
+          students: [
+            {
+              name: "Bobby",
+              age: 15,
+              city: "Queens",
+              grade: 58
+            },
+            
+          ]
+        }  
 
     }
   }
@@ -20,6 +58,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -32,7 +71,7 @@ class School {
   enrollStudent(className, student) {
     // Your code here
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
-    this.classes[name].students.push(newStudent);
+    this.classes[`${className}`].students.push(newStudent);
 
   }
 

@@ -10,79 +10,46 @@ addClass.addEventListener("submit",async (e)=>{
             let teacher = document.querySelector("#teacherName")
             let classesInput = classes.value
             let teacherInput = teacher.value
+            classesInput.value = ""
+            teacherInput.value = ""
             let p = document.createElement("p")
-            let host = await axios.post(`http://localhost:4000/classes/add`, {teacher: teacherInput, class: classesInput})
+            let host = await axios.post(`http://localhost:4000/classes`, {teacher: teacherInput, class: classesInput})
             p.innerText = host.data.message
             classAdd.appendChild(p)
-            addClass.reset()
+      
+    
 
 })
-// document.addEventListener("DOMContentLoaded", () => {
-//     let addButton = document.querySelector("#addButton")
-//     addButton.addEventListener("click", addClass)
-//     let enrollButton = document.querySelector("#enrollButton")
-//     enrollButton.addEventListener("click", enrollStudent)
-//     let listButton = document.querySelector("#listButton")
-//     listButton.addEventListener("click", getStudentsByClass)
-    
-//     const addClass = async (event) => {
-//         event.preventDefault()
-//         classes.value = ""
-//         teacher.value = ""
-//         let classAdd = document.querySelector("#classAdd")
-//       
-    
-//         try{
-//             let response = await axios.post(host, classInfo)
-//             console.log(response)
-// 
-//   
-//         }catch(error){
-//     console.log(error)
-//         }
-    
-//     }
-// })
-
-// const enrollStudent = async (event) => {
-//     event.preventDefault()
-//     let classes = document.querySelector("#class")
-//     let student = document.querySelector("#student")
-//     let age = document.querySelector("#age")
-//     let city = document.querySelector("#city")
-//     let grade = document.querySelector("#grade")
-//     let classInput = classes.value
-//     let nameInput = student.value
-//     let ageInput = age.value
-//     let cityInput = city.value
-//     let gradeInput = grade.value
-//     classes.value = ""
-//     student.value = ""
-//     age.value = ""
-//     grade.value = ""
-//     city.value = ""
-//     let p = document.createElement("p")
-//     let studentEnroll = document.querySelector("#studentEnroll")
-//     let host = "http://localhost:4000/classes/enroll"
-
-//     let studentInfo = {
-//         student: nameInput,
-//         classes: classInput,
-//         age: ageInput,
-//         city: cityInput,
-//         grade: gradeInput
-//     }
-//     try{
-//         let response = await axios.post(host, studentInfo)
-//         p.innerText = response.data.message
-//         studentEnroll.appendChild(p)
-//     }catch(error){
-// console.log(error)
-//     }
-
-
-
-// }
+addStudent.addEventListener("submit",async(e)=>{
+    e.preventDefault()
+        let className = document.querySelector("#class").value
+        let name = document.querySelector("#student").value
+        let age = document.querySelector("#age").value
+        let city = document.querySelector("#city").value
+        let grade = document.querySelector("#grade").value
+        className.value = ""
+        name.value = ""
+        age.value = ""
+        grade.value = ""
+        city.value = ""
+        let p = document.createElement("p")
+        let host = await axios.post(`http://localhost:4000/classes/enroll`, {class: className, name, age, grade, city})
+        debugger
+        p.innerText = host.data.message
+        studentEnroll.appendChild(p)
+  
+})
+listStudents.addEventListener("submit",async(e)=>{
+    e.preventDefault()
+    let className = document.querySelector("#classList").value
+    className.value = ""
+    let failing = document.querySelector("#fail")
+    let ul = document.querySelector("ul")
+    let li = document.createElement("li")
+    let host = await axios.post(`http://localhost:4000/classes/lists`, {className:className,failing:failing})
+    li.innerText = host.data.message
+    ul.appendChild(li)
+})
 
 // const getStudentsByClass = async (event) => {
 //     event.preventDefault()
