@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           result.innerText = `Teacher: ${teacher} : Class: ${newClass}`;
           div1.appendChild(result);
           debugger;
-          alert(res.data.message);
+          console.log(res.data.message);
         });
     } catch (err) {
       console.log(err);
