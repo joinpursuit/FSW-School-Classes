@@ -20,7 +20,7 @@ let filterFailStudents = document.querySelector("#filterFailStudents")
 let submitFilter = document.querySelector("#submitFilter")
 let filterError = document.querySelector("#filterError")
 let studentFilterList = document.querySelector("#studentFilterList")
-let ul = document.querySelector("ul")
+
 
 addClassForm.addEventListener("submit", async event => {
     event.preventDefault()
@@ -55,6 +55,7 @@ enrollStudentForm.addEventListener("submit", async event => {
 const renderData = (className, data) => {
     studentFilterList.innerHTML = ""
     h2 = document.createElement("h2")
+    ul = document.createElement("ul")
     h2.innerText = className
     studentFilterList.appendChild(h2)
     data.forEach(student => {

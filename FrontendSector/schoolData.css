@@ -95,6 +95,7 @@ input[type="submit"]:focus {
 }
 
 .error {
+    margin: 10px;
     color: red;
     font-weight: bold;
 }
