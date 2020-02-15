@@ -42,6 +42,7 @@ classesRouter.get("/:city/students"),
     let city = req.params.city
     let arr = mySchool.getStudentsByCity(city)
     res.json(arr)
+    console.log(arr)
   }
 
 classesRouter.post("/:className/enroll", (req, res) => {

@@ -19,12 +19,18 @@
     </h1>
 
     <div id="formDiv">
-      <h2><b>ADD CLASS</b></h2>       
-      <form id="formAddClass">
-        <input id="teacherInput" type="text" placeholder="Enter Teacher Name" />
-        <input id="classInput" type="text" placeholder="Enter Class Name" />
-        <button id="addClassInfo" type="submit">Submit</button>
-      </form>
+      <h2><b>ADD CLASS</b></h2>
+      <div id="addClassDiv">
+        <form id="formAddClass">
+          <input
+            id="teacherInput"
+            type="text"
+            placeholder="Enter Teacher Name"
+          />
+          <input id="classInput" type="text" placeholder="Enter Class Name" />
+          <button id="addClassInfo" type="submit">Submit</button>
+        </form>
+      </div>
 
       <h2><b>ADD STUDENT</b></h2>
       <form id="formAddStudent">
@@ -57,7 +63,7 @@
       </form>
 
       <h2><b>STUDENT LIST</b></h2>
-      <form id="listStudents" >
+      <form id="listStudents">
         <input
           id="studentByClassInput"
           type="text"

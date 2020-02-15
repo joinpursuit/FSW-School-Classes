@@ -52,6 +52,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher)
     this.classes[name] = newClass
+    return newClass
   }
 
   enrollStudent(className, stdnt) {
@@ -67,7 +68,7 @@ class School {
     // Your code here
     let arr = mySchool.classes[className].students
     console.log(arr)
-    if (city !== undefined) {
+    if (city) {
       arr = arr.filter(s => s.city === city)
       console.log(s.city)
     }
@@ -83,22 +84,19 @@ class School {
     console.log(city)
     let studentByCityArr = []
     for (let className in this.classes) {
-      for (let students in className) {
-        students.forEach(el => {
-          if (el.city === city) {
-            
-            studentByCityArr.push(el)
-          }
-        })
-        return studentByCityArr
-      }
+      // for (let students in className) {
+      className.students.forEach(student => {
+        if (student.city === city) {
+          studentByCityArr.push(student)
+        }
+      })
+      // }
     }
-    className.students[0].city
+    return studentByCityArr
+    // className.students[0].city
   }
 }
 
 let mySchool = new School()
 
-module.exports = mySchool
-
-
+module.exports = mySchool 

@@ -7,6 +7,8 @@ class Class {
 
   addStudent = student => {
     this.students.push(student)
+    return this.students
   }
+  
 }
 module.exports = Class

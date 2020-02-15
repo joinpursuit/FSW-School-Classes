@@ -21,11 +21,18 @@ let studentByCityInput = document.querySelector("#studentByCityInput")
 let getStudentInfoBtn = document.querySelector("#getStudentInfo")
 
 let div = document.querySelector("#students")
+let classes = []
 
-addClassInfoBtn.addEventListener("click", e => {
+let addClassDiv = document.querySelector("#addClassDiv")
+addClassInfoBtn.addEventListener("click", async e => {
   e.preventDefault()
   formAddClass.innerHtml = ""
-  axios.post(`http://localhost:3001/class/add`).then(res => {
+  try {
+    let res = await axios.post(`http://localhost:3001/class/add`, {
+      teacher: teacherInput.value,
+      class: classInput.value
+    })
+    // console.log(res)
     // debugger
     formAddClass.classList.add("hidden")
     res.data.class.teacher = teacherInput.value
@@ -33,8 +40,11 @@ addClassInfoBtn.addEventListener("click", e => {
 
     let p = document.createElement("p")
     p.innerText = `Teacher : ${res.data.class.teacher}, Class: ${res.data.class.name}`
-    formDiv.appendChild(p)
-  })
+    addClassDiv.appendChild(p)
+  } catch (err) {
+    console.log(err)
+  }
+  //try catch async await
 })
 
 getStudentInfoBtn.addEventListener("click", e => {
@@ -43,6 +53,7 @@ getStudentInfoBtn.addEventListener("click", e => {
   axios
     .get(`http://localhost:3001/class/${studentByClassInput.value}/students`)
     .then(res => {
+      console.log(res)
       formListStudents.classList.add("hidden")
       res.data.forEach(el => {
         let ul = document.createElement("ul")
@@ -54,11 +65,12 @@ getStudentInfoBtn.addEventListener("click", e => {
       })
     })
   axios
-    .get(`http://localhost:3001/class/${studentByCityInput.value}/students`)
+    .get(`http://localhost:3001/${studentByCityInput.value}/students`)
     .then(res => {
-      // console.log(res)
-      // debugger
+      console.log(res)
+      debugger
       res.data.forEach(el => {
+        console.log(res)
         let ul = document.createElement("ul")
         let li = document.createElement("li")
         li.innerText = el.city
@@ -66,4 +78,42 @@ getStudentInfoBtn.addEventListener("click", e => {
         div.appendChild(ul)
       })
     })
+})
+
+addStudentInfoBtn.addEventListener("click", async e => {
+  e.preventDefault()
+  formAddStudent.innerHTML = ""
+  try {
+    let res = await axios.post(
+      `http://localhost:3001/class/${studentClassInput.value}/enroll`,
+      {
+        name: studentNameInput.value,
+        age: studentAgeInput.value,
+        city: studentCityInput.value,
+        grade: studentGradeInput.value
+      }
+    )
+    debugger
+    let subject = await axios.get(
+      `http://localhost:3001/class/${studentByClassInput.value}/students`
+    )
+    console.log(subject)
+    console.log(res)
+    // formListStudents.classList.add("hidden")
+    subject.data.forEach(el => {
+      let ul = document.createElement("ul")
+      let li = document.createElement("li")
+      li.classList.add("studentListLi")
+      li.innerText = el.name
+      ul.appendChild(li)
+      div.appendChild(ul)
+
+      console.log(res)
+      // formAddStudent.classList.add("hidden")
+      res.data.class = studentClassInput.value
+      res.data.class.name = studentNameInput.value
+    })
+  } catch (err) {
+    console.log(err)
+  }
 })
