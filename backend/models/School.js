@@ -13,6 +13,16 @@ class School {
             age: 15,
             city: "Brooklyn",
             grade: 98
+          },
+          {name: "Corey",
+            age: 100,
+            city: "Brooklyn",
+            grade: 19
+          },
+          {name: "John",
+            age: 60,
+            city: "queens",
+            grade: 60
           }
           ]
         } 
@@ -56,10 +66,10 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    return this.classes[className]["students"]
 
+    let students = this.classes[className]["students"]
 
-    // Your code here
+    return students
   }
 
 
@@ -80,18 +90,36 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    let studentList = []
+    let studentList = this.classes[className]["students"]
+    let newStudentList = []
     // let list = 
 
-    if(failing === true && city !== "all"){
+    console.log({className,newStudentList,failing,city,studentList})
 
-    } else if(failing === false && city !== "all"){
-
-    }else if(failing === false && city === "all"){
+    if(failing === "true" && city === "all"){
+      studentList.forEach(student =>{
+        if(student["grade"] <70){
+          newStudentList.push(student)
+        }
+      })
+      
+    }else if(failing === "true" && city !== "all"){
+      
+      studentList.forEach(student =>{
+        if(student["grade"] <70  && student["city"].toLowerCase() === city.toLowerCase()){
+          newStudentList.push(student)
+        }
+      })
+    } else if(failing === "false" && city !== "all"){
+        studentList.forEach(student =>{
+          if(student["city"].toLowerCase() === city.toLowerCase()){
+            newStudentList.push(student)
+          }
+        })
 
     }
 
-    return studentList
+    return newStudentList
 
   }
 

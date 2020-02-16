@@ -19,7 +19,6 @@ const addNewClass = (req,res) =>{
         })
     } else {
         school.addClass(newClassName.toLowerCase(),newClassTeacher)
-        console.log(school)
         res.json({
             class:school.classes[newClassName],
             status:"sucess",
@@ -32,8 +31,6 @@ const addNewClass = (req,res) =>{
 const studentCheck = (className, student)=>{
 
     let studentList = []
-    let studentIndex = ''
-    console.log(school.classes[className]["students"])
     if(!school.classes[className]["students"]){
         return false
     }
@@ -41,8 +38,6 @@ const studentCheck = (className, student)=>{
     school.classes[className]["students"].forEach(pupil =>{
         studentList.push(Object.values(pupil).join(","))
     })
-    console.log(studentList)
-    console.log(Object.values(student).join(","))
     if(studentList.includes(Object.values(student).join(","))){
         return true
     } else {
@@ -76,5 +71,24 @@ const addNewStudent = (req, res) =>{
 }
 
 
+const studentsByClass = (req,res)=>{
+    let queryClass = req.params["className"]
+    let queryfailing = req.query["failing"]
+    let queryCity = req.query["city"]
+    let queryStudentList
 
-module.exports = {addNewClass,addNewStudent,getAllClasses};
+    if(queryfailing === "false" && queryCity === "all"){
+        queryStudentList = school.getStudentsByClass(queryClass)
+        
+    } else {
+        
+        queryStudentList = school.getStudentsByClassWithFilter(queryClass,queryfailing,queryCity)
+    }
+    res.json({
+        students: queryStudentList,
+        message: "Retrieved Students",
+        timestamp: Date(Date.now()).toString()
+    })
+}
+
+module.exports = {addNewClass,addNewStudent,getAllClasses, studentsByClass};

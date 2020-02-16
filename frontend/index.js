@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         select.appendChild(selectOption)
         try{
         res = await axios.get("http://localhost:3000/school/")
-        debugger
         let classList = res.data.classes
             for(key in classList){
                 let option = document.createElement("option")
@@ -70,7 +69,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
             
             try{
                 res = await axios.post(`http://localhost:3000/school/${classEnroll}/enroll`,newStudent)
-                debugger
                 if(res.data.status === "failure"){
                     let h4 = document.createElement("h4")
                     h4.innerText="Student Enrollment failed, student already enrolled"
@@ -90,20 +88,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     studentList.addEventListener("submit", async (event)=>{
         event.preventDefault()
-        let results = document.querySelector("#studentListResults")
         let showFail = studentList.failingStudents.checked
         let showCity = studentList.listCity.value
-        debugger
-        let className = studentList.newClassName.value
+        let selectedClass = studentList.listClass.value
+        console.log({showFail,showCity,selectedClass})
 
         if(showCity===""){
             showCity = "all"
         }
 
-        debugger
         try{
-            res = await axios.post(`http://localhost:3000/class/${className}/students/?failing=${showFail}&city=${showCity}`)
+            res = await axios.get(`http://localhost:3000/school/${selectedClass}/students/?failing=${showFail}&city=${showCity}`)
+            reqStudentList= res.data.students
             debugger
+
+            let ul =document.createElement("ul")
+            reqStudentList.forEach(student =>{
+                let li = document.createElement("li")
+                let studentInfo = ""
+                for(key in student){
+                    studentInfo += `${key}: ${student[key]} `
+                }
+                li.innerText = studentInfo
+                ul.appendChild(li)
+            })
+
+            results.appendChild(ul)
             
         } catch(err){
             console.log(err)
