@@ -21,69 +21,69 @@ document.addEventListener("DOMContentLoaded", () => {
     enrollStudentsForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
-            let data = await axios.post(`http://localhost:3000/classes/enroll/${studentNameInput.value}/${studentClassInput.value}`)
+            let data = await axios.post(`http://localhost:3000/classes/${studentClassInput.value}/enroll`)
             debugger
         } catch (error) {
-            
+
         }
     })
 
-    button.addEventListener("click", async () => {
-        let data = await axios.get("http://localhost:3000/")
-        let div = document.querySelector("#allClasses")
-        let classes = data.data
-        let h2 = document.createElement("h2")
-        div.innerHTML = ""
-        h2.innerText = "ALL CLASSES"
-        div.appendChild(h2)
-        let ul = document.createElement("ul")
-        div.appendChild(ul)
-        for (let classRoom in classes) {
-            let li = document.createElement("li")
-            li.innerText = classRoom
-            ul.appendChild(li)
-        } 
-    })
+    // button.addEventListener("click", async () => {
+    //     let data = await axios.get("http://localhost:3000/")
+    //     let div = document.querySelector("#allClasses")
+    //     let classes = data.data
+    //     let h2 = document.createElement("h2")
+    //     div.innerHTML = ""
+    //     h2.innerText = "ALL CLASSES"
+    //     div.appendChild(h2)
+    //     let ul = document.createElement("ul")
+    //     div.appendChild(ul)
+    //     for (let classRoom in classes) {
+    //         let li = document.createElement("li")
+    //         li.innerText = classRoom
+    //         ul.appendChild(li)
+    //     } 
+    // })
 
-    classSearchForm.addEventListener("submit", async(e) => {
-        e.preventDefault()
-        try {
-            let data = await axios.get(`http://localhost:3000/classes/${classSearchInput.value}`)
-            let students = data.data 
-            let ul = document.createElement("ul")
-            ul.innerHTML = ""
-            students.forEach((student) => {
-                let li = document.createElement("li")
-                li.innerText = `Student name: ${student.name},  Age: ${student.age},  Grade: ${student.grade}`
-                ul.appendChild(li)
-            })
-            classSearchDiv.appendChild(ul)
-            debugger
-        } catch (error) {
+    // classSearchForm.addEventListener("submit", async(e) => {
+    //     e.preventDefault()
+    //     try {
+    //         let data = await axios.get(`http://localhost:3000/classes/${classSearchInput.value}`)
+    //         let students = data.data 
+    //         let ul = document.createElement("ul")
+    //         ul.innerHTML = ""
+    //         students.forEach((student) => {
+    //             let li = document.createElement("li")
+    //             li.innerText = `Student name: ${student.name},  Age: ${student.age},  Grade: ${student.grade}`
+    //             ul.appendChild(li)
+    //         })
+    //         classSearchDiv.appendChild(ul)
+    //         debugger
+    //     } catch (error) {
             
-        }
-    })
+    //     }
+    // })
 
     
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault()
-        try {
-            let data = await axios.post(`http://localhost:3000/class/${classInput.value}/addClass`, {})
-            data.data.class = classInput.value 
-            let h2 = document.createElement("h2")
-            h2.innerHTML = ""
-            h2.innerText = `Congrats! You've created a new class: ${classInput.value}`
-            let messages = document.querySelector("#messages")
-            messages.appendChild(h2)
-        } catch (error) {
+    // form.addEventListener("submit", async (e) => {
+    //     e.preventDefault()
+    //     try {
+    //         let data = await axios.post(`http://localhost:3000/class/${classInput.value}/addClass`, {})
+    //         data.data.class = classInput.value 
+    //         let h2 = document.createElement("h2")
+    //         h2.innerHTML = ""
+    //         h2.innerText = `Congrats! You've created a new class: ${classInput.value}`
+    //         let messages = document.querySelector("#messages")
+    //         messages.appendChild(h2)
+    //     } catch (error) {
 
-        }
-    })
-
-    // collapse.addEventListener("click", () => {
-    //     allClassesDiv.innerHTML = ""
+    //     }
     // })
-    document.body.appendChild(button)
+
+    // // collapse.addEventListener("click", () => {
+    // //     allClassesDiv.innerHTML = ""
+    // // })
+    // document.body.appendChild(button)
     
 
     

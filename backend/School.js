@@ -12,7 +12,7 @@ class School {
             age: 14,
             city: "Brooklyn",
             grade: 98
-        },
+        }
       ]} 
     }
   }
@@ -28,6 +28,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     newClass.name = name;
+    return newClass;
   }
 
   /**
@@ -39,8 +40,9 @@ class School {
    */
 
   enrollStudent(className, student) {
-    student = new Student(student.name, student.age, student.city, student.grade)
+    student = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
     this.classes[className]["students"].push(student)
+    return this.classes[className]
   }
 
   /**
@@ -50,11 +52,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    let students = Object.values(this.classes[className]["students"])
-    return students
+   return this.classes[className].students
   }
-
-
 
 
   /**
@@ -74,15 +73,11 @@ class School {
 
 
   getStudentsByClassWithFilter(className, failing, city) {
-    
+  }
+
+  getClasses() {
+    return this.classes
   }
 }
-
-let school = new School()
-// let marvin = new Student("Marvin", "25", "Laurelton", 65)
-
-// console.log(testSchool.addClass("Physics", "Teacher"))
-// // console.log(testSchool.enrollStudent("Physics", marvin))
-
 
 module.exports = School;
