@@ -25,6 +25,27 @@ class School {
             grade: 60
           }
           ]
+        } ,
+      Gym: {
+          name: "Gym",
+          teacher: "Jack",
+          students: [
+            {name: "Peter",
+            age: 17,
+            city: "Queens",
+            grade: 98
+          },
+          {name: "William",
+            age: 45,
+            city: "New York City",
+            grade: 34
+          },
+          {name: "Noel",
+            age: 60,
+            city: "queens",
+            grade: 80
+          }
+          ]
         } 
     }
   }

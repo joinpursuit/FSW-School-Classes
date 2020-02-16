@@ -57,6 +57,7 @@ const addNewStudent = (req, res) =>{
             student:newStudent,
             className:enrollClass,
             message: "Enrolled Student",
+            status: "success",
             timestamp: Date(Date.now()).toString()
         })
 
@@ -84,11 +85,24 @@ const studentsByClass = (req,res)=>{
         
         queryStudentList = school.getStudentsByClassWithFilter(queryClass,queryfailing,queryCity)
     }
-    res.json({
-        students: queryStudentList,
-        message: "Retrieved Students",
-        timestamp: Date(Date.now()).toString()
-    })
+
+    if(queryStudentList.length === 0){
+
+        res.json({
+            students: queryStudentList,
+            status: "failure",
+            message: " No Students found",
+            timestamp: Date(Date.now()).toString()
+        })
+    } else {
+
+        res.json({
+            status: "success",
+            students: queryStudentList,
+            message: "Retrieved Students",
+            timestamp: Date(Date.now()).toString()
+        })
+    }
 }
 
 module.exports = {addNewClass,addNewStudent,getAllClasses, studentsByClass};
