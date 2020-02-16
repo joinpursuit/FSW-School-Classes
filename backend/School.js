@@ -68,7 +68,7 @@ class School {
    let allStudents = this.classes[className][students]
    if(failing=== true){
      students.filter((student)=>{
-       return student.grade <65
+       return student.grade <=65
      })
    } else {
     return allStudents
