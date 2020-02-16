@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Express Poject</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="./master.css" />
+    <title>Pursuit-Core-Web-Express-Project</title>
+</head>
+<body>
+
+    <div id="mainDiv"> 
+        <h1> Welcome to the School of Hogwarts!</h1>
+        <!-- <button id=welcomeBtn> Click To Enter Database </button> -->
+
+        <!-- referenced star wars lesson -->
+
+        <select name="" id="populateClasses">
+            <option value="select1" selected disabled>View All Classes</option>
+        </select>
+
+        <br> 
+        <br> 
+
+        <select name="" id="populateStudents">
+            <option value="select2" selected disabled>View All Students</option>
+        </select>
+
+
+
+
+
+            <div id="addClassDivHead">
+                <h3> Please fill out the form below to add a new class</h3>     
+            <div> 
+
+            <div id="addClassDivMain">
+                <form id="addClassForm"> 
+                    Class Name:<br>
+                    <input type="text" id="className" name="class" value="">
+                    <br>
+        
+                    Teacher:<br>
+                    <input type="text" id="teacherName" name="teacher" value="">
+                    <br>
+                    
+                    <input class="submit" type="submit" id="addClassBtn" value="Add Class">
+                    <br><br>
+                    
+                    <!-- <button id="classBtn" type="submit">Add Class</button> -->
+
+                </form>
+            </div>  
+            
+            <div id="newClassDisplay">
+                <ul id="newClassDisplayUL"></ul>
+                
+            </div>
+
+
+            <div id="enrollStudentDiv">
+                <h3> Please fill out the form below to add a new student</h3>
+                <form id="enrollStudentForm">
+                    Class:<br>
+                    <input type="text" id="sClassName" name="class" value="">
+                    <br>
+
+                    Name:<br>
+                    <input type="text" id="studentName" name="name" value="">
+                    <br>
+
+                    Age: <br>
+                    <input type="text" id="studentAge" name="age" value="">
+                    <br>
+
+                    City: <br>
+                    <input type="text" id="studentCity" name="city" value="">
+                    <br>
+
+                    Grade: <br>
+                    <input type="text" id="studentGrade" name="grade" value="">
+                    <br>
+
+                    <input class="submit" type="submit" id="studenetEnrollBtn" value="Enroll New Student">
+                    <br><br>
+
+    
+    
+                    </form> 
+            </div>
+          
+            <div id="newStudentDisplay"> 
+                <ul id="newStudentDisplayUL"> </ul>
+            </div>
+
+    </div> 
+
+    <div> 
+
+        <h3> If you would like to see failing students, click below.</h3>
+
+        <div> 
+            <form id="failingForm">
+                Add Class: <br>
+                <input type="text" id="enterClass" name="class" value="">
+                <br>
+
+                Add City: <br>
+                <input type="text" id="addCity" name="class" value="">
+                <br>
+
+                <input type="checkbox" id="displayFailing" name="" value=""> Show Failing Students<br>
+                <br><br>
+
+                <input class="submit" type="submit" id="fsBtn" value="Viola!">
+                    
+
+                
+              </form>
+        </div> 
+
+        <div id="failingStudentList">
+            <ul id="failingStudentListUL"> 
+            </ul>
+        </div> 
+
+    </div>
+
+
+
+
+
+    </div>
+    
+    
+</body>
+</html>

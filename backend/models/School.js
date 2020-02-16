@@ -1,12 +1,15 @@
-const Class = require('./Classes');
-const Student = require('./Student')
+const Class = require('../models/Class');
+const Student = require('../models/Student')
 
 
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+      physics: {
+        name: 'physics',
+        teacher: 'Ms. Noi',
+        students:[]
+      }
     }
   }
 
@@ -21,6 +24,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    // return newClass
   }
 
   /**
@@ -31,7 +35,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    return this.classes[className].students.push(student);
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    // this.classes["className"]["students"].push(newStudent);     figure out why this line isn't working... student not defined??
+    return newStudent
   }
 
 
@@ -43,7 +49,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    return this.classes[className].students;
+    return this.classes[`${className}`]["students"];
   }
 
   /**
@@ -63,23 +69,21 @@ class School {
 
 
   getStudentsByClassWithFilter(className, failing, city) {
-    if(failing && city) {
-      this.classes[className].students.filter(el => {
-        return el.grade < 70 && el.city === city;
+    let students = this.classes[`${className}`]["students"]
+    if (failing && city){
+      return students.filter((student) => {
+        return (student.grade < 70) && (student.city === city)
       })
-    } else if (failing) {
-      this.classes[className].students.filter(el => {
-        return el.grade < 70;
+    } else if (city){
+      return students.filter((student) => {
+        return student.city === city
       }) 
-    } else if (city)
-      this.classes[className].students.filter(el => {
-        return el.city === city
+    } else if (failing){
+      return students.filter((student) => {
+        return student.grade < 70
       })
     }
-
+  }
 }
-
-
-
 
 module.exports = School;
