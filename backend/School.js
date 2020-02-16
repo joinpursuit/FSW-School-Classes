@@ -8,28 +8,30 @@ class School {
       //   physics: {} 
     }
   }
-
   /**
    * Add class to classes
    * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
+   * @param {string} name - Name of the class done
+   * @param {string} teacher - Name of instructor  deon
+   * @return {Class} Class object deon
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
    * Enroll student in class
    * 
-   * @param {string} className - Name of the class
+   * @param {string} className - Name of the class 
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(name,age,city,grade)
+    this.Classes[className][student].push(newStudent)
+    return newStudent
   }
 
 
@@ -42,7 +44,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className][students]
   }
 
 
@@ -59,11 +61,18 @@ class School {
    * 
    * @param {string} className - Name of the class
    * @param {boolean} failing - Whether to return students that are failing the class or not
-   * @param {string} city - Name of the city to match against students
+   * @param {string} city - Name of the city to match against students optional
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+  getStudentsByClassWithFilter(className, failing) {
+   let allStudents = this.classes[className][students]
+   if(failing=== true){
+     students.filter((student)=>{
+       return student.grade <65
+     })
+   } else {
+    return allStudents
+  }
   }
 
 }
