@@ -1,71 +1,82 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require("./Class");
+const Student = require("./Student");
 
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
-    }
+      physics: {
+        name: "physics",
+        teacher: "Jon A",
+        students: [
+          { name: "slater", age: 14, city: "Brooklyn", grade: 35 },
+          {
+            name: "zach",
+            age: 14,
+            city: "Brooklyn",
+            grade: 98
+          },
+          {
+            name: "screech",
+            age: 14,
+            city: "Queens",
+            grade: 45
+          },
+          {
+            name: "lisa",
+            age: 14,
+            city: "Queens",
+            grade: 98
+          },
+          {
+            name: "jessy",
+            age: 14,
+            city: "Queens",
+            grade: 69
+          }
+        ]
+      },
+      english: { name: "english", teacher: "lee", students: [] }
+    };
   }
-
-  /**
-   * Add class to classes
-   * 
-   * @param {string} name - Name of the class
-   * @param {string} teacher - Name of instructor 
-   * @return {Class} Class object
-   */
+  addClassToClasses(name, teacher) {
+    this.addClass(name, teacher);
+    return this.classes[name];
+  }
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return this.classes[name];
   }
 
-  /**
-   * Enroll student in class
-   * 
-   * @param {string} className - Name of the class
-   * @param {Student} student - Student object
-   * @return {Student} Enrolled student
-   */
-  enrollStudent(className, student) {
-    // Your code here
+  enrollStudent(className, student, age, city) {
+    let studentsarr = this.classes[className].students;
+    let newStudent = new Student(student, age, city, "N/A");
+    studentsarr.push(newStudent);
+    return newStudent;
   }
 
-
-
-
-  /**
-   * Get all students enrolled in a class
-   * 
-   * @param {string} className - Name of the class
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students;
   }
 
-
-
-
-  /**
-   * Get all students and apply filters. If failing = true
-   * return all students that are failing the class, 
-   * that is all students whose grade is less than 70.
-   * If a city is passed return students whose city match
-   * the city passed. If both failing and city are passed
-   * return students that are failing and that live in the
-   * specified city
-   * 
-   * @param {string} className - Name of the class
-   * @param {boolean} failing - Whether to return students that are failing the class or not
-   * @param {string} city - Name of the city to match against students
-   * @return {Student[]} Array of Student objects
-   */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
+    let studentsArr = this.classes[className].students;
 
+    return studentsArr.filter(student => {
+      if (failing && student.grade < 70 && student.city === city) {
+        return student;
+      } else if (failing === undefined && student.city === city) {
+        return student;
+      } else if (failing && student.grade < 70 && city === undefined) {
+        return student;
+      }
+    });
+  }
 }
 
-module.exports = School;
+let mySchool = new School();
+
+// console.log(mySchool.getStudentsByClassWithFilter("physics",false,"Queens"));
+// console.log(mySchool.classes.physics);
+
+module.exports = mySchool;
