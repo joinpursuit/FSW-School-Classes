@@ -45,7 +45,7 @@ const addStudent = async() =>{
     try{
         let form2 = document.querySelector("#form2")
         form2.addEventListener("submit",async(event)=>{
-            debugger
+           // debugger
             event.preventDefault()
             let name = document.querySelector("#name")
             let age = document.querySelector("#age")
@@ -64,20 +64,26 @@ const addStudent = async() =>{
     }
     addStudent()
 
-    
-    const listStudent = async() =>{
-        try{
-            let ul = document.querySelector("#listStudent")
-            let select = document.querySelector("submitStudent")
-            let res = await axios.get("http://localhost:7000/class/student")
-            debugger
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-
-
-
 }
-    
+const listStudent = async() =>{
+    try{
+        let form3 = document.querySelector("#form3")
+        form3.addEventListener("click", async(event)=>{
+            event.preventDefault()
+            let ul = document.querySelector("#listStudent")
+            let li = document.createElement("li")
+            //let select = document.querySelector("#submitStudent")
+            let res = await axios.get(`http://localhost:7000/class/`)
+            let classClist = res.data.classes
+            debugger
+            li.innerText = classClist
+            ul.appendChild(li)c
+
+
+        })
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+listStudent()
