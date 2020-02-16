@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./index.js" async ></script>
+    <script src="./index.js" ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="master.css">
     <title>Express Project</title>
 </head>
 <body>
-    <form id="addClass">
+    <form class="addClass">
         <input type="text" placeholder="Class Name"  id="classNameInput">
         <input type="text" placeholder="Teacher" id="teacherNameInput">
         <button>Add Class</button>
-        <ul><li id="addClass"></li></ul>
+        <ul><li id="addAClass"></li></ul>
     </form>
     <br>
-    <form id="addStudent">
+    <form class="addStudent">
         <input type="text" placeholder="Class">
         <input type="text" placeholder="Name">
         <input type="text" placeholder="Age">
@@ -25,7 +26,7 @@
         <button>Add Student</button>
     </form>
     <br>
-    <form id="listStudents">
+    <form class="listStudents">
         <input type="text" placeholder="" id="listStudentsInput">
         <input type="checkbox">
         <button>Submit</button>

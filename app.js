@@ -33,19 +33,19 @@ app.post("/class", (req, res) => {
     }
 
 })
-app.post('/class/:name/:teacher', (req, res) => {
-    let keys = Object.keys(mySchool.classes)
+// app.post('/class/:name/:teacher', (req, res) => {
+//     let keys = Object.keys(mySchool.classes)
 
-    if(keys.includes(req.params.name)){
-            res.send({error: "Please fill out all the information or Class already exists",
-            timestamp: "YYYY, MM/DD HH:MM:SS"})
-        }else {
-            mySchool.classes[mySchool.addClass(req.params.name, req.params.teacher)]
-            mySchool.classes[req.params.name]["message"] = "Created a new class"
-            mySchool.classes[req.params.name]["timestamp"] = "Todays Date"
-            res.send(mySchool.classes) 
-        }
-})
+//     if(keys.includes(req.params.name)){
+//             res.send({error: "Please fill out all the information or Class already exists",
+//             timestamp: "YYYY, MM/DD HH:MM:SS"})
+//         }else {
+//             mySchool.classes[mySchool.addClass(req.params.name, req.params.teacher)]
+//             mySchool.classes[req.params.name]["message"] = "Created a new class"
+//             mySchool.classes[req.params.name]["timestamp"] = "Todays Date"
+//             res.send(mySchool.classes) 
+//         }
+// })
 app.post('/class/:className/enroll', (req, res) => {
     let className = req.params.className
     mySchool.classes[className]["students"].push()
