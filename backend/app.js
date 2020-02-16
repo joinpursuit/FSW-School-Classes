@@ -30,3 +30,58 @@ app.listen(port, () => {
   theSchool.enrollStudent("Science",{name:"Sarah",age:18,city:"Bronx",grade:65})
   theSchool.enrollStudent("Math",{name:"Lyn",age:17,city:"Manhattan",grade:55})
   theSchool.enrollStudent("Math",{name:"Carla",age:15,city:"Bronx",grade:80})
+  // theSchool.getStudentsByClass([className]["students"])
+// console.log(theSchool.classes);
+// console.log(theSchool);
+// console.log(theSchool.classes["History"]["students"]);
+// console.log(theSchool.getStudentsByClass("Math"));
+
+
+// theSchool.classes[className]["students"]
+
+
+app.get("/school",(req,res)=>{
+  let moment = req.timestamp
+  try {
+    let info = theSchool
+    res.json({
+    payload: info,
+    status: "success",
+    message: "Retrieved Students",
+    moment
+  })
+  } catch (error) {
+    console.log(error)
+  }
+}) 
+
+app.get("/class",(req,res)=>{
+  let moment = req.timestamp
+  try {
+    let info = theSchool.classes
+    res.json({
+    payload: info,
+    status: "success",
+    message: "Retrieved Students",
+    moment
+  })
+  } catch (error) {
+    console.log(error)
+  }
+}) 
+
+app.get("/:className/students",(req,res)=>{
+  let moment = req.timestamp
+  let {className} = req.params
+  try {
+    let info = theSchool.getStudentsByClass(className)
+    res.json({
+    payload: info,
+    status: "success",
+    message: "Retrieved Students",
+    moment
+  })
+  } catch (error) {
+    console.log(error)
+  }
+})
