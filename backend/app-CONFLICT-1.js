@@ -35,7 +35,7 @@ app.listen(port, () => {
 // console.log(theSchool)
 // console.log(theSchool.classes["Math"]["students"])
 // console.log(theSchool.getStudentsByClass("Math"))
-console.log(theSchool.getStudentsByClassWithFilter("Math", true))
+// console.log(theSchool.getStudentsByClassWithFilter("Math", true))
 
 
 // theSchool.classes[className]["students"]

@@ -35,8 +35,7 @@ app.listen(port, () => {
 // console.log(theSchool)
 // console.log(theSchool.classes["Math"]["students"])
 // console.log(theSchool.getStudentsByClass("Math"))
-// console.log(theSchool.getStudentsByClassWithFilter("Math", false))
-// console.log(theSchool.getStudentsByClassWithFilter("Math", true))
+console.log(theSchool.getStudentsByClassWithFilter("Math", true))
 
 
 // theSchool.classes[className]["students"]
@@ -76,28 +75,7 @@ app.listen(port, () => {
 //   let moment = req.timestamp
 //   let {className} = req.params
 //   try {
-//     console.log(req.query.failing);
-    
 //     let info = theSchool.getStudentsByClass(className)
-//     res.json({
-//     payload: info,
-//     status: "success",
-//     message: "Retrieved Students",
-//     moment
-//   })
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
-
-// app.get("/:className/students",(req,res)=>{
-//   let moment = req.timestamp
-//   let {className} = req.params
-//   let value = req.query.failing
-//   var boolValue = (value == 'true');
-//   let failing = boolValue
-//   try {
-//     let info = theSchool.getStudentsByClassWithFilter(className, failing) 
 //     res.json({
 //     payload: info,
 //     status: "success",

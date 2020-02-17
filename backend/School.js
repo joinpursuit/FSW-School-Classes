@@ -64,7 +64,7 @@ class School {
    * @param {string} city - Name of the city to match against students optional
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing = false) {
+  getStudentsByClassWithFilter(className, failing) {
    let allStudents = this.classes[className]["students"]
    if (failing === true){
     return allStudents.filter((el)=>{
