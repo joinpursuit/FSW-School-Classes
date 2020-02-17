@@ -64,15 +64,14 @@ class School {
    * @param {string} city - Name of the city to match against students optional
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing) {
-   let allStudents = this.classes[className][students]
-   if(failing=== true){
-     students.filter((student)=>{
-       return student.grade <=65
+  getStudentsByClassWithFilter(className, failing = false) {
+   let allStudents = this.classes[className]["students"]
+   if (failing === true){
+    return allStudents.filter((el)=>{
+       return el.grade < 70
      })
-   } else {
+   }
     return allStudents
-  }
   }
 
 }
