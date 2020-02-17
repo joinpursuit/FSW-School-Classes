@@ -35,8 +35,7 @@ app.listen(port, () => {
 // console.log(theSchool)
 // console.log(theSchool.classes["Math"]["students"])
 // console.log(theSchool.getStudentsByClass("Math"))
-// console.log(theSchool.getStudentsByClassWithFilter("Math", false))
-// console.log(theSchool.getStudentsByClassWithFilter("Math", true))
+console.log(theSchool.getStudentsByClassWithFilter("Math", true))
 
 
 // theSchool.classes[className]["students"]
@@ -57,27 +56,25 @@ app.listen(port, () => {
 //   }
 // }) 
 
-app.get("/class",(req,res)=>{
-  let moment = req.timestamp
-  try {
-    let info = theSchool.classes
-    res.json({
-    payload: info,
-    status: "success",
-    message: "Retrieved classes",
-    moment
-  })
-  } catch (error) {
-    console.log(error)
-  }
-}) 
+// app.get("/class",(req,res)=>{
+//   let moment = req.timestamp
+//   try {
+//     let info = theSchool.classes
+//     res.json({
+//     payload: info,
+//     status: "success",
+//     message: "Retrieved Students",
+//     moment
+//   })
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }) 
 
 // app.get("/:className/students",(req,res)=>{
 //   let moment = req.timestamp
 //   let {className} = req.params
 //   try {
-//     console.log(req.query.failing);
-    
 //     let info = theSchool.getStudentsByClass(className)
 //     res.json({
 //     payload: info,
@@ -89,73 +86,3 @@ app.get("/class",(req,res)=>{
 //     console.log(error)
 //   }
 // })
-
-app.get("/:className/students",(req,res)=>{
-  let moment = req.timestamp
-  let {className} = req.params
-  let value = req.query.failing
-  var boolValue = (value == 'true');
-  let failing = boolValue
-  try {
-    let info = theSchool.getStudentsByClassWithFilter(className, failing) 
-    res.json({
-    payload: info,
-    status: "success",
-    message: "Retrieved Students",
-    moment
-  })
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-
-app.post("/class", (req, res) => {
-  let moment = req.timestamp
-  let {name, teacher} = req.body
-  try {
-        let info = theSchool.addClass(name, teacher)
-        res.json({
-        payload: info,
-        status: "success",
-        message: "class added",
-        moment
-      })
-      } catch (error) {
-        console.log(error)
-      }
-})
-
-app.post("/class/:className/enroll", (req, res) => {
-  let moment = req.timestamp
-  let {className} = req.params
-  let {name, age, grade, city} = req.body
-  age = Number(age)
-  grade = Number(grade)
-  let student = {name,age,city,grade}
-
-  // enrollStudent(className, student) {
-  //   let newStudent = new Student(student.name,student.age,student.city,student.grade)
-  //   this.classes[className]["students"].push(newStudent)
-  //   return newStudent
-  // }
-
-  let info = theSchool.enrollStudent(className, student) 
-  // console.log(info);
-  // console.log(Number(age));
-  
-
-
-  try {
-        res.json({
-        payload: info,
-        status: "success",
-        message: "student added",
-        moment
-      })
-      } catch (error) {
-        console.log(error)
-      }
-
-
-})
