@@ -77,7 +77,7 @@ const addStudent = async (e) => {
    let displayStudent = document.querySelector("#studentPrint");
    try {
       let res = await axios.post(`http://localhost:4000/class/${inputCourseName}/enroll`, { name: inputStudentName, city: inputCity, age: inputAge, grade: inputGrade });
-      console.log(res.data)
+
       displayStudent.innerText = res.data.message;
 
    } catch (err) {
@@ -92,13 +92,19 @@ const displayRoster = async (e) => {
 
    let checkbox = document.querySelector("#checkbox");
    let showStudents = document.querySelector("#rosterPrint");
-   
+   showStudents.innerHTML = "";
    if(checkbox.checked === false) {
       try {
          let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students`)
          
-         showStudents.innerText = "student(s): " + JSON.stringify(res.data.body)
-
+         let students = res.data.body
+         
+         students.forEach(student => {
+            let li = document.createElement("li");
+            li.innerText = `Name: ${student.name}, City: ${student.city}, Age: ${student.age}, Grade: ${student.grade}`;
+            showStudents.appendChild(li)
+         })
+         
       } catch (err) {
          console.log(err)
       }
@@ -111,12 +117,16 @@ const displayRoster = async (e) => {
 
 const displayFailingStudents = async (classNameInput) => {
    let classData = document.querySelector("#rosterPrint");
-   
+   classData.innerHTML = "";
       try {
          let res = await axios.get(`http://localhost:4000/class/${classNameInput}/students/failing`)
          let failingStudentArr = res.data.body;
 
-         classData.innerText = JSON.stringify(failingStudentArr)
+         failingStudentArr.forEach(student => {
+            let li = document.createElement("li");
+            li.innerText = `Name: ${student.name}, City: ${student.city}, Age: ${student.age}, Grade: ${student.grade}`;
+            classData.appendChild(li)
+         })
 
       } catch (err) {
          console.log("there was an error with display failing students frontend ", err)

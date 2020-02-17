@@ -15,6 +15,7 @@ h1 {
 input {
    border-color: purple;
    margin: 5px;
+   width: 5%;
 }
 
 button {
@@ -36,4 +37,20 @@ button:active {
 label {
    color: darkmagenta;
    font-weight: bold;
+}
+
+#rosterPrint {
+   list-style-type: none;
+   line-height: 25px;
+   border: 5px double darkgreen;
+   background-color: white;
+   width: 45%;
+   font-size: small
+}
+
+p {
+   border: 5px double darkgreen;
+   background-color: white;
+   width: 45%;
+   font-size: small 
 }

@@ -14,7 +14,7 @@
       <h1>Enter Class Info</h1>
       <form id="classEntry" autocomplete="off">
          <label for="className">Class Name:</label>
-         <input type="text" id="className" required onfocus="this.value=''"><br>
+         <input type="text" id="className" required onfocus="this.value=''"><br><br>
          <label for="teacher">Teacher:</label>
          <input type="text" id="teacher" required onfocus="this.value=''">
          <button type="submit">click</button>
@@ -30,13 +30,13 @@
          <label for="classList">Class Name:</label>
          <select id="classList"> 
             <option value="" disabled selected>Select a class</option>
-         </select><br>
+         </select><br><br>
          <label for="studentName">Name:</label>
-         <input type="text" id="studentName" required onfocus="this.value=''"><br>
+         <input type="text" id="studentName" required onfocus="this.value=''"><br><br>
          <label for="city">City:</label>
-         <input type="text" id="city" required onfocus="this.value=''"><br>
+         <input type="text" id="city" required onfocus="this.value=''"><br><br>
          <label for="age">Age:</label>
-         <input type="text" id="age" required onfocus="this.value=''"><br>
+         <input type="text" id="age" required onfocus="this.value=''"><br><br>
          <label for="grade">Grade:</label>
          <input type="number" id="grade" required onfocus="this.value=''" min="1" max="100">
          <button type="submit">click</button>
@@ -52,12 +52,12 @@
          <label for="classList2">Class Name:</label>
          <select id="classList2"> 
             <option value="" disabled selected>Select a class</option>
-         </select><br>
+         </select><br><br>
          <label for="checkbox">Show Failing Students Only:</label>
          <input type="checkbox" id="checkbox">
          <button type="submit">click</button>
       </form>
-      <p id="rosterPrint"></p>
+      <ul id="rosterPrint"></ul>
    </div>
  
 </body>
