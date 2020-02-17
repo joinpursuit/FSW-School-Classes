@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="index.js"></script>
+   <link rel="stylesheet" href="index.css">
+   <title>School</title>
+</head>
+<body>
+   <div id="class">
+      <h1>Enter Class Info</h1>
+      <form id="classEntry" autocomplete="off">
+         <label for="className">Class Name:</label>
+         <input type="text" id="className" required onfocus="this.value=''"><br><br>
+         <label for="teacher">Teacher:</label>
+         <input type="text" id="teacher" required onfocus="this.value=''">
+         <button type="submit">click</button>
+      </form>
+      <p id="classPrint"></p>
+   </div>
+   
+   <br>
+   
+   <div id="addStudent">
+      <h1>Enter Student Info</h1>
+      <form id="studentEntry" autocomplete="off">
+         <label for="classList">Class Name:</label>
+         <select id="classList"> 
+            <option value="" disabled selected>Select a class</option>
+         </select><br><br>
+         <label for="studentName">Name:</label>
+         <input type="text" id="studentName" required onfocus="this.value=''"><br><br>
+         <label for="city">City:</label>
+         <input type="text" id="city" required onfocus="this.value=''"><br><br>
+         <label for="age">Age:</label>
+         <input type="text" id="age" required onfocus="this.value=''"><br><br>
+         <label for="grade">Grade:</label>
+         <input type="number" id="grade" required onfocus="this.value=''" min="1" max="100">
+         <button type="submit">click</button>
+      </form>
+      <p id="studentPrint"></p>
+   </div>
+
+   <br>
+
+   <div id="listStudent">
+      <h1>Display Students </h1>
+      <form id="finalForm" autocomplete="off">
+         <label for="classList2">Class Name:</label>
+         <select id="classList2"> 
+            <option value="" disabled selected>Select a class</option>
+         </select><br><br>
+         <label for="checkbox">Show Failing Students Only:</label>
+         <input type="checkbox" id="checkbox">
+         <button type="submit">click</button>
+      </form>
+      <ul id="rosterPrint"></ul>
+   </div>
+ 
+</body>
+</html>

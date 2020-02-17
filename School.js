@@ -1,9 +1,10 @@
 const Class = require('./Class');
-const Student = require('./Student')
+const Student = require('./Student');
 
 class School {
   constructor() {
     this.classes = {
+      Physics:{name: "Physics", teacher: "Henry Roman", students: [{name: "Karen", city: "Brooklyn", age: 21, grade: 55}, {name: "Will", city: "Philly", age: 51, grade: 90}]},
       // className: Class Object
       //   physics: {} 
     }
@@ -19,6 +20,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -30,6 +32,12 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    let newStudent = new Student (student.name,student.age, student.city, student.grade)
+    console.log(newStudent)
+    console.log(this.classes[className])
+    this.classes[className].students.push(newStudent)
+    console.log(this.classes[className].students)
+   return newStudent
   }
 
 
@@ -43,6 +51,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    return this.classes[className].students
   }
 
 
@@ -62,10 +71,17 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
+  getStudentsByClassWithFilter(className) {
     // Your code here
+    let studentArr = this.classes[className].students;
+    let failArr = studentArr.filter(student => {
+        return student.grade <= 70
+    })
+    return failArr
   }
 
 }
+
+
 
 module.exports = School;

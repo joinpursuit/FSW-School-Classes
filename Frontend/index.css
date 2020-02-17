@@ -1,0 +1,56 @@
+body {
+   background-color: deeppink;
+   width: 100%;
+   height:100%;
+}
+
+form {
+   background-color: lavender;
+   width: 50%
+}
+
+h1 {
+   color: white;
+}
+input {
+   border-color: purple;
+   margin: 5px;
+   width: 5%;
+}
+
+button {
+   padding: 5px 10px;
+   font-size: 10px;
+   text-align: center;
+   cursor: pointer;
+   color: white;
+   background-color: darkgreen;
+   border-radius: 5px;
+   box-shadow: 0 3px #999;
+}
+button:active {
+   background-color: #3e8e41;
+   box-shadow: 0 3px #666;
+   transform: translateY(4px);
+}
+
+label {
+   color: darkmagenta;
+   font-weight: bold;
+}
+
+#rosterPrint {
+   list-style-type: none;
+   line-height: 25px;
+   border: 5px double darkgreen;
+   background-color: white;
+   width: 45%;
+   font-size: small
+}
+
+p {
+   border: 5px double darkgreen;
+   background-color: white;
+   width: 45%;
+   font-size: small 
+}
