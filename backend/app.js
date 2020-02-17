@@ -68,7 +68,11 @@ app.get("/class",(req,res)=>{
     moment
   })
   } catch (error) {
-    console.log(error)
+    res.json({
+      status: "error",
+      message: "classes not Retrieved ",
+      moment
+    })
   }
 }) 
 
@@ -105,7 +109,11 @@ app.get("/:className/students",(req,res)=>{
     moment
   })
   } catch (error) {
-    console.log(error)
+    res.json({
+      status: "error",
+      message: "Students not Retrieved ",
+      moment
+    })
   }
 })
 
@@ -122,7 +130,11 @@ app.post("/class", (req, res) => {
         moment
       })
       } catch (error) {
-        console.log(error)
+        res.json({
+          status: "error",
+          message: "class not added",
+          moment
+        })
       }
 })
 
@@ -154,8 +166,10 @@ app.post("/class/:className/enroll", (req, res) => {
         moment
       })
       } catch (error) {
-        console.log(error)
+        res.json({
+          status: "error",
+          message: "student not added",
+          moment
+        })
       }
-
-
 })
