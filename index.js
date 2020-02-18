@@ -93,22 +93,24 @@ addStudentInfoBtn.addEventListener("click", async e => {
         grade: studentGradeInput.value
       }
     )
-    debugger
-    let subject = await axios.get(
-      `http://localhost:3001/class/${studentByClassInput.value}/students`
-    )
-    console.log(subject)
+    // debugger
+
+    // console.log(subject)
+    res.data = arr
     console.log(res)
     // formListStudents.classList.add("hidden")
-    subject.data.forEach(el => {
+    arr.forEach(el => {
       let ul = document.createElement("ul")
       let li = document.createElement("li")
+      let p = document.createElement("p")
       li.classList.add("studentListLi")
-      li.innerText = el.name
+      p.innerText = `New Student Added:`
+      li.innerText = `Name: ${el.name} Age: ${el.age} City: ${el.city} Grade: ${el.grade}`
+      formAddStudent.appendChild(p)
+      formAddStudent.appendChild(ul)
       ul.appendChild(li)
-      div.appendChild(ul)
 
-      console.log(res)
+      // console.log(res)
       // formAddStudent.classList.add("hidden")
       res.data.class = studentClassInput.value
       res.data.class.name = studentNameInput.value

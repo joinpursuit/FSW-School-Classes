@@ -1,5 +1,5 @@
-const Class = require("./Class")
-const Student = require("./Student")
+const Class = require("./Class.js")
+const Student = require("./Student.js")
 
 class School {
   constructor() {
@@ -56,7 +56,8 @@ class School {
   }
 
   enrollStudent(className, stdnt) {
-    this.classes[className].addStudent(stdnt)
+    this.classes[className].students.push(stdnt)
+
     return stdnt
   }
 
@@ -99,4 +100,4 @@ class School {
 
 let mySchool = new School()
 
-module.exports = mySchool 
+module.exports = mySchool
