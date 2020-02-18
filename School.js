@@ -4,46 +4,9 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-        physics: {
-          name: "physics",
-          teacher: "Smith",
-          students: [
-            {
-              name: "Jan",
-              age: 15,
-              city: "Brooklyn",
-              grade: 98
-            },
-            
-          ]
-        }, 
-        english: {
-          name: "physics",
-          teacher: "Smith",
-          students: [
-            {
-              name: "Greg",
-              age: 17,
-              city: "Brooklyn",
-              grade: 58
-            },
-            
-          ]
-        },
-        physics: {
-          name: "physics",
-          teacher: "Smith",
-          students: [
-            {
-              name: "Bobby",
-              age: 15,
-              city: "Queens",
-              grade: 58
-            },
-            
-          ]
-        }  
+      Physics:{name: "Physics", teacher: "Smith", students: 
+      [{name: "Shawn", city: "NY", age: 5, grade: 100},
+       {name: "Alicia", city: "NJ", age: 50, grade: 60}]},
 
     }
   }
@@ -71,7 +34,8 @@ class School {
   enrollStudent(className, student) {
     // Your code here
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
-    this.classes[`${className}`].students.push(newStudent);
+    this.classes[className].students.push(newStudent);
+    return newStudent
 
   }
 
@@ -107,15 +71,11 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     let students = this.classes[className].students;
-    if (failing === true) {
-      return students.filter((el) => {
-        return (el.grade < 65)
-      });
-    } else if (failing) {
-      return students.failing((el) => {
-        return el.grade < 65
-      })
-    }
+    let fail = students.filter(el=>{
+      return el.grade <  65
+    })
+    return fail
+
 
   }
 
