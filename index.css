@@ -1,0 +1,38 @@
+body{
+  background-image: linear-gradient(to bottom right, red, yellow);
+}
+
+h2{
+  font-size: xx-large;
+  font-style: oblique;
+  font-family: sans-serif;
+  margin: 20px; 
+} 
+
+#pClass,#pStudent{
+  font-size: large;
+  font-style: oblique;
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+#displayBtn{
+  margin: 40px;
+}
+
+#className,#teacher,#addClass,#classBtn{
+ margin: 20px; 
+}
+
+#studentForm,#studentClass,#studentName,#studentAge,#studentCity,#studentGrade,#studentBtn{
+  margin: 20px; 
+}
+
+#searchClass{
+  margin-left: 40px;
+}
+
+#searchCity{
+  margin: 30px; 
+}
+

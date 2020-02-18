@@ -1,3 +1,4 @@
+
 class Student {
   constructor(name, age, city, grade) {
     this.name = name
@@ -7,4 +8,12 @@ class Student {
   }
 }
 
-module.exports = Student;
+// const varOne = 'a';
+// const varTwo = 'b';
+
+// module.exports = {
+//   varOne: varOne,
+//   varTwo: varTwo,
+// }
+
+ module.exports = Student;
