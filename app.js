@@ -14,30 +14,35 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
 
 let mySchool = new School();
-
+const allClasses = (request,response)=>{
+response.status(200).json({
+    status: "success",
+    message: "All classes",
+    body: mySchool.classes
+})
+}
 const checkClassName = (request,response,next)=>{
-if(!request.body.name||!request.body.teacher){
+    let classes = request.body.classes
+    let teacher = request.body.teacher
+if(!classes||!teacher){
     response.json({
-        error:"not valid data"
+        error:"not valid data",
+        time: new Date()
     })
 }else{
     next()
 }
 }
 const addClass =(request,response)=>{
-    let newClass = mySchool.addClass(request.body.name,request.body.teacher)
-    if(newClass=== newClass){
-        response.json({
-            error:"class exist",
-            time: new Date()
-        })
-    }else{
-        response.json({
-            class: newClass,
-            message: "created new class",
-            time: new Date()
-        })
-    }
+    let classes = request.body.classes
+    let teacher = request.body.teacher
+    let newClass = mySchool.addClass(classes, teacher)
+    request.status(200).json({
+        status:"success",
+        message: "added a new class",
+        body: newClass,
+        time: new Date()
+    })
 
 }
 const ifRepeated =(request,response,next)=>{
@@ -116,10 +121,10 @@ const studentBody=(request,response)=>{
     }
 }
 
-app.get("/")
+app.get("/", allClasses)
 app.post("/class",checkClassName,addClass,ifRepeated)
 app.post("/class/:className",classExist,enrollStudent,studentExist)
-app.get("/class/:className/students",classExist,studentBody)
+app.get("/class/:className/students/failing",classExist,studentBody)
 
 app.listen(port,()=>{
     console.log("server is running", port)
