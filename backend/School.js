@@ -15,7 +15,7 @@ class School {
   enrollStudent(className, student) {
     let newStudent = new Student(student.name, student.city, student.age, student.grade)
     if (this.classes.hasOwnProperty(className)) {
-      this.classes.hasOwnProperty[className].students.push(newStudent)
+      this.classes[className].students.push(newStudent)
     }
     return newStudent; 
   }
@@ -27,12 +27,13 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    return this.classes[className].students;
-  }
-
-
-
-
+      let classNames = this.classes
+      for(let i = 0; i < classNames.length; i++) {
+        if(classNames[i].name === classNames) {
+         return classNames[i].students
+        } 
+      }
+    }
   /**
    * Get all students and apply filters. If failing = true
    * return all students that are failing the class, 
@@ -47,12 +48,10 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    if(failing === true) {
-      return 
-    }
-  }
+//   getStudentsByClassWithFilter(className, failing, city) {
 
+// }
 }
 
 module.exports = School;
+

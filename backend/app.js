@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json());
 app.use(time.init)
 
-let mSchool = new School();
+let mySchool = new School();
 
 app.get("/", (req,res,next) => {
     res.json("GET request on app.js")
@@ -21,6 +21,7 @@ app.get("/", (req,res,next) => {
 app.post("/", (req,res,next) => {
     res.json("POST request on app.js")
 })
+
 
 app.post('/class/', (req, res, next) => {
     try {
@@ -39,7 +40,7 @@ app.post('/class/', (req, res, next) => {
 
 app.post('/class/:className/enroll', (req,res,next) => {
     try{
-        let newStudent = mySchool.enrollStudent(req.params.className, req.body);
+        let newStudent = mySchool.enrollStudent(req.params.className, req.body.name,req.body.age,req.body.city,req.body.grade);
         res.json({
             status: "success",
             message: "Enrolled Student",
@@ -55,7 +56,7 @@ app.post('/class/:className/enroll', (req,res,next) => {
 
 app.get("/:className/students", (req,res,next) => {
     try{
-        let allStudents = mySchool.getStudentsByClass(req.params)
+        let allStudents = mySchool.getStudentsByClass(req.params.className)
         res.json({
             status: "success",
             message: "Retrieved Students",
@@ -66,14 +67,6 @@ app.get("/:className/students", (req,res,next) => {
         next(err)
     }
 })
-
-// app.get("/class/:classname/enroll", (req,res) => {
-//     res.json({
-//         params: req.params,
-//         message: "you've reached get request to class 1 .. /class/:classname/enroll",   
-//         timestamp: req.timestamp
-//     })
-// })
 
 
 app.listen(port, () => {
