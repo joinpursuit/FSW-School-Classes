@@ -73,6 +73,7 @@ addClassForm.addEventListener("submit", async (event) => {
 try {
     newClassDisplayUL.innerHTML = "";
     let res = await axios.post(`http://localhost:3000/class/add`, {name: className, teacher: teacherName})
+    debugger
     let h3 = document.createElement("h3");
     h3.innerText = res.data.message
     newClassDisplay.appendChild(h3)
@@ -82,16 +83,17 @@ try {
 } 
   })
 
-  enrollStudentForm.addEventListener("submit", async (e) => {
-    e.preventDefault()
+  enrollStudentForm.addEventListener("submit", async (event) => {
+    event.preventDefault()
     let sClassName = document.querySelector("#sClassName").value
-
     let name = document.querySelector("#studentName").value
     let age = document.querySelector("#studentAge").value
     let city = document.querySelector("#studentCity").value
     let grade = document.querySelector("#studentGrade").value
 try {
-    let res = await axios.post("http://localhost:3000/class/:className/enroll",{class: sClassName.value, name: name.value, age: age.value, grade: grade.value, city: city.value})
+    newStudentDisplayUL.innerHTML = "";
+    let res = await axios.post(`http://localhost:3000/class/${className}/enroll`,{class: sClassName, name: name, age: age, grade: grade, city: city})
+    // debugger
     let h3 = document.createElement("h3")
     h3.innerText = res.data.message
     // `${req.body.age} year old ${req.body.name} from ${req.body.city}is now enrolled in the ${className} class with a GPA of ${req.body.grade}.`

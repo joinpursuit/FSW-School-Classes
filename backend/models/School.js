@@ -8,7 +8,7 @@ class School {
       physics: {
         name: 'physics',
         teacher: 'Ms. Noi',
-        students:[]
+        students:[{name: "Tim", age: 21, city: "LA", grade: 62}, {name: "Sarah", age: 25, city: "NO", grade: 72}, {name: "Jen", age: 47, city: " ", grade: 31}]
       }
     }
   }
@@ -35,8 +35,12 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    // this.classes["className"]["students"].push(newStudent);     figure out why this line isn't working... student not defined??
+    // let newStudent = new Student(className, student)
+    let newStudent = new Student(student.name, student.city, student.age, student.grade)
+    debugger
+    // let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className]["students"].push(newStudent);     
+    // figure out why this line isn't working... student not defined??
     return newStudent
   }
 
