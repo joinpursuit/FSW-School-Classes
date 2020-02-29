@@ -55,7 +55,7 @@ app.post("/class/add", (req, res) => {
     } catch (err) {
       console.log(err);
       res.json({
-        message: "That class can not be created at this time. Try again or speak to Dumbledor.",
+        message: "This class can not be created at this time. Try again or speak to Dumbledor.",
         timestamp: req.timestamp
       });
     }
@@ -65,56 +65,35 @@ app.post("/class/add", (req, res) => {
 app.get("/class/:className", (req, res) => {
   if (mySchool.classes[req.params.className]) {
     let allStudents = mySchool.classes[req.params.className].students;
-    // console.log('allStudents', allStudents)
     res.json({
       allStudents: allStudents,
-      "message": "Retrieved all students in this class",
+      "message": `You have summonded all the students in the ${req.params["className"]} class.`,
       "timestamp": req.timestamp
     })
   } else {
     res.json({
-      "message": "This class does not exist",
+      "message": `No students can be summonded from the ${req.params["className"]} class. Please speak to Dumbledor.`,
       "timestamp": req.timestamp
     })
   }
-
-
- // try catch will be used when you want to return a promise,
-  // if not, you can use a conditional 
-  
-    // try{
-    //   let allStudents = mySchool.classes[req.params.className].students;
-    //   console.log(allStudents)
-    //   res.json({
-    //     allStudents: allStudents,
-    //     "message": "Retrieved all students in this class",
-    //     "timestamp": req.timestamp
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    //   res.json({
-    //     "message": "Could not recieve any students from this class",
-    //     "timestamp": req.timestamp
-    //   })
-    // }
 })
 
 
 // Enrolling a new student
-app.post("/class/:className/enroll", (req, res) => {
+app.post("/class/:className/enrollStudent", (req, res) => {
     try {
-        mySchool.enrollStudent(req.params.className, req.body);
-        console.log('in enroll student req.body',req.body)
+        if(mySchool.enrollStudent(req.params.className, req.body));
+        // console.log('in enroll student req.body',req.body)
         res.json({
-                "student": { "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade },
+                "student": { "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade, "house": req.body.house},
                 "className": req.params["className"],
-                "message": `${req.body.age} year old ${req.body.name} from ${req.body.city}is now enrolled in the ${req.params.className} class with a GPA of ${req.body.grade}.`,
+                "message": `${req.body.age} year old ${req.body.name} from ${req.body.city} is now enrolled in the ${req.params.className} class with a GPA of ${req.body.grade}. They will be a part of the ${req.body.house} house.`,
                 timestamp: req.timestamp
         });
     } catch(err) {
       console.log(err)
         res.json({
-            "message":`${req.body.age} year old ${req.body.name} with a GPA of ${req.body.grade} from ${req.body.city} CAN NOT be enrolled in the ${req.body.class} class.`,
+            "message":`${req.body.age} year old ${req.body.name} with a GPA of ${req.body.grade} from ${req.body.city} CAN NOT be enrolled in the ${req.body.class} class. Please speak to Dumbledor. They are not allowed in the ${req.body.house} house.`,
             timestamp: req.timestamp
         })
     }
@@ -125,15 +104,15 @@ app.get("/class/:className/students", (req, res) => {
     try {
         if(mySchool.getStudentsByClassWithFilter([req.params.className], req.body.name, req.body.failing, req.body.city));
         res.json({
-            "students": [{ "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade },
-            // { "name": "Ron Weasley", "age": 23, "city": "Manchester", "grade": 91 }
+            "students": [{ "name": req.body.name, "age": req.body.age, "city": req.body.city, "grade": req.body.grade, "house":req.body.house },
+            // { "name": "Ron Weasley", "age": 23, "city": "Manchester", "grade": 91, "house: "..."" }
             ],
-            "message": "Displaying all failing students in Hogwarts",
+            "message": `You are now summoning all the failing students in the ${req.params["className"]} class.`,
             "timestamp": req.timestamp
         });
     } catch(error) {
         res.json({
-            "error": `Class ${req.body.class} doesn't exist.`,
+            "error": `Failing students could not be summonded from the ${req.params["className"]} class.`,
             "timestamp": req.timestamp
         });
     };

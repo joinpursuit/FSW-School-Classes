@@ -4,14 +4,17 @@ const Student = require('../models/Student')
 
 class School {
   constructor() {
-    this.classes = {
-      physics: {
-        name: 'physics',
-        teacher: 'Ms. Noi',
-        students:[{name: "Tim", age: 21, city: "LA", grade: 62}, {name: "Sarah", age: 25, city: "NO", grade: 72}, {name: "Jen", age: 47, city: " ", grade: 31}]
+    this.classes = 
+    {
+      Transfigurations: {
+        name: 'Transfigurations',
+        teacher: 'Ms. Minerva McGonagall',
+        students:[{name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"}, {name: "Penelope Clearwater", age: 23, city: "Oxford", grade: 79.0, house: "Ravenclaw"}, {name: "Ronald Weasley", age: 22, city: "Newcastle", grade: 88.5, house: "Gryffindor"},  {name: "Susan Bones", age: 23, city: "London", grade: 89.0, house: "Hufflepuff"}]
       }
-    }
-  }
+    } 
+  };
+
+  class 
 
   /**
    * Add class to classes
@@ -34,13 +37,10 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
+  
   enrollStudent(className, student) {
-    // let newStudent = new Student(className, student)
-    let newStudent = new Student(student.name, student.city, student.age, student.grade)
-    debugger
-    // let newStudent = new Student(student.name, student.age, student.city, student.grade)
-    this.classes[className]["students"].push(newStudent);     
-    // figure out why this line isn't working... student not defined??
+    let newStudent = new Student(student.name, student.city, student.age, student.grade, student.house)
+    this.classes[className]["students"].push(newStudent); 
     return newStudent
   }
 

@@ -25,9 +25,9 @@
         <br> 
         <br> 
 
-        <select name="" id="populateStudents">
+        <!-- <select name="" id="populateStudents">
             <option value="select2" selected disabled>View All Students</option>
-        </select>
+        </select> -->
 
 
 
@@ -84,6 +84,10 @@
                     <input type="text" id="studentGrade" name="grade" value="">
                     <br>
 
+                    House: <br>
+                    <input type="text" id="studentHouse" name="house" value="">
+                    <br>
+
                     <input class="submit" type="submit" id="studenetEnrollBtn" value="Enroll New Student">
                     <br><br>
 
@@ -138,3 +142,32 @@
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!-- const getHomeWorld = async (url) => {
+    try {
+        let res = await axios.get(url);
+        let planet = res.data;
+        let section = document.querySelector("section");
+        if(section) {
+            section.parentNode.removeChild(section);
+        }
+        section = document.createElement("section");
+        let h1 = document.createElement("h1");
+        h1.innerText = planet.name; 
+        let h3 = document.createElement("h3");
+        h3.innerText = "Climate: " + planet["climate"];
+        document.body.appendChild(section)
+        section.appendChild(h1)
+        section.appendChild(h3)
+    } catch(err) {
+        console.log(err)
+    }
+} -->

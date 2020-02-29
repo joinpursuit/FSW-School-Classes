@@ -1,36 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("hello world")
-let select1 = document.querySelector("populateClasses");
-  const populateClasses = async () => {
-      try {
-          let res = await axios.get("`http://localhost:3000/classes");
-          let displayClasses = res.data;
-          displayClasses.forEach(displayedClass => {
-              let option = document.createElement("option");
-              option.innerText = this.classes; 
-              option.value = school.classes;
-              select.appendChild(option)
-          })
-      } catch(err) {
-          console.log(err);
-      }
-  }
+// let select = document.querySelector("#populateClasses");
+//   const populateClasses = async () => {
+//       try {
+//           let res = await axios.get("http://localhost:3000/class/");
+//           let displayClasses = res.data.class;
+//           displayClasses.foreach(showClass => {
+//               let option = document.createElement("option");
+//               option.innerText = showClass.name; 
+//               option.value = showClass.students;
+//               select.appendChild(option)
+//           })
+//       } catch(err) {
+//           console.log(err);
+//       }
+//   }
 
-let select2 = document.querySelector("populateStudents");
-    const populateStudents = async () => {
-        try {
-            let res = await axios.get("");
-            let displayStudents = res.data.results;
-            displayStudents.forEach(student => {
-                let option = document.createElement("option");
-                option.innerText = `${student.name} ${student.age} ${student.city} ${student.grade}`
-                // option.value = student.homeworld;
-                select.appendChild(option)
-            })
-        } catch(err) {
-            console.log(err);
-        }
-    }
+//   const getAllStudentsInClass = async () => {
+//     try {
+//         let res = await axios(`http://localhost:3000/class/${className}`);
+//         let students = res.data.allStudents[name];
+//         let 
+//     }
+//   }
+
+// populateClasses()
+
+// select.addEventListener("change", (event) => {
+//     getAllStudentsInClass(event.target.value)
+// })
+
+
+// let select2 = document.querySelector("populateStudents");
+//     const populateStudents = async () => {
+//         try {
+//             let res = await axios.get("");
+//             let displayStudents = res.data.results;
+//             displayStudents.forEach(student => {
+//                 let option = document.createElement("option");
+//                 option.innerText = `${student.name} ${student.age} ${student.city} ${student.grade} ${student.house}`
+//                 select.appendChild(option)
+//             })
+//         } catch(err) {
+//             console.log(err);
+//         }
+//     }
 
 let mainDiv = document.querySelector("#mainDiv")
 // let populateClasses = document.querySelector("#populateClasses")
@@ -73,7 +87,6 @@ addClassForm.addEventListener("submit", async (event) => {
 try {
     newClassDisplayUL.innerHTML = "";
     let res = await axios.post(`http://localhost:3000/class/add`, {name: className, teacher: teacherName})
-    debugger
     let h3 = document.createElement("h3");
     h3.innerText = res.data.message
     newClassDisplay.appendChild(h3)
@@ -90,13 +103,12 @@ try {
     let age = document.querySelector("#studentAge").value
     let city = document.querySelector("#studentCity").value
     let grade = document.querySelector("#studentGrade").value
+    let house = document.querySelector("#studentHouse").value
 try {
     newStudentDisplayUL.innerHTML = "";
-    let res = await axios.post(`http://localhost:3000/class/${className}/enroll`,{class: sClassName, name: name, age: age, grade: grade, city: city})
-    // debugger
+    let res = await axios.post(`http://localhost:3000/class/${sClassName}/enrollStudent`,{class: sClassName, name: name, age: age, grade: grade, city: city, house: house})
     let h3 = document.createElement("h3")
     h3.innerText = res.data.message
-    // `${req.body.age} year old ${req.body.name} from ${req.body.city}is now enrolled in the ${className} class with a GPA of ${req.body.grade}.`
     newStudentDisplay.appendChild(h3)
 } catch (error){
     console.log(error)
