@@ -5,7 +5,11 @@ class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+        physics: {
+          name:"fullstack",
+          teacher:"Corey",
+          students:[{name:'Jon'},{name:"Jhenya"}]
+        } 
     }
   }
 
@@ -30,6 +34,7 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+
   }
 
 
@@ -43,6 +48,7 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    
   }
 
 
