@@ -7,6 +7,7 @@ const app = express();
 const School = require('./School');
 
 let colegio = new School();
+console.log(colegio)
 //import school
 //create new instance of school
 
@@ -14,6 +15,10 @@ let colegio = new School();
 app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
+
+app.get("/colegio", (req,res) => {
+    res.json(colegio.classes)
+})
 
 //create all routes and test them by using console.log
 
