@@ -25,7 +25,12 @@ let mySchool = new School();
 // mySchool.addClass("Defense Against the Dark Arts", "Mr. Rubeus Hagrid");
 // mySchool.addClass("Herbology", "Ms. Pomona Sprout");
 // mySchool.addClass("Charms", "Mr. Filius Flitwick");
-// mySchool.enrollStudent("Defense Against the Dark Arts", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
 
 
 //Getting all classes in Hogwarts

@@ -1,34 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("hello world")
-// let select = document.querySelector("#populateClasses");
-//   const populateClasses = async () => {
-//       try {
-//           let res = await axios.get("http://localhost:3000/class/");
-//           let displayClasses = res.data.class;
-//           displayClasses.foreach(showClass => {
-//               let option = document.createElement("option");
-//               option.innerText = showClass.name; 
-//               option.value = showClass.students;
-//               select.appendChild(option)
-//           })
-//       } catch(err) {
-//           console.log(err);
-//       }
-//   }
+let select = document.querySelector("#populateClasses");
+  const populateClasses = async () => {
+      try {
+          let res = await axios.get("http://localhost:3000/class/");
+    
+          let displayClasses = res.data.class;
+          return displayClasses.forEach((showClass) => {
+            const name = Object.keys(showClass)[0]
+            console.log(name)
+            let option = document.createElement("option");
+            option.innerText = name; 
+            //   option.value = showClass.students;
+            select.appendChild(option)
+        })
+    } catch(err) {
+        console.log(err);
+    }
+}
 
-//   const getAllStudentsInClass = async () => {
+// const getAllStudentsInClass = async () => {
 //     try {
 //         let res = await axios(`http://localhost:3000/class/${className}`);
+
+
 //         let students = res.data.allStudents[name];
-//         let 
+
+//         let ul = document.querySelector("ul");
+//         if (ul) {
+//             ul.parentNode.removeChild(ul)
+//         }
+//         ul = document.createElement("ul");
+//         let li = document.createElement("li");
+//         li.innerText = students
+//         ul.appendChild(li) 
+//     } catch (error) {
+//         console.log(error)
 //     }
 //   }
 
-// populateClasses()
-
-// select.addEventListener("change", (event) => {
-//     getAllStudentsInClass(event.target.value)
-// })
+populateClasses()
+select.addEventListener("change", (event) => {
+    getAllStudentsInClass(event.target.value)
+})
 
 
 // let select2 = document.querySelector("populateStudents");
