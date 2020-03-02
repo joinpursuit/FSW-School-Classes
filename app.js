@@ -37,21 +37,23 @@ app.post("/colegio/class", (req, res) => {
   }
 });
 
-app.post("/colegio/:className/enrollStudent", (req, res) => {
+app.post("/colegio/:className/enroll", (req, res) => {
   try {
+    const { className } = req.params;
     const { name, age, city, grade } = req.body;
-    colegio.enrollStudent(name, age, city, grade);
     console.log(req.body);
+
+    colegio.enrollStudent(name, age, city, grade);
+
     res.json({
       student: { name: name, age: age, city: city, grade: grade },
-      className: req.params.className,
+      className: className,
       message: "student enrolled",
       timestamp: new Date().toString()
     });
   } catch (error) {
     res.json({
-      error:
-        err + "Please fill out all the information or Class already exists",
+      error: "Please fill out all the information or Class already exists",
       timestamp: new Date().toString()
     });
   }
