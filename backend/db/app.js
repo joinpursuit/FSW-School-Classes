@@ -18,13 +18,18 @@ const Student = require("../models/Student");
 
 
 let mySchool = new School();
+mySchool.addClass("Transfigurations", "Ms. Minerva McGonagall"),
+mySchool.addClass("Potions", "Mr. Severus Snape"),
+mySchool.addClass("Defense Against The Dark Arts", "Mr. Rubeus Hagrid");
+mySchool.addClass("Herbology", "Ms. Pomona Sprout");
+mySchool.addClass("Charms", "Mr. Filius Flitwick");
+mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+mySchool.enrollStudent("Defense Against The Dark Arts", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 51, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: "Jamie Sgjter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
+// mySchool.enrollStudent("Transfigurations", {name: ""})
 
 //try
-// mySchool.addClass("Transfiguration", "Ms. Minerva McGonagall");
-// mySchool.addClass("Potions", "Mr. Severus Snape");
-// mySchool.addClass("Defense Against the Dark Arts", "Mr. Rubeus Hagrid");
-// mySchool.addClass("Herbology", "Ms. Pomona Sprout");
-// mySchool.addClass("Charms", "Mr. Filius Flitwick");
+
 // mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
 // mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
 // mySchool.enrollStudent("Transfigurations", {name: "Harry Potter", age: 22, city: "Godric Hallows", grade: 86.5, house: "Gryffindor"})
@@ -85,7 +90,7 @@ app.get("/class/:className", (req, res) => {
 
 
 // Enrolling a new student
-app.post("/class/:className/enrollStudent", (req, res) => {
+app.post("/class/:className/enroll", (req, res) => {
     try {
         if(mySchool.enrollStudent(req.params.className, req.body));
         // console.log('in enroll student req.body',req.body)
