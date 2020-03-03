@@ -4,10 +4,10 @@ const time = require("express-timestamp");
 const bodyParser = require("body-parser");
 const port = 3000;
 const app = express();
-const School = require("./School");
+const School = require("./backend/models/School");
 
-let colegio = new School();
-// console.log(colegio);
+let rhdb = new School();
+console.log(rhdb);
 //import school
 //create new instance of school
 
@@ -15,15 +15,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/colegio", (req, res) => {
-  res.json(colegio.classes);
+app.get("/rhdb", (req, res) => {
+  res.json(rhdb.schoolData);
 });
 
-app.post("/colegio/class", (req, res) => {
+app.post("/rhdb/class", (req, res, next) => {
   try {
     const { name, teacher } = req.body;
-    // console.log(req.body);
-    colegio.addClass(name, teacher);
+    console.log(req.body);
+    debugger
+    rhdb.addClass(name, teacher);
     res.json({
       class: { name: name, teacher: teacher, students: [] },
       message: "new class created",
@@ -37,7 +38,7 @@ app.post("/colegio/class", (req, res) => {
   }
 });
 
-app.post("/colegio/:className/enroll", (req, res) => {
+app.post("/rhdb/:className/enroll", (req, res, next) => {
   try {
     const { className } = req.params;
     const { name, age, city, grade } = req.body;
