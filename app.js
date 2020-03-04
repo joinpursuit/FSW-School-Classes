@@ -22,8 +22,6 @@ app.get("/rhdb", (req, res) => {
 app.post("/rhdb/class", (req, res, next) => {
   try {
     const { name, teacher } = req.body;
-    console.log(req.body);
-    debugger
     rhdb.addClass(name, teacher);
     res.json({
       class: { name: name, teacher: teacher, students: [] },
@@ -41,13 +39,13 @@ app.post("/rhdb/class", (req, res, next) => {
 app.post("/rhdb/:className/enroll", (req, res, next) => {
   try {
     const { className } = req.params;
-    const { name, age, city, grade } = req.body;
+    //const { name, age, city, grade } = req.body;
     console.log(req.body);
 
-    colegio.enrollStudent(name, age, city, grade);
+    rhdb.enrollStudent(className, req.body);
 
     res.json({
-      student: { name: name, age: age, city: city, grade: grade },
+      student: req.body,
       className: className,
       message: "student enrolled",
       timestamp: new Date().toString()
@@ -55,6 +53,31 @@ app.post("/rhdb/:className/enroll", (req, res, next) => {
   } catch (error) {
     res.json({
       error: "Please fill out all the information or Class already exists",
+      timestamp: new Date().toString()
+    });
+  }
+});
+
+app.get("/rhdb/:className/students", (req, res, next) => {
+  const { className } = req.params;
+  const { failing, city } = req.query;
+  if (failing || city) {
+    let filteredStudents = getStudentsByClassWithFilter(
+      className,
+      failing,
+      city
+    );
+    res.json({
+      students: filteredStudents,
+      message: "retrieved students",
+      timestamp: new Date().toString()
+    });
+  } else {
+    let students = rhdb.getStudentsByClass(className);
+
+    res.json({
+      students,
+      message: "retrieved students",
       timestamp: new Date().toString()
     });
   }

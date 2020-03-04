@@ -7,7 +7,7 @@ class School {
       // className: Class Object
       // physics: {
       //   name:"fullstack",
-      //   teacher:"Corey",
+      //   teachper:"Corey",
       //   students:[{name:'Jon'},{name:"Jhenya"}]
       // }
     };
