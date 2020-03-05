@@ -2,15 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const timestamp = require("express-timestamp");
-const School = require("./School.js");
 const app = express();
 const port = 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(timestamp.init);
-
-
 
 const School = require("../models/School");
 const Student = require("../models/Student");
@@ -141,14 +138,14 @@ app.get("/class/:className/students/", (req, res) => {
       );
       res.json({
         students: failedStudents,
-        message: `You are now summoning all the failing students in this class.`,
+        message: `You are now summoning all the failing students in the ${req.params.className} class.`,
         timestamp: req.timestamp
       });
     } else {
       let allStu = mySchool.getStudentsByClass(className);
       res.json({
         students: allStu,
-        message: `There are no failing students in this class but you are welcomed to view it yourself.`,
+        message: `You are summoning all the students in the ${req.params.className} class, failing or not.`,
         // Name: ${name} Age: ${age} City: ${city} Grade: ${grade} House: ${house}
         timestamp: req.timestamp
 
