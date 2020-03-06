@@ -3,7 +3,9 @@ const Student = require('./Student')
 
 class School {
   constructor() {
-    this.classes = []
+    this.classes = {
+      Math: { name: 'Math', teacher: 'Ms.Taylor' }
+    }
   }
 
   /**
@@ -16,8 +18,12 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    console.log(newClass);
     return newClass;
+    
+
   }
+   
 
   /**
    * Enroll student in class
@@ -29,7 +35,9 @@ class School {
   enrollStudent(className, student) {
     // Your code here
       student = new Student(name, age, city, grade)
-      this.classes[className][students].push(student)
+      if(this.classes[className][students])
+      // this.classes[className][students].push(student)
+      return student
   }
 
 
@@ -96,5 +104,6 @@ class School {
   }
 
 }
+
 
 module.exports = School;

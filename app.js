@@ -8,23 +8,24 @@ const port = 3000;
 let mySchool = new School();
 // let approvedMessage = {message: "Created a new class", timestamp: "Todays Date"}
 
-
-
 app.use(cors());
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.post("/class", (req, res) => {
     let addClass = req.body
-    console.log(addClass)
-    if(mySchool.classes.includes(req.body)) {
+    // addClass[student] = [];
+    let keys = Object.keys(mySchool.classes)
+    console.log(keys);
+    if(keys.includes(req.body.name)) {
         res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     }else {
-        mySchool.classes.push(req.body)
+        mySchool.classes[req.body.name] = req.body
+        // console.log(mySchool.classes)
         res.json({
             addClass,
             message: "Created a new class",
@@ -46,10 +47,42 @@ app.post("/class", (req, res) => {
 //             res.send(mySchool.classes) 
 //         }
 // })
-app.post('/class/:className/enroll', (req, res) => {
+app.post("/class/:className/enroll", (req, res) => {
+    // console.log(req.params["className"])
     let className = req.params.className
-    mySchool.classes[className]["students"].push()
+    let studentName = req.body.name
+    let keys = Object.keys(mySchool.classes)
+    // console.log(mySchool);
+    console.log(keys);
+    //add example class and console log the classes to find out how to access the objects in the class
+    //also check to see if add class still works 
+    //check keys as well
+    
+    // mySchool.classes[className]["students"].push()
+    mySchool.classes[className]["students"].forEach((student, i) => {
+        if(student.name = studentName){
+            mySchool.classes[className]["students"][i] = req.body
+        }
+    });
+
+    if(keys.includes(className)) {
+
+        res.json({
+            error: "Please fill out all the information for the student",
+            timestamp: "YYYY, MM/DD HH:MM:SS"
+        })
+    } else {
+    
+        mySchool.classes[req.body.name] = req.body
+        res.json({
+            addClass,
+            message: "Created a new class",
+            timestamp: "YYYY, MM/DD HH:MM:SS"
+        })
+    }
+
 })
+
 app.get('/class/:className/students', (req,res) => {
     mySchool.classes[mySchool.addClass("math", "brandon")]
     let className = req.params.className

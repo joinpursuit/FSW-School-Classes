@@ -7,25 +7,34 @@ document.addEventListener("DOMContentLoaded", () => {
   addClassForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     let addAClassLi = document.querySelector("#addAClass");
-    let classNameInput = document.querySelector("#classNameInput") ;
-    let teacherNameInput = document.querySelector("#teacherNameInput");
+    // debugger
+    let classNameInput = e.target.children[0].value;
+    let teacherNameInput = e.target.children[1].value;
     // let newClass = [];
 
     // newClass.push({name: classNameInput.value, teacher: teacherNameInput.value})
-    await axios.post("http://localhost:3000/class/", {name: classNameInput.value, teacher: teacherNameInput.value}) 
+    await axios.post("http://localhost:3000/class/", {name: classNameInput, teacher: teacherNameInput}) 
     
     addAClassLi.innerHTML = "";
-    addAClassLi.innerText = "You've created a class " + {name: classNameInput.value, teacher: teacherNameInput.value};
-    // debugger
+    addAClassLi.innerText = "You've created a class named " + classNameInput + " with the teacher " + teacherNameInput;
   })
 
+  addStudentForm.addEventListener("submit", async (e) => {
+     e.preventDefault()
+     let addAStudentLi = document.querySelector("#addAStudent");
+     let classInput = e.target.children[0].value; 
+     let nameInput = e.target.children[1].value;
+     let ageInput = e.target.children[2].value;
+     let cityInput = e.target.children[4].value;
+     let gradeInput = e.target.children[5].value;
+
+     await axios.post(`http://localhost:3000/class/${classInput}/enroll`, {name: nameInput, age: ageInput, city: cityInput, grade: gradeInput})
+    
+     addAStudentLi.innerHTML = "";
+     addAStudentLi.innerText = "You've created a student named " + nameInput
+   })
 })
   
-
-//  addStudentForm.addEventListener("submit", (e) => {
-//     e.preventDefault()
-//   })
-
 //   listStudentsForm.addEventListener("submit", async(e) => {
 //     e.preventDefault()
 //     let inputValue = listStudentsInput.value
