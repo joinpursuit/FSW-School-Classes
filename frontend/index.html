@@ -15,9 +15,6 @@
     <div id="mainDiv"> 
         <h1> Welcome to the School of Hogwarts!</h1>
         <!-- <button id=welcomeBtn> Click To Enter Database </button> -->
-
-        <!-- referenced star wars lesson -->
-
         <select name="" id="populateClasses">
             <option value="select1" selected disabled>View All Classes</option>
         </select>
@@ -96,7 +93,7 @@
 
     <div> 
 
-        <h3> If you would like to see failing students, click below.</h3>
+        <h3> If you would like to summon students in a given class, fill out the form below.</h3>
 
         <div> 
             <form id="failingForm">
@@ -108,8 +105,12 @@
                 <input type="text" id="addCity" name="class" value="">
                 <br>
 
-                <input type="checkbox" id="displayFailing" name="" value=""> Show Failing Students<br>
-                <br><br>
+                <input type="checkbox" id="grabAllStudents" name="" value=""> Summon All Students<br>
+                
+
+                <input type="checkbox" id="grabFailing" name="" value=""> Summon Failing Students<br>
+                <br>
+
 
                 <input class="submit" type="submit" id="fsBtn" value="Viola!">
                     
@@ -118,21 +119,16 @@
               </form>
         </div> 
 
-        <div id="failingStudentList">
-            <ul id="failingStudentListUL"> 
-            </ul>
+        <div id="studentList">
+            <p id="failingStudentList"> 
+            </p>
+
+            <p id="allStudentsList"> 
+
+            </p> 
         </div> 
 
     </div>
-
-
-
-
-
     </div>
-    
-    
 </body>
 </html>
-
-
