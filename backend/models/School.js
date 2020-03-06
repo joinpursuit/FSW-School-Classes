@@ -64,10 +64,9 @@ class School {
    * @return {Student[]} Array of Student objects
    */
 
-
-  getStudentsByClassWithFilter(className, failing = false, city = "") {
+  getStudentsByClassWithFilter(className, failing, city = "") {
     let students = this.classes[className]["students"]
-      if (failing && city){
+      if (failing === true && city){
         return students.filter((studentF) => {
           return (studentF.grade < 70) && (studentF.city === city)
           })
@@ -77,10 +76,11 @@ class School {
         }) 
       } else if (failing){
         return students.filter((studentF) => {
-          console.log(studentF)
           return studentF.grade < 70
-      })
-    }    return students
+      }) 
+    } else {
+      return students
+    }
   }
 };
 
