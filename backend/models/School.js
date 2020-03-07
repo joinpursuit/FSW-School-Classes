@@ -3,7 +3,10 @@ const Student = require("./Student");
 
 class School {
   constructor() {
-    this.schoolData = {};
+    this.schoolData = {
+      // german: { name: "german", teacher: "Jon" , students: [{name: "wil", city: "las vegas", age: "32", grade: 67}]}
+    
+    };
   }
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);

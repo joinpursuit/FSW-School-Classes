@@ -1,5 +1,28 @@
 body {
+    /* display: flex;    */
+    height: 100vh;
+    width: 100%;
+    
+}
+
+#image {
+    display: flex;
+    background: red;
+    justify-content: flex-end;
+    margin-left: 50%;
+    
+}
+
+img {
     height: 100%;
-    width: auto;
+    width: 100%;
+}
+
+#container {
+    display: flex;
+    height:100%;
+    width: 50%;
+    align-content: center;
+    justify-content: center;
     
 }

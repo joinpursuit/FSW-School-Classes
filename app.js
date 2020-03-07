@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const time = require("express-timestamp");
+// const time = require("express-timestamp");
 const bodyParser = require("body-parser");
 const port = 3000;
 const app = express();
@@ -40,7 +40,6 @@ app.post("/rhdb/:className/enroll", (req, res, next) => {
   try {
     const { className } = req.params;
     //const { name, age, city, grade } = req.body;
-    console.log(req.body);
 
     rhdb.enrollStudent(className, req.body);
 
@@ -59,10 +58,11 @@ app.post("/rhdb/:className/enroll", (req, res, next) => {
 });
 
 app.get("/rhdb/:className/students", (req, res, next) => {
+  console.log('this is req.query',req.query)
   const { className } = req.params;
   const { failing, city } = req.query;
   if (failing || city) {
-    let filteredStudents = getStudentsByClassWithFilter(
+    let filteredStudents = rhdb.getStudentsByClassWithFilter(
       className,
       failing,
       city

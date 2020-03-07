@@ -6,25 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js" async></script>
-    <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="master.css" />
     <title>School Data Base Express Project</title>
   </head>
   <body>
-    <h1>Ridgemont High</h1>
-
-    <select name="" id="selectOptions">
-      <option value="" selected disabled>Choose an option</option>
-      <option value="addClass">Add Class</option>
-      <option value="enroll">Enroll student</option>
-      <option value="list">List students</option>
-    </select>
+    <section id="image">
+    </section>
+    
+    <section id="container">
+      <img src="./resources/ridgemont.jpg" alt="" srcset="" />
+    <label>
+      <select name="" id="selectOptions">
+        <option value="" selected disabled>Choose an option</option>
+        <option value="addClass">Add Class</option>
+        <option value="enroll">Enroll student</option>
+        <option value="list">List students</option>
+      </select>
+    </label>
 
     <form id="addClass">
       <h4>please enter class and teacher</h4>
-      <input type="text" placeholder="class name" />
-      <input id="teacher" type="text" placeholder="teacher" />
+      <input id="className" type="text" placeholder="Class name" />
+      <input id="teacher" type="text" placeholder="Teacher" />
       <button>Submit</button>
-      <section id="displayAddClass"></section>
+      <h3 id="displayAddClass"></h3>
     </form>
 
     <form id="addStudents">
@@ -35,7 +40,7 @@
       <input id="city" type="text" placeholder="city" />
       <input id="grade" type="text" placeholder="grade" />
       <button>Submit</button>
-      <section id="displayAddStudents"></section>
+      <h3 id="displayAddStudents"></h3>
     </form>
 
     <form id="listStudents">
@@ -43,7 +48,8 @@
       <input type="text" placeholder="class" />
       <input type="checkbox" placeholder="show failing strudents" />
       <button>Submit</button>
-      <section id="displayListStudents"></section>
+      <h3 id="displayListStudents"></h3>
     </form>
+  </section>
   </body>
 </html>
