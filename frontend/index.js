@@ -16,6 +16,9 @@ let displayAddstudents = document.querySelector("#displayAddStudents");
 
 let listStudents = document.querySelector("#listStudents");
 listStudents.style.display = "none";
+let studentClass = document.querySelector("#studentClass");
+let studentCity = document.querySelector("#studentCity");
+let failing = document.querySelector("#failing");
 let displayListStudents = document.querySelector("#displayListStudents");
 
 select.addEventListener("change", e => {
@@ -46,11 +49,9 @@ addClass.addEventListener("submit", async e => {
       name: className.value,
       teacher: teacher.value
     });
-    // const { name , teacher } = res.data.class
     displayAddClass.innerText = res.data.message;
-    debugger;
+    // const { name , teacher } = res.data.class
     // console.log(res)
-
 
     // let res = await axios.get(`http://localhost:3000/class/?failing=${failing.value}&$city=${city.value}`);
 
@@ -64,13 +65,32 @@ addClass.addEventListener("submit", async e => {
 
 addStudents.addEventListener("submit", async e => {
   e.preventDefault();
+
   try {
     let res = await axios.post("http://localhost:3000/rhbd/:className/enroll", {
-      student: 
+      name: name.value,
+      age: age.value,
+      grade: grade.value,
+      city: city
     });
-    displayAddstudents.innerText = res.data.class
-    // debugger
+    displayAddstudents.innerText = res.data.message;
+    debugger;
   } catch (err) {
     console.log(err);
   }
 });
+
+listStudents.addEventListener("submit", async e => {
+  e.preventDefault();
+  displayListStudents.innerHTML=""
+  if(failing.checked && studentCity.value) {
+      let res = await axios.get(`http://localhost:3000/${studentClass.value}/students/?failing=${failing.checked}&$city=${studentCity.value}`, {
+        className: studentClass.value,
+        failing: failing.checked,
+        studentCity: studentCity.value
+    })
+    debugger
+}
+
+});
+
