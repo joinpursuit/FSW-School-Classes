@@ -7,8 +7,8 @@ class School {
       german: {
         name: "german",
         teacher: "Jon",
-        students: [{ name: "wil", city: "las vegas", age: "32", grade: 67 }, {
-          name: "goliath", city: "akron", age: 23, grade: 85}, { name: "rose", city: "tuscany", age: 46, grade: 90
+        students: [{ name: "mike", city: "new york", age: "32", grade: 67 }, {
+          name: "goliath", city: "new york", age: 23, grade: 85}, { name: "rose", city: "new york", age: 46, grade: 90
         },]
       }
     };

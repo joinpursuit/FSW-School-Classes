@@ -9,20 +9,23 @@ body {
     display: flex;
     background: red;
     justify-content: flex-end;
-    margin-left: 50%;
+    
     
 }
 
 img {
-    height: 100%;
-    width: 100%;
+    
+    width: 60%;
+    margin-right: 50%;
+    height: 100vh;
 }
 
 #container {
     display: flex;
     height:100%;
-    width: 50%;
+    width: 100%;
     align-content: center;
     justify-content: center;
+    background: palevioletred;
     
 }

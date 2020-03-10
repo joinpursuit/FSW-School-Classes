@@ -52,9 +52,6 @@ addClass.addEventListener("submit", async e => {
     displayAddClass.innerText = res.data.message;
     // const { name , teacher } = res.data.class
     // console.log(res)
-
-    // let res = await axios.get(`http://localhost:3000/class/?failing=${failing.value}&$city=${city.value}`);
-
     //check res
     //key into it to use res values
     //use values to append to divs or p tags
@@ -82,15 +79,28 @@ addStudents.addEventListener("submit", async e => {
 
 listStudents.addEventListener("submit", async e => {
   e.preventDefault();
-  displayListStudents.innerHTML=""
-  if(failing.checked && studentCity.value) {
-      let res = await axios.get(`http://localhost:3000/${studentClass.value}/students/?failing=${failing.checked}&$city=${studentCity.value}`, {
-        className: studentClass.value,
-        failing: failing.checked,
-        studentCity: studentCity.value
+  displayListStudents.innerHTML = "";
+
+  if (failing.checked && studentCity.value) {
+    let res = await axios.get(
+      `http://localhost:3000/rhdb/${studentClass.value}/students/?failing=${failing.checked}&city=${studentCity.value}`
+    );
+
+    let studentArray = res.data.students
+    studentArray.forEach(student => {
+        showStudents = document.createElement("p");
+        showStudents.innerText = student.name
     })
-    debugger
-}
+    // debugger
+    displayListStudents.innerText = `Student name: ${student.name}, Age: ${student.age}, City: ${student.city}, Grade: ${student.grade}`
 
+  } else {
+
+    let res = await axios.get("/rhdb/:className/students");
+    // res.data.students.forEach(student => {
+    //     showStudents = document.createElement("p");
+    //     showStudents.innerText = student.name
+    // })
+    // displayListStudents.appendChild(showStudents)
+  }
 });
-
