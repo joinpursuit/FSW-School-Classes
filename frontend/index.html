@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js" async></script>
+    <link rel="stylesheet" href="master.css" />
+    <title>School Data Base Express Project</title>
+  </head>
+  <body>
+    <section id="image">
+      <img src="./resources/ridgemont.jpg" alt="" srcset="" />
+    </section>
+    
+    <section id="container">
+    <label>
+      <select name="" id="selectOptions">
+        <option value="" selected disabled>Choose an option</option>
+        <option value="addClass">Add Class</option>
+        <option value="enroll">Enroll student</option>
+        <option value="list">List students</option>
+      </select>
+    </label>
+
+    <form id="addClass">
+      <h4>please enter class and teacher</h4>
+      <input id="className" type="text" placeholder="Class name" />
+      <input id="teacher" type="text" placeholder="Teacher" />
+      <button>Submit</button>
+      <h3 id="displayAddClass"></h3>
+    </form>
+
+    <form id="addStudents">
+      <h4>Please enter student info.</h4>
+      <input type="text" placeholder="class" />
+      <input id="name" type="text" placeholder="name" />
+      <input id="age" type="text" placeholder="age" />
+      <input id="city" type="text" placeholder="city" />
+      <input id="grade" type="text" placeholder="grade" />
+      <button>Submit</button>
+      <h3 id="displayAddStudents"></h3>
+    </form>
+
+    <form id="listStudents">
+      <h4>Please enter a class name. can filter by failing</h4>
+      <input id="studentClass" type="text" placeholder="class" />
+      <input id="studentCity" type="text" placeholder="city" />
+      <label>show failing</label>
+      <input id="failing" type="checkbox" />
+      <button>Submit</button>
+      <h3 id="displayListStudents"></h3>
+    </form>
+  </section>
+  </body>
+</html>
