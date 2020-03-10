@@ -25,7 +25,7 @@ app.post("/class", (req, res) => {
         })
     }else {
         mySchool.classes[req.body.name] = req.body
-        mySchool.classes[req.body.name]["students"] = []
+        // mySchool.classes[req.body.name]["students"] = []
         console.log(mySchool.classes)
         res.json({
             addClass,
@@ -55,18 +55,18 @@ app.post("/class/:className/enroll", (req, res) => {
     // let studentName = req.body.name
     let keys = Object.keys(mySchool.classes)
     mySchool.enrollStudent(className, student)
-    // console.log(mySchool);
-    console.log(keys);
+    // console.log(mySchool.classes);
+    // console.log(keys);
     //add example class and console log the classes to find out how to access the objects in the class
     //also check to see if add class still works 
     //check keys as well
     
     // mySchool.classes[className]["students"].push()
-    mySchool.classes[className]["students"].forEach((student, i) => {
-        if(student.name = studentName){
-            mySchool.classes[className]["students"][i] = req.body
-        }
-    });
+    // mySchool.classes[className]["students"].forEach((student, i) => {
+    //     if(student.name = studentName){
+    //         mySchool.classes[className]["students"][i] = req.body
+    //     }
+    // });
 
     if(keys.includes(className)) {
 
@@ -75,8 +75,7 @@ app.post("/class/:className/enroll", (req, res) => {
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     } else {
-    
-        mySchool.classes[req.body.name] = req.body
+        req.body
         res.json({
             addClass,
             message: "Created a new class",

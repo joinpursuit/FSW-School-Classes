@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
      let classInput = e.target.children[0].value; 
      let nameInput = e.target.children[1].value;
      let ageInput = e.target.children[2].value;
-     let cityInput = e.target.children[4].value;
-     let gradeInput = e.target.children[5].value;
+     let cityInput = e.target.children[3].value;
+     let gradeInput = e.target.children[4].value;
 
      await axios.post(`http://localhost:3000/class/${classInput}/enroll`, {name: nameInput, age: ageInput, city: cityInput, grade: gradeInput})
     

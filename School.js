@@ -4,7 +4,7 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // Math: { name: 'Math', teacher: 'Ms.Taylor', student: [] }
+      Math: { name: 'Math', teacher: 'Ms.Taylor', students: [{ name: 'Brandon', age: '24', city: 'Brooklyn', grade: '12' }] }
     }
   }
 
@@ -34,15 +34,21 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-      // student = new Student(name, age, city, grade)
-      this.classes[className][students].forEach(el => {
+      let listOfStudents = this.classes[className]["students"]
+      let foundStudent = false
+      console.log(listOfStudents);
+
+      listOfStudents.forEach((el, i) => {
         if(el.name === student.name) {
+          foundStudent = true
           console.log("Student already exists");
-          el = student
-        } else {
-          return this.classes[className][students].push(student)
+          
+          listOfStudents[i] = student  
         }
-      });
+      }) 
+      if(foundStudent === false){
+        listOfStudents.push(student)
+      }
       return student
   }
 
@@ -110,6 +116,7 @@ class School {
   }
 
 }
+
 
 
 module.exports = School;
