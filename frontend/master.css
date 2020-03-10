@@ -1,7 +1,7 @@
 body {
-    /* display: flex;    */
-    height: 100vh;
-    width: 100%;
+    display: flex;   
+    /* height: 100vh;
+    width: 100%; */
     
 }
 
@@ -9,23 +9,28 @@ body {
     display: flex;
     background: red;
     justify-content: flex-end;
+    width: 50%;
     
     
 }
 
 img {
     
-    width: 60%;
-    margin-right: 50%;
-    height: 100vh;
+    width: 100%;
+    
+    height: 100%;
 }
 
 #container {
     display: flex;
-    height:100%;
-    width: 100%;
-    align-content: center;
+    /* height:100%; */
+    width: 50%;
+    /* align-content: center; */
     justify-content: center;
-    background: palevioletred;
+    background: #968D8E;
     
+}
+#selectOptions {
+    /* display: flex; */
+    margin-top: 100%;
 }
