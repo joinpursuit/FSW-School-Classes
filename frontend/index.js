@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let addClassForm = document.querySelector(".addClass")
   let addStudentForm = document.querySelector(".addStudent")
   let listStudentsForm = document.querySelector(".listStudents")
-  let listStudentsInput = document.querySelector("#listStudentsInput") 
-  let cityInput = document.querySelector("#cityInput")
   
   addClassForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -37,15 +35,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
    listStudentsForm.addEventListener("submit", async(e) => {
      e.preventDefault()
-     let inputValue = listStudentsInput.value
-     let url = `http://localhost:3000/class/${inputValue}/students`
-    await axios.get(url).then(res => {
-         console.log(res)
-        debugger
-         let li = document.createElement("li")
-         li.innerHTML = ""
+     let classInput = e.target.children[0].value;
+     let cityInput = e.target.children[1].value;
+     let checkboxInput = document.querySelector("#checkbox").checked;
+     let ul = document.querySelector("#listAllStudents");
+     
+    //  debugger
+     await axios.get(`http://localhost:3000/class/${classInput}/students`, {failing: checkboxInput, city: cityInput}).then((res)=> {
+       console.log(res);
+       const { students } = res.data
+       console.log(students);
+       
+        students.forEach((el, i) => {
+          if(i === 0){
+            let p = document.createElement("p")
+            p.innerText = `Students enrolled in ${classInput}`
+            ul.appendChild(p)
+          }
+          let li = document.createElement("li")
+          li.innerText = el.name
+          ul.appendChild(li)
+
+        })
+
+       debugger
+       
      })
-     // debugger
+  
+    //  let url = `http://localhost:3000/class/${classInput}/students`
+    // await axios.get(url).then(res => {
+    //      console.log(res)
+    //     debugger
+    //      let li = document.createElement("li")
+    //      li.innerHTML = ""
+    //  })
    })
 
 })

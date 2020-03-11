@@ -11,7 +11,7 @@ let mySchool = new School();
 
 app.use(cors());
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.post("/class", (req, res) => {
@@ -76,7 +76,17 @@ app.post("/class/:className/enroll", (req, res) => {
     }
 })
 
-app.get('/class/:className/students', (req,res) => {
+app.get("/class/:className/students", (req,res) => {
+    console.log("my body",req.body);
+    console.log("my params", req.params.className);
+    mySchool.classes[req.params.className].students
+    let studentsArr = mySchool.getStudentsByClassWithFilter(req.params.className, req.body.failing, req.body.city)
+    
+    debugger
+    res.json({
+        students: studentsArr,
+        message: "thank you"
+    })
     mySchool.classes[mySchool.addClass("math", "brandon")]
     let className = req.params.className
     res.send(mySchool.classes[className]["students"])

@@ -34,7 +34,7 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-      console.log("student array", this.classes[className].students);
+      // console.log("student array", this.classes[className].students);
       
       this.classes[className].students.forEach((el) => { //checks to see if student exists
         if(el.name === student.name) {
@@ -94,30 +94,46 @@ class School {
     // let grade = this.classes[className]["students"]["grade"]
     let cityName = this.classes[className]["students"]["city"]
 
-    filterArr = this.classes.filter(el => {
-      return el["students"]
-    } )
-    if(failing === "true" && city !== ""){
-      return filterArr.filter(student => {
-        if(city === student.city && student.grade < 70  ) {
-          return student
-        }
-      })
-    }else if(failing === "true") {
-      return filterArr.filter(student => {
-        if(student.grade < 70) {
-          return student
-        }
-      })
-    }else if(city !== ""){
-      return filterArr.filter(student => {
-        if(city === student.city) {
-          return student
-        }
-      })
-    }
+    let student = this.getStudentsByClass(className)
+    if(student) {
+      if(failing && city){
+        return student.filter(el => { return el.grade <= 70 && el.city === city})
+      } else if(failing){
+        return student.filter(el => {return el.grade <= 70})
+       } else if(city){
+       return student.filter(el => {return el.city === city})
+       } else {
+         return student
+       }
+      }else {
+        return student
+      }
+   } 
 
-  }
+    // filterArr = this.classes.filter(el => {
+    //   return el["students"]
+    // } )
+    // if(failing === "true" && city !== ""){
+    //   return filterArr.filter(student => {
+    //     if(city === student.city && student.grade < 70  ) {
+    //       return student
+    //     }
+    //   })
+    // }else if(failing === "true") {
+    //   return filterArr.filter(student => {
+    //     if(student.grade < 70) {
+    //       return student
+    //     }
+    //   })
+    // }else if(city !== ""){
+    //   return filterArr.filter(student => {
+    //     if(city === student.city) {
+    //       return student
+    //     }
+    //   })
+    // }
+
+  // }
 
 }
 
