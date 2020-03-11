@@ -4,7 +4,7 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      Math: { name: 'Math', teacher: 'Ms.Taylor', students: [{ name: 'Brandon', age: '24', city: 'Brooklyn', grade: '12' }] }
+      Gym: { name: 'Gym', teacher: 'Brandon', students: [] }
     }
   }
 
@@ -34,25 +34,18 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-      let listOfStudents = this.classes[className].students
-      let foundStudent = false
-      console.log("student array",listOfStudents);
+      console.log("student array", this.classes[className].students);
       
-
-      listOfStudents.forEach((el, i) => {
+      this.classes[className].students.forEach((el) => { //checks to see if student exists
         if(el.name === student.name) {
           foundStudent = true
           console.log("Student already exists");
-          listOfStudents[i] = student  
-
-          
+          this.classes[className].students.pop()  
         }
       }) 
-      if(foundStudent === false){
-        listOfStudents.push(student)
-      }
+      this.classes[className].students.push(student)
       
-      return listOfStudents.filter(el => {
+      return this.classes[className].students.filter(el => {
         return el.name === student.name
       })
   }
@@ -68,7 +61,13 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
-    return this.classes[className]["students"]
+    if(!this.classes[className]){
+      console.log("This class doesnt exist");
+      
+    } else {
+      console.log("students array for entered class", this.classes[className].students)
+      return this.classes[className].students
+    }
 
   }
 

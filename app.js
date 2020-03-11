@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const School = require("./School")
+const Student = require('./Student')
 const port = 3000;
 
 let mySchool = new School();
@@ -19,6 +20,8 @@ app.post("/class", (req, res) => {
     let keys = Object.keys(mySchool.classes)
     // console.log("my keys",keys)
     if(keys.includes(name) || name === "" || teacher === "") {
+        console.log("Please fill out all the information or Class already exists");
+        
         res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: "YYYY, MM/DD HH:MM:SS"
@@ -30,10 +33,8 @@ app.post("/class", (req, res) => {
             message: "Created a new class",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
-        // console.log("my classes at gym",mySchool.classes["Gym"].teacher);
-        
+        console.log("my classes",mySchool.classes);
     }
-
 })
 // app.post('/class/:name/:teacher', (req, res) => {
 //     let keys = Object.keys(mySchool.classes)
@@ -49,28 +50,30 @@ app.post("/class", (req, res) => {
 //         }
 // })
 app.post("/class/:className/enroll", (req, res) => {
-    let student = req.body
-    let className = req.params.className
-    let keys = Object.values(req.body)
-    console.log("keys", keys)
-
-    if(keys.includes("")) {
+    // let className = req.params.className
+    let values = Object.values(req.body)
+    console.log("values", values)
+    
+    let newStudent = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
+    
+    if(values.includes("")) {
+        console.log("Please fill out all the information for the student");
+        
         res.json({
             error: "Please fill out all the information for the student",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     } else {
-        mySchool.enrollStudent(className, student)
-        console.log("students", mySchool.classes);
-        console.log("look here", student)
+        mySchool.enrollStudent(req.params.className, newStudent)
+        console.log("classes", mySchool.classes);
+        console.log("new student", newStudent)
         
         res.json({
-            students: student,
-            message: "Created a new class",
+            studentEnrolled: newStudent,
+            message: "Enrolled Student",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     }
-
 })
 
 app.get('/class/:className/students', (req,res) => {

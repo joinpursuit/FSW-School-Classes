@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let addStudentForm = document.querySelector(".addStudent")
   let listStudentsForm = document.querySelector(".listStudents")
   let listStudentsInput = document.querySelector("#listStudentsInput") 
+  let cityInput = document.querySelector("#cityInput")
   
   addClassForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -33,17 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
      addAStudentLi.innerHTML = "";
      addAStudentLi.innerText = "You've created a student named " + nameInput
    })
+
+   listStudentsForm.addEventListener("submit", async(e) => {
+     e.preventDefault()
+     let inputValue = listStudentsInput.value
+     let url = `http://localhost:3000/class/${inputValue}/students`
+    await axios.get(url).then(res => {
+         console.log(res)
+        debugger
+         let li = document.createElement("li")
+         li.innerHTML = ""
+     })
+     // debugger
+   })
+
 })
   
-//   listStudentsForm.addEventListener("submit", async(e) => {
-//     e.preventDefault()
-//     let inputValue = listStudentsInput.value
-//     let url = `http://localhost:3000/class/${inputValue}/students`
-//    await axios.get(url).then(res => {
-//         console.log(res)
-//        debugger
-//         let li = document.createElement("li")
-//         li.innerHTML = ""
-//     })
-//     // debugger
-// })
