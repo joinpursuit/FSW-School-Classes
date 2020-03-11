@@ -14,24 +14,24 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.post("/class", (req, res) => {
-    let addClass = req.body
-    // addClass[student] = [];
+    const { name, teacher } = req.body
+    // console.log(req.body);
     let keys = Object.keys(mySchool.classes)
-    console.log(keys);
-    if(keys.includes(req.body.name)) {
+    // console.log("my keys",keys)
+    if(keys.includes(name) || name === "" || teacher === "") {
         res.json({
             error: "Please fill out all the information or Class already exists",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     }else {
-        mySchool.classes[req.body.name] = req.body
-        // mySchool.classes[req.body.name]["students"] = []
-        console.log(mySchool.classes)
+        let newClass = mySchool.addClass(req.body.name, req.body.teacher)
         res.json({
-            addClass,
+            newClass,
             message: "Created a new class",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
+        // console.log("my classes at gym",mySchool.classes["Gym"].teacher);
+        
     }
 
 })
@@ -49,35 +49,23 @@ app.post("/class", (req, res) => {
 //         }
 // })
 app.post("/class/:className/enroll", (req, res) => {
-    // console.log(req.params["className"])
-    student = req.body
+    let student = req.body
     let className = req.params.className
-    // let studentName = req.body.name
-    let keys = Object.keys(mySchool.classes)
-    mySchool.enrollStudent(className, student)
-    // console.log(mySchool.classes);
-    // console.log(keys);
-    //add example class and console log the classes to find out how to access the objects in the class
-    //also check to see if add class still works 
-    //check keys as well
-    
-    // mySchool.classes[className]["students"].push()
-    // mySchool.classes[className]["students"].forEach((student, i) => {
-    //     if(student.name = studentName){
-    //         mySchool.classes[className]["students"][i] = req.body
-    //     }
-    // });
+    let keys = Object.values(req.body)
+    console.log("keys", keys)
 
-    if(keys.includes(className)) {
-
+    if(keys.includes("")) {
         res.json({
             error: "Please fill out all the information for the student",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })
     } else {
-        req.body
+        mySchool.enrollStudent(className, student)
+        console.log("students", mySchool.classes);
+        console.log("look here", student)
+        
         res.json({
-            addClass,
+            students: student,
             message: "Created a new class",
             timestamp: "YYYY, MM/DD HH:MM:SS"
         })

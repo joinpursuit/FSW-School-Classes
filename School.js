@@ -17,9 +17,9 @@ class School {
    */
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
-    console.log(newClass);
-    return newClass;
+    this.classes[name] = newClass
+    // console.log("the new class", this.classes);
+    return this.classes;
     
 
   }
@@ -34,22 +34,27 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
-      let listOfStudents = this.classes[className]["students"]
+      let listOfStudents = this.classes[className].students
       let foundStudent = false
-      console.log(listOfStudents);
+      console.log("student array",listOfStudents);
+      
 
       listOfStudents.forEach((el, i) => {
         if(el.name === student.name) {
           foundStudent = true
           console.log("Student already exists");
-          
           listOfStudents[i] = student  
+
+          
         }
       }) 
       if(foundStudent === false){
         listOfStudents.push(student)
       }
-      return student
+      
+      return listOfStudents.filter(el => {
+        return el.name === student.name
+      })
   }
 
 
