@@ -55,11 +55,11 @@ const renderData = (className, data) => {
     studentFilterList.innerHTML = ""
     h2 = document.createElement("h2")
     ul = document.createElement("ul")
-    h2.innerText = className
+    h2.innerText = `Class: ${className}`
     studentFilterList.appendChild(h2)
     data.forEach(student => {
         let li = document.createElement("li")
-        li.innerText = `${student.name} \n ${student.city} \n ${student.grade}`
+        li.innerText = `Name: ${student.name} City: ${student.city} Grade:${student.grade}`
         ul.appendChild(li)
     })
     studentFilterList.appendChild(ul)

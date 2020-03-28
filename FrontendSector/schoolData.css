@@ -95,6 +95,13 @@ input[type="submit"]:focus {
     color: white
 }
 
+#studentFilterList {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .error {
     margin: 10px;
     color: red;
@@ -102,7 +109,7 @@ input[type="submit"]:focus {
 }
 
 @media only screen and (max-width: 900px){
-    .header, .enrollStudentForm {
+    .header, .enrollStudentForm, #studentFilterList {
         display:flex;
         flex-direction: column;
         flex-wrap: wrap;
