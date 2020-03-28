@@ -12,14 +12,12 @@ class School {
     }
   }
   addClass(name, teacher) {
-    debugger
     let newClass = new Class(name, teacher)
     if(this.classes[name]){
         let error = {Status:500, message: "Class already exists at NRES"}
         throw error
       }
     this.classes[name] = newClass;
-    console.log(this.classes)
     return newClass
   }
   enrollStudent(className, student) {
@@ -30,9 +28,6 @@ class School {
     this.classes[className]["students"].push(newStudent);
     return newStudent
   } 
-  // getStudentsByClass(className) {
-  //   return this.classes[className]["students"]
-  // }
   getStudentsByClassWithFilter(className, city, fail) {
     let studentFilter = [];
     let schoolClass = this.classes[className]["students"]
@@ -64,7 +59,5 @@ class School {
         }
   }
 }
-
-
 
 module.exports = School;
