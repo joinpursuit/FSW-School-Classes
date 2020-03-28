@@ -33,11 +33,12 @@ body {
     font-family: 'Schoolbell', cursive;
 }
 
-div {
+.header {
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 h1 {
@@ -98,4 +99,24 @@ input[type="submit"]:focus {
     margin: 10px;
     color: red;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 900px){
+    .header, .enrollStudentForm {
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .addClassForm, .filterForm {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

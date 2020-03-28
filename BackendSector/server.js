@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")
 
 const classRouter = require("./routes/classRoutes.js")
 
-const port = 4000
+const port = 3000
 
 const app = express()
 app.use(cors())

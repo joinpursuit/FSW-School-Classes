@@ -4,24 +4,30 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //  
+      "Hellfire" : {
+        name: "Hellfire",
+        teacher: "Remon",
+        students: [{name: "Nilber", age: 15, city: "New York", grade: 50}, {name: "Danielle", age: 15, city: "New York", grade: 100}]
+      } 
     }
   }
   addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
+    debugger
+    let newClass = new Class(name, teacher)
     if(this.classes[name]){
-        throw {Status:500, Message: "Class already exists at NRES"}
+        let error = {Status:500, message: "Class already exists at NRES"}
+        throw error
       }
     this.classes[name] = newClass;
+    console.log(this.classes)
     return newClass
   }
-  enrollStudent(student) {
+  enrollStudent(className, student) {
     let newStudent = new Student(student.name, student.age, student.city, student.grade);
-    if(this.classes[student.class]["students"].includes(student.name)){
-      throw {Status:500, Message: "Student has already been enrolled for indoctrination"}
+    if(this.classes[className]["students"].includes(student.name)){
+      throw {status:500, message: "Student has already been enrolled for indoctrination"}
     }
-    this.classes[student.class]["students"].push(newStudent);
+    this.classes[className]["students"].push(newStudent);
     return newStudent
   } 
   // getStudentsByClass(className) {
@@ -30,26 +36,32 @@ class School {
   getStudentsByClassWithFilter(className, city, fail) {
     let studentFilter = [];
     let schoolClass = this.classes[className]["students"]
-      if(fail === true && city !== null){
-        for (let student of schoolClass){
-          if(student["grade"] < 70 && student["city"] === city){
-            studentFilter.push(student);
-          }
+
+    if(fail === "true" && city.length !== 0){
+      schoolClass.forEach( student => {
+        if(student.grade < 70 && student.city === city){
+          studentFilter.push(student)
         }
-      } else if(fail === false && city !== null){
-        for (let student of schoolClass){
-          if(student["city"] === city){
-            studentFilter.push(student)
-          }
+      })
+      return studentFilter
+    } else if(fail === "false" && city.length !== 0){
+      for (let student of schoolClass){
+        console.log(student)
+        if(student["city"] === city){
+          studentFilter.push(student)
         }
-      } else if(fail === true & city === null){
-          if(student["grade"] < 70){
-            studentFilter.push(student)
-          }
-      } else if(fail === false && city === null) {
-          return schoolClass
-          }
-    return studentFilter
+      }
+      return studentFilter
+    } else if(fail === "true" & city.length === 0){
+      for (let student of schoolClass){  
+        if(student["grade"] < 70){
+          studentFilter.push(student)
+        }
+      }
+      return studentFilter
+    } else {
+        return schoolClass
+        }
   }
 }
 

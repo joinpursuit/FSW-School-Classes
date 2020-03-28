@@ -15,7 +15,7 @@ let enrollStudentError = document.querySelector("#enrollStudentError")
 
 let filterForm = document.querySelector("#filterForm")
 let filterClass = document.querySelector("#filterClass")
-let filterCIty = document.querySelector("#filterCity")
+let filterCity = document.querySelector("#filterCity")
 let filterFailStudents = document.querySelector("#filterFailStudents")
 let submitFilter = document.querySelector("#submitFilter")
 let filterError = document.querySelector("#filterError")
@@ -28,9 +28,9 @@ addClassForm.addEventListener("submit", async event => {
         let res = await axios.post("http://localhost:3000/class", {
         name: className.value, 
         teacher: classTeacherName.value,
-        });
-    } catch (error) {  
-        addClassError.innerText = error
+        })
+    } catch (error) {
+        addClassError.innerText = error.response.data.error.message
     }
     addClassForm.reset()
 })
@@ -38,15 +38,14 @@ addClassForm.addEventListener("submit", async event => {
 enrollStudentForm.addEventListener("submit", async event => {
     event.preventDefault()
     try {
-        let res = await axios.post("http://localhost:3000/enroll", {
-        name: className.value, 
-        class: studentClass.value,
+        let res = await axios.post(`http://localhost:3000/class/${studentClass.value}/enroll`, {
+        name: studentName.value,
         age: studentAge.value,
         city: studentCity.value,
         grade: studentGrade.value
         });
     } catch (error) {  
-        enrollStudentError.innerText = error
+        enrollStudentError.innerText = error.response.data.error.message
     }
     enrollStudentForm.reset()
 })
@@ -63,15 +62,16 @@ const renderData = (className, data) => {
         li.innerText = `${student.name} \n ${student.city} \n ${student.grade}`
         ul.appendChild(li)
     })
+    studentFilterList.appendChild(ul)
 }
 
 filterForm.addEventListener("submit", async event => {
     event.preventDefault()
     try {
-        let res = await axios.get(`http://localhost:3000/class?className=${filterClass.value}&city=${filterCity.value}&fail=${filterFailStudents.value}`);
-        renderData(filterClass.value, res.data)
+        let res = await axios.get(`http://localhost:3000/class/${filterClass.value}/students?city=${filterCity.value}&fail=${filterFailStudents.checked}`);
+        renderData(filterClass.value, res.data.filter)
     } catch (error) {  
-        filterError.innerText = error
+        filterError.innerText =  error
     }
     filterForm.reset()
 })

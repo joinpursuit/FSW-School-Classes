@@ -12,22 +12,22 @@
     <title>NRS</title>
 </head>
 <body>
-    <div>
+    <div class="header">
         <h1>Nílber Remón Elementary</h1>
         <h2>School for the Awkwardly-Gifted</h2>
     </div>
-    <div>
-        <form id="addClassForm">
-            <h2>Sanction a Class @NRES</h2>
+    <div class="addClassForm">
+        <h2>Sanction a Class @NRES</h2>
+        <form class="addClassForm">
             <input class="input" type="text" id="className" placeholder="CLASS NAME" required>
             <input class="input" type="text" id="classTeacherName" placeholder="TEACHER NAME" required>
             <input class="submit" type="submit" id="submitClass" value="Add">
         </form>
         <div class="error" id="addClassError"></div>
     </div>
-    <div>
-        <form id="enrollStudentForm">
-            <h2>Enroll a Student @NRES</h2>
+    <div class="enrollStudentForm">
+        <h2>Enroll a Student @NRES</h2>
+        <form class="enrollStudentForm">
             <input class="input" type="text" id="studentClass" placeholder="CLASS" required>
             <input class="input" type="text" id="studentName" placeholder="NAME" required>
             <input class="input" type="number" id="studentAge" placeholder="AGE" required>
@@ -37,16 +37,16 @@
         </form>
         <div class="error" id="enrollStudentError"></div>
     </div>
-    <div>
-        <form id="filterForm">
-            <h2>List NRES Students By Filters</h2>
+    <div class="filterForm">
+        <h2>List NRES Students By Filters</h2>
+        <form class="filterForm">
             <input class="input" type="text" id="filterClass" placeholder="CLASS" required>
             <input class="input" type="text" id="filterCity" placeholder="CITY (Optional)">
             <input type="checkbox" id="filterFailStudents"> FAILURES (Optional)
             <input class="submit" type="submit" id="submitFilter" value="Filter">
         </form>
         <div id="studentFilterList"></div>
-        <div class="error" id="filterError">hi</div>
+        <div class="error" id="filterError"></div>
     </div>
 </body>
 </html>

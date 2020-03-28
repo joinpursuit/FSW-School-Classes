@@ -3,8 +3,8 @@ const {addClass, enrollStudent, studentFilter} = require("../databaseMiddleware"
 
 classRoutes.post("/", addClass);
 
-classRoutes.post("/enroll", enrollStudent);
+classRoutes.post("/:className/enroll", enrollStudent);
 
-classRoutes.get("/", studentFilter)
+classRoutes.get("/:className/students", studentFilter)
 
 module.exports = classRoutes
