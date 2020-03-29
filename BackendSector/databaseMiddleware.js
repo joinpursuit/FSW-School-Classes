@@ -3,7 +3,6 @@ let school = require("./databaseSchool");
 const addClass = (req, res, next) => {
     try {
         let newClass = school.addClass(req.body.name, req.body.teacher)
-        debugger
         res.json({
             newClass,
             status: "Success",

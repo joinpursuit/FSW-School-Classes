@@ -14,7 +14,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher)
     if(this.classes[name]){
-        let error = {Status:500, message: "Class already exists at NRES"}
+        let error = {status:500, message: "Class already exists at NRES"}
         throw error
       }
     this.classes[name] = newClass;
