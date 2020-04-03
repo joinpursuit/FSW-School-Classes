@@ -15,8 +15,6 @@ addClass.addEventListener("submit", async e => {
       teacher: teacher,
       name: name
     });
-    debugger;
-    // host.data.body.name
 
     h4.innerText = host.data.body.name;
     p.innerText = host.data.body.teacher;
@@ -38,7 +36,7 @@ addStudent.addEventListener("submit", async e => {
   city.value = "";
   let p = document.createElement("p");
   try {
-    let host = await axios.post(`http://localhost:4000/class/${className}`, {
+    let host = await axios.post(`http://localhost:4000/class/${className.value}`, {
       class: className,
       name,
       age,
@@ -46,7 +44,7 @@ addStudent.addEventListener("submit", async e => {
       city
     });
     debugger;
-    p.innerText = host.data;
+    p.innerText = host.config.data;
     studentEnroll.appendChild(p);
   } catch (error) {
     console.log(error);

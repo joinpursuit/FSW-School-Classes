@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const port = 4000;
-const School = require("./School");
+let School = require("./School");
 const Class = require("./Class");
 const Student = require("./Student");
 
@@ -36,7 +36,7 @@ const addClass = (request, response) => {
   console.log("addClass");
   let name = request.body.name;
   let teacher = request.body.teacher;
-  let newClass = mySchool.addClass(name, teacher);
+  let newClass = School.addClass(name, teacher);
   response.status(200).json({
     status: "success",
     message: "added a new class",
@@ -56,29 +56,9 @@ const ifRepeated = (request, response, next) => {
   next();
 };
 const enrollStudent = (request, response) => {
-  let name = request.body.name;
-  let age = request.body.age;
-  let city = request.body.city;
-  let grade = request.body.grade;
-  let className = request.params.name;
-  let newStudent = new Student(name, age, city, grade, className);
-  let enrolledStudent = mySchool.enrollStudent(
-    request.params["className"],
-    newStudent
-  );
-  if (!enrolledStudent) {
-    response.json({
-      error: "student does not exist",
-      time: new Date()
-    });
-  } else {
-    response.json({
-      student: enrolledStudent,
-      class: className,
-      message: "Enrolled ",
-      time: new Date()
-    });
-  }
+ 
+  let newStudent = mySchool.enrollStudent
+
 };
 const classExist = (request, response, next) => {
   let className = request.params.classes;
