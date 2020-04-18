@@ -73,48 +73,24 @@ class School {
     // Your code here
     let currClass = this.classes[className].students 
     
-    if (failing === true) {
-      let failingArr = currClass.filter(el => {
-        return (el.grade < 70)
-      }) 
-      if (city) {
-        failingArr = failingArr.filter(el => {
-          return (el.city === city)
-        })
-      }
-      return failingArr 
-    } else if (failing === false) {
-      let passingArr = currClass.filter(el => {
-        return (el.grade > 65)
-      })
-      if (city) {
-        passingArr = failingArr.filter(el => {
-          return (el.city === city)
-        })
-      }
-      return passingArr 
+    if (failing === true && city) {
+     let failingAndCity = currClass.filter(el => el.grade < 70 && el.city === city)
+     return failingAndCity
+    } else if (failing === false && city) {
+      let passingAndCity = currClass.filter(el => el.grade >= 70 && el.city === city)
+      return passingAndCity
+    } else if (failing === true) {
+      let failingArr = currClass.filter(el => el.grade < 70)
+      return failingArr
+    } else if (failing === false){
+      let passingArr = currClass.filter(el => el.grade >= 70)
+      return passingArr
+    } else {
+      let cityArr = currClass.filter(el => el.city === city)
+      return cityArr
     }
   }
+
 }
 
 module.exports = School;
-
-// let mySchool = new School()
-// let newStudent = new Student("Briany", 22, "New York City", "95")
-// let passingNy = new Student("Joshua", 18, "New York City", "63")
-// let failingStudent = new Student("Jon", 21, "Boston", "55")
-// let passingBoston = new Student("Ben", 24, "Boston", "85")
-
-
-//mySchool.addClass("Astronomy", "Mr.Bob")
-
-
-// mySchool.enrollStudent("Astronomy", newStudent)
-// mySchool.enrollStudent("Astronomy", passingNy)
-// mySchool.enrollStudent("Astronomy", failingStudent)
-// mySchool.enrollStudent("Astronomy", passingBoston)
-
-//console.log(mySchool.getStudentsByClass("Astronomy"))
-
-// console.log('getstudents by class with filter function')
-// console.log(mySchool.getStudentsByClassWithFilter("Astronomy", true, "Boston"))
