@@ -60,29 +60,38 @@ router.post('/:classname/enroll', (req, res) => {
   let studentGrade = parseInt(req.body.grade)
   let date = new Date().toString()
 
+  console.log(className)
 
-  let currClass = mySchool.classes[className].students
+  if (!mySchool.classes[className]) {
+    res.status(404).json({
+      "error": "Class Doesn't Exist",
+     "timestamp": date
+    })
+  } else if (!studentName || !studentAge || !studentCity || !studentGrade) {
 
-
- if (!studentName || !studentAge || !studentCity || !studentGrade) {
-
-    res.status(404)
-
-    res.json({
+    res.status(404).json({
       "error": "Please fill out all the information for the student",
      "timestamp": date
     })
 
   } else {
 
+    let currClass = mySchool.classes[className].students
+
+    let newStudent = {
+      "name": studentName,
+      "age": studentAge,
+      "city": studentCity,
+      "grade": studentGrade
+    }   
+
+     if (currClass.length === 0){
+      mySchool.enrollStudent(currClass, newStudent)
+    } else {
+
     for (let i = 0; i < currClass.length; i++) {
       if (currClass[i].name === studentName) {
-          let newStudent = {
-            "name": studentName,
-            "age": studentAge,
-            "city": studentCity,
-            "grade": studentGrade
-          }    
+
           currClass.splice(i, 1, newStudent)
               
           res.json({
@@ -94,13 +103,6 @@ router.post('/:classname/enroll', (req, res) => {
 
       } else {
 
-        let newStudent = {
-          "name": studentName,
-          "age": studentAge,
-          "city": studentCity,
-          "grade": studentGrade
-        }
-    
        let result = mySchool.enrollStudent(className, newStudent)
      
        res.json({
@@ -111,6 +113,7 @@ router.post('/:classname/enroll', (req, res) => {
           })
       }
     }
+   }
   } 
 })
 
