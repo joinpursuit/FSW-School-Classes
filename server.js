@@ -7,8 +7,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors())
 
-//let mySchool = new School();
-
 const classRouter = require('./class_router')
 
 app.use('/class', classRouter);
