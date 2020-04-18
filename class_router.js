@@ -28,7 +28,6 @@ mySchool.enrollStudent("Astronomy", passingBoston)
 mySchool.enrollStudent("Astronomy", failingBoston)
 
 
-
 router.post('/', (req, res) => {
   let className = req.body.name 
   let classteacher = req.body.teacher 
@@ -60,8 +59,6 @@ router.post('/:classname/enroll', (req, res) => {
   let studentGrade = parseInt(req.body.grade)
   let date = new Date().toString()
 
-  console.log(className)
-
   if (!mySchool.classes[className]) {
     res.status(404).json({
       "error": "Class Doesn't Exist",
@@ -86,7 +83,8 @@ router.post('/:classname/enroll', (req, res) => {
     }   
 
      if (currClass.length === 0){
-      mySchool.enrollStudent(currClass, newStudent)
+      mySchool.enrollStudent(className, newStudent)
+      
     } else {
 
     for (let i = 0; i < currClass.length; i++) {
@@ -95,7 +93,7 @@ router.post('/:classname/enroll', (req, res) => {
           currClass.splice(i, 1, newStudent)
               
           res.json({
-          "student" : result,
+          "student" : newStudent,
           "className": className,
           "message" : `Updated Student ${studentName}`,
           "timestamp" : date
