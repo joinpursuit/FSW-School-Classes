@@ -1,0 +1,203 @@
+@font-face {
+    font-family: trajanPro;
+    src: url(./../../../assets/fonts/Trajan_Bold_Pro.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: abstergoSans;
+    src: url(./../../../assets/fonts/abstergo_sans_light.ttf);
+}
+
+header {
+    margin-top: 25px;
+    text-align: center;
+    font-family: trajanPro;
+    color: #C1232C;
+}
+
+body {
+    background-color: #C7C8CA;
+    margin: 0px;
+}
+
+section {
+    padding: 25px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 15% 4% 24% 3% 24% 3% 24% 3%;
+}
+
+h1, h2, h3 {
+    font-family: trajanPro;
+    font-weight: bold;
+    color: #C1232C;
+}
+
+p, label, input, li, button {
+    font-family: abstergoSans;
+    color: #2D2C2E;
+}
+
+input[type=submit], button {
+    width: fit-content;
+    box-shadow: 1px 1px 5px -1px #2d2c2e;
+	background-color:transparent;
+	border-radius:24px;
+	border:1px solid #c1232b;
+	display:inline-block;
+	cursor:pointer;
+	color:#2d2c2e;
+	font-size:12px;
+	padding:11px 21px;
+	text-decoration:none;
+    text-shadow:3px 1px 5px #c7c8ca;
+}
+
+input, button {
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+input[type=text] {
+    font-size:15px; 
+	border-style:solid; 
+    border-radius:24px; 
+	padding:11px; 
+	border-width:1px; 
+	background-color:#2d2c2e; 
+	color:#c7c8ca; 
+	box-shadow: 1px 1px 5px -1px rgba(42,42,42,.75); 
+    border-color:#c7c8ca;  
+}
+
+input[type=text]:focus {
+    outline: none;
+}
+
+nav {
+    grid-column: 1 / 2;
+    background-color: #c1232b;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-evenly;
+    padding: 25px;
+    height: 100vh;
+    margin: 0;
+}
+
+a {
+    font-family: trajanPro;
+    text-decoration: none;
+    color: #c7c8ca; 
+    font-size: 32px;
+}
+
+select {
+    font-family: abstergoSans;
+    font-size: 15px;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 15px;
+    outline: 0;
+    border: 1px solid #c7c8ca;
+    border-radius: 24px;
+    background: #2d2c2e;
+    color: #c7c8ca;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-bottom: 12px;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover,
+select:focus {
+    color: #2d2c2e;
+    background: #c1232b;
+}
+
+select:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+a:hover {
+    font-size: 34px;
+}
+
+#studentSection {
+    grid-column: 3 / 4;
+}
+
+#studentForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#teacherSection {
+    grid-column: 5 / 6;
+}
+
+#teacherForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#classSection {
+    grid-column: 7 / 8;
+}
+
+#classForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#logout {
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 1300px) {
+    a {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: row;
+        height: fit-content;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    a {
+        font-size: 16px;
+    }
+
+    #logout {
+        font-size: 12px;
+    }
+
+    nav {
+        justify-content: space-evenly;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    a {
+        font-size: 12px;
+    }
+}

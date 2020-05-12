@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./teacher.css">
+    <script src="./teacher.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>School Records</title>
+</head>
+<body>
+    <header><a href="./../../index.html" id="logout">Logout</a></header>
+    <main>
+        <section id="showStudents">
+            <h1>Students</h1>
+            <label for="showCity">City Name: </label>
+            <input type="text" name="showCity" id="showCity" />
+
+            <label for="showFailing">Show Failing Students Only</label>
+            <input type="checkbox" name="showFailing" id="showFailing">
+
+            <section id="students"></section>
+        </section>
+
+        <section id="updateStudent">
+            <h1>Update Students</h1>
+            <form id="updateForm">
+                <label for="updateClass">Class ID: </label>
+                <input type="text" name="updateClass" id="updateClass">
+
+                <label for="updateStudentId">Student ID: </label>
+                <input type="text" name="updateStudentId" id="updateStudentId">
+
+                <label for="updateGrade">Grade: </label>
+                <input type="text" name="updateGrade" id="updateGrade">
+
+                <input type="submit">
+            </form>
+
+            <section id="updateResponse"></section>
+        </section>
+    </main>
+
+    <footer>
+        <audio src="./../../assets/music/assassinsCreed.mp3" controls loop></audio>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/admin.css">
+    <script src="./scripts/admin.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>School Records</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <a href="./../../index.html" id="logout">Logout</a>
+            <a href="/" onclick="return false;">Home</a>
+            <a href="./pages/classes.html">Show Classes</a>
+            <a href="./pages/students.html">Show Students</a>
+            <a href="./pages/teachers.html">Show Teachers</a>
+        </nav>
+        
+        <section id="studentSection">
+            <h2>Add Student</h2>
+            <form id="studentForm" autocomplete="off">
+                <label for="studentFirst">First Name: </label>
+                <input type="text" name="studentFirst" id="studentFirst">
+
+                <label for="studentLast">Last Name: </label>
+                <input type="text" name="studentLast" id="studentLast">
+
+                <label for="studentCity">City: </label>
+                <input type="text" name="studentCity" id="studentCity">
+
+                <label for="studentAge">Age: </label>
+                <input type="text" name="studentAge" id="studentAge">
+
+                <input type="submit">
+            </form>
+            <section id="studentResponse"></section>
+        </section>
+
+        <section id="teacherSection">
+            <h2>Add Teacher</h2>
+            <form id="teacherForm" autocomplete="off">
+                <label for="teacherFirst">First Name: </label>
+                <input type="text" name="teacherFirst" id="teacherFirst">
+
+                <label for="teacherLast">Last Name: </label>
+                <input type="text" name="teacherLast" id="teacherLast">
+
+                <input type="submit">
+            </form>
+
+            <section id="teacherResponse"></section>
+        </section>
+
+        <section id="classSection">
+            <h2>Add Class</h2>
+            <form id="classForm" autocomplete="off">
+                <label for="className">Class Name: </label>
+                <input type="text" name="className" id="className">
+    
+                <label for="classTeacher">Teacher: </label>
+                <select name="classTeacher" id="classTeacher">
+                    <option value="disabled" selected disabled>Select a teacher</option>
+                </select>
+    
+                <input type="submit">
+            </form>
+            <section id="classResponse"></section>
+        </section>
+    </main>
+
+    <footer>
+        <audio src="./../../assets/music/assassinsCreed.mp3" controls loop></audio>
+    </footer>
+</body>
+</html>
