@@ -1,4 +1,4 @@
-# Pursuit-Core-Web-Express-Project
+# School Classes Management
 
 ## Introduction
 
@@ -8,6 +8,13 @@ In this lab you will be developing a server that stores data for a school, and a
 - Students
 
 ## Setup
+
+* Create a new project from scratch on your computer
+* Install express and write the boilerplate code to get it running
+* Create a new repository on github. DO NOT check the box to create a README file.
+* Follow the instructions on github for setting up a new project
+
+## Overview
 
 1. Take a look at the JavaScript Classes in the files [`Class.js`](./Class.js), [`School.js`](./School.js) and [`Student.js`](./Student.js). They will be our models for creating objects.
 
@@ -23,7 +30,7 @@ In this lab you will be developing a server that stores data for a school, and a
 
 4. It is your responsibility to implement and write the code for all the `School` methods outlined in [`School.js`](./School.js). The comments above the methods document what the methods should do and return. You will use these methods in your server routes.
 
-## Details
+## Code Details
 
 ### Classes
 
@@ -64,7 +71,9 @@ In this lab you will be developing a server that stores data for a school, and a
   ```
 - A student can be enrolled in multiple classes. A student's grade is class dependant.
 
-## Routes & Functionality
+## Technical Requirements
+
+### Routes 
 
 #### Creating a new class
 
