@@ -28,12 +28,27 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
+  enrollStudent(name, student, city, age, grade) {
     // Your code here
+    let newStudent = new Student(student, city, age, grade);
+
+    // console.log('Whats this array', this.classes[name].students)
+
+    this.classes[name].students.push(newStudent);
+
+    for (let i = 0; i < this.classes[name].students.length - 1; i++) {
+      if (this.classes[name].students[i].name === newStudent.studentname) {
+        // console.log("Before", this.classes[name].students)
+
+        // console.log("Remove Dupe ", this.classes[name].students[i].name)
+        this.classes[name].students[i] = newStudent;
+        this.classes[name].students.pop()
+        // console.log("After", this.classes[name].students)
+
+      }
+    }
+    // console.log(this.classes[name]);
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
@@ -42,7 +57,12 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    for (let key in this.classes) {
+      // console.log('Checking Key', this.classes[key])
+      if (this.classes[key].name === className) {
+        return this.classes[key].students
+      }
+    }
   }
 
 
@@ -63,7 +83,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    // I added this and the last function together
   }
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>School of E-Sports Database</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src='./index.js'></script>
+  </head>
+
+  <body>
+    <h1>School of E-Sports Database</h1>
+
+    <div>
+        <h2> Class Information </h2>
+        <form id="classAdd">
+            <input type='text' name='name' placeholder='name'>
+          <input type='text' name='teacher' placeholder='teacher'>
+
+          <input type='submit'>
+        </form>
+        <ul id="class-info">
+  
+        </ul>
+      </div>
+
+    <div>
+      <h2> Student Information </h2>
+      <form id="studentAdd">
+        <input type='text' name='class-name' placeholder='Class Name'>
+        <input type='text' name='studentname' placeholder='name'>
+        <input type='text' name='city' placeholder='city'>
+        <input type='text' name='age' placeholder='age'>
+        <input type='text' name='grade' placeholder='grade'>
+
+        <input type='submit'>
+     </form>
+      <ul id="student-info">
+
+      </ul>
+    </div>
+  </body>
+
+</html>
