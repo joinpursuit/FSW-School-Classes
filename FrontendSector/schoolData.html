@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./schoolIndex.js" async></script>
+    <link rel="stylesheet" href="schoolData.css">
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>NRS</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Nílber Remón Elementary</h1>
+        <h2>School for the Awkwardly-Gifted</h2>
+    </div>
+    <div class="addClassFormContainer">
+        <h2>Sanction a Class @NRES</h2>
+        <form class="addClassForm">
+            <input class="input" type="text" id="className" placeholder="CLASS NAME" required>
+            <input class="input" type="text" id="classTeacherName" placeholder="TEACHER NAME" required>
+            <input class="submit" type="submit" id="submitClass" value="Add">
+        </form>
+        <div class="error" id="addClassError"></div>
+    </div>
+    <div class="enrollStudentFormContainer">
+        <h2>Enroll a Student @NRES</h2>
+        <form class="enrollStudentForm">
+            <input class="input" type="text" id="studentClass" placeholder="CLASS" required>
+            <input class="input" type="text" id="studentName" placeholder="NAME" required>
+            <input class="input" type="number" id="studentAge" placeholder="AGE" required>
+            <input class="input" type="text" id="studentCity" placeholder="CITY" required>
+            <input class="input" type="number" id="studentGrade" placeholder="GRADE" required>
+            <input class="submit" type="submit" id="submitStudent" value="Add">
+        </form>
+        <div class="error" id="enrollStudentError"></div>
+    </div>
+    <div class="filterFormContainer">
+        <h2>List NRES Students By Filters</h2>
+        <form class="filterForm">
+            <input class="input" type="text" id="filterClass" placeholder="CLASS" required>
+            <input class="input" type="text" id="filterCity" placeholder="CITY (Optional)">
+            <input type="checkbox" id="filterFailStudents"> FAILURES (Optional)
+            <input class="submit" type="submit" id="submitFilter" value="Filter">
+        </form>
+        <div id="studentFilterList"></div>
+        <div class="error" id="filterError"></div>
+    </div>
+</body>
+</html>
