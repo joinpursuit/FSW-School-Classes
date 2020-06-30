@@ -29,7 +29,13 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+      if (this.classes[className].students[student.name]){
+        return "This student is already enrolled in this class";
+      } else {
+        this.classes[className].students[student.name] = student;
+        // console.log(this.classes[className].students)
+        return student;
+      }
   }
 
 
@@ -42,10 +48,18 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students
   }
 
+  changeGrade(className, student, grade) {
+    if(this.classes[className].students[student.name]) {
+      this.classes[className].students[student.name].grade = grade;
+      return this.classes[className].students[student.name].grade = grade;
 
+    } else {
+      return "This student isn't in this class."
+    }
+  }
 
 
   /**
@@ -62,10 +76,53 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
+  getStudentsByClassWithFilter(className, failing) {
+    let studentsObj = this.classes[className].students;
+    let failingNum = Number(failing);
+    let passingArr = [];
+    let failingArr = [];
 
+    for (let i in studentsObj) {
+      console.log(studentsObj[i].grade)
+      if (Number(studentsObj[i].grade) >= 65) {
+        passingArr.push(i);
+      } else {
+        failingArr.push(i);
+      }
+    }
+
+    console.log(failingArr, passingArr)
+    console.log("typeof failing", typeof failing)
+    if (failingNum === 0) {
+      return passingArr;
+    } 
+    return failingArr
+}
 }
 
 module.exports = School;
+
+
+// let mySchool = new School();
+// let newStudent = new Student("Peter", 25, "NY", 12);
+// let mike = new Student("Mike", 25, "NY", 65);
+// let tim = new Student("Tim", 25, "NY", 99);
+
+// mySchool.addClass("math", "Alejo");
+// mySchool.enrollStudent("math", newStudent)
+// console.log(mySchool.classes.math.students)
+
+// mySchool.changeGrade("math", newStudent, "95")
+// console.log(mySchool.changeGrade("math", mike, 100))
+
+// console.log(mySchool.enrollStudent("math", newStudent));
+// console.log(mySchool.classes.math.students)
+// console.log(mySchool.enrollStudent("math", mike));
+
+// console.log(mySchool.classes.math.students)
+// console.log(mySchool.enrollStudent("math", tim));
+// console.log(mySchool.enrollStudent("math", newStudent));
+
+// console.log(mySchool.getStudentsByClass("math"))
+
+// console.log(mySchool.getStudentsByClassWithFilter("math", true));
