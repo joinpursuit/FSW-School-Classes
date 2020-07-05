@@ -1,11 +1,11 @@
 #showFailing {
   width: 30px;
 }
-body {
+/* body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 #results {
   position: absolute;
@@ -21,4 +21,12 @@ body {
   right: 1%;
   top: 10%;
   border: 1px solid black;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 15%;
+  gap: 90px;
 }
