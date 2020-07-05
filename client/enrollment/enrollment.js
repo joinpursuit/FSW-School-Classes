@@ -23,7 +23,7 @@ const loadStudentEnrollment = async () => {
   let city = document.querySelector("#city").value;
   let grade = document.querySelector("#grade").value;
 
-  url = `http://localhost:8283/class/${className}/enroll`;
+  url = `http://localhost:8283/enrollment/${className}/enroll`;
 
   try {
     let studentObj = {
