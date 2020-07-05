@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express();
-const { db } = require("../../database/databaseInfo"); //connected db instance
+const { db } = require("../database/db"); //connected db instance
 
 //function create a timestamp
 const timeStamp = () => new Date().toLocaleString();
@@ -14,7 +14,7 @@ const addClassMethod = async (req, res, next) => {
     req.returnQuery = await db.one(insertQuery, {
       classname,
       teacher,
-      timeStamp
+      timeStamp,
     });
     next();
   } catch (err) {
@@ -25,7 +25,7 @@ const addClassMethod = async (req, res, next) => {
       res.send({
         message: err,
         error: true,
-        timeStamp: timeStamp()
+        timeStamp: timeStamp(),
       });
     }
     throw err;
@@ -37,9 +37,9 @@ const emptyClassData = (req, res, next) => {
   let teacher = req.body.teacher;
   classname === "" || teacher === ""
     ? res.status(400).send({
-      message: "Please fill out all of the class information",
-      error: true
-    })
+        message: "Please fill out all of the class information",
+        error: true,
+      })
     : next();
 };
 //sends class creation information
@@ -49,7 +49,7 @@ const sendClassResults = (req, res) => {
     payload: data,
     message: "Created a new class",
     status: "success",
-    error: false
+    error: false,
   });
 };
 
@@ -72,7 +72,7 @@ const enrollClass = async (req, res, next) => {
       age,
       city,
       grade,
-      timeStamp
+      timeStamp,
     });
     next();
   } catch (err) {
@@ -85,7 +85,7 @@ const enrollClass = async (req, res, next) => {
         message: err,
         error: true,
         payload: null,
-        timestamp: timeStamp()
+        timestamp: timeStamp(),
       });
     }
     throw err;
@@ -101,10 +101,10 @@ const invalidStudent = (req, res, next) => {
 
   studentName === "" || age === "" || grade === "" || city === ""
     ? res.status(400).send({
-      errMessage: "Please fill out all the information for the student",
-      error: true,
-      timeStamp: timeStamp()
-    })
+        errMessage: "Please fill out all the information for the student",
+        error: true,
+        timeStamp: timeStamp(),
+      })
     : next();
 };
 
@@ -124,7 +124,7 @@ const sendStudentResults = (req, res) => {
     message: "Enrolled Student",
     payload: data,
     status: "success",
-    error: false
+    error: false,
   });
 };
 
@@ -137,11 +137,11 @@ const getStudentsByClass = async (req, res, next) => {
   failing === "false"
     ? (getQuery = "SELECT * FROM students WHERE className = $/classname/")
     : (getQuery =
-      "SELECT * FROM students WHERE className = $/classname/ AND grade <= 65");
+        "SELECT * FROM students WHERE className = $/classname/ AND grade <= 65");
 
   try {
     req.query = await db.any(getQuery, {
-      classname
+      classname,
     });
     next();
     // return geuery
@@ -166,7 +166,7 @@ const validateClassQuery = (req, res, next) => {
       status: "failed",
       error: true,
       message: `${classname} is empty please enroll students`,
-      timeStamp: timeStamp()
+      timeStamp: timeStamp(),
     });
   } else {
     next();
@@ -182,7 +182,7 @@ const sendFilterResults = (req, res) => {
     classname: classname,
     message: "Retrieved Students",
     status: "success",
-    error: false
+    error: false,
   });
 };
 
