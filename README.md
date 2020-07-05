@@ -1,11 +1,8 @@
-# Pursuit-Core-Web-Express-Project
+# VonBarown University
 
 ## Introduction
 
-In this lab you will be developing a server that stores data for a school, and a simple frontend. The school has the following data models:
-
-- Classes
-- Students
+A web application application for a university administrator to manage student enrollment
 
 ## Setup
 
