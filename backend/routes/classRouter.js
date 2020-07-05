@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express();
-const { db } = require("../database/db"); //connected db instance
+const db = require("../database/db"); //connected db instance
 
 //function create a timestamp
 const timeStamp = () => new Date().toLocaleString();

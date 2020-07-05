@@ -6,7 +6,7 @@
     <meta charset=" UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
     <script src="./creatingClass.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./creatingClass.css">
@@ -35,7 +35,7 @@
                     <Div id="formContainer">
                         <div id="classContainer" class="display">
                             <h3>Enter New Class Information:</h3>
-                            <form id="addClass">
+                            <form id="addClass" onsubmit="return false">
                                 <input type="text" placeholder="Enter class Name" id="createClass" class="classname">
                                 <input type="text" placeholder="Enter Teacher" id="teacher">
                                 <button id="classAdded">Add class to directory</button>

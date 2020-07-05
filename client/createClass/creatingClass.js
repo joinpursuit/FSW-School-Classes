@@ -3,7 +3,7 @@ let clsName, name, age, city, grade, timeStamp;
 document.addEventListener("DOMContentLoaded", () => {
   emptyInput();
   let addForm = document.querySelector("#addClass");
-  addForm.addEventListener("submit", event => {
+  addForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addingClassToDom();
   });
@@ -13,16 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadAddClassData = async () => {
   let className = document.querySelector("#createClass").value;
   let teacher = document.querySelector("#teacher").value;
-  url = `http://localhost:3100/class/post`;
+  url = `http://localhost:8283/class/post`;
 
   let classObj = {
     className,
-    teacher
+    teacher,
   };
 
-  const { data } = await axios.post(url, classObj);
-  console.log(data);
-  return data;
+  try {
+    const { data } = await axios.post(url, classObj);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // retrieving the container to display class creation results
@@ -35,7 +39,7 @@ const addingClassToDom = async () => {
 };
 
 // creating cards for the class information created
-const displayNewClass = async data => {
+const displayNewClass = async (data) => {
   const container = getContainer();
   clearResults();
   let lecture = document.createElement("div");
@@ -66,7 +70,7 @@ const clearResults = () => {
   }
 };
 
-const displayError = data => {
+const displayError = (data) => {
   emptyInput();
   const container = getContainer();
   clearResults();
