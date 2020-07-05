@@ -3,13 +3,12 @@ let clsName, name, age, city, grade, timeStamp;
 document.addEventListener("DOMContentLoaded", () => {
   emptyInput();
 
-
   let enrollmentForm = document.querySelector("#enrollForm");
-  enrollmentForm.addEventListener("submit", event => {
+  enrollmentForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addingStudentToDom();
     document.querySelector("#enrollmentContainer").style.display = "flex";
-    document.querySelector('#results').style.border = '1px solid black'
+    document.querySelector("#results").style.border = "1px solid black";
   });
 });
 
@@ -24,7 +23,7 @@ const loadStudentEnrollment = async () => {
   let city = document.querySelector("#city").value;
   let grade = document.querySelector("#grade").value;
 
-  url = `http://localhost:3100/class/${className}/enroll`;
+  url = `http://localhost:8283/class/${className}/enroll`;
 
   try {
     let studentObj = {
@@ -32,7 +31,7 @@ const loadStudentEnrollment = async () => {
       studentName,
       age,
       city,
-      grade
+      grade,
     };
     const { data } = await axios.post(url, studentObj);
 
@@ -94,7 +93,7 @@ const displayEnrollment = async (data, el) => {
 };
 
 // //this function handles displaying the error message
-const displayError = data => {
+const displayError = (data) => {
   console.log("this", data.timestamp);
 
   emptyInput();
