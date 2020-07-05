@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     classFilterChoiceToDOM();
     document.querySelector("#bodyContainer").style.display = "flex";
-    document.querySelector("#results").style.border = "1px solid black";
   });
   checker();
 });
@@ -36,6 +35,8 @@ const displayEnrollment = async (data, el) => {
   console.log("this is display", data.payload[0].studentname);
 
   const container = getContainer();
+
+  // container.style.visibility = "";
 
   let student = document.createElement("div");
   student.className = "student";
@@ -86,7 +87,7 @@ const displayError = (data) => {
   let errorDiv = document.createElement("div");
   errorDiv.className = "error";
   let err = document.createElement("p");
-  err.innerText = `Error: ${data.message}`;
+  err.innerText = `${data.message}`;
   let timeStamp = document.createElement("p");
   timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
 

@@ -24,13 +24,6 @@ body {
     gap: 30px;
 } */
 
-#results {
-  display: flex;
-  gap: 15px;
-  flex-direction: column;
-  align-items: center;
-}
-
 .classCard,
 .student {
   font-size: 20px;
@@ -52,16 +45,11 @@ body {
   border: 3px solid brown;
 }
 .error {
-  border-color: 2px solid burlywood;
-  background-color: red;
-  border: 3px solid burlywood;
-  border-radius: 10%;
-  padding: 20px;
   font-size: 20px;
-  color: yellow;
+  color: red;
 }
 input {
   border: 1px solid black;
   border-radius: 10%;
   background-color: wheat;
-} */
+}
