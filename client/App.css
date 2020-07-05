@@ -48,3 +48,19 @@ input {
   border-radius: 10%;
   background-color: wheat;
 }
+
+#studentLoginForm {
+  /* width: 10px; */
+  display: flex;
+  align-items: center;
+}
+
+.login-input {
+  width: 390px;
+}
+/* 
+
+#username,
+#password {
+  width: 20px;
+} */
