@@ -5,8 +5,8 @@
   "main": "Class.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/ExpressProjectServer.js",
-    "start:dev": "nodemon"
+    "start": "node ./backend/bin/ww",
+    "heroku-postbuild": "cd backend && npm install"
   },
   "repository": {
     "type": "git",

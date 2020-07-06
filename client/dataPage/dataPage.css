@@ -10,7 +10,7 @@
 #results {
   position: absolute;
   overflow: scroll;
-  height: 68vh;
+  height: 623px;
   width: 35vw;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
   border-radius: 20px;
   padding-top: 40px;
   background-color: white;
-  right: 1%;
+  right: 4%;
   top: 10%;
   border: 1px solid black;
 }
@@ -29,4 +29,13 @@
   position: fixed;
   left: 15%;
   gap: 90px;
+}
+
+@media only screen and (max-width: 800px) {
+  #results {
+    height: 260px;
+    width: 90vw;
+    top: 60%;
+    position: absolute;
+  }
 }
