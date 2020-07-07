@@ -1,107 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-     <link rel="stylesheet" href="./client/App.css" />
-    <meta charset=" UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="frontEnd.html"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <!-- <script src="frontEnd.css"></script> -->
-    <link rel="stylesheet" href="./frontEnd.css" />
-    <title>Vonbarown University</title>
-  </head>
 
-  <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="index.html" class="brand-logo">Home</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a href="./client/createClass/creatingClass.html"
-              ><i class="material-icons left">class</i>Create Class</a
-            >
-          </li>
-          <li>
-            <a href="./client/enrollment/enrollment.html"
-              ><i class="material-icons left">add_circle_outline</i>Enroll
-              Student</a
-            >
-          </li>
-          <li>
-            <a href="./client/dataPage/dataPage.html"
-              ><i class="material-icons left">search</i>Search Class</a
-            >
-          </li>
-        </ul>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="./client/App.css" />
+  <meta charset=" UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="frontEnd.html"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <!-- <script src="frontEnd.css"></script> -->
+  <link rel="stylesheet" href="./frontEnd.css" />
+  <title>Vonbarown University</title>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+  <h1>Student Data Management</h1>
+  <form>
+    <div id="studentLoginForm">
+      <div class="row">
+        <form class="col s12">
+
+          <button id="studentLogin">
+  
+            <a href="./client/auth/login.html" class="brand-logo">Login</a>
+
+          </button>
+            <button id="studentSignUp">
+  
+            <a href="./client/auth/signup.html" class="brand-logo">Sign Up</a>
+
+          </button>
+
+        </form>
       </div>
-    </nav>
-    <h1>Student Data Management</h1>
-    <h3>Login</h3>
-    <form>
-      <div id="studentLoginForm">
-        <div class="row" >
-          <form class="col s12">
-            <div class="row login-input" id="username'">
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate" />
-                <label for="password">Username</label>
-              </div>
-            </div>
-            <div class="row login-input" id="password'">
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate" />
-                <label for="password">Password</label>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <button id="studentLogin">Log In</button>
-      <!-- <button id="newUser">New User</button>
-       <div id="signUpForm">
-          <form class="row" >
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="first_name" type="text" class="validate" />
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="last_name" type="text" class="validate" />
-                  <label for="last_name">Last Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="password" type="password" class="validate" />
-                  <label for="password">Username</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="password" type="password" class="validate" />
-                  <label for="password">Password</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="email" type="email" class="validate" />
-                  <label for="email">Email</label>
-                </div>
-              </div>
-            </form>
-          </form> -->
-          </form>
-       </div>
-  </body>
+</body>
+
 </html>
