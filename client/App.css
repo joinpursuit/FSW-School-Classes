@@ -66,6 +66,8 @@ input {
 } */
 
 #landing {
+  width: 100%;
+  height: 100%;
   display: flex;
   /* flex-direction: column; */
 }
@@ -75,15 +77,25 @@ input {
   position: absolute;
   top: 17%;
   left: 30px;
+  -webkit-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
 }
 
 .site-info {
+  display: flex;
+  align-items: center;
   position: absolute;
   border: 1px solid black;
-  right: 10px;
-  height: 502px;
-  width: 602px;
-  margin-bottom: 10px;
+  right: 1%;
+  height: 562px;
+  width: 902px;
+  /* margin-bottom: 90px; */
+  margin-top: -130px;
+  border: transparent;
+  -webkit-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
 }
 
 .auth-links {
@@ -91,17 +103,68 @@ input {
   bottom: 30px;
   right: 200px;
 }
+.auth-nav-buttons {
+  border: transparent;
+  border-radius: 5px;
+  height: 40px;
+  width: 90px;
+}
+
+#web {
+  visibility: visible;
+}
+#mobile {
+  visibility: hidden;
+}
 
 @media only screen and (max-width: 800px) {
-  .site-info {
-    position: relative;
-    /* right: 50%; */
-    top: 90%;
-    width: 80%;
+  #studentsOnBench {
+    width: 90%;
+    left: 5%;
+    margin-top: -50px;
   }
+  .site-info {
+    position: absolute;
+    /* right: 50%; */
+    top: 100%;
+    width: 80%;
+    /* margin-right: 60px; */
+    left: 30px;
+  }
+  .auth-links {
+    position: absolute;
+    margin-top: 100%;
+    top: 100%;
+    right: 50%;
+  }
+  .auth-nav-buttons {
+    position: relative;
+    top: 60px;
+  }
+
+  #studentLogin {
+    left: 85px;
+  }
+
+  #studentSignUp {
+    left: 90px;
+  }
+
+  .landing-title {
+    font-size: 25px;
+    position: absolute;
+    align-self: center;
+    font-weight: bolder;
+  }
+  #web {
+    visibility: hidden;
+  }
+  #mobile {
+    visibility: visible;
+    font-size: 40px;
+  }
+}
 /*
-
-
 
 
 /* .logic-container {
