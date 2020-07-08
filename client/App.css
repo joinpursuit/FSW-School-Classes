@@ -77,6 +77,9 @@ input {
   position: absolute;
   top: 17%;
   left: 30px;
+  -webkit-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
 }
 
 .site-info {
@@ -87,7 +90,12 @@ input {
   right: 1%;
   height: 562px;
   width: 902px;
-  margin-bottom: 10px;
+  /* margin-bottom: 90px; */
+  margin-top: -130px;
+  border: transparent;
+  -webkit-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 2px 51px 15px rgba(0, 0, 0, 0.11);
 }
 
 .auth-links {
