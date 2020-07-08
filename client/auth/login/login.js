@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   let studentLogin = document.querySelector("#studentLogin");
-  let newUser = document.querySelector("#newUser");
 
-  let newUserForm = document.querySelector("#signUpForm");
-
-  studentLogin.addEventListener("click", (event) => {
-    event.preventDefault();
+  studentLogin.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "../../landing/index.html";
   });
 
   // newUser.addEventListener("click", (event) => {
