@@ -8,6 +8,7 @@ const logger = require("morgan");
 const studentRouter = require("./routes/students");
 const enrollmentRouter = require("./routes/enrollment");
 const classRouter = require("./routes/class");
+const authRouter = require("./routes/auth");
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/class", classRouter);
 app.use("/student", studentRouter);
 app.use("/enrollment", enrollmentRouter);
+app.use("/api/auth", authRouter);
 
 // app.use("/", (req, res, next) => {
 //   res.sendFile(path.resolve(__dirname, "../client/frontEnd.html"));

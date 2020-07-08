@@ -47,6 +47,6 @@ const getStudents = async (req, res, next) => {
 //   }
 // };
 
-router.get("/:classname/students", getStudents);
+router.get("/:classname/information", getStudents);
 
 module.exports = router;
