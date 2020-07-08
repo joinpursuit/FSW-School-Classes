@@ -6,14 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../../landing/index.html";
   });
 
-  // newUser.addEventListener("click", (event) => {
-  //   let studentLoginForm = (document.querySelector(
-  //     "#studentLoginForm"
-  //   ).style.display = "none");
-  //   event.preventDefault();
-  //   newUserForm.style.display = "initial";
-  // });
-
   console.log("hello");
 });
 
