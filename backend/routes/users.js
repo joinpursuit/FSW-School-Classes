@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const queries = require("../database/queries/users");
+const queries = require("../database/queries/auth");
 const { loginRequired } = require("../auth/helpers");
 
 /* GET users listing. */

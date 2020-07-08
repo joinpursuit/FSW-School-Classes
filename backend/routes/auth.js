@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authHelpers = require("../auth/helpers");
-const userQueries = require("../database/queries/users");
+const userQueries = require("../database/queries/auth");
 const passport = require("../auth/passport");
 const uuidv4 = require("uuid");
 
