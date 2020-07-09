@@ -4,15 +4,22 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start:reseed": "cd database/ && psql -f seed.sql && cd .. && npm run start:dev",
+    "start:resetDB": "heroku pg:reset DATABASE",
+    "start:reseedDB": "npm run start:resetDB && heroku pg:psql -f database/seed.sql"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.1",
     "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^7.12.1",
     "pg-promise": "^10.2.1",
     "uuid": "^3.3.3"
