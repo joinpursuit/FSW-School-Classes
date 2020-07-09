@@ -19,7 +19,7 @@ const getContainer = () => document.querySelector("#results");
 const loadStudentByClass = async () => {
   let className = document.querySelector("#searchClass").value;
   let checkBox = checker();
-  url = `http://localhost:8283/student/${className}/students?failing=${checkBox}`;
+  url = `http://localhost:8283/student/${className}/information?failing=${checkBox}`;
 
   try {
     const { data } = await axios.get(url);
