@@ -18,6 +18,7 @@ router.post("/signup", async (req, res, next) => {
 
   try {
     let newUser = await userQueries.addNewUser(userInfo);
+    res.header("Access-Control-Allow-Origin", "*");
     res.json({
       payload: newUser,
       message: "Registration successful",
