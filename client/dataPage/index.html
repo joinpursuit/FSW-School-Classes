@@ -21,22 +21,29 @@
 
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <nav>
+    <nav id="test-nav" class="nav-extended">
       <div class="nav-wrapper">
-        <a href="../../index.html" class="brand-logo">Home</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a href="../createClass/creatingClass.html"
-              ><i class="material-icons left">class</i>Create Class</a
+        <a href="../landing/index.html" class="landing-header"
+          >Student Data Management</a
+        >
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons"></i
+        ></a>
+      </div>
+      <div id="nav-mobile" class="nav-content right">
+        <ul class="tabs tabs-transparent">
+          <li class="tab">
+            <a href="../createClass/index.html"
+              ><i class="material-icons left tab-nav">class</i>Create Class</a
             >
           </li>
-          <li>
-            <a href="../enrollment/enrollment.html"
+          <li class="tab">
+            <a href="../enrollment/index.html"
               ><i class="material-icons left">add_circle_outline</i>Enroll
               Student</a
             >
           </li>
-          <li>
+          <li class="tab">
             <a href="#"
               ><i class="material-icons left">search</i>Search Class</a
             >
