@@ -5,10 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // studentLoginForm.addEventListener("submit", (e) => {
   //   console.log("hello");
   // });
-  loadLoginForm();
   studentLogin.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = "../../landing/index.html";
+    loadLoginForm();
   });
 });
 
@@ -18,11 +17,12 @@ const loadLoginForm = async () => {
 
   console.log("user:", username);
   console.log("pass:", password);
+
+  if (username !== "" && password !== "") {
+    window.location.href = "../../landing/index.html";
+  }
+
+  clearResults();
 };
 
-const clearResults = () => {
-  let container = getContainer();
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-};
+const clearResults = () => (document.querySelector("#username").value = "");
