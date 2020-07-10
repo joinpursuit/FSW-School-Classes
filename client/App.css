@@ -125,7 +125,7 @@ button {
   border: transparent;
   border-radius: 5px;
   height: 40px;
-  width: 90px;
+  width: 120px;
   -webkit-box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
   -moz-box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
   box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
@@ -138,7 +138,16 @@ button {
   visibility: hidden;
 }
 
+
+#test-nav {
+  display: flex;
+  justify-content: space-between;
+}
 @media only screen and (max-width: 800px) {
+  #test-nav {
+    display: inline;
+  }
+
   #studentsOnBench {
     width: 90%;
     left: 5%;
@@ -203,3 +212,8 @@ button {
     bottom: 20px;
   }
 } */
+
+#nav-right {
+  margin-right: 0px;
+  margin-left: 300px;
+}
