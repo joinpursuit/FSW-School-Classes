@@ -45,9 +45,12 @@ const loadLoginForm = async () => {
   // console.log("pass:", password);
 };
 
-const clearResults = () => {
-  let container = getContainer();
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
+
+  if (username !== "" && password !== "") {
+    window.location.href = "../../landing/index.html";
   }
+
+  clearResults();
 };
+
+const clearResults = () => (document.querySelector("#username").value = "");

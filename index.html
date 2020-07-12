@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="frontEnd.html"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
   <!-- <script src="frontEnd.css"></script> -->
   <title>Student Data Management</title>
@@ -16,27 +15,26 @@
 
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-  <h1 class="landing-title" id="web">Student Data Management</h1>
-  <h1 class="landing-title" id="mobile">SDM</h1>
+    <script src="index.js"></script>
+    <nav class="landing-title">
+        <a href="index.html" class="landing-header brand-logo" id="web">Student Data Management</a>
+        <a href="index.html" class="landing-header" id="mobile">SDM</a>
+    </nav>
     <div id="landing">
       <img src="./assets/naassom-azevedo-Q_Sei-TqSlc-unsplash.jpg" alt="people sitting" id='studentsOnBench'>
       <div class="logic-container">
       <div class="site-info">
-        <p>Welcome to the Student Data Management System (SDM).  </p>
+        <p>Welcome to the Student Data Management System (SDM) </p>
+
+        <ul id="features">
+          <li>Add new classes to your schools directory</li>
+          <li>Keep track of the students enrolled in a class</li>
+        </ul>
       </div>
           <div class="auth-links">
             
-            <button class='auth-nav-buttons' id="studentLogin">
-              
-              <a href="./client/auth/login/login.html" class="auth-nav-link login">Login</a>
-              
-            </button>
-            <button class='auth-nav-buttons' id="studentSignUp">
-              
-              <a href="./client/auth/signup/signup.html" class="auth-nav-link signUp">Sign Up</a>
-              
-            </button>
+            <button class='auth-nav-buttons' id="studentLogin">Login</button>
+            <button class='auth-nav-buttons' id="studentSignUp">Sign Up</button>
             
           </div>
       </div>
