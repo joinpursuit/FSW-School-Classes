@@ -30,7 +30,7 @@ const loadAddClassData = async () => {
 };
 
 // retrieving the container to display class creation results
-const getContainer = () => document.querySelector("#results");
+const getContainer = () => document.querySelector(".results");
 
 //this function adds the class information to the screen
 const addingClassToDom = async () => {
@@ -43,17 +43,20 @@ const displayNewClass = async (data) => {
   const container = getContainer();
   clearResults();
   let lecture = document.createElement("div");
-  lecture.className = "classCard";
+  let name = document.createElement("div");
   let professor = document.createElement("p");
   let message = document.createElement("p");
   let err = document.createElement("p");
-  timeStamp = document.createElement("p");
-  timeStamp.innerText = `Timestamp: ${data.payload.timestamp}`;
 
-  lecture.innerText = `Class Name: ${data.payload.classname}`;
+  name.className = "className";
+  lecture.className = "classCard";
+  timeStamp = document.createElement("p");
+  timeStamp.innerText = `Created: ${data.payload.timestamp}`;
+
+  name.innerText = `${data.payload.classname}`;
   professor.innerText = `Assigned professor: ${data.payload.teacher}`;
   message.innerText = `Status: ${data.message}`;
-  lecture.append(professor, message, timeStamp);
+  lecture.append(name, professor, message, timeStamp);
   container.append(lecture);
   emptyInput();
 };

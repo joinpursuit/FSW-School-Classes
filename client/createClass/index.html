@@ -19,20 +19,6 @@
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- <nav>
-        <div class="nav-wrapper">
-             <a href="../landing/index.html" class="brand-logo"
-          >Student Data Management</a
-        >
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#"><i class="material-icons left">class</i>Create Class</a>
-                </li>
-                <li><a href="../enrollment/index.html"><i class="material-icons left">add_circle_outline</i>Enroll
-                        Student</a></li>
-                <li><a href="../dataPage/index.html"><i class="material-icons left">search</i>Search Class</a></li>
-            </ul>
-        </div>
-    </nav> -->
     <nav id="test-nav" class="nav-extended ">
         <div class="nav-wrapper">
             <a href="../landing/index.html" class="landing-header">Student Data Management</a>
@@ -53,16 +39,16 @@
             </ul>
         </div>
     </nav>
-    <div class="row">
+    <div class="createContainer">
 
-        <h1>Enter New Class Information:</h1>
+        <h3>Enter New Class Information:</h3>
         <form id="addClass" onsubmit="return false">
             <input required type="text" placeholder="Enter class Name" id="createClass" class="classname">
             <input required type="text" placeholder="Enter Teacher" id="teacher">
             <button id="classAdded">Add class to directory</button>
         </form>
     </div>
-    <div id="results"></div>
+    <div id="createResults" class="results"></div>
 
     </div>
 </body>

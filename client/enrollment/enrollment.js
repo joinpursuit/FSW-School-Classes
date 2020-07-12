@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // retrieving the container to display class creation results
-const getContainer = () => document.querySelector("#results");
+const getContainer = () => document.querySelector(".results");
 
 // function to post the information about the students from user input
 const loadStudentEnrollment = async () => {

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // retrieving the container to display class creation results
-const getContainer = () => document.querySelector("#results");
+const getContainer = () => document.querySelector(".results");
 
 //grabbing the student information by filter
 const loadStudentByClass = async () => {
