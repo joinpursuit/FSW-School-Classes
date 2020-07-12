@@ -96,8 +96,12 @@ input {
   height: 562px;
   width: 902px;
   /* margin-bottom: 90px; */
-  margin-top: -130px;
+  /* margin-top: -130px; */
   border: transparent;
+}
+
+.site-info-title {
+  font-size: 40px;
 }
 
 .auth-links {
@@ -185,7 +189,7 @@ button {
   margin-left: 300px;
 }
 
-.features {
+#features {
   text-align: left;
 }
 .features-heading {
@@ -211,4 +215,10 @@ button {
   -webkit-box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
   -moz-box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
   box-shadow: 0px 2px 146px -8px rgba(0, 0, 0, 0.11);
+}
+
+#landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

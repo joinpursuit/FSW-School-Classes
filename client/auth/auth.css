@@ -1,0 +1,12 @@
+#studentLoginForm,
+#signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#username,
+#password {
+  width: 400px;
+}

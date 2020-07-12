@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="signup.js"></script>
+    <link rel="stylesheet" href="../auth.css"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -26,24 +27,14 @@
         <a href="../../../index.html" class="brand-logo">Student Data Management</a>
       </div>
     </nav>
-    <h1>Sign Up</h1>
     <form>
-       <div id="signUpForm">
+      <div id="signUpForm">
+        <h1>Sign Up</h1>
           <form class="row" >
             <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input required id="first_name" type="text" class="validate" />
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input required id="last_name" type="text" class="validate" />
-                  <label for="last_name">Last Name</label>
-                </div>
-              </div>
-              <div class="row">
+              <div >
                 <div class="input-field col s12">
-                  <input required id="password" type="password" class="validate" />
+                  <input required id="username" type="password" class="validate" />
                   <label for="password">Username</label>
                 </div>
               </div>
@@ -53,15 +44,15 @@
                   <label for="password">Password</label>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="input-field col s12">
                   <input required id="email" type="email" class="validate" />
                   <label for="email">Email</label>
                 </div>
-              </div>
+              </div> -->
             </form>
           </form>
-                <button id="newUser">New User</button>
+                <button id="newUser">Sign Up</button>
 
           </form>
        </div>
