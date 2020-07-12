@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../dataPage/dataPage.js"></script>
-    <script src="../index.js"></script>
 
     <link
       rel="stylesheet"
@@ -60,7 +59,12 @@
         <form id="searchForm">
           <!-- <input type="text" placeholder="Enter city (optional)" id="searchCity"> -->
           <div class="input-field col s6">
-            <input id="searchClass" type="text" class="validate classname" />
+            <input
+              id="searchClass"
+              type="text"
+              class="validate classname"
+              required
+            />
             <label for="last_name">Enter class Name</label>
           </div>
 
