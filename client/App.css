@@ -103,7 +103,9 @@ input {
 
 .site-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: absolute;
   border: 1px solid black;
   right: 1%;
@@ -193,26 +195,15 @@ button {
     font-size: 40px;
   }
 }
-/*
-
-
-/* .logic-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-/*eight: 230px;
-  }
-
-  .auth-links {
-    top: 1224px;
-    margin-bottom: 20px;
-    bottom: 20px;
-  }
-} */
 
 #nav-right {
   margin-right: 0px;
   margin-left: 300px;
+}
+
+.features {
+  text-align: left;
+}
+.features-heading {
+  border-bottom: 1px solid black;
 }

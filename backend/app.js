@@ -25,8 +25,8 @@ app.use("/class", classRouter);
 app.use("/student", studentRouter);
 app.use("/enrollment", enrollmentRouter);
 
-// app.use("/", (req, res, next) => {
-//   res.sendFile(path.resolve(__dirname, "../client/frontEnd.html"));
-// });
+app.use("/", (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, "../index.html"));
+});
 
 module.exports = app;
