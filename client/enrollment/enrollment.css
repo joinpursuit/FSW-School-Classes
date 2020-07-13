@@ -24,3 +24,16 @@
 #enrollResults {
   top: -50px;
 }
+@media only screen and (max-width: 800px) {
+  #enrollResults {
+    position: absolute;
+    top: 670px;
+    right: 20px;
+  }
+
+  #enrollmentContainer {
+    margin-left: 10px;
+    width: 390px;
+    height: 1120px;
+  }
+}

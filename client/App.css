@@ -222,3 +222,70 @@ button {
   flex-direction: column;
   align-items: center;
 }
+
+#study-group {
+  width: 400px;
+  position: fixed;
+  /* left: 30px; */
+  bottom: 200px;
+  right: 20px;
+}
+
+#library {
+  position: fixed;
+  left: 0;
+  width: 750px;
+  height: 732px;
+  bottom: 0;
+}
+
+.welcome {
+  position: fixed;
+  right: 230px;
+  top: 90px;
+}
+
+.quoteContainer {
+  position: fixed;
+  right: 23px;
+  top: 190px;
+}
+
+.quoteContainer p {
+  font-size: 15px;
+}
+
+.tagLine {
+  position: fixed;
+  right: 183px;
+  top: 390px;
+  font-size: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+  #library {
+    width: 450px;
+    height: 450px;
+    top: 190px;
+    /* left: 5%; */
+  }
+
+  .welcome {
+    left: 20%;
+  }
+
+  .quoteContainer {
+    top: 680px;
+  }
+
+  .tagLine {
+    display: none;
+  }
+
+  .results {
+    height: 260px;
+    width: 90vw;
+    top: 60%;
+    position: absolute;
+  }
+}

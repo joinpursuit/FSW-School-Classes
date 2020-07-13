@@ -14,12 +14,3 @@
   left: 15%;
   gap: 90px;
 }
-
-@media only screen and (max-width: 800px) {
-  .results {
-    height: 260px;
-    width: 90vw;
-    top: 60%;
-    position: absolute;
-  }
-}
