@@ -11,9 +11,9 @@ const getStudents = async (req, res, next) => {
       req.query.failing
     );
 
-    req.data = student;
-
-    console.log("data", req.data);
+    if (!student.length) {
+      res.send({ message: "yolo", status: "failure", error: true });
+    }
 
     res.status(200).json({
       payload: student,
@@ -47,6 +47,6 @@ const getStudents = async (req, res, next) => {
 //   }
 // };
 
-router.get("/:classname/students", getStudents);
+router.get("/:classname/information", getStudents);
 
 module.exports = router;

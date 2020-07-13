@@ -1,15 +1,12 @@
-body {
+#enrollmentContainer {
   display: flex;
+  justify-content: left;
   flex-direction: column;
-  align-items: center;
-
+  width: 600px;
+  margin-left: 50px;
 }
 
-#enrollmentContainer{
-  gap: 30px
-}
-
-#results {
+.results {
   display: flex;
   flex-direction: column;
   margin-top: 115px;
@@ -17,9 +14,26 @@ body {
   height: 40vh;
   width: 40vw;
   text-align: center;
-  border-radius:20px;
+  border-radius: 20px;
   justify-content: center;
 }
 /* #enrollForm{
   margin-right: 60px;
 } */
+
+#enrollResults {
+  top: -50px;
+}
+@media only screen and (max-width: 800px) {
+  #enrollResults {
+    position: absolute;
+    top: 670px;
+    right: 20px;
+  }
+
+  #enrollmentContainer {
+    margin-left: 10px;
+    width: 390px;
+    height: 1120px;
+  }
+}

@@ -12,7 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./enrollment.js"></script>
-    <script src="../index.js"></script>
 
     <link
       rel="stylesheet"
@@ -54,34 +53,39 @@
         </ul>
       </div>
     </nav>
-    <h1>Enroll New Student</h1>
     <div id="enrollmentContainer" class="display">
+      <h1>Enroll New Student</h1>
       <form id="enrollForm">
         <h3>Student Information:</h3>
         <div class="input-field col s6">
-          <input id="enrollClass" type="text" class="validate classname" />
+          <input
+            required
+            id="enrollClass"
+            type="text"
+            class="validate classname"
+          />
           <label for="last_name">Enter class Name</label>
         </div>
         <div class="input-field col s6">
-          <input id="studentName" type="text" class="validate" />
+          <input required id="studentName" type="text" class="validate" />
           <label for="last_name">Enter student's name</label>
         </div>
         <div class="input-field col s6">
-          <input id="age" type="text" class="validate" />
+          <input required id="age" type="text" class="validate" />
           <label for="last_name">Enter student's age</label>
         </div>
         <div class="input-field col s6">
-          <input id="city" type="text" class="validate" />
+          <input required id="city" type="text" class="validate" />
           <label for="last_name">Enter student's city</label>
         </div>
         <div class="input-field col s6">
-          <input id="grade" type="text" class="validate" />
+          <input required id="grade" type="text" class="validate" />
           <label for="last_name">Enter student's grade</label>
         </div>
         <button id="enroll">Enroll student</button>
       </form>
       <!-- <div id="enrollSubContainer" class="resultsContainer"></div> -->
-      <div id="results" class="scale-transition"></div>
+      <div id="enrollResults" class="scale-transition results"></div>
     </div>
   </body>
 </html>
