@@ -4,8 +4,6 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
     }
   }
 
@@ -19,6 +17,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -29,12 +28,9 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    let newStudent = new Student (student.name, student.city, student.age, student.grade)
-      if(!student.name){
-        this.classes[className].students.push(newStudent)
-        return newStudent
-      }
-
+    let newStudent = new Student(student.name, student.age, student.city, student.grade)
+    this.classes[className].students.push(newStudent)
+    return newStudent
   }
 
 
@@ -45,7 +41,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-   return this.classes[className].students
+    return this.classes[className].students
   }
 
 
@@ -66,27 +62,26 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    let class = this.classes[className]
-    let students = class.students
-    let failing = 70
-    let failingStudents = students.filter((student)=>{student.grade < failing})
-    console.log(failingStudents)
-    for(let student of failingStudents){
-      if(city === student.city ){
-        return students[student]
-      }
-      return student
-     
-    }
-  }
+    let currClass = this.classes[className].students
 
+    if (failing === true && city) {
+      let cityFail = currClass.filter((student) => student.grade <= 70 && student.city === city )
+      return cityFail
+    } else if (failing === false && city) {
+      let cityPass = currClass.filter((student) => student.grade > 70 && student.city === city )
+      return cityPass
+    } else if (failing === true) {
+      let failingStudents = currClass.filter((student) => student.grade <= 70 )
+      return failingStudents
+    } else if (failing === false) {
+      let passingStudents = currClass.filter((student) =>   student.grade > 70 )
+      return passingStudents
+    } else if (city) {
+      let cityStudents = currClass.filter((student) =>   student.city === city )
+      return cityStudents
+    }
+
+  }
 }
 
-
-let mySchool = new School();
-
-
-
-// mySchool.addClass('physics', 'Mr.Sims')
-// console.log(mySchool)
-module.exports = mySchool;
+module.exports = School;
