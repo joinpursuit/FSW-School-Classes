@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <title>School App</title>
+</head>
+
+<body>
+    <div id='feedbackDiv'>
+        <div>
+            <div id='close'>X</div>
+        </div>
+        <p id='feedbackText'></p>
+        <p id='details'></p>
+    </div>
+    <h2>Add a class</h2>
+    <form id="addClass">
+        <label for="className">Class: </label>
+        <input id="className" type="text">
+        <br>
+        <label for="classTeacher">Teacher: </label>
+        <input id="classTeacher" type="text">
+        <br>
+        <button id="addClassBtn">Add Class</button>
+    </form>
+    <hr>
+
+    <h2>Add a student</h2>
+    <form id="addStudent">
+        <label for="studentClass">Class: </label>
+        <input id="studentClass" type="text">
+        <br>
+        <label for="studentName">Name: </label>
+        <input id="studentName" type="text">
+        <br>
+        <label for="studentAge">Age: </label>
+        <input id="studentAge" type="text">
+        <br>
+        <label for="studentCity">City: </label>
+        <input id="studentCity" type="text">
+        <br>
+        <label for="studentGrade">Grade: </label>
+        <input id="studentGrade" type="text">
+        <br>
+        <button id="addStudentBtn">Add Student</button>
+    </form>
+    <hr>
+
+    <h2>List Students</h2>
+    <form id="listStudent">
+        <label for="searchStudentByClass">Class: </label>
+        <input id="searchStudentByClass" type="text">
+        <br>
+        <label for="searchStudentByCity">City: </label>
+        <input id="searchStudentByCity" type="text">
+        <br>
+        <input id="failing" type="checkbox">
+        <label for="failing">Show Failing Students Only</label>
+
+        <br>
+        <button id="listStudentBtn">List Student</button>
+    </form>
+</body>
+</html>
