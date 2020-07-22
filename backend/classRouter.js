@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-//const classes = require('./class.js')
 const School = require('./School.js')
-//const students = require('./student.js')
 
 const mySchool = new School();
 mySchool.addClass('Geometry', 'Mr. Xia')
@@ -130,7 +128,6 @@ const studentError = (req, res, next) => {
 
 // enrolling students in class and updates info
 router.post('/:className/enroll', enrollNewStudent, updateStudent, studentError)
-
 const doesClassExist = (req, res, next) => {
     const className = req.params.className
     if (mySchool.classes[className]) {
@@ -172,22 +169,15 @@ const getStudentsByClassWithFilter = (req, res, next) => {
 
     if (failing === 'true' && city) {
         filteredClass = mySchool.getStudentsByClassWithFilter(className, true, city)
-        console.log('hello is me')
     } else if (failing === 'false' && city) {
         filteredClass = mySchool.getStudentsByClassWithFilter(className, false, city)
-        console.log('still me')
     } else if (failing === 'true') {
         filteredClass = mySchool.getStudentsByClassWithFilter(className, true)
-        console.log('i cry')
 
     } else if (failing === 'false') {
         filteredClass = mySchool.getStudentsByClassWithFilter(className, false)
-        console.log('*cries*')
-
     } else if (city) {
         filteredClass = mySchool.getStudentsByClassWithFilter(className, null, city)
-        console.log('hi',filteredClass)
-
     }
 
     res.json({
@@ -196,7 +186,6 @@ const getStudentsByClassWithFilter = (req, res, next) => {
         timestamp: time.toISOString()
     })
 }
-
 router.get('/:className/students', doesClassExist, getStudentByClass, getStudentsByClassWithFilter)
 
 module.exports = router;
