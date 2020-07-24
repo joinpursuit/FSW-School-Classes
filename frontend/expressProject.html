@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src = "expressProject.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Express Project</title>
+</head>
+<body>
+    <h1>School enrollment app</h1>
+
+    <h3>Add Class</h3>
+    <form id = 'addClass'>
+        <input type="text" placeholder="Class Name"id = 'className'>
+        <input type="text" placeholder="Teacher" id = 'teacherName'>
+        <button id='CreateClass'>Submit!</button>
+    </form>
+    <p id='new-class'></p>
+
+    <h3>Enroll Student</h3>
+    <form id ='addStudent'>
+        <input type="text" placeholder="class" id ='student-class'>
+        <input type="text" placeholder = 'name' id='student-name'>
+        <input type="text" placeholder = 'age' id='student-age'>
+        <input type="text" placeholder = 'city' id='student-city'>
+        <input type="number" placeholder = 'grade' id='student-grade'>
+        <button type ='submit' id='submitStudent'>Submit</button>
+    </form>
+    <p id='student-added'></p>
+
+    <h3>List Students</h3>
+    <form id="listStudents">
+        <input type="text" placeholder="class" id='list-student-class'>
+        <input type="text"placeholder='city(optional)' id='list-student-city'>
+        <label>Failing?</label><input type="checkbox" name="failing" id="failing-students">
+        <button id='listStudents'>Submit</button>
+    </form>
+    
+    <ul id='list-students'>
+    </ul>
+
+</html>
