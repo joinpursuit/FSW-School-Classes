@@ -1,10 +1,11 @@
 let url = "https://sdm-backend.herokuapp.com";
 
-if (window.location.hostname === " ") {
-  url = `http://localhost:8283`;
-}
 let clsName, name, age, city, grade, timeStamp;
 document.addEventListener("DOMContentLoaded", () => {
+  //checking if app is in development environment
+  if (window.location.href.includes("file")) {
+    url = `http://localhost:8283`;
+  }
   emptyInput();
   let addForm = document.querySelector("#addClass");
   addForm.addEventListener("submit", (event) => {
@@ -18,7 +19,7 @@ const loadAddClassData = async () => {
   let className = document.querySelector("#createClass").value;
   let teacher = document.querySelector("#teacher").value;
 
-  let params = "http://localhost:8283/class/post";
+  let params = "/class/post";
 
   let classObj = {
     className,
@@ -26,7 +27,7 @@ const loadAddClassData = async () => {
   };
 
   try {
-    const { data } = await axios.post(params, classObj);
+    const { data } = await axios.post(url + params, classObj);
     console.log(data);
     return data;
   } catch (error) {

@@ -10,7 +10,13 @@
 .display {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   position: fixed;
   left: 15%;
   gap: 90px;
+}
+
+#dataResults {
+  display: flex;
+  flex-direction: column;
 }

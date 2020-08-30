@@ -1,11 +1,11 @@
 let url = "https://sdm-backend.herokuapp.com";
 
-if (window.location.hostname === "localhost") {
-  url = `http://localhost:8283`;
-}
-
 let clsName;
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.location.href.includes("file")) {
+    url = `http://localhost:8283`;
+  }
+
   emptyInput();
 
   let searchForm = document.querySelector("#listStudents");

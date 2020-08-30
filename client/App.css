@@ -40,7 +40,7 @@ body {
 } */
 
 .student {
-  border: 3px solid brown;
+  border: 1px solid brown;
 }
 .error {
   font-size: 20px;
@@ -197,11 +197,12 @@ button {
 }
 
 .results {
-  position: absolute;
+  position: fixed;
   overflow: scroll;
   height: 623px;
   width: 35vw;
   display: flex;
+  gap: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
