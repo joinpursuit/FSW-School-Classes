@@ -1,10 +1,10 @@
 const db = require("../db"); //connected db instance
 
-//function create a timestamp
-const timeStamp = () => new Date().toLocaleString();
-
 //query to add a new class to the database
 const addClassMethod = async (classname, teacher) => {
+  //function create a timestamp
+  const timeStamp = () => new Date().toLocaleString();
+
   let insertQuery = `INSERT INTO class(classname,teacher,timeStamp)
      VALUES($/classname/,$/teacher/,$/timeStamp/) RETURNING *`;
 
