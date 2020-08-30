@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS vonbarown_univeristy;
-CREATE DATABASE vonbarown_univeristy;
-\c vonbarown_univeristy;
+-- DROP DATABASE IF EXISTS vonbarown_univeristy;
+-- CREATE DATABASE vonbarown_univeristy;
+-- \c vonbarown_univeristy;
 
 CREATE TABLE users (
   id VARCHAR PRIMARY KEY,
@@ -16,9 +16,9 @@ CREATE TABLE class (
   timeStamp VARCHAR NOT NULL
 );
 CREATE TABLE students (
-  id SERIAL,
+  id SERIAL PRIMARY KEY ,
   className VARCHAR REFERENCES class(classname),
-  studentName VARCHAR PRIMARY KEY UNIQUE,
+  studentName VARCHAR ,
   age INT NOT NULL,
   city VARCHAR NOT NULL,
   grade INT NOT NULL,

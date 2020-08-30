@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon",
     "resetDB": "heroku pg:reset DATABASE",
-    "reseedHeroku": "npm run resetDB && heroku pg:psql -f database/vonbarown_university.sql"
+    "reseedHeroku": "npm run resetDB && heroku pg:psql -f database/seed.sql"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

@@ -41,6 +41,8 @@ body {
 
 .student {
   border: 1px solid brown;
+  padding: 50px;
+  border-radius: 90px;
 }
 .error {
   font-size: 20px;

@@ -43,8 +43,6 @@ const loadLoginForm = async () => {
 
   // console.log("user:", username);
   // console.log("pass:", password);
-};
-
 
   if (username !== "" && password !== "") {
     window.location.href = "../../landing/index.html";
