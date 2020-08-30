@@ -17,10 +17,17 @@ CREATE TABLE class (
 );
 CREATE TABLE students (
   id SERIAL,
-  className VARCHAR NOT NULL REFERENCES class (classname) ON DELETE CASCADE ON UPDATE CASCADE,
-  studentName VARCHAR PRIMARY KEY,
+  className VARCHAR REFERENCES class(classname),
+  studentName VARCHAR PRIMARY KEY UNIQUE,
   age INT NOT NULL,
   city VARCHAR NOT NULL,
   grade INT NOT NULL,
   timeStamp VARCHAR NOT NULL
 );
+
+INSERT INTO class (classname,teacher,timeStamp)
+VALUES('Chem','Phil','8/30/20');
+
+
+INSERT INTO students(className,studentName,age,city,grade,timeStamp) 
+        VALUES('Chem','Brad',26,'Brooklyn',89,'8/30/20');

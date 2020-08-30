@@ -3,27 +3,25 @@ const router = express();
 const { enrollClass } = require("../database/queries/enrollment");
 
 const timeStamp = () => new Date().toLocaleString();
-
 //query to add a new student in the database
 const enroll = async (req, res, next) => {
   try {
-    let newStudent = await enrollClass(
-      req.body,
-      req.params.classname,
-      timestamp()
-    );
+    let bodyCopy = Object.assign({}, req.body);
+    bodyCopy.className = req.params.className;
+    bodyCopy.timeStamp = timeStamp();
+
+    let newStudent = await enrollClass(bodyCopy);
 
     res.status(200).json({
-      //    studentID:classname,
       message: "Enrolled Student",
       payload: newStudent,
       status: "success",
       error: false,
     });
   } catch (err) {
-    // Student already created
+    console.log(err);
     res.send({
-      message: "Student is already enrolled. Please try a different one.",
+      message: "Failed to enroll student",
       error: true,
       payload: null,
       timestamp: timeStamp(),
@@ -47,6 +45,6 @@ const invalidStudent = (req, res, next) => {
     : next();
 };
 
-router.post("/:classname/enroll", invalidStudent, enroll);
+router.post("/:className/enroll", invalidStudent, enroll);
 
 module.exports = router;

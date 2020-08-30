@@ -28,17 +28,16 @@ const loadStudentEnrollment = async () => {
   let city = document.querySelector("#city").value;
   let grade = document.querySelector("#grade").value;
 
-  let params = `/enrollment/${className}/enroll`;
+  let params = `http://localhost:8283/enrollment/${className}/enroll`;
 
   try {
     let studentObj = {
-      className,
       studentName,
       age,
       city,
       grade,
     };
-    const { data } = await axios.post(url + params, studentObj);
+    const { data } = await axios.post(params, studentObj);
 
     console.log(data);
     return data;
@@ -51,9 +50,13 @@ const loadStudentEnrollment = async () => {
 const addingStudentToDom = async () => {
   let studentData = await loadStudentEnrollment();
   clearResults();
-  studentData.error
-    ? displayError(studentData)
-    : displayEnrollment(studentData.payload);
+  try {
+    studentData.error
+      ? displayError(studentData)
+      : displayEnrollment(studentData.payload);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //creating cards for student information to be added to the screen
