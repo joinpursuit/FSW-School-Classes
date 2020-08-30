@@ -24,9 +24,10 @@ const getContainer = () => document.querySelector(".results");
 const loadStudentByClass = async () => {
   let className = document.querySelector("#searchClass").value;
   let checkBox = checker();
-  let params = `/${className}/information?failing=${checkBox}`;
+  let params = `/classData/${className}/information?failing=${checkBox}`;
 
   try {
+    console.log(params);
     const { data } = await axios.get(url + params);
     console.log(data);
     return data;
@@ -77,11 +78,15 @@ const classFilterChoiceToDOM = async () => {
   const classFilterData = await loadStudentByClass();
   clearResults();
   console.log("This is class filter", classFilterData);
-  classFilterData.status === "failed"
-    ? displayError(classFilterData)
-    : classFilterData.payload.forEach((el) =>
-        displayEnrollment(classFilterData, el)
-      );
+  try {
+    classFilterData.status === "failed"
+      ? displayError(classFilterData)
+      : classFilterData.payload.forEach((el) =>
+          displayEnrollment(classFilterData, el)
+        );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //this function handles displaying the error message
@@ -93,10 +98,8 @@ const displayError = (data) => {
   errorDiv.className = "error";
   let err = document.createElement("p");
   err.innerText = `${data.message}`;
-  let timeStamp = document.createElement("p");
-  timeStamp.innerText = `Timestamp: ${data.timeStamp}`;
 
-  errorDiv.append(err, timeStamp);
+  errorDiv.append(err);
   container.append(errorDiv);
 };
 

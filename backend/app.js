@@ -5,7 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const studentRouter = require("./routes/students");
+const classDataRouter = require("./routes/classData");
 const enrollmentRouter = require("./routes/enrollment");
 const classRouter = require("./routes/class");
 
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/class", classRouter);
-app.use("/student", studentRouter);
+app.use("/classData", classDataRouter);
 app.use("/enrollment", enrollmentRouter);
 
 app.use("/", (req, res, next) => {

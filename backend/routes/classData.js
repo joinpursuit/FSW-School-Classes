@@ -6,29 +6,26 @@ const { getStudentsByClass } = require("../database/queries/students");
 const getStudents = async (req, res, next) => {
   let classname = req.params.classname;
   try {
-    let student = await getStudentsByClass(
-      req.params.classname,
-      req.query.failing
-    );
+    let student = await getStudentsByClass(classname, req.query.failing);
+    console.log("student", student);
 
     if (!student.length) {
-      res.send({ message: "yolo", status: "failure", error: true });
+      res.send({
+        message: "no students enrolled",
+        status: "failed",
+        error: true,
+      });
+    } else {
+      res.status(200).json({
+        payload: student,
+        classname: classname,
+        message: "Retrieved Students",
+        status: "success",
+        error: false,
+      });
     }
-
-    res.status(200).json({
-      payload: student,
-      classname: classname,
-      message: "Retrieved Students",
-      status: "success",
-      error: false,
-    });
   } catch (err) {
-    if (err instanceof errors.QueryResultError) {
-      if (err.code === errors.queryResultErrorCode.noData) {
-        return false;
-      }
-    }
-    throw err;
+    console.log(err);
   }
 };
 
