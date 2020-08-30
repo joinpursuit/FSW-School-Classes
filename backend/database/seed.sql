@@ -1,12 +1,12 @@
--- DROP DATABASE IF EXISTS vonbarown_univeristy;
--- CREATE DATABASE vonbarown_univeristy;
--- \c vonbarown_univeristy;
+DROP DATABASE IF EXISTS vonbarown_univeristy;
+CREATE DATABASE vonbarown_univeristy;
+\c vonbarown_univeristy;
+
 CREATE TABLE users (
-  username VARCHAR PRIMARY KEY,
-  firstname VARCHAR NOT NULL,
-  lastname VARCHAR NOT NULL,
-  dob DATE NOT NULL,
-  user_password VARCHAR NOT NULL,
+  id VARCHAR PRIMARY KEY,
+  username VARCHAR UNIQUE NOT NULL,
+  password_digest VARCHAR NOT NULL,
+  avatar_url VARCHAR,
   signing_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 CREATE TABLE class (
