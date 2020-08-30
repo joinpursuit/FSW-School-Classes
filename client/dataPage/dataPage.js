@@ -1,4 +1,9 @@
-let url;
+let url = "https://sdm-backend.herokuapp.com";
+
+if (window.location.hostname === "localhost") {
+  url = `http://localhost:8283`;
+}
+
 let clsName;
 document.addEventListener("DOMContentLoaded", () => {
   emptyInput();
@@ -19,10 +24,10 @@ const getContainer = () => document.querySelector(".results");
 const loadStudentByClass = async () => {
   let className = document.querySelector("#searchClass").value;
   let checkBox = checker();
-  url = `http://localhost:8283/student/${className}/information?failing=${checkBox}`;
+  let params = `/${className}/information?failing=${checkBox}`;
 
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url + params);
     console.log(data);
     return data;
   } catch (error) {

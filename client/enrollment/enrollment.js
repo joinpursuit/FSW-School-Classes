@@ -1,4 +1,9 @@
-let url;
+let url = "https://sdm-backend.herokuapp.com";
+
+if (window.location.hostname === "localhost") {
+  url = `http://localhost:8283`;
+}
+
 let clsName, name, age, city, grade, timeStamp;
 document.addEventListener("DOMContentLoaded", () => {
   emptyInput();
@@ -23,7 +28,7 @@ const loadStudentEnrollment = async () => {
   let city = document.querySelector("#city").value;
   let grade = document.querySelector("#grade").value;
 
-  url = `http://localhost:8283/enrollment/${className}/enroll`;
+  let params = `/enrollment/${className}/enroll`;
 
   try {
     let studentObj = {
@@ -33,7 +38,7 @@ const loadStudentEnrollment = async () => {
       city,
       grade,
     };
-    const { data } = await axios.post(url, studentObj);
+    const { data } = await axios.post(url + params, studentObj);
 
     console.log(data);
     return data;
