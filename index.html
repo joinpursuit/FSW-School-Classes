@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js" async></script>
+    <title>Escuela</title>
+</head>
+<body>
+    <div>
+        <h3>ADD CLASS</h3>
+        <form id="addClass">
+            <input type="text" id="className" placeholder="class name">
+            <input type="text" id="teacher" placeholder="teacher">
+            <button>ADD CLASS</button>
+        </form>
+    </div>
+    <div>
+        <h3>ADD STUDENT</h3>
+        <form id="addStudent">
+            <input type="text" id="addClass" placeholder="class">
+            <input type="text" id="name" placeholder="name">
+            <input type="text" id="age" placeholder="age">
+            <input type="text" id="city" placeholder="city">
+            <input type="text" id="grade" placeholder="grade">
+            <button>ADD STUDENT</button>
+        </form>
+    </div>
+    <div>
+        <h3>LIST STUDENTS</h3>
+        <form id="listStudents">
+            <input type="text" id="sclass" placeholder="class">
+            <input type="text" id="scity "placeholder="city">
+            Search By Failing?: <input type="checkbox">
+            <button>LIST STUDENTS</button>
+        </form>
+        <ul></ul>
+    </div>
+
+</body>
+</html>
