@@ -4,8 +4,6 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
     }
   }
 
@@ -29,7 +27,8 @@ class School {
    * @return {Student} Enrolled student
    */
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(student.name, student.age, student. city, student.grade);
+    this.classes[className]["students"].push(student);     
   }
 
 
@@ -42,7 +41,7 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className]["students"];
   }
 
 
@@ -63,9 +62,26 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    if(failing && city) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.grade < 70 && el.city === city) {
+          return el;
+        }
+      })
+    } else if(failing) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.grade < 70) {
+          return el;
+        }
+      })
+    } else if(city) {
+      return this.classes[className]["students"].filter((el) => {
+        if(el.city === city) {
+          return el;
+        }
+      })
+    }
   }
-
 }
 
 module.exports = School;
