@@ -78,7 +78,7 @@ In this lab you will be developing a server that stores data for a school, and a
 #### Creating a new class
 
 | Method | Endpoint | Request Body                        |
-| ------ | -------- | ----------------------------------- |
+| ------ | -------- | -------------------------------.---- |
 | `POST` | `/class` | Class properties: `name`, `teacher` |
 
 - Create an Express route/endpoint to handle the request as seen above.

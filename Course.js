@@ -1,4 +1,4 @@
-class Class {
+class Course {
   constructor(name, teacher) {
     this.name = name
     this.teacher = teacher
