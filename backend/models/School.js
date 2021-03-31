@@ -1,5 +1,5 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('../models/Class');
+const Student = require('../models/Student')
 
 class School {
   constructor() {
@@ -16,9 +16,11 @@ class School {
    * @param {string} teacher - Name of instructor 
    * @return {Class} Class object
    */
+
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    return newClass
   }
 
   /**
@@ -28,10 +30,12 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
+  
   enrollStudent(className, student) {
-    // Your code here
+    let newStudent = new Student(student.name, student.age, student.city, student.grade, student.house)
+    this.classes[className]["students"].push(newStudent); 
+    return newStudent
   }
-
 
 
 
@@ -42,11 +46,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[`${className}`]["students"];
   }
-
-
-
 
   /**
    * Get all students and apply filters. If failing = true
@@ -62,10 +63,28 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
-  getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
-  }
 
-}
+  getStudentsByClassWithFilter(className, failing, city = "") {
+    let students = this.classes[className]["students"]
+      if (failing === true && city){
+        return students.filter((studentF) => {
+          return (studentF.grade < 70) && (studentF.city === city)
+          })
+      } else if (city){
+        return students.filter((studentF) => {
+          return studentF.city === city
+        }) 
+      } else if (failing){
+        return students.filter((studentF) => {
+          return studentF.grade < 70
+      }) 
+    } else {
+      return students
+    }
+  }
+};
 
 module.exports = School;
+
+
+
