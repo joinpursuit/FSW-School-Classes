@@ -1,0 +1,5 @@
+{
+    "prettier.semi": false,
+    "editor.mouseWheelZoom": true,
+    "editor.formatOnType": true
+}

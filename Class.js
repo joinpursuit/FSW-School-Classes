@@ -4,6 +4,11 @@ class Class {
     this.teacher = teacher
     this.students = []
   }
-}
 
-module.exports = Class;
+  addStudent = student => {
+    this.students.push(student)
+    return this.students
+  }
+  
+}
+module.exports = Class
