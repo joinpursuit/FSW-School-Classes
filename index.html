@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Express Project</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"async></script>
+
+</head>
+<body>
+    <div id="classAdd">
+        <h3>Add A Class</h3>
+        <form id = "addClass" action="submit">
+            <input id="className" placeholder="Class Name" type="text"required >
+            <input id="teacherName" placeholder="Teacher" type="text"required ><br>
+            <button id="addButton">Add A Class</button>
+        </form>
+    </div>
+<h3>Add A Student</h3>
+<div id="studentEnroll">
+
+    <form id = "addStudent" action="submit">
+        <input id="class" placeholder="Class" type="text"required >
+        <input id="student" placeholder="Name" type="text"required >
+        <input id="age" placeholder="Age" type="text"required >
+        <input id="city" placeholder="City" type="text"required >
+        <input id ="grade" placeholder="Grade"type="text"required ><br>
+        <button id="enrollButton">Enroll a Student</button>
+    </form>
+</div>
+
+        <h3>List Students</h3>
+        <div id="list">
+            <form id = "listStudents" action="submit">
+                <input id="classList" placeholder="Class" type="text"required >
+                <input type="text" name="" id="cityList">
+                <input id = "fail"type="checkbox">Get All Failing Students <br>
+                <button id="listButton">List Students</button>
+            </form>
+            <ul></ul>
+        </div>
+
+</body>
+</html>
