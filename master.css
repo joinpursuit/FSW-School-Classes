@@ -1,0 +1,17 @@
+body { 
+    background-color: bisque;
+    
+}
+
+h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    
+    justify-content: center;
+    flex-direction: column;
+}

@@ -4,8 +4,93 @@ const Student = require('./Student')
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+      biology: {
+        name: "Biology", 
+        teacher: "Sky s", 
+        students: [{
+          name: "Danielle",
+          age: 15,
+          city: "Brooklyn",
+          grade: 100
+        },
+        {
+          name: "Christina",
+          age: 15,
+          city: "Manhattan",
+          grade: 79
+        },
+        {
+          name: "Ashely",
+          age: 14,
+          city: "Queens",
+          grade: 88
+        },
+        {
+          name: "Shayna",
+          age: 14,
+          city: "Brooklyn",
+          grade: 90
+        },
+        {
+          name: "Zaria",
+          age: 15,
+          city: "Manhattan",
+          grade: 89
+        }
+      ]
+      },
+      philosphy: {
+          name: "Philosphy", 
+          teacher: "Herdella C", 
+          students: [{
+            name: "Udakabasi",
+            age: 13,
+            city: "Brooklyn",
+            grade: 98
+          },
+          {
+            name: "Kayla",
+            age: 13,
+            city: "Bronx",
+            grade: 47
+          },
+          {
+            name: "Kaiden",
+            age: 14,
+            city: "Queens",
+            grade: 100
+          },
+          {
+            name: "Marcus",
+            age: 14,
+            city: "Bronx",
+            grade: 92
+          }
+      ]
+      },
+      mathematics: {
+        name: "Mathematics",
+        teacher: "Deshawnta",
+        students: [{
+          name: "Shanna",
+          age: 15,
+          city: "Queens",
+          grade: 99
+        },
+        {
+          name: "David",
+          age: 14,
+          city: "Brooklyn",
+          grade: 78
+        },
+        {
+          name: "Mike",
+          age: 15,
+          city: "Queens",
+          grade: 66
+        }
+      ]
+      } 
     }
   }
 
@@ -19,6 +104,7 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+
   }
 
   /**
@@ -28,9 +114,10 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
-  enrollStudent(className, student) {
-    // Your code here
-  }
+  // enrollStudent(className, student) {
+  //   let newStudent = new Student(name, age, city, grade);
+  //   this.enrolledStudent = 
+  // }
 
 
 
@@ -68,4 +155,6 @@ class School {
 
 }
 
-module.exports = School;
+let mySchool = new School()
+
+module.exports = mySchool;
