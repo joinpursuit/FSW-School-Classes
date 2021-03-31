@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    <title>School Project</title>
+</head>
+<body>
+    <form id="classForm">
+        <h2>Add Class</h2>
+        Class Name:<br>
+        <input id="classInput" type="text" name="className">
+    </br>
+        Teacher:<br>
+        <input id="teacherInput" type="text" name="teacher">
+        <button type="submit">Submit</button>
+    </form>
+<div id="studentsByClass">
+    <form id="classSearch">
+        <h2>Search by Class</h2>
+        Class Name:<br>
+        <input id="classSearchInput" type="text" name="classSearch">
+        <button id="classSearchButton" type="submit">Submit</button>
+    </form>
+</div>
+<div id="enrollStudentsDiv">
+    <form id="enrollStudents">
+        <h2>Enroll Students Here!</h2>
+        Student Name:<br>
+        <input id="studentNameInput" type="text" name="StudentName">
+        <br>
+        Age:<br>
+        <input id="studentAgeInput" type="text" name="StudentAge">
+        <br>
+        City:<br>
+        <input id="studentCityInput "type="text" name="StudentCity">
+        <br>
+        Class:<br>
+        <input id="classToEnroll" type="text" name="classSelect">
+        <br>
+        <button id="enrollButton" type="submit">Submit</button>
+    </form>
+</div>
+    <div id="allClasses">
+        <button type="button" id="allClassesButton">Get all classes</button>
+        <button type="button" id="collapse">Close</button>
+    </div>
+
+    <div id="messages"></div>
+</body>
+</html>

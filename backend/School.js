@@ -1,11 +1,19 @@
-const Class = require('./Class');
-const Student = require('./Student')
+const Class = require('../backend/Class');
+const Student = require('../backend/Student')
 
 class School {
   constructor() {
     this.classes = {
-      // className: Class Object
-      //   physics: {} 
+        physics: {
+          name: "Physics", 
+          teacher: "Jon A", 
+          students: [
+            {name: "Jhenya",
+            age: 14,
+            city: "Brooklyn",
+            grade: 98
+        }
+      ]} 
     }
   }
 
@@ -16,9 +24,11 @@ class School {
    * @param {string} teacher - Name of instructor 
    * @return {Class} Class object
    */
+
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+    newClass.name = name;
+    return newClass;
   }
 
   /**
@@ -28,12 +38,12 @@ class School {
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
+
   enrollStudent(className, student) {
-    // Your code here
+    student = new Student(req.body.name, req.body.age, req.body.city, req.body.grade)
+    this.classes[className]["students"].push(student)
+    return this.classes[className]
   }
-
-
-
 
   /**
    * Get all students enrolled in a class
@@ -42,10 +52,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+   return this.classes[className].students
   }
-
-
 
 
   /**
@@ -62,10 +70,14 @@ class School {
    * @param {string} city - Name of the city to match against students
    * @return {Student[]} Array of Student objects
    */
+
+
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
   }
 
+  getClasses() {
+    return this.classes
+  }
 }
 
 module.exports = School;
