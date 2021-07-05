@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js" async></script>
+    <link rel="stylesheet" href="./master.css"/>
+    <title>Express Project</title>
+</head>
+<body>
+    <div id="showAllClasses">
+        <button id="allClasses" type="submit">Show All Classes</button>
+    </div>
+    <div id="addClassDiv" class="form">
+        <h1>Add Class</h1>
+        <form id="addClass" >
+            <input id="className" type="text" placeholder="Class Name" required>
+            <input id="teacherName" type="text" placeholder="Professor Name" required>
+            <button id="addClasses">Submit</button>
+            <p></p>
+        </form>
+    </div>
+    <hr>
+    <div id="addStudentDiv" class="form">
+    <h1>Add Student</h1>
+        <form id="addStudent" >
+            <select name="" id="class" >
+                <option value="" selected disabled>Choose a class</option>
+            </select>
+            <!-- <input id="class" type="text" placeholder="Class"> -->
+            <input required id="studentName" type="text" placeholder="Student's Name">
+            <input required id="age" type="text" placeholder="Age">
+            <input required id="city" type="text" placeholder="City">
+            <input required id="grade" type="text" placeholder="Grade">
+            <button type="submit" id="addStudents">Submit</button>
+        </form>
+    </div>
+    <hr>
+    <div id="studentListDiv" class="form">
+    <h1>List of Students</h1>
+        <form id="studentList">
+            <input required id="classList" type="text" placeholder="Class">
+            <input required id="cityList" type="text" placeholder="City">
+            <input id="checkbox" type="checkbox">
+            <button id="list">Submit</button>
+            <p id="listOfStudents"></p>
+        </form>
+    </div>
+</body>
+</html>
