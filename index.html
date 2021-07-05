@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Express Project</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+
+</head>
+<body>
+    <div id="classAdd">
+        <h3>Add A Class</h3>
+        <form id = "addClass" action="submit">
+            <input id="className" placeholder="Class Name" type="text">
+            <input id="teacherName" placeholder="Teacher" type="text"><br>
+            <button id="addButton">Add A Class</button>
+        </form>
+    </div>
+<h3>Add A Student</h3>
+<div id="studentEnroll">
+
+    <form id = "addStudent" action="submit">
+        <input id="class" placeholder="Class" type="text">
+        <input id="name" placeholder="Name" type="text">
+        <input id="age" placeholder="Age" type="text">
+        <input id="city" placeholder="City" type="text">
+        <input id ="grade" placeholder="Grade"type="text"><br>
+        <button id="enrollButton">Enroll a Student</button>
+    </form>
+</div>
+    <h3>Update A Student</h3>
+    <div id="update">
+
+        <form id = "updateStudents" action="submit">
+            <input id="classUpdate" placeholder="Class" type="text">
+            <input id="nameUpdate" placeholder="City" type="text">
+            <input id = "gradeUpdate"type="checkbox"> <br>
+            <button id="updateButton">Update Students</button>
+        </form>
+    </div>
+        <h3>List Students</h3>
+        <div id="list">
+            <form id = "listStudents" action="submit">
+                <input id ="nameList" placeholder="name" type="text">
+                <input id="classList" placeholder="Class" type="text">
+                <input id="cityList" placeholder="City" type="text">
+                <input id = "fail"type="checkbox">Get All Failing Students <br>
+                <button id="listButton">List Students</button>
+            </form>
+        </div>
+
+</body>
+</html>
