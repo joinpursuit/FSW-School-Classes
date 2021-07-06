@@ -1,12 +1,24 @@
 const Class = require('./Class');
 const Student = require('./Student')
+const classes = require('./routes/classes/classes.js')
+const students = require('./routes/students/students.js')
+//const school = require('express').Router()
+
+
+
 
 class School {
   constructor() {
     this.classes = {
       // className: Class Object
-      //   physics: {} 
+       
+        math:{
+          name: "math",
+          teacher:'Albert',
+          students:[]
+        }
     }
+    
   }
 
   /**
@@ -19,6 +31,9 @@ class School {
   addClass(name, teacher) {
     let newClass = new Class(name, teacher);
     this.classes[name] = newClass;
+    //console.log(newClass);
+    return this.classes
+    
   }
 
   /**
@@ -30,9 +45,16 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    //console.log(student);
+    
+    let newStudent = new Student(student.name,student.city,student.age,student.grade)
+    this.classes[className]["students"].push(newStudent);
+
+    //console.log(newStudent);
+    return newStudent
+    
+    
   }
-
-
 
 
   /**
@@ -43,7 +65,15 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    if(this.classes(className)){
+      className.push(students)
+    }
+
+    if(this.classes[className]){
+      return clasName[students]
+    }
   }
+  
 
 
 
@@ -64,8 +94,23 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+    
+    this.classes[className][student][grade,city]
+    student.filter(grade => {
+      if(grade < 65){
+        grade = true
+        return className.student.city[grade]
+      }
+        else{
+          false 
+        }
+    })
   }
 
 }
+let pursuit = new School()
+let newStudent = new Student ()
+//pursuit.addClass('math','joel null')
+// console.log(pursuit.enrollStudent())
 
 module.exports = School;

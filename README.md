@@ -90,7 +90,7 @@ A successful response should look like:
 ```json
 { 
   "class": { "name": "Physics", "teacher": "Henry Roman", "students": []},
-  "message": "Created a new class",
+  message: "Created a new class",
   "timestamp": "YYYY, MM/DD HH:MM:SS"
 }
 ```
