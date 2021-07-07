@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src='./index.js'></script>
+    </head>
+    <body>
+        <form id="class">
+                <input type='text' name='className' placeholder='Class Name'>
+                <input type='text' name='teacher' placeholder='Teacher'>
+                <input type='submit'>
+        </form>
+
+        <form id="addStudents">
+                <input type='text' name='class' placeholder='Class'>
+                <input type='text' name='name' placeholder='Name'>
+                <input type='text' name='age' placeholder='Age'>
+                <input type='text' name='city' placeholder='City'>
+                <input type='text' name='grade' placeholder='Grade'>
+                <input type="checkbox" value="Show" id="filter-failingStudents" />
+                <label for="failingStudents">Show Failing Students</label>
+                <input type='submit'> 
+        </form>
+
+        <form id= "listStudents">
+                <input type='text' name='class' placeholder='Class'>
+                <input type='text' name='citer' placeholder='City (optional)'>
+                <input type='submit'>
+        </form>
+    </body>
+</html>
