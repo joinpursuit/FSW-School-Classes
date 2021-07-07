@@ -1,0 +1,22 @@
+body {
+    position: relative;
+    left: 30%;
+    background-color: aliceblue;
+}
+img {
+    height: 300px;
+    width: 700px;
+}
+button {
+    border-radius: 30px;
+}
+#addAClass {
+    list-style: none;
+}
+#addAStudent {
+    list-style: none;
+}
+
+#listAllStudents {
+    list-style: none;
+}

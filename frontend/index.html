@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./index.js" ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="master.css">
+    <title>Express Project</title>
+</head>
+<body>
+    <section>
+        <img src="./schoolpic3.jpg" alt=""/>
+    </section>
+    <br>
+    <br>
+    <form class="addClass">
+        <input type="text" placeholder="Class Name"  id="classNameInput">
+        <input type="text" placeholder="Teacher" id="teacherNameInput">
+        <button>Add Class</button>
+        <ul><li id="addAClass"></li></ul>
+    </form>
+    <br>
+    <br>
+    <form class="addStudent">
+        <input type="text" placeholder="Class">
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Age">
+        <input type="text" placeholder="City">
+        <input type="text" placeholder="Grade">
+        <button>Add Student</button>
+        <ul><li id="addAStudent"></li></ul>
+    </form>
+    <br>
+    <br>
+
+    <form class="listStudents">
+        <input type="text" placeholder="class name" >
+        <input type="text" placeholder="city" >
+        <input type="checkbox" id="checkbox">
+        <button>Submit</button>
+        <ul id="listAllStudents"></ul>
+    </form>
+</body>
+</html>
