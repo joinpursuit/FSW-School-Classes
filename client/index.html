@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+   <meta name="author" content="Joseph P. Pasaoa" />
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+   <title>Express Web Server Project | Joseph P. Pasaoa</title>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="./index.js" type="text/javascript"></script>
+   <link rel="stylesheet" href="./style.css" type="text/css" />
+</head>
+<body>
+
+   <div id="grid-base">
+
+      <div id="leftPrimeCol">
+         <div id="title-card">
+            <h1>SCHOOL SERVER Express Project</h1>
+            <span>Copyright © 2019 Joseph P. Pasaoa. All rights reserved.</span>
+         </div>
+         <div id="nav">
+            <div class="nav-button" id="btnAddClass">Add Class</div>
+            <div class="nav-button" id="btnAddStudent">Add Student</div>
+            <div class="nav-button" id="btnListStudents">List Students</div>
+            <div class="nav-button special" id="btnSchool">School Data</div>
+         </div>
+      </div>
+
+      <div id="midActionCol">
+         
+         <div class="form-package" id="form1pack">
+            <h2>Add a New Class</h2>
+            <p>Enter the name of the new class and the name of the teacher who will lead it, then click Submit.</p>
+            <p>------</p>
+            <form id="form1">
+               <div>
+                  <label for="classText">Class name:</label>
+                  <input form="form1" id="classText" name="classText" type="text" />
+               </div>
+               <div>
+                  <label for="teacherText">Teacher name:</label>
+                  <input form="form1" id="teacherText" name="teacherText" type="text" />      
+               </div>
+               <button type="button" id="buttonForm1">Submit</button>
+            </form>
+            <p>------</p>
+         </div><!-- id="form1pack" end -->
+
+         <div class="form-package" id="form2pack">
+            <h2>Enroll/Modify Student</h2>
+            <p>Enter the target class first, then name, ss#, age, city, and grade information for a specific student, then click Submit.</p>
+            <p>------</p>
+            <form id="form2">
+               <div>
+                  <label for="className">Class:</label>
+                  <input form="form2" id="className" name="className" type="text" />
+               </div>
+               <div>
+                  <label for="name">Student name:</label>
+                  <input form="form2" id="name" name="name" type="text" />
+               </div>
+               <div>
+                  <label for="ssn">Student SocSec#:</label>
+                  <input form="form2" id="ssn" name="ssn" type="text" placeholder="000-00-0000" />
+               </div>
+               <div>
+                  <label for="age">Student age:</label>
+                  <input form="form2" id="age" name="age" type="text" />      
+               </div>
+               <div>
+                  <label for="city">Student city:</label>
+                  <input form="form2" id="city" name="city" type="text" />
+               </div>
+               <div>
+                  <label for="grade">Grade:</label>
+                  <input form="form2" id="grade" name="grade" type="text" />      
+               </div>
+               <button type="button" id="buttonForm2">Submit</button>
+            </form>
+            <p>------</p>
+         </div><!-- id="form2pack" end -->
+
+         <div class="form-package" id="form3pack">
+            <h2>Class Roll Search</h2>
+            <p>Enter the class you request roll info for, optionally filter results by student's city and whether 
+               student is currently passing or failing, then click Submit.</p>
+            <p>------</p>
+            <form id="form3">
+               <div>
+                  <label for="className">Class:</label>
+                  <input form="form3" id="className" name="className" type="text" />
+               </div>
+               <div>
+                  <label for="city">Student city (opt):</label>
+                  <input form="form3" id="city" name="city" type="text" />
+               </div>
+               <div>
+                  <label for="failing">Grade status (opt):</label>
+                  All <input value=undefined form="form3" id="failing" name="failing" type="radio" checked />
+                  Failing <input value="true" form="form3" id="failing" name="failing" type="radio" />
+                  Passing <input value="false" form="form3" id="failing" name="failing" type="radio" />
+               </div>
+               <button type="button" id="buttonForm3">Submit</button>
+            </form>
+            <p>------</p>
+         </div><!-- id="form3pack" end -->
+
+         <div class="form-package" id="form4pack"> <!-- Fake Form Package for Navigation Sys -->
+            <h2>JoeySchool Data Dump</h2>
+            <p>Unfiltered view of School Data for debugging</p>
+            <p>------</p>
+         </div><!--  id="form4pack" end -->
+
+      </div>
+
+      <div id="rightResultsCol">
+         <div id="responseGroup">
+            <h3>• Server Response</h3>
+            <p>------</p>
+            <div id="response"></div>
+            <p>------</p>
+         </div>
+      </div>
+
+   </div>
+   
+</body>
+</html>
