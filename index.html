@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+   <script src="./function.js"></script>
+   <link rel="stylesheet" href="style.css">
+    <title>Class Project</title>
+</head>
+<body>
+    <h1>John Jay's School Enrollment</h1>
+    <img src="https://media.edutopia.org/styles/responsive_700px_16x9/s3/masters/d7_images/cover_media/petty-169hero-classroomtools-shutterstock.jpg" alt="">
+<div id="page">
+    <div id="teacherEnrollment">
+        <h3>Teacher Enrollment</h3>
+        <form id="addClass">
+            <input type="name" id="className" placeholder="Class Name">
+            <input type="teacher" id="teacherName" placeholder="Teacher Name">
+            <button>Enter</button>
+            <p id="pClass"></p>
+        </form>
+    </div>
+
+    <div id="studentEnrollment">
+        <h3>Student Enrollment</h3>
+        <form id= "addStudents">
+            <input type="text" placeholder="class" id="class" onfocus="">
+            <input type="text" placeholder="name" id="name" onfocus="">
+            <input type="number" placeholder="age" id="age" onfocus="">
+            <input type="text" placeholder="city" id="city" onfocus="">
+            <input type="number" placeholder="grade" id="grade" onfocus="">
+            <button>Enter</button>
+            <p id="pStudent"></p>
+        </form>
+    </div>
+
+    <div id="showEnrollment">
+        <h3>Show Enrollment by:</h3>
+        <form id= "lstudents">
+            <input type="text" placeholder="class" id="lsClass">
+            <input type="text" placeholder="city (optional)" id="lsCity">
+            <input type="checkbox" id="checkbox"> (Show Failing Students Only)
+            <button>enter</button>
+            <div id="divResult" >
+                <p id="pResult"></p>
+            </div>
+            
+        </form>
+    </div>
+  
+    
+</div>
+</body>
+</html>

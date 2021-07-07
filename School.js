@@ -17,8 +17,16 @@ class School {
    * @return {Class} Class object
    */
   addClass(name, teacher) {
-    let newClass = new Class(name, teacher);
-    this.classes[name] = newClass;
+    if(!this.classes[name]){
+      let newClass = new Class(name, teacher);
+      this.classes[name] = newClass;
+  
+      return this.classes;
+    } else {
+      console.log("Class already exist")
+      return false
+    }
+   
   }
 
   /**
@@ -30,6 +38,27 @@ class School {
    */
   enrollStudent(className, student) {
     // Your code here
+    
+    if(!this.classes[className] || student.name === "" || student.age === "" || student.city === ""|| student.grade === ""){
+      console.log("Class does not Exist!!")
+      return false
+    }else {
+        this.classes[className].students.forEach(stu => {
+          if(stu.name === student.name){
+            stu.age = student.age
+            stu.city = student.city
+            stu.grade = student.grade
+            this.classes[className].students.pop()
+          }
+        });  
+  
+      this.classes[className].students.push(student)
+      console.log(this.classes[className].students);
+      return this.classes[className].students
+    }
+    
+    
+
   }
 
 
@@ -43,6 +72,13 @@ class School {
    */
   getStudentsByClass(className) {
     // Your code here
+    if(!this.classes[className]){
+      return false
+    } else {
+      console.log(this.classes[className].students)
+      return this.classes[className].students
+    }
+    
   }
 
 
@@ -64,8 +100,25 @@ class School {
    */
   getStudentsByClassWithFilter(className, failing, city) {
     // Your code here
+   let student = this.getStudentsByClass(className)
+   if(student){
+     if(failing && city){
+      return student.filter(stu => { return stu.grade <= 70 && stu.city === city})
+    } else if(failing){
+      return student.filter(stu => {return stu.grade <= 70})
+     } else if(city){
+     return student.filter(stu => {return stu.city === city})
+     } else {
+       return student
+     }
+   } else {
+     return student
+   }
   }
 
 }
+
+// let mySchool = new School();
+// mySchool.addClass('physics', 'Henry Roman');
 
 module.exports = School;
