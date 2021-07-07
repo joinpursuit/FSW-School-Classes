@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    <title>School Database</title>
+</head>
+<body>
+    <h1>School DB</h1>
+
+    <select name="" id="selectOptions">
+        <option value="" selected disabled>Pick an option</option>
+        <option value="addClass">Add Class</option>
+        <option value="enroll">Enroll student</option>
+        <option value="list">List students</option>
+    </select>
+
+    <form id="formClass">  
+        <h4>Please enter class and teacher name</h4>
+        </br><label>Class name:</label>
+        <input id="className1" type="text" placeholder="Input name"></br>
+        <label>Teacher name:</label>
+        <input id="teacher" type="text" placeholder="Input teacher"></br>
+        <button id="addClassBtn" type="submit">Add Class</button></br>
+        <div id=formClassRes></div>
+    </form>
+
+    <form id="formEnroll">  
+        <h4>Please enter a class and student information</h4>
+        </br><label>Class name:</label>
+        <input id="className2" type="text" placeholder="Input class"></br>
+        <label>Name:</label>
+        <input id="name" type="text" placeholder="Input name"></br>
+        <label>Age:</label>
+        <input id="age" type="text" placeholder="Input age"></br>
+        <label>City:</label>
+        <input id="city" type="text" placeholder="Input city"></br>
+        <label>Grade</label>
+        <input id="grade" type="text" placeholder="Input grade"></br>
+        <button id="enrollBtn" type="submit">Enroll</button></br>
+        <div id="formEnrollRes"></div>
+    </form>
+
+    <form id="formList">
+        <h4>Please enter a class name. Filter by city or failing students</h4>
+        </br><label>Class name:</label>
+        <input id="className3" type="text" placeholder="Input class"></br>
+        <label>City:</label>
+        <input id="cityList" type="text" placeholder="Input city"></br>
+        <label>Show Failing:</label>
+        <input id="failing" type="checkbox">
+        <button id="listBtn" type="submit">List Students</button></br>
+        <div id="formListRes"></div>
+    </form>
+    
+</body>
+</html>
