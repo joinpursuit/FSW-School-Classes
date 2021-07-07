@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>School Server</title>
+	<script src='./index.js'></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel='stylesheet' href='./index.css'>
+</head>
+<body>
+	<h1> School Server</h1>
+	<div class='giant-container'>
+		<form id='create-class' class='form-body'>
+			<h2>Create new Class</h2>
+			<label for='teacherClass'>Enter the class name</label>
+			<input id='teacherClass' type='text'>
+			<label for='teacher'>Enter the name of the teacher</label>
+			<input id='teacher' type='text'>
+			<button type='button' id='create-class-button'>Submit</button>
+		</form>
+		<form id ='enroll-student' class='form-body'>
+			<h2>Enroll new Student</h2>
+			<label for='studentclass'>Enter the class name</label>
+			<input id='studentClass' type='text'>
+			<label for='student'>Enter the full name of the student</label>
+			<input id='student' type='text'>
+			<label for='age'>Enter the students age</label>
+			<input id='age' type='text'>
+			<label for='city'>Enter the city the student comes from</label>
+			<input id='city' type='text'>
+			<label for='grade'>Enter the students grade</label>
+			<input id='grade' type='text'>
+			<button type = 'button' id= 'enroll-student-button'>Submit</button>
+		</form>
+		<form id='student-search' class='form-body'>
+			<h2>View students by Class</h2>
+			<label for='class-search'>Enter the class name</label>
+			<input id='class-search' type='text'>
+			<label for='city-search'>Enter the name of the city to search by(Optional)</label>
+			<input id='city-search' type='text'>
+			<label for='failure'>Show Failing Students Only</label>
+			<input id='failure' type='checkbox'>
+			<button type='button' id='student-search-button'>Submit</button>
+		</form>
+	</div>
+	<div class ='responseBoard'>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+body{
+	background-color: green;
+	color:whitesmoke;
+}
+
+h1{
+	text-align: center;
+	color: whitesmoke;
+}
+
+.giant-container{
+	display: flex;
+	justify-content: space-around;
+}
+
+.form-body{
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+}
+
+.responseBoard{
+	font-size: 30px;
+	text-align: center;
+}

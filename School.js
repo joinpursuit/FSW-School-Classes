@@ -24,12 +24,35 @@ class School {
   /**
    * Enroll student in class
    * 
-   * @param {string} className - Name of the class
+   * @param 
    * @param {Student} student - Student object
    * @return {Student} Enrolled student
    */
+
+   //compare name in student to name in all students in class
   enrollStudent(className, student) {
-    // Your code here
+    // for(let i = 0; i < classes.length; i++){
+    //   if(!(this.classes[classes[i].class])){
+    //     throw new Error('This class does not exist');
+    //   }
+    //   if(this.classes[classes[i].class].students.indexOf(student) === -1){
+    //     throw new Error('Duplicate student');
+    //   }
+    //   student.addClassGrade(classes[i].grade, classes[i].class);
+    //   this.classes[classes[i].class].enrollStudent(student);
+    // }
+
+    if(!(this.classes[className])){
+      throw new Error('Class does not exist');
+    }
+    for(let i = 0; i < this.classes[className].students.length; i++){
+      if(this.classes[className].students[i].name === student.name){
+        this.classes[className].students[i] = student;
+        return student;
+      }
+    }
+    this.classes[className].students.push(student);
+    return student;
   }
 
 
@@ -42,7 +65,8 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClass(className) {
-    // Your code here
+    return this.classes[className].students;
+
   }
 
 
@@ -63,9 +87,32 @@ class School {
    * @return {Student[]} Array of Student objects
    */
   getStudentsByClassWithFilter(className, failing, city) {
-    // Your code here
+    let allStudentsOfClass = this.classes[className].students;
+    let studentsToReturn;
+    if(failing && city){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.city === city && elem.grade <= 60;
+      })
+      return studentsToReturn
+    }
+    else if(failing){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.grade <= 60;
+      })
+      return studentsToReturn
+    }
+    else if(city){
+      studentsToReturn = allStudentsOfClass.filter((elem) => {
+        return elem.city === city;
+      })
+      return studentsToReturn
+    }
+    return allStudentsOfClass;
+
+
   }
 
 }
+
 
 module.exports = School;
