@@ -1,0 +1,24 @@
+body{
+    display: inline-block;
+    background-color: lightsteelblue;
+    text-align: center;
+    align-content: space-between;
+}
+
+#queries{
+    display: inline-flex;
+    justify-content: space-evenly;
+    border: solid;
+    border-width: 2px;
+    padding: 20px;
+    margin: 20px;
+}
+
+form{
+    display: grid;
+    text-align: left;
+    padding:20px;
+    margin:20px;
+    border: solid;
+    border-width: 2px;
+}
