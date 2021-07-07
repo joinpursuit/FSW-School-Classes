@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAACYmJf8mJiX/JiYl/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAAAAAAAAAAAA/wAAAP8AAAD/AAAAAAAAAAAAAAD/bm1teQAAAP8AAAD/bm1teW5tbXkAAAD/JiYl/wAAAP8AAAD/AAAA/wAAAP8mJiX/AAAA/wAAAAAAAAAAbm1teW5tbXkAAAAAAAAAAG5tbXlubW15AAAA/yYmJf+hoaH/oaGh/6Ghof8AAAAAAAAAAAAAAP8AAAAAAAAAAG5tbXkAAAAAAAAAAAAAAAChoaH/bm1teQAAAP8mJiX/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAABubW15bm1teaGhof8AAAAAAAAAAG5tbXkAAAD/JiYl/6Ghof8AAAAAoaGh/wAAAAAAAAAAAAAA/wAAAAAAAAAAAAAA/25tbXmhoaH/oaGh/yYmJXlubW15AAAA/yYmJf8AAAAAAAAAAAAAAAChoaH/AAAAAAAAAP8AAAAAAAAAAAAAAP9ubW15AAAAAAAAAABubW15bm1teQAAAP8mJiX/oaGh/6Ghof+hoaH/AAAAAAAAAAAAAAD/AAAAAAAAAAAAAAD/bm1teaGhof+hoaH/bm1teW5tbXkAAAD/JiYl/wAAAAAAAAAAAAAAAKGhof8AAAAAAAAA/wAAAAAAAAAAAAAA/25tbXkAAAAAAAAAAAAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAAAAAAAAAAAAAAAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAA//kAAIAxAACmAQAA/g0AAPp9AADuLQAApnUAAL4NAACmdQAAuD0AAIOBAAD//wAA//8AAA==" rel="icon" type="image/x-icon" />
+    <script src="./index.js" async></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="master.css">
+    <title>School Administrator</title>
+</head>
+<body>
+<h1>School Administrator</h1>
+<br>
+
+<button id="showAllClasses" aria-placeholder="1">Show School all Class</button>
+<br>
+<form action="" id="addClass">
+    <h3>Open Class</h3>
+    <label for="Class Name">Class: </label>
+    <input type="text" placeholder="Class Subject Name" id="name" required>
+    <br>
+    <label for="Class Teach">Teacher: </label>
+    <input type="text" placeholder="Class Teacher Name" id="teacher" required>
+    <input type="submit" value="Click to Open Class">
+</form>
+
+<br>
+
+<form id="addStudent">
+        <h3>Enroll Student</h3>
+        <label for="class">Class: </label>
+    <select name="classList" id="classList" onfocus="this.value=''" required>
+    <option disabled>select class</option>
+    </select>
+    <br>
+    <label for="Student Name">Name: </label>
+    <input type="text" name="name" id="nameStudent" placeholder="Student Name" required onfocus="this.value=''">
+    <br>
+    <label for="Student Age">Age: </label>
+    <input type="number" name="age" id="ageStudent" placeholder="Student Age" required onfocus="this.value=''">
+    <br>
+    <label for="Student City">City: </label>
+    <input type="text" name="city" id="cityStudent" placeholder="Student City" required onfocus="this.value=''">
+    <br>
+    <label for="Student Grade">Grade: </label>
+    <select name="grade" id="gradeList" required onfocus="this.value=''">
+            <option disabled>select grade</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+            <option value="N/A" selected>N/A</option>
+        </select>
+    <input type="submit" value="Click to Enroll Student"></input>
+</form>
+
+<br>
+<form id="showStudent">
+    <h3>Show Student</h3>
+    <label for="class">Class: </label>
+    <select name="classList" id="classList2" required>
+        <option disabled>select class</option>
+    </select>
+    <br>
+    <label for="Grade">Grade: </label>
+    <select name="" id="">
+        <option disabled>select grade</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="F">F</option>
+        <option value="N/A" selected>N/A</option>
+        <option value="" selected>All Student</option>
+    </select>
+    <button type="button" id="studentList">Click Show Select Student</button>
+</form>
+<div id="showing"></div>
+<div id="showingStudent"></div>
+
+</body>
+</html>
+
+
+
+
+        <!-- <form action="">
+            <h3>Student Grade</h3>
+            <select name="classList" id="" required>
+                    <option disabled>select class</option>
+            </select>
+            <select name="" id="" required>
+                <option disabled>select student</option>
+            </select>
+            <select name="" id="" required>
+                <option disabled>select grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                <option value="N/A" selected>N/A</option>
+            </select>
+            <button type="button" id="">Click to Change Grade</button>
+        </form>
+        
+        <form action="">
+            <h3>Drop Student</h3>
+            <select name="classList" id="" required>
+                    <option disabled>select class</option>
+            </select>
+            <select name="" id="" required>
+                <option disabled>select student</option>
+            </select>
+            <button type="button" id="">Click to Drop Student</button>
+        </form> -->

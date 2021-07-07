@@ -1,0 +1,46 @@
+body{
+    background-color: lightsalmon;
+    background-image: url("./classroom-empty-blur-600x400.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    /* background-op; */
+    /* opacity: 0.5; */
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-right: 5%;
+    font-size: larger;
+    color: orangered;
+}
+h1{
+    text-align: center;
+}
+
+button,input[type=submit] {
+    background-color: lightseagreen; /* Green */
+    border: none;
+    color: white;
+    border-radius: 8px;
+    /* font-size: 16px; */
+  }
+
+button:hover, input[type=submit]:hover{
+    background-color:black
+}
+input[type=text],input[type=number]{
+min-width:15%;
+border: 1px solid black;
+}
+
+
+#showing{
+    background-color:springgreen;
+    font-weight: bold;
+    max-width: 75%;
+}
+
+#showingStudent{
+    background-color:pink;
+    font-weight: bold;
+    max-width: 75%;
+}
